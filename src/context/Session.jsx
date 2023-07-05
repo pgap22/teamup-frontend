@@ -1,11 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import { obtenerPerfil } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const SessionContext = createContext();
 
 const SessionProvider = ({ children }) => {
   const [usuario, setUsuario] = useState({});
   const [loading, setLoading] = useState(true);
+
 
   const perfil = async () => {
     try {
@@ -15,7 +17,6 @@ const SessionProvider = ({ children }) => {
       setUsuario(data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };

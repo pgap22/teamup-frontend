@@ -1,76 +1,84 @@
+import PaginaPrincipal from "./pages/PaginaPrincipal/PaginaPrincipal";
+import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
+import Dashboard from "./pages/Coordinacion/Dashboard";
+import DashboardMaestro from "./pages/Maestro/Dashboard";
 
-import PaginaPrincipal from './pages/PaginaPrincipal/PaginaPrincipal'
-import Login from './pages/Login/Login'
-import SignUp from './pages/SignUp/SignUp'
-import Dashboard from './pages/Coordinacion/Dashboard'
-import DashboardMaestro from './pages/Maestro/Dashboard'
-
-import Deportes from './pages/Coordinacion/Deportes'
-import ZonaDeJuego from './pages/Coordinacion/ZonaDeJuego'
-import Maestro from './pages/Coordinacion/Maestro'
-import Solicitudes from './pages/Coordinacion/Solicitudes'
-import DeporteCrear from './pages/Coordinacion/Deportes/Crear'
-import { createBrowserRouter } from 'react-router-dom'
-
-
+import Deportes from "./pages/Coordinacion/Deportes";
+import ZonaDeJuego from "./pages/Coordinacion/ZonaDeJuego";
+import Maestro from "./pages/Coordinacion/Maestro";
+import Solicitudes from "./pages/Coordinacion/Solicitudes";
+import DeporteCrear from "./pages/Coordinacion/Deportes/Crear";
+import { createBrowserRouter } from "react-router-dom";
+import Redirect from "./redirect";
+import ProtectedRoute from "./components/routes/ProtectedRoute";
+import CoordinadorRoute from "./components/routes/CoordinadorRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PaginaPrincipal />
+    element: <PaginaPrincipal />,
+  },
+  {
+    path: "/redirect",
+    element: <Redirect />,
   },
   {
     path: "/login",
-    element: <Login />
+    element: <Login />,
   },
   {
     path: "/signup",
-    element: <SignUp />
+    element: <SignUp />,
   },
   {
     path: "/maestro",
     children: [
       {
         index: true,
-        element: <DashboardMaestro />
-      }
-    ]
+        element: <DashboardMaestro />,
+      },
+    ],
   },
   {
     path: "/coordinacion",
+    element: (
+      <ProtectedRoute>
+        <CoordinadorRoute />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
-        element: <Dashboard />
+        element: <Dashboard />,
       },
       {
-        path: 'deportes',
-        children:[
+        path: "deportes",
+        children: [
           {
             index: true,
             element: <Deportes />,
           },
           {
             path: "crear",
-            element: <DeporteCrear />
-          }
-        ]
+            element: <DeporteCrear />,
+          },
+        ],
       },
       {
-        path: 'zonadejuego',
-        element: <ZonaDeJuego />
+        path: "zonadejuego",
+        element: <ZonaDeJuego />,
       },
       {
-        path: 'maestros',
-        element: <Maestro />
+        path: "maestros",
+        element: <Maestro />,
       },
       {
-        path: 'solicitudes',
-        element: <Solicitudes />
+        path: "solicitudes",
+        element: <Solicitudes />,
       },
+    ],
+  },
+]);
 
-    ]
-  }
-])
-
-export {router}
+export { router };
