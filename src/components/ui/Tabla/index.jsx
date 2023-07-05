@@ -6,7 +6,7 @@ import TablaBotonAdd from './TablaBotonAdd';
 import TablaRowHeader from './TablaRowHeader';
 import TablaListaDeFilas from './TablaListaDeFilas';
 
-const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], botonTexto }) => {
+const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], botonTexto, botonUrl }) => {
     const filas = [...Object.keys(listaDatos[0]), "Acciones"];
   
     return (
@@ -14,7 +14,7 @@ const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], botonTexto }) => {
         <TablaHeaderContainer>
           <TablaHeader titulo={titulo} cantidadTexto={cantidadTexto} />
   
-          <TablaBotonAdd>{botonTexto}</TablaBotonAdd>
+          <TablaBotonAdd url={botonUrl}>{botonTexto}</TablaBotonAdd>
         </TablaHeaderContainer>
   
         <TablaRowHeader filas={filas} />

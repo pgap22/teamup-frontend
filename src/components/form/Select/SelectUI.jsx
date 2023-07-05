@@ -2,13 +2,18 @@ import { MdChevronLeft } from "react-icons/md";
 import Options from "./Options";
 import { useSelect } from "./useSelect";
 import Placeholder from "./Placeholder";
+import { useEffect } from "react";
 
-const SelectUI = ({ label, placeholder, opciones = [] }) => {
+const SelectUI = ({ label, placeholder, opciones = [], setValue = ()=>{},valueLabel }) => {
   const { value, menuOpciones, setMenuOpciones } = useSelect();
 
   const alternarMenuOpciones = () => {
     setMenuOpciones(!menuOpciones);
   };
+
+  useEffect(()=>{
+    setValue(valueLabel, value.value)
+  },[value])
 
   return (
     <div className="flex flex-col gap-1 w-full">
@@ -20,7 +25,9 @@ const SelectUI = ({ label, placeholder, opciones = [] }) => {
         {value.value ? value.label : <Placeholder text={placeholder} />}
         <MdChevronLeft className="-rotate-90" size={28} />
       </div>
-      <Options mostrar={menuOpciones} opciones={opciones} />
+      <div className="relative">
+        <Options mostrar={menuOpciones} opciones={opciones} />
+      </div>
     </div>
   );
 };

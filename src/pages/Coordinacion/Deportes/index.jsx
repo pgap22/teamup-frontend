@@ -32,6 +32,7 @@ const Deportes = () => {
         cantidadTexto={"4 Deportes"}
         botonTexto={"Nuevo Deporte"}
         listaDatos={deportes}
+        botonUrl={"/coordinacion/deportes/crear"}
       />
     </CoordinacionLayout>
   );

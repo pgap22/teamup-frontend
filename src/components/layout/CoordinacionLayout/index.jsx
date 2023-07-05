@@ -2,11 +2,12 @@ import React from "react";
 import DashboardLayout from "../DashboardLayout";
 import { MdHouse, MdOutlineAssignment, MdOutlineSportsEsports } from "react-icons/md";
 
-const CoordinacionLayout = ({ children, titulo }) => {
+const CoordinacionLayout = ({ children, titulo, center }) => {
   const links = [
     {
         nombre: "Inicio",
         ruta: "/coordinacion",
+        principal: true,
         icon: MdHouse
     },
     {
@@ -30,7 +31,7 @@ const CoordinacionLayout = ({ children, titulo }) => {
   ];
 
   return (
-    <DashboardLayout links={links} titulo={titulo}>
+    <DashboardLayout links={links} titulo={titulo} center={center}>
       {children}
     </DashboardLayout>
   );

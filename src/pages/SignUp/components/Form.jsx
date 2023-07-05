@@ -1,78 +1,84 @@
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import LogoBlack from "../../../components/Logo/LogoBlack";
-import Input from "../../../components/form/Input";
 import Button from "../../../components/form/Button";
-import { LuEye } from "react-icons/lu";
-import { useMediaQuery } from "@uidotdev/usehooks";
+import Input from "../../../components/form/Input";
 import Select from "../../../components/form/Select";
-import clsx from "clsx";
+import FormLayout from "../../../components/layout/FormLayout";
+
+import { Link } from "react-router-dom";
+import { LuEye } from "react-icons/lu";
+
+import { useNivelesAcademicos } from "../hooks/useNivelesAcademicos";
+import { useTranslation } from "react-i18next";
+import { useFormulario } from "../../../hooks/useFormulario";
+import { crearCuentaEstudiante } from "../../../api";
 
 const Form = () => {
-  
+  const { nivelesAcademicos, isLoading, error } = useNivelesAcademicos();
   const { t } = useTranslation(["signup"]);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    mensajeError,
+    mostrarPassword,
+    mostrarOcultarPassword,
+    registroExitoso,
 
-  const noMobile = useMediaQuery("(min-width: 768px)");
+  } = useFormulario(crearCuentaEstudiante);
 
-  const nivelesAcademicos = [
-    {
-      value: 'bach',
-      label: 'Bachillerato'
-    },
-    {
-      value: 'ter_c',
-      label: 'Tercer Ciclo'
-    }
-  ]
+  if (isLoading) return <p>Cargando...</p>;
+  if (error) return <p>Hubo un error, recarga la pagina</p>;
+  if (registroExitoso) return <p>Registro Exitoso</p>;
 
   return (
-    <main className={clsx(
-      "md:self-center md:m-0",
-      "flex bg-white m-4 rounded-md flex-col items-center p-6 gap-4"
-    )}>
-      <div className="flex flex-col items-center md:items-start gap-6">
-        <Link to={"/"}>
-          <LogoBlack width={noMobile ? 260 : 170} />
-        </Link>
+    <FormLayout titulo={t("titulo")} subtitulo={t("subtitulo")}>
+      <p>{mensajeError}</p>
+      <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
+        <Input
+          register={register("nombre")}
+          label={"Nombre"}
+          placeholder={"Ingrese su nombre"}
+        />
+        <Input
+          register={register("apellido")}
+          label={"Apellido"}
+          placeholder={"Ingrese su apellido"}
+        />
+        <Select
+          valueLabel={"id_nivelAcademico"}
+          setValue={setValue}
+          label={"Nivel Academico"}
+          placeholder={"Nivel academico"}
+          opciones={nivelesAcademicos}
+        />
+        <Input
+          register={register("email")}
+          type="email"
+          label={"Correo Institucional"}
+          placeholder={"Ingrese su correo institucional"}
+        />
 
-        <div className="space-y-2">
-          <h1 className="font-semibold text-3xl text-center md:text-start">
-            {t("titulo")}
-          </h1>
-          <p className="text-[#676767] font-semibold text-center md:text-start">
-            {t("subtitulo")}
-          </p>
-        </div>
-
-        <form className="w-full max-w-md flex flex-col gap-6">
-          <Input label={"Nombre"} placeholder={"Ingrese su nombre"} />
-          <Input label={"Apellido"} placeholder={"Ingrese su apellido"} />
-          <Select 
-            label={"Nivel Academico"} 
-            placeholder={"Nivel academico"}
-            opciones={nivelesAcademicos}
+        <Input
+          register={register("password")}
+          type={mostrarPassword ? "text" : "password"}
+          Icon={(props) => (
+            <LuEye
+              className="cursor-pointer select-none"
+              onClick={mostrarOcultarPassword}
+              {...props}
             />
-          <Input
-            type="email"
-            label={"Correo Institucional"}
-            placeholder={"Ingrese su correo institucional"}
-          />
-          <Input
-            type="password"
-            Icon={(props) => <LuEye {...props} />}
-            label={"Contraseña"}
-            placeholder={"Ingrese su contraseña"}
-          />
+          )}
+          label={"Contraseña"}
+          placeholder={"Ingrese su contraseña"}
+        />
 
-          <div className="text-center flex flex-col gap-3">
-            <Button color={"azul"}>Registrarse</Button>
-            <Link to={"/login"} className="text-primary">
-              ¿ Ya tienes cuenta ?
-            </Link>
-          </div>
-        </form>
-      </div>
-    </main>
+        <div className="text-center flex flex-col gap-3">
+          <Button color={"azul"}>Registrarse</Button>
+          <Link to={"/login"} className="text-primary">
+            ¿ Ya tienes cuenta ?
+          </Link>
+        </div>
+      </form>
+    </FormLayout>
   );
 };
 

@@ -1,13 +1,14 @@
 import { MdAdd } from "react-icons/md";
 import Button from "../../form/Button";
+import { Link } from "react-router-dom";
 
-const TablaBotonAdd = ({ children }) => {
+const TablaBotonAdd = ({ children, url = '' }) => {
   return (
-    <div className="w-full max-w-[250px]">
+    <Link to={url} className="w-full max-w-[250px]">
       <Button>
         {children} <MdAdd size={29} />
       </Button>
-    </div>
+    </Link>
   );
 };
 

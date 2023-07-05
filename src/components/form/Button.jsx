@@ -30,7 +30,7 @@ const Button = ({children, color, border, textColor, onClick = ()=>{}}) => {
     color_text = '!text-primary'
   }
   return (
-    <button onClick={onClick} className={`text-white w-full flex justify-center items-center gap-4  rounded-full p-2 font-bold border ${colorBoton} ${borderBoton} ${color_text}`}>{children}</button>
+    <button onClick={onClick} className={`text-white shadow-md w-full flex justify-center items-center gap-4 hover:opacity-75 transition-all  rounded-full p-2 font-bold border ${colorBoton} ${borderBoton} ${color_text}`}>{children}</button>
   )
 }
 
