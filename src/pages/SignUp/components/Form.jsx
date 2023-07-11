@@ -10,17 +10,18 @@ import { useNivelesAcademicos } from "../hooks/useNivelesAcademicos";
 import { useTranslation } from "react-i18next";
 import { useFormulario } from "../../../hooks/useFormulario";
 import { crearCuentaEstudiante } from "../../../api";
+import { useIconPassword } from "../../../hooks/useIconPassword";
 
 const Form = () => {
   const { nivelesAcademicos, isLoading, error } = useNivelesAcademicos();
+  const {mostrarOcultarPassword, mostrarPassword} = useIconPassword();
+
   const { t } = useTranslation(["signup"]);
   const {
     register,
     handleSubmit,
     setValue,
     mensajeError,
-    mostrarPassword,
-    mostrarOcultarPassword,
     registroExitoso,
 
   } = useFormulario(crearCuentaEstudiante);

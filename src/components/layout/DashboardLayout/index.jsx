@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import AsideMenu from "./Aside/AsideMenu";
 import MainContent from "./MainContent";
 
-const DashboardLayout = ({ children, links, titulo = "Titulo",center=false }) => {
+const DashboardLayout = ({ children, links, titulo = "Titulo",center=false, bottom }) => {
   const { menu, toggleMenu } = useMenu();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const DashboardLayout = ({ children, links, titulo = "Titulo",center=false }) =>
     <>
       <FondoColor color={"#EDEDED"}>
         <div className="md:grid md:grid-cols-[minmax(0,250px)_minmax(0,1fr)]">
-          <AsideMenu links={links} />
+          <AsideMenu links={links} bottom={bottom}/>
           <MainContent titulo={titulo} center={center}>{children}</MainContent>
         </div>
       </FondoColor>

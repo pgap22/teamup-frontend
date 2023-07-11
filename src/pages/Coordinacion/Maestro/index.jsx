@@ -9,6 +9,7 @@ const Maestro = () => {
       "nivel academico": "Bachillerato"
     }
   ]
+  
   return (
     <CoordinacionLayout titulo={"Maestros"}>
         <Tabla 

@@ -2,32 +2,31 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const useFormulario = (apiFunction) => {
-    const { register, handleSubmit, setValue } = useForm();
-    const [mostrarPassword, setMostrarPassword] = useState(false);
+    const { register, handleSubmit, setValue, formState } = useForm();
     const [mensajeError, setMensajeError] = useState("");
     const [registroExitoso, setRegistroExitoso] = useState(false);
+    const [data, setData] = useState()
   
     const realizarAccion = async (data) => {
       try {
-        await apiFunction(data);
+        const d = await apiFunction(data);
+        setData(d);
         setRegistroExitoso(true);
       } catch (error) {
         setMensajeError(error);
       }
     };
   
-    const mostrarOcultarPassword = () => {
-      setMostrarPassword(!mostrarPassword);
-    };
+
   
     return {
       register,
       handleSubmit: handleSubmit(realizarAccion),
       setValue,
-      mostrarPassword,
-      mostrarOcultarPassword,
       mensajeError,
       registroExitoso,
+      formState,
+      data
     };
   };
   

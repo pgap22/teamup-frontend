@@ -16,6 +16,7 @@ const Dashboard = () => {
     },
     {
       nombre: "🥇 Nuevo deporte",
+      url: "/deportes/crear"
     },
     {
       nombre: "⛳ Nueva Zona de Juego",

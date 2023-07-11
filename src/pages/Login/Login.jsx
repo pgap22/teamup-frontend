@@ -4,7 +4,7 @@ import Form from "./components/Form";
 
 const Login = () => {
   return (
-    <FormPage>
+    <FormPage reverse>
       <Form />
       <FormImagen src={"/login.jpg"} />
     </FormPage>

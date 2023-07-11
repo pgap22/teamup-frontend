@@ -5,7 +5,7 @@ const ListaAccionesRapidas = ({ acciones }) => {
     <div className="overflow-auto max-w-full">
       <div className="flex gap-4">
         {acciones.map((accion) => (
-          <AccionRapidoBoton>{accion.nombre}</AccionRapidoBoton>
+          <AccionRapidoBoton key={accion.nombre+"-accion"} url={accion.url}>{accion.nombre}</AccionRapidoBoton>
         ))}
       </div>
     </div>

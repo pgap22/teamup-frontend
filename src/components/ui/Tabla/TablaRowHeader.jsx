@@ -2,7 +2,7 @@ const TablaRowHeader = ({ filas = [] }) => {
     return (
       <div
         style={{
-          gridTemplateColumns: `repeat(${filas.length}, 1fr)`,
+          gridTemplateColumns: `repeat(${filas.length-1}, 1fr) 0.3fr`,
         }}
         className="grid items-center w-full px-4 py-2 font-bold text-gray-600 border-t border-b"
       >

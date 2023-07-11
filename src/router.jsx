@@ -11,28 +11,36 @@ import Solicitudes from "./pages/Coordinacion/Solicitudes";
 import DeporteCrear from "./pages/Coordinacion/Deportes/Crear";
 import { createBrowserRouter } from "react-router-dom";
 import Redirect from "./redirect";
-import ProtectedRoute from "./components/routes/ProtectedRoute";
-import CoordinadorRoute from "./components/routes/CoordinadorRoute";
+
+import Estudiante from "./pages/Estudiante/estudiante";
+import RolRoute from "./components/routes/RolRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PaginaPrincipal />,
-  },
-  {
-    path: "/redirect",
-    element: <Redirect />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
+    children: [
+      {
+        index: true,
+        element: <PaginaPrincipal />,
+      },
+      {
+        path: "redirect",
+        element: <Redirect />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+
+        element: <SignUp />,
+      },
+    ],
   },
   {
     path: "/maestro",
+    element: <RolRoute rol={"MAESTRO"} />,
     children: [
       {
         index: true,
@@ -42,11 +50,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/coordinacion",
-    element: (
-      <ProtectedRoute>
-        <CoordinadorRoute />
-      </ProtectedRoute>
-    ),
+    element: <RolRoute rol="COORDINADOR" />,
     children: [
       {
         index: true,
@@ -76,6 +80,16 @@ const router = createBrowserRouter([
       {
         path: "solicitudes",
         element: <Solicitudes />,
+      },
+    ],
+  },
+  {
+    path: "/estudiante",
+    element: <RolRoute rol="ESTUDIANTE" />,
+    children: [
+      {
+        index: true,
+        element: <Estudiante />,
       },
     ],
   },

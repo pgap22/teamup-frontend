@@ -4,7 +4,7 @@ const TablaDatoFila = ({ datos, filas }) => {
   return (
     <div
       style={{
-        gridTemplateColumns: `repeat(${datos.length}, 1fr)`,
+        gridTemplateColumns: `repeat(${datos.length-1}, 1fr) 0.3fr`,
       }}
       className={clsx(
         "last:rounded-b-md",
@@ -13,7 +13,7 @@ const TablaDatoFila = ({ datos, filas }) => {
       )}
     >
       {datos.map((fila, i) => (
-        <div className="text-lg" style={{ minWidth: `${filas[i].length}ch` }} key={fila + "-dato"}>
+        <div className="text-lg whitespace-normal" style={{ minWidth: `${filas[i].length}ch` }} key={fila + "-dato"}>
           {fila}
         </div>
       ))}

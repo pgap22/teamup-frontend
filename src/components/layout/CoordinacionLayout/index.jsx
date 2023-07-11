@@ -1,19 +1,25 @@
 import React from "react";
 import DashboardLayout from "../DashboardLayout";
-import { MdHouse, MdOutlineAssignment, MdOutlineSportsEsports } from "react-icons/md";
+import {
+  MdHouse,
+  MdOutlineAssignment,
+  MdOutlineSportsEsports,
+} from "react-icons/md";
+import Button from "../../form/Button";
+import { useSession } from "../../../hooks/useSession";
 
 const CoordinacionLayout = ({ children, titulo, center }) => {
   const links = [
     {
-        nombre: "Inicio",
-        ruta: "/coordinacion",
-        principal: true,
-        icon: MdHouse
+      nombre: "Inicio",
+      ruta: "/coordinacion",
+      principal: true,
+      icon: MdHouse,
     },
     {
       nombre: "Deportes",
       ruta: "/coordinacion/deportes",
-      icon: MdOutlineSportsEsports
+      icon: MdOutlineSportsEsports,
     },
     {
       nombre: "Zona De Juego",
@@ -26,14 +32,24 @@ const CoordinacionLayout = ({ children, titulo, center }) => {
     {
       nombre: "Solicitudes",
       ruta: "/coordinacion/solicitudes",
-      icon: MdOutlineAssignment
+      icon: MdOutlineAssignment,
     },
   ];
 
   return (
-    <DashboardLayout links={links} titulo={titulo} center={center}>
+    <DashboardLayout links={links} titulo={titulo} center={center} bottom={<Bottom/>}>
       {children}
     </DashboardLayout>
+  );
+};
+
+const Bottom = () => {
+  const { logout } = useSession();
+
+  return (
+    <>
+      <Button onClick={logout} color={"rojo"}>Cerrar Sesion</Button>
+    </>
   );
 };
 

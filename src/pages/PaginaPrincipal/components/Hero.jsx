@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const { t } = useTranslation(["paginaPrincipal"]);
@@ -29,7 +30,9 @@ const Hero = () => {
 
         <div className="md:mt-12">
           <p className="text-lg md:max-w-[520px]">{t("subtitulo")}</p>
-          <button className="bg-white text-primary font-bold p-2 rounded-full px-8 mt-5">Empezar</button>      
+          <Link to={"/signup"}>
+            <button className="bg-white text-primary font-bold p-2 rounded-full px-8 mt-5 text-lg hover:opacity-75 hover:ring-1 transition-all">Empezar</button>      
+          </Link>
         </div>
        </div>
       <img className="" src="/hero_icon.svg" alt="Imagen de deportes" />

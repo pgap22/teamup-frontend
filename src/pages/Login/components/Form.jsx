@@ -1,27 +1,36 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../../components/form/Input";
 import Button from "../../../components/form/Button";
 import { LuEye } from "react-icons/lu";
 import FormLayout from "../../../components/layout/FormLayout";
 import { useFormulario } from "../../../hooks/useFormulario";
 import { iniciarSesion } from "../../../api";
+import { useEffect } from "react";
+import { useSession } from "../../../hooks/useSession";
+import { useIconPassword } from "../../../hooks/useIconPassword";
 
 const Form = () => {
-  
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     mensajeError,
-    mostrarPassword,
     registroExitoso,
-    mostrarOcultarPassword,
+    data,
   } = useFormulario(iniciarSesion);
+  
+  const {mostrarOcultarPassword, mostrarPassword} = useIconPassword();
 
   const { t } = useTranslation(["login"]);
+  const { login } = useSession();
 
-
-  if(registroExitoso) return <p>Ta logeao</p>
+  useEffect(() => {
+    if (registroExitoso) {
+      login(data);
+      navigate("/redirect");
+    }
+  }, [registroExitoso]);
 
   return (
     <FormLayout titulo={t("titulo")} subtitulo={t("subtitulo")}>

@@ -1,13 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import { obtenerPerfil } from "../api";
-import { useNavigate } from "react-router-dom";
-
 const SessionContext = createContext();
 
 const SessionProvider = ({ children }) => {
   const [usuario, setUsuario] = useState({});
   const [loading, setLoading] = useState(true);
-
 
   const perfil = async () => {
     try {
@@ -21,6 +18,16 @@ const SessionProvider = ({ children }) => {
     }
   };
 
+  const login = (usuario)=>{
+    setUsuario(usuario);
+    localStorage.setItem("token", usuario.token)
+  }
+  const logout = ()=>{
+    setUsuario({})
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
+
   useEffect(() => {
     perfil();
   }, []);
@@ -31,6 +38,8 @@ const SessionProvider = ({ children }) => {
     <SessionContext.Provider
       value={{
         usuario,
+        login,
+        logout
       }}
     >
       {children}
