@@ -30,7 +30,7 @@ const NavMobile = ({links = []}) => {
 const MobileLinks = ({links})=>{
   return (
     links.map((link)=> {
-      if(link.icon) return <MobileButton Icon={link.icon} ruta={link.ruta} />
+      if(link.icon) return <MobileButton key={link.ruta} Icon={link.icon} ruta={link.ruta} />
     })
   )
 }

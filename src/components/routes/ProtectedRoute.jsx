@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { useSession } from "../../hooks/useSession"
+import { useNavigate } from "react-router-dom";
 
-const ProtectedRoute = ({children}) => {
-  
+const ProtectedRoute = ({children, needLogged=true}) => {
+  const navigate = useNavigate();
   const { usuario } = useSession();
 
   useEffect(()=> {
+    if(!usuario.id && needLogged) return navigate("/login");
 
-    if(!usuario.id) return <p>No estas logeado</p>
+    if(usuario.id && !needLogged) return navigate("/redirect")
     
   },[])
 

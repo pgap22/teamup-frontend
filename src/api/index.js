@@ -1,10 +1,5 @@
-import { AxiosError } from "axios";
 import { clienteAxios } from "../config/axios";
-const throwError = (error) => {
-  if (error instanceof AxiosError) {
-    throw error.response.data.data.error;
-  }
-};
+import { headers, throwError } from "../helper";
 
 const obtenerNivelesAcademicos = async () => {
   try {
@@ -14,18 +9,44 @@ const obtenerNivelesAcademicos = async () => {
     throwError(error);
   }
 };
-
-const obtenerPerfil = async (token)=>{
+const obtenerTipoDeportes = async () => {
   try {
-    const {data} = await clienteAxios.get("/usuario/perfil", {headers: {
-      Authorization: "Bearer " + token
-    }})
-
-    return data
+    const { data } = await clienteAxios.get("/tipos-deportes");
+    return data;
   } catch (error) {
-    throwError(error)
+    throwError(error);
+  }
+};
+const obtenerDeportes = async()=>{
+  try {
+    const { data } = await clienteAxios.get("/deporte");
+    return data;
+  } catch (error) {
+    throwError(error);
   }
 }
+const obtenerUnDeporte = async(id)=>{
+  try {
+    const { data } = await clienteAxios.get("/deporte/"+id);
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+}
+const obtenerPerfil = async (token) => {
+  try {
+    const { data } = await clienteAxios.get("/usuario/perfil", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+};
+
 
 const crearCuentaEstudiante = async (data) => {
   try {
@@ -36,14 +57,52 @@ const crearCuentaEstudiante = async (data) => {
     throwError(error);
   }
 };
-
-const iniciarSesion = async (d)=>{
+const crearDeporte = async (data) => {
   try {
-    const { data } = await clienteAxios.post("/usuario/login", d);
-    return data
+    await clienteAxios.post("/deporte", data, headers());
+    return true;
   } catch (error) {
-    throwError(error)
+    throwError(error);
+  }
+};
+
+
+const editarDeporte = async(data)=>{
+  try {
+    await clienteAxios.put("/deporte/"+data.id, data, headers());
+    return true;
+  } catch (error) {
+    throwError(error);
   }
 }
 
-export { obtenerNivelesAcademicos, crearCuentaEstudiante, obtenerPerfil, iniciarSesion};
+const eliminarDeporte = async(id)=>{
+  try {
+    await clienteAxios.delete("/deporte/"+id, headers());
+    return true;
+  } catch (error) {
+    throwError(error);
+  }
+}
+
+const iniciarSesion = async (d) => {
+  try {
+    const { data } = await clienteAxios.post("/usuario/login", d);
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+};
+
+export {
+  obtenerNivelesAcademicos,
+  crearCuentaEstudiante,
+  obtenerPerfil,
+  iniciarSesion,
+  obtenerTipoDeportes,
+  crearDeporte,
+  obtenerDeportes,
+  obtenerUnDeporte,
+  editarDeporte,
+  eliminarDeporte,
+};

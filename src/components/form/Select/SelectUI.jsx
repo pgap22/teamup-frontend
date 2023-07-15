@@ -4,16 +4,22 @@ import { useSelect } from "./useSelect";
 import Placeholder from "./Placeholder";
 import { useEffect } from "react";
 
-const SelectUI = ({ label, placeholder, opciones = [], setValue = ()=>{},valueLabel }) => {
-  const { value, menuOpciones, setMenuOpciones } = useSelect();
+const SelectUI = ({ label, placeholder, opciones = [], setValue = () => { }, valueLabel, id_valorPorDefecto }) => {
+  const { value, menuOpciones, setMenuOpciones, setValue: setDefaultValue } = useSelect();
 
   const alternarMenuOpciones = () => {
     setMenuOpciones(!menuOpciones);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setValue(valueLabel, value.value)
-  },[value])
+  }, [value])
+
+  useEffect(() => {
+    if (opciones[id_valorPorDefecto]) {
+      setDefaultValue(opciones[id_valorPorDefecto])
+    }
+  }, [])
 
   return (
     <div className="flex flex-col gap-1 w-full">

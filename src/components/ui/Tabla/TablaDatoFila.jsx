@@ -2,22 +2,19 @@ import clsx from "clsx";
 
 const TablaDatoFila = ({ datos, filas }) => {
   return (
-    <div
-      style={{
-        gridTemplateColumns: `repeat(${datos.length-1}, 1fr) 0.3fr`,
-      }}
+    <tr
       className={clsx(
         "last:rounded-b-md",
         "even:bg-gray-200",
-        "grid px-4 py-5 w-full"
+        "w-full"
       )}
     >
       {datos.map((fila, i) => (
-        <div className="text-lg whitespace-normal" style={{ minWidth: `${filas[i].length}ch` }} key={fila + "-dato"}>
+        <td className="text-lg whitespace-normal px-4 py-5" style={{ minWidth: `${filas[i].length}ch` }} key={i + "-dato"}>
           {fila}
-        </div>
+        </td>
       ))}
-    </div>
+    </tr>
   );
 };
 

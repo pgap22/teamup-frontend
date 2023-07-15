@@ -8,7 +8,6 @@ import { AnimatePresence } from "framer-motion";
 import Cta from "./components/Cta";
 import SportBoxes from "./components/Cajas/SportBoxes";
 import { useEffect } from "react";
-import Container from "../../components/ui/Container";
 
 const PaginaPrincipal = () => {
   const { menu, toggleMenu } = useMenu((state) => state);

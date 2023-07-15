@@ -1,38 +1,26 @@
+import { eliminarDeporte, obtenerDeportes } from "../../../api";
 import CoordinacionLayout from "../../../components/layout/CoordinacionLayout";
 import Tabla from "../../../components/ui/Tabla";
+import { deportesTransformar } from "../../../helper/transformarDatos";
+import { useFetchAndDelete } from "../../../hooks/useFetchAndDelete";
 
 const Deportes = () => {
-  const deportes = [
-    {
-      "Nombre del deporte": "Futbol",
-      "Jugadores": 11,
-      "Reservas": 2,
-    },
-    {
-      "Nombre del deporte": "Futbol",
-      "Jugadores": 11,
-      "Reservas": 2,
-    },
-    {
-      "Nombre del deporte": "Futbol",
-      "Jugadores": 11,
-      "Reservas": 2,
-    },
-    {
-      "Nombre del deporte": "Futbol",
-      "Jugadores": 11,
-      "Reservas": 2,
-    },
-  ];
+  
+  const {isLoading, deportes, eliminar} = useFetchAndDelete("deportes", obtenerDeportes, eliminarDeporte, deportesTransformar);
+
+  if(isLoading) return <p>Cargando...</p>
+
 
   return (
     <CoordinacionLayout titulo={"Deportes"}>
       <Tabla 
         titulo={"Lista Deportes"}
-        cantidadTexto={"4 Deportes"}
+        cantidadTexto={deportes.length+" Deportes"}
         botonTexto={"Nuevo Deporte"}
         listaDatos={deportes}
         botonUrl={"/coordinacion/deportes/crear"}
+        editarUrl={"/coordinacion/deportes/editar"}
+        borrarElemento={eliminar.mutate}
       />
     </CoordinacionLayout>
   );

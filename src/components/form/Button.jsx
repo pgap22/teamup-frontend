@@ -29,8 +29,9 @@ const Button = ({children, color, border, textColor, onClick = ()=>{}}) => {
   if(textColor == 'azul'){
     color_text = '!text-primary'
   }
+  
   return (
-    <button onClick={onClick} className={`text-white shadow-md w-full flex justify-center items-center gap-4 transition-all rounded-lg p-2 font-bold border ${colorBoton} ${borderBoton} ${color_text}`}>{children}</button>
+    <button onClick={onClick} className={`text-white shadow-md w-full flex justify-center items-center gap-4 hover:scale-[1.02] transition-all rounded-lg p-2 font-bold border ${colorBoton} ${borderBoton} ${color_text}`}>{children}</button>
   )
 }
 

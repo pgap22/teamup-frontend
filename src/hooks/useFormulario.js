@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const useFormulario = (apiFunction) => {
-    const { register, handleSubmit, setValue, formState } = useForm();
+const useFormulario = (apiFunction, defaultValues={}) => {
+    const { register, handleSubmit, setValue, formState } = useForm({});
     const [mensajeError, setMensajeError] = useState("");
     const [registroExitoso, setRegistroExitoso] = useState(false);
     const [data, setData] = useState()
