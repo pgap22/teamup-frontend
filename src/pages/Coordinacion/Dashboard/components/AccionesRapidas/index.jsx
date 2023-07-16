@@ -1,6 +1,6 @@
 import React from "react";
 import ListaAccionesRapidas from "./ListaAccionesRapidas";
-import Caja from "../Cajas/Caja";
+import Caja from "../../../../../components/ui/Cajas/Caja";
 
 const AccionesRapidas = ({acciones = []}) => {
   return (

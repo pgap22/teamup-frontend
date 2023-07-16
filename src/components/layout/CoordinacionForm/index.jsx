@@ -13,7 +13,7 @@ const CoordinacionForm = ({ children, titulo, imagenUrl, handleSubmit=()=>{} }) 
                 </form>
             </div>
 
-            <div style={{ backgroundImage: `url('${imagenUrl}')` }} className="rounded-lg bg-cover bg-no-repeat"></div>
+            <div style={{ backgroundImage: `url('${imagenUrl}')` }} className="rounded-lg bg-cover bg-no-repeat max-h-[550px]"></div>
         </div>
     )
 }

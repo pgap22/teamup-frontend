@@ -3,13 +3,19 @@ import MaestroRoutes from "./router/maestro"
 import EstudianteRoutes from "./router/estudiante"
 import CoordinacionRoutes from "./router/coordinacion"
 import { createBrowserRouter } from "react-router-dom";
+import Animador from "./components/routes/Animador";
 
 
 const router = createBrowserRouter([
-  InicioRoutes,
-  CoordinacionRoutes,
-  MaestroRoutes,
-  EstudianteRoutes,
+  {
+    element: <Animador />,
+    children: [
+      InicioRoutes,
+      CoordinacionRoutes,
+      MaestroRoutes,
+      EstudianteRoutes,
+    ]
+  }
 ]);
 
 export { router };

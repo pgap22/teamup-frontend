@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 
-const FondoColor = ({children, color}) => {
-  useEffect(()=>{
-    document.body.style.backgroundColor = color
-    return ()=>{
-      document.body.style.backgroundColor = ''
+const FondoColor = ({ children, color }) => {
+  return <>
+    <style dangerouslySetInnerHTML={{
+      __html: `
+    body{
+      background-color: ${color}
     }
-  },[color])
-
-
-  return children
+    `}} />
+    {children}
+  </>
 }
 
 export default FondoColor

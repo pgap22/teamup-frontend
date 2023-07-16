@@ -4,7 +4,7 @@ import TablaBotonAdd from './TablaBotonAdd';
 import TablaRowHeader from './TablaRowHeader';
 import TablaListaDeFilas from './TablaListaDeFilas';
 
-const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], botonTexto, botonUrl, editarUrl, borrarElemento }) => {
+const Tabla = ({ titulo, cantidadTexto, listaDatos = [], botonTexto, botonUrl, editarUrl, borrarElemento }) => {
 
   const filas = listaDatos.length ? [...Object.keys(listaDatos[0]), "Acciones"] : [];
   return (

@@ -6,7 +6,7 @@ import { useFormulario } from "../../../hooks/useFormulario";
 import Textarea from "../../../components/form/Textarea";
 import CoordinacionForm from "../../../components/layout/CoordinacionForm";
 import { crearDeporte, obtenerTipoDeportes } from "../../../api";
-import Caja from "../Dashboard/components/Cajas/Caja";
+import Caja from "../../../components/ui/Cajas/Caja";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch"
 import { tipoDeporteTransformar } from "../../../helper/transformarDatos"
@@ -15,7 +15,7 @@ const DeporteCrear = () => {
 
   const { register, setValue, handleSubmit, registroExitoso } = useFormulario(crearDeporte);
 
-  const { isLoading, tiposDeportes } = useFetch("tiposDeportes", obtenerTipoDeportes, tipoDeporteTransformar);
+  const { tiposDeportes } = useFetch("tiposDeportes", obtenerTipoDeportes, tipoDeporteTransformar);
 
   if (registroExitoso) return <Exito />
 

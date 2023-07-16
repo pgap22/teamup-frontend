@@ -7,11 +7,11 @@ import Select from "../../../components/form/Select";
 import Button from "../../../components/form/Button";
 import { Link, useParams } from "react-router-dom";
 import { editarDeporte, obtenerTipoDeportes, obtenerUnDeporte } from "../../../api";
-import Caja from "../Dashboard/components/Cajas/Caja";
 import { useEffect } from "react";
 import { useFetch } from "../../../hooks/useFetch";
 import { tipoDeporteTransformar } from "../../../helper/transformarDatos";
 import { useFetchId } from "../../../hooks/useFetchId";
+import Caja from "../../../components/ui/Cajas/Caja";
 
 function DeporteEditar() {
 
