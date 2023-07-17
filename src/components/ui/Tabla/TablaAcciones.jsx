@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 import Button from "../../form/Button";
 import TemplateModal from "../../Modales/ModalTemplate";
 
-const TablaAcciones = ({ dato, editarUrl, borrarElemento = () => {} }) => {
+const TablaAcciones = ({
+  dato,
+  editarUrl,
+  borrarElemento = () => {},
+  eliminar,
+  editar,
+}) => {
   const { modalState, toggleModal } = useModal();
 
   const mostrarModal = () => {
@@ -18,9 +24,11 @@ const TablaAcciones = ({ dato, editarUrl, borrarElemento = () => {} }) => {
 
   return (
     <div className="flex gap-4">
-      <Link to={editarUrl + "/" + dato.ID}>
-        <MdEdit size={24} />
-      </Link>
+      {editar && (
+        <Link to={editarUrl + "/" + dato.ID}>
+          <MdEdit size={24} />
+        </Link>
+      )}
 
       <MdDelete className="cursor-pointer" onClick={mostrarModal} size={24} />
 
@@ -29,7 +37,7 @@ const TablaAcciones = ({ dato, editarUrl, borrarElemento = () => {} }) => {
         modalState={modalState}
         toggleModal={toggleModal}
       >
-        <div className="flex flex-col gap-4 p-4">
+        <div className="p-4 flex flex-col gap-4">
           <h2>Seguro que quieres eliminar este item ?</h2>
 
           <div className="grid grid-cols-2 gap-4">

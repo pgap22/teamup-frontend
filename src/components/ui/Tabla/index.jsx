@@ -1,12 +1,20 @@
-import React from 'react'
 import TablaHeader from './TablaHeader';
 import TablaBotonAdd from './TablaBotonAdd';
 import TablaRowHeader from './TablaRowHeader';
 import TablaListaDeFilas from './TablaListaDeFilas';
 
-const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], botonTexto, botonUrl, editarUrl, borrarElemento }) => {
+const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], botonTexto, botonUrl, editarUrl, borrarElemento, acciones=true, AccionesCustomElement, accionesCustomLabel, eliminar=true, editar=true }) => {
 
-  const filas = listaDatos.length ? [...Object.keys(listaDatos[0]), "Acciones"] : [];
+  let filas = listaDatos.length ? [...Object.keys(listaDatos[0])] : [];
+
+  if(acciones){
+    filas = [...filas, "Acciones"]
+  }
+
+  if(!acciones && accionesCustomLabel){
+    filas = [...filas, accionesCustomLabel]
+  }
+  
   return (
     <div className='overflow-auto'>
       <table className='w-full bg-white min-w-[680px] rounded-md'>
@@ -26,7 +34,7 @@ const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], botonTexto, botonUrl,
           }
           {
             listaDatos.length
-            ? <TablaListaDeFilas filas={filas} listaDatos={listaDatos} editarUrl={editarUrl} borrarElemento={borrarElemento} />
+            ? <TablaListaDeFilas filas={filas} listaDatos={listaDatos} editarUrl={editarUrl} borrarElemento={borrarElemento} acciones={acciones} AccionesCustomElement={AccionesCustomElement} editar={editar} eliminar={eliminar} />
             : <p className='p-4'>No hay ningun item...</p>
           }
         </tbody>
