@@ -18,10 +18,10 @@ export const obtenerEquiposDelUsuario = async () => {
     throwError(error);
   }
 };
-export const crearEquipo = async (data) => {
+export const crearEquipo = async (datos) => {
   try {
-    await clienteAxios.post("/equipo", data, headers());
-    return true;
+    const { data } = await clienteAxios.post("/equipo", datos, headers());
+    return data
   } catch (error) {
     throwError(error);
   }

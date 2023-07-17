@@ -6,10 +6,23 @@ import Button from "../../ui/Button";
 import TemplateModal from "../ModalTemplate";
 
 import { crearEquipo } from "../../../api";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-const FormCrearEquipo = () => {
-  const { register, handleSubmit, mensajeError, registroExitoso } =
+const FormCrearEquipo = ({ toggleModal }) => {
+  const navigate = useNavigate()
+  const { data, register, handleSubmit, mensajeError, registroExitoso } =
     useFormulario(crearEquipo);
+
+  useEffect(() => {
+    if (registroExitoso) {
+      const { id } = data.data
+      setTimeout(() => {
+        toggleModal(false)
+        navigate(`/estudiante/equipos/${id}`)
+      }, 1000)
+    }
+  }, [registroExitoso])
 
   return (
     <>
@@ -40,7 +53,7 @@ const FormCrearEquipo = () => {
           type={"s"}
           px={50}
           textButton={"Crear equipo"}
-          onClickButton={() => {}}
+          onClickButton={() => { }}
         />
       </form>
     </>
@@ -56,7 +69,7 @@ const EquipoModal = () => {
       toggleModal={toggleModal}
       desktopTitle={"Crear equipo"}
     >
-      <FormCrearEquipo />
+      <FormCrearEquipo toggleModal={toggleModal} />
     </TemplateModal>
   );
 };

@@ -11,7 +11,7 @@ const Box = ({ equipo }) => {
         className="w-16 h-16 mx-auto overflow-hidden bg-center bg-cover rounded-full"
         style={{
           backgroundImage: `url(${
-            import.meta.env.VITE_BASEAPIURL
+            import.meta.env.VITE_URL
           }${avatar_url})`,
         }}
       ></div>
