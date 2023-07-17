@@ -1,5 +1,5 @@
 import { clienteAxios } from "src/config/axios";
-import { headers, throwError } from "src/helper";
+import { headers, headersForm, throwError } from "src/helper";
 
 export const obtenerRegistros = function (key) {
   return async () => {
@@ -22,6 +22,17 @@ export const obtenerUnRegistro = function (key, id) {
     }
   };
 };
+
+export const editarUnRegistroForm = function(key, datos){
+  return async () => {
+      try {
+        const { data } = await clienteAxios.patchForm(key + "/" + datos.id, datos, headersForm());
+        return data;
+      } catch (error) {
+        throwError(error);
+      }
+    };
+}
 
 export const eliminarUnRegistro = function (key, id) {
   return async () => {

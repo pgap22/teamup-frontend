@@ -12,8 +12,7 @@ import { crearZonaDeJuego, obtenerDeportes } from "src/api"
 import { deportesSelect } from "src/helper/transformarDatos"
 import ImageDrop from "src/components/form/ImageDrop"
 import { useFormulario } from "src/hooks/useFormulario"
-import Caja from "src/components/ui/Cajas/Caja"
-import { Link } from "react-router-dom"
+import Exito from "src/components/coordinacion/Exito"
 
 
 
@@ -21,7 +20,15 @@ const Crear = () => {
   const { deportes } = useFetch("deportes", obtenerDeportes, deportesSelect)
   const { register, setValue, handleSubmit, registroExitoso } = useFormulario(crearZonaDeJuego);
 
-  if(registroExitoso) return <Exito />
+  if(registroExitoso) return(
+    <Exito
+        titulo={"Zona de Juego Creada"}
+        subtitulo={"La zona de juego se ha creado exitosamente"}
+        linkText={"Volver a zona de juego"}
+        url={"/coordinacion/zonadejuego"}
+  />
+)
+
 
   return (
     <CoordinacionLayout
@@ -42,15 +49,5 @@ const Crear = () => {
 }
 
 
-const Exito = () => {
-  return <CoordinacionLayout titulo={"Crear Zona de Juego"} center={true}>
-    <Caja titulo={"Zona de juego Creada"}>
-      <p>Se ha creado la zona de juego exitosamente</p>
-      <Link className="text-primary underline" to={"/coordinacion/zonadejuego"}>
-        Volver a zona de juego
-      </Link>
-    </Caja>
-  </CoordinacionLayout>
-}
 
 export default Crear

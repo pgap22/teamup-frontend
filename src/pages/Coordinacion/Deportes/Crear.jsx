@@ -6,10 +6,9 @@ import { useFormulario } from "../../../hooks/useFormulario";
 import Textarea from "../../../components/form/Textarea";
 import CoordinacionForm from "../../../components/layout/CoordinacionForm";
 import { crearDeporte, obtenerTipoDeportes } from "../../../api";
-import Caja from "../../../components/ui/Cajas/Caja";
-import { Link } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch"
 import { tipoDeporteTransformar } from "../../../helper/transformarDatos"
+import Exito from "src/components/coordinacion/Exito";
 
 const DeporteCrear = () => {
 
@@ -17,7 +16,14 @@ const DeporteCrear = () => {
 
   const { tiposDeportes } = useFetch("tiposDeportes", obtenerTipoDeportes, tipoDeporteTransformar);
 
-  if (registroExitoso) return <Exito />
+  if (registroExitoso) return (
+    <Exito
+      titulo={"Deporte Creado"}
+      subtitulo={"El deporte se ha creado exitosamente"}
+      linkText={"Volver a deportes"}
+      url={"/coordinacion/deportes"}
+    />
+  )
 
   return (
     <CoordinacionLayout titulo={"Crear Deporte"} center={true}>
@@ -65,15 +71,6 @@ const DeporteCrear = () => {
 };
 
 
-const Exito = () => {
-  return <CoordinacionLayout titulo={"Crear Deporte"} center={true}>
-    <Caja titulo={"Deporte Creado"}>
-      <p>Se ha creado el deporte exitosamente</p>
-      <Link className="text-primary underline" to={"/coordinacion/deportes"}>
-        Volver a deportes
-      </Link>
-    </Caja>
-  </CoordinacionLayout>
-}
+
 
 export default DeporteCrear;

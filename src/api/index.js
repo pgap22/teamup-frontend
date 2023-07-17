@@ -1,6 +1,6 @@
 import { clienteAxios } from "../config/axios";
 import { headers, headersForm, throwError } from "../helper";
-import { eliminarUnRegistro, obtenerRegistros } from "./helpers";
+import { editarUnRegistroForm, eliminarUnRegistro, obtenerRegistros, obtenerUnRegistro } from "./helpers";
 
 export const obtenerUnEquipo = async (id) => {
   try {
@@ -65,7 +65,7 @@ export const obtenerPerfil = async (token) => {
         Authorization: "Bearer " + token,
       },
     });
-    
+
     return data;
   } catch (error) {
     throwError(error);
@@ -74,7 +74,7 @@ export const obtenerPerfil = async (token) => {
 export const crearCuentaEstudiante = async (data) => {
   try {
     await clienteAxios.post("/usuario", data);
-    
+
     return true;
   } catch (error) {
     throwError(error);
@@ -99,7 +99,7 @@ export const crearDeporte = async (data) => {
 };
 export const editarDeporte = async (data) => {
   try {
-    await clienteAxios.put("/deporte/" + data.id, data, headers());
+    await clienteAxios.patch("/deporte/" + data.id, data, headers());
     return true;
   } catch (error) {
     throwError(error);
@@ -113,6 +113,20 @@ export const eliminarDeporte = async (id) => {
     throwError(error);
   }
 };
+
+export const crearZonaDeJuego = async (data) => {
+  try {
+    await clienteAxios.postForm("/zonaJuego", data, headersForm());
+    return true;
+  } catch (error) {
+    throwError(error);
+  }
+};
+export const obtenerZonasDeJuegos = obtenerRegistros("/zonaJuego");
+export const eliminarZonaDeJuego = (id) => eliminarUnRegistro("/zonaJuego", id)();
+export const obtenerUnaZonaDeJuego = (id) => obtenerUnRegistro("/zonaJuego", id)();
+export const editarUnaZonaDeJuego = (data) => editarUnRegistroForm("/zonaJuego", data)();
+
 export const iniciarSesion = async (d) => {
   try {
     const { data } = await clienteAxios.post("/usuario/login", d);

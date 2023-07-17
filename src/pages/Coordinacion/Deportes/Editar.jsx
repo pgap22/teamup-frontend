@@ -5,13 +5,13 @@ import Textarea from "../../../components/form/Textarea";
 import { useFormulario } from "../../../hooks/useFormulario";
 import Select from "../../../components/form/Select";
 import Button from "../../../components/form/Button";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { editarDeporte, obtenerTipoDeportes, obtenerUnDeporte } from "../../../api";
 import { useEffect } from "react";
 import { useFetch } from "../../../hooks/useFetch";
 import { tipoDeporteTransformar } from "../../../helper/transformarDatos";
 import { useFetchId } from "../../../hooks/useFetchId";
-import Caja from "../../../components/ui/Cajas/Caja";
+import Exito from "src/components/coordinacion/Exito";
 
 function DeporteEditar() {
 
@@ -30,7 +30,14 @@ function DeporteEditar() {
 
     if (isLoading || loading) return <p>Cargando...</p>
 
-    if (registroExitoso) return <Exito />
+    if (registroExitoso) return(
+        <Exito
+            titulo={"Deporte editado"}
+            subtitulo={"El deporte se ha editado exitosamente"}
+            linkText={"Volver a deportes"}
+            url={"/coordinacion/deportes"}
+      />
+    )
 
     const idTipoDeporte = tiposDeportes.findIndex(tipoDeporte => tipoDeporte.value == deporte.tipoDeporte.id);
 
@@ -75,17 +82,6 @@ function DeporteEditar() {
     )
 }
 
-
-const Exito = () => {
-    return <CoordinacionLayout titulo={"Editar Deporte"} center={true}>
-        <Caja titulo={"Deporte Editado"}>
-            <p>Se ha editado el deporte exitosamente</p>
-            <Link className="text-primary underline" to={"/coordinacion/deportes"}>
-                Volver a deportes
-            </Link>
-        </Caja>
-    </CoordinacionLayout>
-}
 
 
 export default DeporteEditar;
