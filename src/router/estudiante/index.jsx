@@ -1,5 +1,9 @@
 import RolRoute from "../../components/routes/RolRoute";
-import Estudiante from "../../pages/Estudiante/estudiante";
+
+import DasboardEstudiante from "../../pages/Estudiante/Dashboard";
+import EquiposRoutes from "./equipos";
+import SolicitudesRoutes from "./solicitudes";
+import PartidosRoutes from "./partidos";
 
 const routes = {
   path: "/estudiante",
@@ -7,9 +11,12 @@ const routes = {
   children: [
     {
       index: true,
-      element: <Estudiante />,
+      element: <DasboardEstudiante />,
     },
+    EquiposRoutes,
+    SolicitudesRoutes,
+    PartidosRoutes,
   ],
-}
+};
 
 export default routes;
