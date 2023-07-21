@@ -16,7 +16,6 @@ const PageLayaout = ({ children, title, textButton, onClickButton }) => {
         >
           {children}
         </Main>
-        <EquipoModal />
       </div>
     </FondoColor>
   );

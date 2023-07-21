@@ -1,5 +1,8 @@
 import EstudianteLayaout from "../../../components/layout/EstudianteLayout";
-import TeamItems from "./Components/Equipos/TeamItems";
+import TeamItems from "./Components/TeamItems";
+
+import EquipoModal from "../../../components/Modales/equipoModal/EquipoModal";
+import UnirseEquipoModal from "../../../components/Modales/equipoModal/UnirseEquipoModal";
 
 import { useModal } from "../../../store/useModal";
 import { useFetch } from "../../../hooks/useFetch";
@@ -15,7 +18,7 @@ const Equipos = () => {
     <EstudianteLayaout
       textButton="Crear equipo"
       onClickButton={() => {
-        toggleModal(true);
+        toggleModal("CrearEquipo");
       }}
       title={"Equipos"}
     >
@@ -23,6 +26,8 @@ const Equipos = () => {
         <h1 className="text-[#828282] text-4xl font-bold">Tus equipos</h1>
         <TeamItems equipos={equipos} />
       </div>
+      <EquipoModal />
+      <UnirseEquipoModal />
     </EstudianteLayaout>
   );
 };

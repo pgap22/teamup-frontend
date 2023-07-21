@@ -3,7 +3,10 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
 
-const TemplateModal = ({ modalState, toggleModal, children, desktopTitle }) => {
+import { useModal } from "../../store/useModal";
+
+const TemplateModal = ({ children, desktopTitle, identificator }) => {
+  const { modalState, toggleModal } = useModal();
   const dekstop = useMediaQuery("(min-width: 768px)");
 
   const MODAL_DURATION = 0.5;
@@ -26,7 +29,7 @@ const TemplateModal = ({ modalState, toggleModal, children, desktopTitle }) => {
   return (
     <>
       <AnimatePresence mode="popLayout">
-        {modalState && (
+        {modalState === identificator && (
           <>
             <motion.div
               key={"background-modal"}
