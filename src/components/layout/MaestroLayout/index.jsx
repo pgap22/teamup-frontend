@@ -1,5 +1,5 @@
 import { MdHouse } from "react-icons/md";
-import {HiOutlineDocumentSearch} from "react-icons/hi"
+import { HiOutlineDocumentSearch } from "react-icons/hi";
 
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 const MaestroLayout = ({ children, titulo }) => {
@@ -9,11 +9,6 @@ const MaestroLayout = ({ children, titulo }) => {
       ruta: "/maestro",
       icon: MdHouse,
     },
-    {
-        nombre: "Verficar Equipo",
-        ruta: "/verificar-equipo",
-        icon: HiOutlineDocumentSearch
-    }
   ];
 
   return (

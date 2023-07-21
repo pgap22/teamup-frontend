@@ -2,7 +2,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 import Button from "../../form/Button";
-import { useModal } from "../../../store/useModal";
+import { useModal } from "../../../hooks/useModal.jsx";
 
 const TablaAcciones = ({
   dato,
