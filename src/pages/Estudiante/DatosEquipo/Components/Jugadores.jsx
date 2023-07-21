@@ -1,6 +1,6 @@
 import { BiUserMinus } from "react-icons/bi";
 
-import { useSession } from "../../../../hooks/useSession";
+import { useSession } from "src/hooks/useSession";
 
 const JugadorItem = ({ jugador, id_lider }) => {
   const { nombre, id, rango } = jugador;

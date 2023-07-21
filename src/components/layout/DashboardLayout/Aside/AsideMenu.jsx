@@ -10,22 +10,9 @@ const AsideMenu = ({ links = [], bottom }) => {
       <div className="mt-4 flex flex-col gap-4 items-center">
         <Logo width={168} />
         <AsideLinks links={links} />
-        <Bottom />
         {bottom}
       </div>
     </div>
   );
 };
 export default AsideMenu;
-
-const Bottom = () => {
-  const { logout } = useSession();
-
-  return (
-    <>
-      <Button onClick={logout} color={"rojo"}>
-        Cerrar Sesion
-      </Button>
-    </>
-  );
-};

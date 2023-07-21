@@ -49,7 +49,7 @@ export default function Editar() {
       />
     );
 
-                <Input register={register("nombre", {value: zonaDeJuego.nombre})} label={"Nombre"} placeholder={"Nombre de la zona de juego"} />
+  const idDeporte = deportes.findIndex(deporte => deporte.value == zonaDeJuego.deporte.id);
 
   return (
     <CoordinacionLayout titulo={"Editar Zona De Juego"}>
@@ -61,7 +61,7 @@ export default function Editar() {
         <Input
           register={register("nombre", { value: zonaDeJuego.nombre })}
           label={"Nombre"}
-          placeholder={"Nombre del deporte"}
+          placeholder={"Nombre de la zona de juego"}
         />
 
         <Select
