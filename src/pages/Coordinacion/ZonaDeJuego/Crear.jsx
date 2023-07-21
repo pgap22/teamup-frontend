@@ -36,7 +36,7 @@ const Crear = () => {
     >
       <CoordinacionForm handleSubmit={handleSubmit} titulo={"Datos Generales"} imagenUrl={"/cancha.jpg"}>
 
-        <Input register={register("nombre")} label={"Nombre"} placeholder={"Nombre del deporte"} />
+        <Input register={register("nombre")} label={"Nombre"} placeholder={"Nombre de la zona de juego"} />
 
         <Select setValue={setValue} valueLabel={"id_deporte"} placeholder={"Selecciona un deporte"} label={"Deporte"} opciones={deportes} />
 

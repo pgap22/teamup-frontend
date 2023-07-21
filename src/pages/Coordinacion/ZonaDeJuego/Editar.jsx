@@ -49,7 +49,7 @@ export default function Editar() {
         >
             <CoordinacionForm handleSubmit={handleSubmit} titulo={"Datos Generales"} imagenUrl={"/basquet.jpg"}>
 
-                <Input register={register("nombre", {value: zonaDeJuego.nombre})} label={"Nombre"} placeholder={"Nombre del deporte"} />
+                <Input register={register("nombre", {value: zonaDeJuego.nombre})} label={"Nombre"} placeholder={"Nombre de la zona de juego"} />
 
                 <Select setValue={setValue} id_valorPorDefecto={idDeporte} valueLabel={"id_deporte"} placeholder={"Selecciona un deporte"} label={"Deporte"} opciones={deportes} />
 
