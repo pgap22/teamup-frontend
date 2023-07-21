@@ -13,13 +13,15 @@ const Dashboard = () => {
   const acciones = [
     {
       nombre: "👨‍🏫 Nuevo maestro",
+      url: "/maestros/crear"
     },
     {
       nombre: "🥇 Nuevo deporte",
-      url: "deportes/crear"
+      url: "/deportes/crear"
     },
     {
       nombre: "⛳ Nueva Zona de Juego",
+      url: "/zonadejuego/crear"
     },
     {
       nombre: "📩 Ver Solicitudes Pendientes",
@@ -30,32 +32,32 @@ const Dashboard = () => {
     {
       titulo: "Solicitudes Pendientes",
       icon: MdOutlineArticle,
-      cantidad: 1,
+      cantidad: 0,
     },
     {
       titulo: "Maestros Cuidando Hoy  ",
       icon: AiOutlineUser,
-      cantidad: 5,
+      cantidad: 0,
     },
     {
       titulo: "Partidos Realizados",
       icon: LuMedal,
-      cantidad: 30,
+      cantidad: 0,
     },
   ];
 
   const partidos = [
     {
       titulo: "Futbol",
-      cantidad: 10,
+      cantidad: 0,
     },
     {
       titulo: "Baloncesto",
-      cantidad: 10,
+      cantidad: 0,
     },
     {
       titulo: "Volleyball",
-      cantidad: 10,
+      cantidad: 0,
     },
   ];
 

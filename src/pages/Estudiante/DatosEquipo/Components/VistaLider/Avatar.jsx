@@ -11,7 +11,7 @@ const Avatar = ({ avatar_url }) => {
         <div
           style={{
             backgroundImage: `url(${
-              import.meta.env.VITE_BASEAPIURL
+              import.meta.env.VITE_URL
             }${avatar_url})`,
           }}
           className=" bg-no-repeat bg-center w-56 h-36 border-2 border-[#CECECE] rounded-md p-3 grid grid-rows-auto justify-around flex-col"

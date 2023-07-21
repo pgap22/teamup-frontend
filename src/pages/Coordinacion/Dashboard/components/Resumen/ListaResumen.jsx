@@ -1,5 +1,5 @@
 import React from "react";
-import CajaEstadistica from "../Cajas/CajaEstadistica";
+import CajaEstadistica from "src/components/ui/Cajas/CajaEstadistica";
 
 const ListaResumen = ({ resumen = [] }) => {
   return (

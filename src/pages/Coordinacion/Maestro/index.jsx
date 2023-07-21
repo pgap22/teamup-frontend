@@ -5,7 +5,7 @@ import { useFetchAndDelete } from "src/hooks/useFetchAndDelete";
 import { docentesTransformarTabla } from "src/helper/transformarDatos";
 
 const Maestro = () => {
-  const {maestros, eliminar, isLoading}= useFetchAndDelete("maestros", obtenerMaestros, eliminarMaestro, docentesTransformarTabla);
+  const {isLoading, maestros, eliminar, }= useFetchAndDelete("maestros", obtenerMaestros, eliminarMaestro, docentesTransformarTabla);
   
   if (isLoading) return <p>Cargando...</p>
 

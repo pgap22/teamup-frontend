@@ -9,13 +9,18 @@ const Redirect = () => {
   useEffect(() => {
     if (usuario.role == "COORDINADOR") {
       navigate("/coordinacion");
+      return
     }
     if (usuario.role == "ESTUDIANTE") {
       navigate("/estudiante");
+      return
     }
     if (usuario.role == "MAESTRO") {
       navigate("/maestro");
+      return
     }
+
+    navigate("/")
   }, [usuario]);
 
   return <div>Redirect</div>;

@@ -1,5 +1,5 @@
+import Caja from "../../../../../components/ui/Cajas/Caja";
 import ListaResumen from "./ListaResumen";
-import Caja from "../Cajas/Caja";
 
 const Resumen = ({resumen = []}) => {
   return (

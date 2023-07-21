@@ -1,6 +1,7 @@
 import React from "react";
 import ListaPartidosRealizados from "./ListaPartidosRealizados";
-import Caja from "../Cajas/Caja";
+import Caja from "../../../../../components/ui/Cajas/Caja";
+
 
 const PartidosRealizados = ({partidos = []}) => {
   return (

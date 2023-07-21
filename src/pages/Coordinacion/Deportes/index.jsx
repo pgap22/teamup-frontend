@@ -5,17 +5,17 @@ import { deportesTransformar } from "../../../helper/transformarDatos";
 import { useFetchAndDelete } from "../../../hooks/useFetchAndDelete";
 
 const Deportes = () => {
-  
-  const {isLoading, deportes, eliminar} = useFetchAndDelete("deportes", obtenerDeportes, eliminarDeporte, deportesTransformar);
 
-  if(isLoading) return <p>Cargando...</p>
+  const { isLoading, deportes, eliminar } = useFetchAndDelete("deportes", obtenerDeportes, eliminarDeporte, deportesTransformar);
+
+  if (isLoading) return <p>Cargando...</p>
 
 
   return (
     <CoordinacionLayout titulo={"Deportes"}>
-      <Tabla 
+      <Tabla
         titulo={"Lista Deportes"}
-        cantidadTexto={deportes.length+" Deportes"}
+        cantidadTexto={deportes.length + " Deportes"}
         botonTexto={"Nuevo Deporte"}
         listaDatos={deportes}
         botonUrl={"/coordinacion/deportes/crear"}

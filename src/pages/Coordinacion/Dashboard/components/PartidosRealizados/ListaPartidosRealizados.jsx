@@ -1,4 +1,4 @@
-import CajaEstadisticaSimple from "../Cajas/CajaEstadisticaSimple";
+import CajaEstadisticaSimple from "../../../../../components/ui/Cajas/CajaEstadisticaSimple";
 
 const ListaPartidosRealizados = ({ partidos }) => {
   return (

@@ -9,7 +9,7 @@ const Options = ({ mostrar, opciones = [] }) => {
     <AnimatePresence>
       {mostrar && (
         <motion.div
-          className="overflow-hidden absolute left-0 right-0 top-0"
+          className="overflow-hidden absolute left-0 right-0 top-0 z-10"
           initial={oculto}
           animate={mostrado}
           exit={oculto}

@@ -1,25 +1,24 @@
-import { useModal } from "../../../store/useModal";
 
 import { MdEdit, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 import Button from "../../form/Button";
-import TemplateModal from "../../Modales/ModalTemplate";
+import { useModal } from "src/hooks/useModal";
 
 const TablaAcciones = ({
   dato,
   editarUrl,
-  borrarElemento = () => {},
+  borrarElemento = () => { },
   eliminar,
   editar,
 }) => {
-  const { modalState, toggleModal } = useModal();
+  const [ Modal, modalState ] = useModal();
 
   const mostrarModal = () => {
-    toggleModal(true);
+    modalState.toggleModal(true);
   };
   const esconderModal = () => {
-    toggleModal(false);
+    modalState.toggleModal(false);
   };
 
   return (
@@ -30,12 +29,16 @@ const TablaAcciones = ({
         </Link>
       )}
 
-      <MdDelete className="cursor-pointer" onClick={mostrarModal} size={24} />
+      {
+        eliminar && (
+          <MdDelete className="cursor-pointer" onClick={mostrarModal} size={24} />
+        )
+      }
 
-      <TemplateModal
+
+      <Modal
         desktopTitle="Deseas eliminar este item?"
-        modalState={modalState}
-        toggleModal={toggleModal}
+        {...modalState}
       >
         <div className="p-4 flex flex-col gap-4">
           <h2>Seguro que quieres eliminar este item ?</h2>
@@ -55,7 +58,7 @@ const TablaAcciones = ({
             </Button>
           </div>
         </div>
-      </TemplateModal>
+      </Modal>
     </div>
   );
 };
