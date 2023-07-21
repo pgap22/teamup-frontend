@@ -7,21 +7,19 @@ import AccionesRapidas from "./components/AccionesRapidas";
 import Resumen from "./components/Resumen";
 import PartidosRealizados from "./components/PartidosRealizados";
 
-
 const Dashboard = () => {
-
   const acciones = [
     {
       nombre: "👨‍🏫 Nuevo maestro",
-      url: "/maestros/crear"
+      url: "/coordinacion/maestros/crear",
     },
     {
       nombre: "🥇 Nuevo deporte",
-      url: "/deportes/crear"
+      url: "/coordinacion/deportes/crear",
     },
     {
       nombre: "⛳ Nueva Zona de Juego",
-      url: "/zonadejuego/crear"
+      url: "/coordinacion/zonadejuego/crear",
     },
     {
       nombre: "📩 Ver Solicitudes Pendientes",

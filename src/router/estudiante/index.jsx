@@ -4,6 +4,7 @@ import DasboardEstudiante from "../../pages/Estudiante/Dashboard";
 import EquiposRoutes from "./equipos";
 import SolicitudesRoutes from "./solicitudes";
 import PartidosRoutes from "./partidos";
+import ExitoRouter from "./exito";
 
 const routes = {
   path: "/estudiante",
@@ -16,6 +17,7 @@ const routes = {
     EquiposRoutes,
     SolicitudesRoutes,
     PartidosRoutes,
+    ExitoRouter,
   ],
 };
 

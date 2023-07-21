@@ -1,7 +1,42 @@
 import { clienteAxios } from "../config/axios";
 import { headers, headersForm, throwError } from "../helper";
-import { editarUnRegistroForm, eliminarUnRegistro, obtenerRegistros, obtenerUnRegistro } from "./helpers";
+import {
+  editarUnRegistroForm,
+  eliminarUnRegistro,
+  obtenerRegistros,
+  obtenerUnRegistro,
+} from "./helpers";
 
+export const abandonarEquipo = (id) =>
+  eliminarUnRegistro("/equipo/abandonarEquipo", id)();
+
+export const eliminarEquipo = (id) => eliminarUnRegistro("/equipo", id)();
+
+export const actualizarDatos = async (datos) => {
+  try {
+    const { data } = await clienteAxios.patch(
+      `/equipo/actualizarDatos/${datos.id}`,
+      datos,
+      headers()
+    );
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+};
+export const actualizarAvatar = async () => {};
+export const unirseEquipo = async (datos) => {
+  try {
+    const { data } = await clienteAxios.post(
+      `/equipo/unirseEquipo`,
+      datos,
+      headers()
+    );
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+};
 export const obtenerUnEquipo = async (id) => {
   try {
     const { data } = await clienteAxios.get(`/equipo/${id}`, headers());
@@ -21,7 +56,7 @@ export const obtenerEquiposDelUsuario = async () => {
 export const crearEquipo = async (datos) => {
   try {
     const { data } = await clienteAxios.post("/equipo", datos, headers());
-    return data
+    return data;
   } catch (error) {
     throwError(error);
   }
@@ -123,9 +158,12 @@ export const crearZonaDeJuego = async (data) => {
   }
 };
 export const obtenerZonasDeJuegos = obtenerRegistros("/zonaJuego");
-export const eliminarZonaDeJuego = (id) => eliminarUnRegistro("/zonaJuego", id)();
-export const obtenerUnaZonaDeJuego = (id) => obtenerUnRegistro("/zonaJuego", id)();
-export const editarUnaZonaDeJuego = (data) => editarUnRegistroForm("/zonaJuego", data)();
+export const eliminarZonaDeJuego = (id) =>
+  eliminarUnRegistro("/zonaJuego", id)();
+export const obtenerUnaZonaDeJuego = (id) =>
+  obtenerUnRegistro("/zonaJuego", id)();
+export const editarUnaZonaDeJuego = (data) =>
+  editarUnRegistroForm("/zonaJuego", data)();
 
 export const iniciarSesion = async (d) => {
   try {

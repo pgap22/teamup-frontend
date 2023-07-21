@@ -22,7 +22,6 @@ export const docentesTransformarTabla = ({ data }) => {
   }));
 };
 
-
 export const tipoDeporteTransformar = ({ data }) => {
   return data.map((tipoDeporte) => ({
     value: tipoDeporte.id,
@@ -38,17 +37,36 @@ export const tipoNivelesAcademicos = ({ data }) => {
 };
 
 export const deportesSelect = ({ data }) => {
-  return data.map(deporte => ({
+  return data.map((deporte) => ({
     value: deporte.id,
-    label: deporte.nombre
-  }))
-}
+    label: deporte.nombre,
+  }));
+};
 
 export const zonaJuegoTabla = function ({ data }) {
-  return data.map(zonadejuego => ({
+  return data.map((zonadejuego) => ({
     ID: zonadejuego.id,
     nombre: zonadejuego.nombre,
     deporte: zonadejuego.deporte.nombre,
-    imagenes: <Imagenes imagenes={zonadejuego.imagenes} />
-  }))
-}
+    imagenes: <Imagenes imagenes={zonadejuego.imagenes} />,
+  }));
+};
+
+export const miembrosEquipo = ({ equipo }) => {
+  const { usuarios } = equipo;
+  const { lider } = equipo;
+  lider.rango = "lider";
+
+  const DatosUsuarios = usuarios?.map((jugador) => {
+    const { usuarios } = jugador;
+    return { id: usuarios.id, nombre: usuarios.nombre, rango: "miembro" };
+  });
+
+  DatosUsuarios.push(lider);
+
+  const sortedUsuarios = DatosUsuarios.sort((a, b) =>
+    a.rango === "lider" && b.rango !== "lider" ? -1 : 1
+  );
+
+  return { jugadores: sortedUsuarios };
+};

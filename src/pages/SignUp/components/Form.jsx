@@ -3,7 +3,7 @@ import Input from "../../../components/form/Input";
 import Select from "../../../components/form/Select";
 import FormLayout from "../../../components/layout/FormLayout";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LuEye } from "react-icons/lu";
 
 import { useNivelesAcademicos } from "../hooks/useNivelesAcademicos";
@@ -13,26 +13,23 @@ import { crearCuentaEstudiante } from "../../../api";
 import { useIconPassword } from "../../../hooks/useIconPassword";
 
 const Form = () => {
+  const navigate = useNavigate();
   const { nivelesAcademicos, isLoading, error } = useNivelesAcademicos();
-  const {mostrarOcultarPassword, mostrarPassword} = useIconPassword();
+  const { mostrarOcultarPassword, mostrarPassword } = useIconPassword();
 
   const { t } = useTranslation(["signup"]);
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    mensajeError,
-    registroExitoso,
-
-  } = useFormulario(crearCuentaEstudiante);
+  const { register, handleSubmit, setValue, mensajeError, registroExitoso } =
+    useFormulario(crearCuentaEstudiante);
 
   if (isLoading) return <p>Cargando...</p>;
   if (error) return <p>Hubo un error, recarga la pagina</p>;
-  if (registroExitoso) return <p>Registro Exitoso</p>;
+  if (registroExitoso) {
+    navigate("/login");
+  }
 
   return (
     <FormLayout titulo={t("titulo")} subtitulo={t("subtitulo")}>
-      <p>{mensajeError}</p>
+      <p className="text-red-500 font-bold">{mensajeError}</p>
       <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
         <Input
           register={register("nombre")}

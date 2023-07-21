@@ -5,20 +5,20 @@ import Input from "../../form/Input";
 import Button from "../../ui/Button";
 import TemplateModal from "../ModalTemplate";
 
-import { crearEquipo } from "../../../api";
+import { unirseEquipo } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const FormCrearEquipo = ({ toggleModal }) => {
+const FormUniseEquipo = ({ toggleModal }) => {
   const navigate = useNavigate();
   const { data, register, handleSubmit, mensajeError, registroExitoso } =
-    useFormulario(crearEquipo);
+    useFormulario(unirseEquipo);
 
   useEffect(() => {
     if (registroExitoso) {
-      const { id } = data.data;
+      const { id_equipo } = data.data;
       toggleModal(false);
-      navigate(`/estudiante/equipos/datos/${id}`);
+      navigate(`/estudiante/equipos/datos/${id_equipo}`);
     }
   }, [registroExitoso]);
 
@@ -32,7 +32,7 @@ const FormCrearEquipo = ({ toggleModal }) => {
           <p className="text-red-500">{mensajeError}</p>
         )}
         {registroExitoso && (
-          <p className="text-green-500">Equipo creado correctamente</p>
+          <p className="text-green-500">Te has unido correctamente al equipo</p>
         )}
         <Input
           placeholder={"Ingresa el nombre del equipo"}
@@ -50,7 +50,7 @@ const FormCrearEquipo = ({ toggleModal }) => {
           disabled={registroExitoso}
           type={"s"}
           px={50}
-          textButton={"Crear equipo"}
+          textButton={"Unirse al equipo"}
           onClickButton={() => {}}
         />
       </form>
@@ -58,14 +58,17 @@ const FormCrearEquipo = ({ toggleModal }) => {
   );
 };
 
-const EquipoModal = () => {
-  const { modalState, toggleModal } = useModal();
+const UnirseEquipoModal = () => {
+  const { toggleModal } = useModal();
 
   return (
-    <TemplateModal desktopTitle={"Crear equipo"} identificator={"CrearEquipo"}>
-      <FormCrearEquipo toggleModal={toggleModal} />
+    <TemplateModal
+      identificator={"UnirseEquipo"}
+      desktopTitle={"Unirse a un equipo"}
+    >
+      <FormUniseEquipo toggleModal={toggleModal} />
     </TemplateModal>
   );
 };
 
-export default EquipoModal;
+export default UnirseEquipoModal;
