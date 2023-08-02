@@ -7,6 +7,32 @@ import {
   obtenerUnRegistro,
 } from "./helpers";
 
+export const HacerLider = async (idEquipo, datos) => {
+  try {
+    await clienteAxios.patch(
+      `/equipo/cambiarLider/${idEquipo}`,
+      datos,
+      headers()
+    );
+    return true;
+  } catch (error) {
+    throwError(error);
+  }
+};
+
+export const eliminarMiembro = async (idEquipo, datos) => {
+  try {
+    await clienteAxios.patch(
+      `/equipo/eliminarMiembro/${idEquipo}`,
+      datos,
+      headers()
+    );
+    return true;
+  } catch (error) {
+    throwError(error);
+  }
+};
+
 export const abandonarEquipo = (id) =>
   eliminarUnRegistro("/equipo/abandonarEquipo", id)();
 

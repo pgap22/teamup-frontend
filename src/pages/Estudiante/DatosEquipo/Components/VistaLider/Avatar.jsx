@@ -1,6 +1,8 @@
+import { useModal } from "src/store/useModal";
 import Button from "../../../../../components/ui/Button";
 
 const Avatar = ({ avatar_url }) => {
+  const { toggleModal } = useModal();
   return (
     <div className="flex justify-end">
       <div className="flex flex-col gap-4 items-center">
@@ -16,7 +18,9 @@ const Avatar = ({ avatar_url }) => {
         />
         <Button
           textButton={"Cambiar avatar"}
-          onClickButton={() => {}}
+          onClickButton={() => {
+            toggleModal("CambiarAvatar");
+          }}
           px={20}
           type={"button"}
         />

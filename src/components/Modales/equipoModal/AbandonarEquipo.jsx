@@ -55,7 +55,7 @@ const AbandonarEquipoModal = ({ id }) => {
   return (
     <TemplateModal
       identificator={"AbandonarEquipo"}
-      desktopTitle={"Eliminar equipo"}
+      desktopTitle={"Abandonar equipo"}
     >
       <ContentModal toggleModal={toggleModal} id={id} />
     </TemplateModal>

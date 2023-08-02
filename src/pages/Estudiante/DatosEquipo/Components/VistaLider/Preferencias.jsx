@@ -3,7 +3,6 @@ import Input from "../../../../../components/form/Input";
 import Button from "../../../../../components/ui/Button";
 import { actualizarDatos } from "../../../../../api";
 import { useEffect } from "react";
-import Exito from "../../../../../components/estudiante/Exito.jsx";
 import { useNavigate } from "react-router-dom";
 
 const Preferencias = ({ equipo }) => {
@@ -46,7 +45,7 @@ const Preferencias = ({ equipo }) => {
 
       <form
         onSubmit={handleSubmit}
-        className="flex gap-4 flex-col max-w-xs items-start"
+        className="flex flex-col items-start max-w-xs gap-4"
       >
         <Input
           label={"Nombre del equipo"}

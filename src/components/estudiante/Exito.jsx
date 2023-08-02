@@ -4,18 +4,18 @@ import Caja from "src/components/ui/Cajas/Caja";
 
 const Exito = () => {
   const location = useLocation();
-  if (!location.state) {
+  const states = { ...location.state };
+
+  if (!states) {
     return <div>Error</div>;
   }
-
-  const { titulo, subtitulo, descripcion, url, linkText } = location.state;
-  console.log(location.state);
+  const { url, titulo, subtitulo, descripcion, linkText } = states;
 
   return (
     <EstudianteLayaout title={titulo}>
       <Caja titulo={subtitulo}>
         <p>{descripcion}</p>
-        <Link className="text-primary underline" to={url}>
+        <Link className="underline text-primary" to={url}>
           {linkText}
         </Link>
       </Caja>
