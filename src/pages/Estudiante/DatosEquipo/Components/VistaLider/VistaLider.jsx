@@ -15,13 +15,13 @@ import InvitarJugadoresModal from "src/components/Modales/equipoModal/InvitarJug
 import CambiarAvatarModal from "src/components/Modales/equipoModal/CambiarAvatarModal";
 
 const VistaLider = ({ equipo }) => {
-  const { id, avatar_url } = equipo;
+  const { id, avatar_url, nombre } = equipo;
   const { jugadores } = miembrosEquipo({ equipo });
   const { toggleModal } = useModal();
 
   return (
-    <div className="flex flex-col items-start gap-5">
-      <div className="grid w-full h-auto grid-rows-2 gap-12 p-5 md:justify-between md:grid-cols-2 md:grid-rows-1">
+    <div className="flex flex-col items-center gap-10 p-5 md:items-start">
+      <div className="flex flex-col justify-center w-full h-auto grid-rows-2 gap-10 md:flex-row md:justify-between">
         <Preferencias equipo={equipo} />
         <Avatar avatar_url={avatar_url} />
       </div>
@@ -34,7 +34,7 @@ const VistaLider = ({ equipo }) => {
       <EliminarMiembroModal />
       <InvitarJugadoresModal />
       <EliminarEquipoModal id={equipo.id} />
-      <CambiarAvatarModal />
+      <CambiarAvatarModal name={nombre} id={equipo.id} />
       <Button
         textButton={"Eliminar equipo"}
         onClickButton={() => {

@@ -22,7 +22,7 @@ const Equipos = () => {
       }}
       title={"Equipos"}
     >
-      <div className="flex flex-col w-full gap-5">
+      <div className="flex flex-col w-full gap-5 ">
         <h1 className="text-[#828282] text-4xl font-bold">Tus equipos</h1>
         <TeamItems equipos={equipos} />
       </div>

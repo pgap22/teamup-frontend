@@ -5,14 +5,16 @@ const Box = ({ equipo }) => {
   return (
     <Link
       to={`/estudiante/equipos/datos/${id}`}
-      className="w-56 h-36 border-2 border-[#CECECE] rounded-md p-3 grid grid-rows-auto justify-around flex-col"
+      className="w-56 h-36 border-2 border-[#CECECE] rounded-md p-3 grid grid-rows-auto place-items-center"
     >
-      <div
-        className="w-16 h-16 mx-auto overflow-hidden bg-center bg-cover rounded-full"
+      <img
+        src={import.meta.env.VITE_URL + avatar_url}
+        alt="Preview"
+        className="object-cover w-[68px] h-[68px]"
         style={{
-          backgroundImage: `url(${import.meta.env.VITE_URL}${avatar_url})`,
+          clipPath: "circle(50% at 50% 50%)", // Aplicar la máscara circular
         }}
-      ></div>
+      />
       <p className="mx-auto font-bold text-xl text-[#747474] truncate">
         {nombre}
       </p>

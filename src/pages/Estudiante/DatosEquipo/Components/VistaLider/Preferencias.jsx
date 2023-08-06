@@ -16,6 +16,7 @@ const Preferencias = ({ equipo }) => {
   } = useFormulario(actualizarDatos);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     setValue("id", equipo.id);
   }, []);
@@ -35,7 +36,7 @@ const Preferencias = ({ equipo }) => {
   }, [registroExitoso]);
 
   return (
-    <div className="flex flex-col gap-5 ">
+    <div className="flex flex-col items-center gap-5 md:items-start ">
       <h1 className="text-[#828282] text-4xl font-bold">Preferencias</h1>
       {mensajeError && !registroExitoso && (
         <p className="text-red-500">{mensajeError}</p>
@@ -45,7 +46,7 @@ const Preferencias = ({ equipo }) => {
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-start max-w-xs gap-4"
+        className="flex flex-col items-center max-w-xs gap-4 md:items-start"
       >
         <Input
           label={"Nombre del equipo"}

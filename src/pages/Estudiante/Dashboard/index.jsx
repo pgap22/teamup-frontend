@@ -2,11 +2,15 @@ import EstudianteLayaout from "../../../components/layout/EstudianteLayout";
 
 import AccionesRapidas from "../../Coordinacion/Dashboard/components/AccionesRapidas/index";
 import Resumen from "../../Coordinacion/Dashboard/components/Resumen/index";
-import PartidosRealizados from "../../Coordinacion/Dashboard/components/PartidosRealizados/ListaPartidosRealizados";
 
 import { AiOutlinePullRequest } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdInsertInvitation } from "react-icons/md";
+
+import {
+  Equipos,
+  IconButtonEquipos,
+} from "src/components/estudiante/AsideEquipo";
 
 const DasboardEstudiante = () => {
   const acciones = [

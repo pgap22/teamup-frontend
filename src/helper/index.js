@@ -17,7 +17,7 @@ export const headers = () => {
 export const headersForm = () => {
   return {
     headers: {
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   };
@@ -41,7 +41,6 @@ export function convertirTamaño(bytes) {
 
 export const convertArrayToFileList = (fileArray) => {
   const dataTransfer = new DataTransfer();
-
   fileArray.forEach((file) => {
     dataTransfer.items.add(file);
   });

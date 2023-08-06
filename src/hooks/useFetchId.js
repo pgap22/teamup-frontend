@@ -1,7 +1,13 @@
 import { useQuery } from "react-query";
 
 const useFetchId = (id, obtenerItem, key, transformarDatosTabla) => {
-  const { data, isLoading, error } = useQuery([key, id], () => obtenerItem(id) );
+  const { data, isLoading, error } = useQuery(
+    [key, id],
+    () => obtenerItem(id),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   if (isLoading) {
     return { isLoading: true, [key]: {} };
@@ -13,10 +19,9 @@ const useFetchId = (id, obtenerItem, key, transformarDatosTabla) => {
 
   let datos = data.data;
 
-  if(transformarDatosTabla){
-     datos = data ? transformarDatosTabla(data) : []
+  if (transformarDatosTabla) {
+    datos = data ? transformarDatosTabla(data) : [];
   }
-
 
   return { isLoading: false, [key]: datos };
 };

@@ -23,16 +23,21 @@ export const obtenerUnRegistro = function (key, id) {
   };
 };
 
-export const editarUnRegistroForm = function(key, datos){
+export const editarUnRegistroForm = function (key, datos) {
+  console.log(datos);
   return async () => {
-      try {
-        const { data } = await clienteAxios.patchForm(key + "/" + datos.id, datos, headersForm());
-        return data;
-      } catch (error) {
-        throwError(error);
-      }
-    };
-}
+    try {
+      const { data } = await clienteAxios.patchForm(
+        key + "/" + datos.id,
+        datos,
+        headersForm()
+      );
+      return data;
+    } catch (error) {
+      throwError(error);
+    }
+  };
+};
 
 export const eliminarUnRegistro = function (key, id) {
   return async () => {

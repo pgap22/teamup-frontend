@@ -1,10 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*{
-    font-family: 'Raleway', sans-serif;
+* {
+  font-family: "Raleway", sans-serif;
 }
 
-.bloque-hijo{
-    @apply max-w-6xl w-full flex items-start
+.bloque-hijo {
+  @apply max-w-6xl w-full flex items-start;
 }

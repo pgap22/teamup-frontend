@@ -11,7 +11,7 @@ const VistaMiembro = ({ equipo }) => {
   const { jugadores } = miembrosEquipo({ equipo });
 
   return (
-    <div className="flex flex-col gap-4 items-start">
+    <div className="flex flex-col items-center gap-4 md:items-start">
       <Jugadores id_lider={equipo.id_lider} jugadores={jugadores} />
       <Button
         textButton={"Abandonar equipo"}

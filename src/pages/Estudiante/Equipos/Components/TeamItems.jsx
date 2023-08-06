@@ -5,7 +5,7 @@ const TeamItems = ({ equipos }) => {
   return (
     <div
       className="grid gap-4"
-      style={{ gridTemplateColumns: "repeat(auto-fit,224px)" }}
+      style={{ gridTemplateColumns: "repeat(auto-fit, 224px)" }}
     >
       <JoinTeam />
 

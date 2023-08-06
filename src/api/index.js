@@ -7,6 +7,8 @@ import {
   obtenerUnRegistro,
 } from "./helpers";
 
+export const actualizarAvatar = async (data) =>
+  editarUnRegistroForm("/equipo/actualizarAvatar", data)();
 export const HacerLider = async (idEquipo, datos) => {
   try {
     await clienteAxios.patch(
@@ -50,7 +52,6 @@ export const actualizarDatos = async (datos) => {
     throwError(error);
   }
 };
-export const actualizarAvatar = async () => {};
 export const unirseEquipo = async (datos) => {
   try {
     const { data } = await clienteAxios.post(
@@ -184,6 +185,7 @@ export const crearZonaDeJuego = async (data) => {
   }
 };
 export const obtenerZonasDeJuegos = obtenerRegistros("/zonaJuego");
+
 export const eliminarZonaDeJuego = (id) =>
   eliminarUnRegistro("/zonaJuego", id)();
 export const obtenerUnaZonaDeJuego = (id) =>
