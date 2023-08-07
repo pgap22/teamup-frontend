@@ -4,7 +4,7 @@ const Box = ({ children, invert = false }) => {
   const orientacion = invert ? 'md:flex-row-reverse' : 'md:flex-row'
   const box = [
     "md:max-w-[1024px] md:gap-16",
-    "flex flex-col gap-6 items-center text-center max-w-md",
+    "flex flex-col gap-6 items-center md:text-start text-center max-w-md",
     orientacion
 ]
   return (

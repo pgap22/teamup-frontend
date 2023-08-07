@@ -54,7 +54,7 @@ const EstudianteLayaout = ({
     toggleMenu(false);
   }, []);
   return (
-    <FondoColor color={"#DCDDDE"}>
+    <FondoColor color={"#f0f0f0"}>
       <div className="flex flex-col gap-5 md:mb-0 mb-14">
         <Nav
           RightAsideContent={RightAsideContent}

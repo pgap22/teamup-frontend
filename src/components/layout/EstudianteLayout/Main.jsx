@@ -17,7 +17,7 @@ const Main = ({
     ? "md:grid-cols-[auto_minmax(0,1fr)]"
     : "md:grid-cols-[auto_minmax(0,1fr)_minmax(0,250px)]";
 
-  const classes = "relative gap-4 p-4 md:grid " + grid;
+  const classes = "relative min-h-screen gap-4 p-4 md:grid " + grid;
 
   return (
     <main className={classes}>
