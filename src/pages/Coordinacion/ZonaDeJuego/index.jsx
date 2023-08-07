@@ -13,7 +13,7 @@ const ZonaDeJuego = () => {
     <CoordinacionLayout titulo={"Zona De Juego"}>
       <Tabla 
         titulo={"Lista De Zonas de juegos"}
-        cantidadTexto={"1 Zona de juegos"}
+        cantidadTexto={`${zonadejuego.length} Zona de juegos`}
         botonTexto={"Nueva Zona De Juego"}
         editarUrl={"/coordinacion/zonadejuego/editar"}
         listaDatos={zonadejuego}
