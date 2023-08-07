@@ -14,7 +14,9 @@ const MainContent = ({ children, title, textButton, onClickButton }) => {
           />
         )}
       </div>
-      <div className="w-full h-full p-5 bg-white rounded-md">{children}</div>
+      <div className="w-full h-full min-h-screen p-5 bg-white rounded-md">
+        {children}
+      </div>
     </section>
   );
 };

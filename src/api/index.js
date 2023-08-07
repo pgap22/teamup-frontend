@@ -35,11 +35,31 @@ export const eliminarMiembro = async (idEquipo, datos) => {
   }
 };
 
+export const equiposCreados = async () => {
+  try {
+    const { data } = await clienteAxios.get(
+      "/equipo/ObtenerEquiposCreados",
+      headers()
+    );
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+};
+export const equiposRivalesUsuario = async () => {
+  try {
+    const { data } = await clienteAxios.get(
+      "/equipo/ObtenerEquiposRivales",
+      headers()
+    );
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+};
 export const abandonarEquipo = (id) =>
   eliminarUnRegistro("/equipo/abandonarEquipo", id)();
-
 export const eliminarEquipo = (id) => eliminarUnRegistro("/equipo", id)();
-
 export const actualizarDatos = async (datos) => {
   try {
     const { data } = await clienteAxios.patch(
