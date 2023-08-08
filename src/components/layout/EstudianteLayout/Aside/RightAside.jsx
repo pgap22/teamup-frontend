@@ -13,9 +13,9 @@ const RightAside = ({ children, titulo, Icon }) => {
   const { toggleModal } = useModal();
 
   return (
-    <aside className="flex-col items-start justify-start hidden w-full max-h-screen gap-1 rounded-md md:flex">
+    <aside className="flex-col items-start justify-start hidden w-full gap-1 rounded-md md:flex">
       <AsideHeader toggleModal={toggleModal} titulo={titulo} Icon={Icon} />
-      <div className="flex flex-col items-center w-full h-full gap-3 pt-5 pb-5 overflow-y-auto bg-white">
+      <div className="flex flex-col items-center w-full h-full gap-3 pt-5 rounded-b-md pb-5 overflow-y-auto bg-white">
         {children}
       </div>
     </aside>

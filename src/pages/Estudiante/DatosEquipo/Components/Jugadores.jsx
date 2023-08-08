@@ -21,7 +21,7 @@ const JugadorItem = ({ jugador, id_lider, idEquipo }) => {
 
   return (
     <div className="min-h-[60px] justify-center max-w-xs py-3 px-2 border border-[#D8D8D8] rounded-md flex flex-col gap-1">
-      <p className="truncate font-bold text-[#565656]">
+      <p title={nombre + (nombre === usuario.nombre ? " (Tu)" : '')} className="truncate font-bold text-[#565656]">
         {nombre}
         {nombre === usuario.nombre && " (Tu)"}
       </p>
