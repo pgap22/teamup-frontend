@@ -8,11 +8,12 @@ import AbandonarEquipoModal from "../../../../../components/Modales/equipoModal/
 
 const VistaMiembro = ({ equipo }) => {
   const { toggleModal } = useModal();
-  const { jugadores } = miembrosEquipo({ equipo });
+  const { jugadores } = equipo;
 
   return (
     <div className="flex flex-col items-center gap-4 md:items-start">
-      <Jugadores id_lider={equipo.id_lider} jugadores={jugadores} />
+      <Jugadores id_lider={equipo.lider.id}
+        jugadores={jugadores} />
       <Button
         textButton={"Abandonar equipo"}
         onClickButton={() => {

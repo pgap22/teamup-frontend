@@ -44,7 +44,7 @@ const MultiStepForm = ({ FormsData = [] }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5">
+    <div className="flex flex-col items-center justify-center gap-5 w-full">
       {form.identificadores && <Forms FormComponents={FormsData} />}
       {form.identificadores && <ProgresiverIndicator FormsData={FormsData} />}
     </div>
@@ -74,6 +74,7 @@ const Forms = ({ FormComponents }) => {
         animate={animateAnimation}
         exit={exitAnimation}
         transition={transitionProps}
+        style={{ width: "100%" }}
       >
         <EstudianteFormLayout title={title}>
           <Componet formName={name} />

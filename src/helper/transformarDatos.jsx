@@ -52,9 +52,10 @@ export const zonaJuegoTabla = function ({ data }) {
   }));
 };
 
-export const miembrosEquipo = ({ equipo }) => {
-  const { usuarios } = equipo;
-  const { lider } = equipo;
+export const miembrosEquipo = ({ data }) => {
+  const { usuarios } = data;
+  const { lider } = data;
+
   lider.rango = "lider";
 
   const DatosUsuarios = usuarios?.map((jugador) => {
@@ -68,10 +69,19 @@ export const miembrosEquipo = ({ equipo }) => {
     a.rango === "lider" && b.rango !== "lider" ? -1 : 1
   );
 
-  return { jugadores: sortedUsuarios };
+  const formatedData = {
+    id: data.id,
+    nombre: data.nombre,
+    avatar_url: data.avatar_url,
+    lider: data.lider,
+    rango: data.rango
+
+  }
+  return { ...formatedData, jugadores: [...sortedUsuarios] };
+
 };
 
-export const solicitudesTabla = ({data})=>{
+export const solicitudesTabla = ({ data }) => {
   return data.map(solicitud => ({
     ID: solicitud.id,
     solicitante: solicitud.equipo_local.lider.nombre,
@@ -80,7 +90,7 @@ export const solicitudesTabla = ({data})=>{
     fecha: solicitud.fecha,
   }))
 }
-export const solicitudesTablaCoordinacion = ({data})=>{
+export const solicitudesTablaCoordinacion = ({ data }) => {
   return data.map(solicitud => ({
     ID: solicitud.id,
     solicitante: solicitud.equipo_local.lider.nombre,
