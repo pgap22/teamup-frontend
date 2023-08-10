@@ -4,10 +4,12 @@ const Button = ({
   disabled = false,
   children,
   color,
+  customBg,
   border,
   textColor,
   onClick = () => {},
   rounded,
+  className
 }) => {
   let colorBoton = "bg-primary ";
   let borderBoton = "border-transparent";
@@ -54,7 +56,8 @@ const Button = ({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`text-white shadow-md w-full flex justify-center items-center gap-4 hover:scale-[1.02] transition-all rounded-lg p-2 font-bold border ${colorBoton} ${borderBoton} ${color_text} ${roundedBoton} ${disabledStyles}`}
+      style={customBg && {backgroundColor: customBg}}
+      className={`text-white shadow-md w-full flex justify-center items-center gap-4 hover:scale-[1.02] transition-all rounded-lg p-2 font-bold border ${colorBoton} ${borderBoton} ${color_text} ${roundedBoton} ${disabledStyles} ${className}`}
     >
       {children}
     </button>

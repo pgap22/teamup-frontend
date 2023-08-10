@@ -36,7 +36,7 @@ export const IconButtonEquipos = ({}) => {
         toggleModal("CrearEquipo");
       }}
     >
-      <AiOutlinePlus color="white" />
+      <AiOutlinePlus size={24} color="white" />
     </div>
   );
 };
