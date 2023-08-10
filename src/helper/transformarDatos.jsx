@@ -70,3 +70,23 @@ export const miembrosEquipo = ({ equipo }) => {
 
   return { jugadores: sortedUsuarios };
 };
+
+export const solicitudesTabla = ({data})=>{
+  return data.map(solicitud => ({
+    ID: solicitud.id,
+    solicitante: solicitud.equipo_local.lider.nombre,
+    "Zona de juego": solicitud.ZonaDejuego.nombre,
+    deporte: solicitud.deporte.nombre,
+    fecha: solicitud.fecha,
+  }))
+}
+export const solicitudesTablaCoordinacion = ({data})=>{
+  return data.map(solicitud => ({
+    ID: solicitud.id,
+    solicitante: solicitud.equipo_local.lider.nombre,
+    "Zona de juego": solicitud.ZonaDejuego.nombre,
+    maestro: solicitud.usuarioMaestro.nombre,
+    fecha: solicitud.fecha,
+    deporte: solicitud.deporte.nombre
+  }))
+}
