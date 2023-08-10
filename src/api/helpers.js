@@ -24,7 +24,6 @@ export const obtenerUnRegistro = function (key, id) {
 };
 
 export const editarUnRegistroForm = function (key, datos) {
-  console.log(datos);
   return async () => {
     try {
       const { data } = await clienteAxios.patchForm(

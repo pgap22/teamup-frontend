@@ -1,39 +1,57 @@
-import EstudianteFormLayout from "src/components/estudiante/form";
 import SportItem from "./SportItem";
 
 import { obtenerDeportes } from "src/api";
 import { useFetch } from "src/hooks/useFetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMultiStepForm } from "src/components/estudiante/MultiStepForm/useMultiStepForm";
+import { useConstantes } from "src/components/estudiante/MultiStepForm/useConstantes";
 
 const SportsForm = () => {
-  const [sport, toogleSport] = useState(null);
+  const { setForm } = useMultiStepForm();
+  const { form, currentFormState, currentFormName } = useConstantes();
+  const { id_deporte } = currentFormState.values;
+  const defaultValueForm = id_deporte ? id_deporte : null;
+
+  const [sport, toogleSport] = useState(defaultValueForm);
   const { isLoading, deportes } = useFetch("deportes", obtenerDeportes);
+
+  useEffect(() => {
+    const funct = () => {
+      const formStateCopy = { ...currentFormState };
+
+      if (sport) {
+        formStateCopy.valid = true;
+        formStateCopy.values.id_deporte = sport;
+        setForm({ ...form, [currentFormName]: { ...formStateCopy } });
+        return;
+      }
+
+      formStateCopy.valid = null;
+      setForm({ ...form, [currentFormName]: { ...formStateCopy } });
+    };
+    funct();
+  }, [sport]);
+
   if (isLoading) return <p>Cargando</p>;
 
   const handleClick = (value) => {
-    toogleSport(value === sport ? null : value);
+    toogleSport(value === sport ? false : value);
   };
 
   return (
-    <EstudianteFormLayout
-      title={"¿Que deporte vamos a jugar hoy?"}
-      handleClickCancelar={() => {}}
-      handleClickContinuar={() => {}}
-    >
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-        {deportes?.map((deporte) => {
-          return (
-            <SportItem
-              handleClickSport={handleClick}
-              toogleSport={toogleSport}
-              isSelected={deporte.id === sport}
-              deporte={deporte}
-              key={deporte.id}
-            />
-          );
-        })}
-      </div>
-    </EstudianteFormLayout>
+    <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+      {deportes?.map((deporte) => {
+        return (
+          <SportItem
+            handleClickSport={handleClick}
+            toogleSport={toogleSport}
+            isSelected={deporte.id === sport}
+            deporte={deporte}
+            key={deporte.id}
+          />
+        );
+      })}
+    </div>
   );
 };
 

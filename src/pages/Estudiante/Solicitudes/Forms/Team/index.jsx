@@ -1,32 +1,50 @@
 import { useFetch } from "src/hooks/useFetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { equiposCreados } from "src/api";
 
-import EstudianteFormLayout from "src/components/estudiante/form";
 import EquiposContainer from "../../Components/Equipos";
+import { useConstantes } from "src/components/estudiante/MultiStepForm/useConstantes";
+import { useMultiStepForm } from "src/components/estudiante/MultiStepForm/useMultiStepForm";
 
 const TeamForm = () => {
+  const { setForm } = useMultiStepForm();
+  const { form, currentFormState, currentFormName } = useConstantes();
+
+  const { id_equipo_local } = currentFormState.values;
+  const defaultValueForm = id_equipo_local ? id_equipo_local : null;
+
+  const [selectedEquipo, setSelectedEquipo] = useState(defaultValueForm);
   const { equipos, isLoading } = useFetch("equipos", equiposCreados);
-  const [selectedEquipo, setSelectedEquipo] = useState(null);
+
+  useEffect(() => {
+    const funct = () => {
+      const formStateCopy = { ...currentFormState };
+
+      if (selectedEquipo) {
+        formStateCopy.valid = true;
+        formStateCopy.values.id_equipo_local = selectedEquipo;
+        setForm({ ...form, [currentFormName]: { ...formStateCopy } });
+        return;
+      }
+
+      formStateCopy.valid = null;
+      setForm({ ...form, [currentFormName]: { ...formStateCopy } });
+    };
+    funct();
+  }, [selectedEquipo]);
   if (isLoading) return <p>Cargando . . .</p>;
 
   const handleClick = (value) => {
     setSelectedEquipo(value === selectedEquipo ? null : value);
   };
   return (
-    <EstudianteFormLayout
-      title={"Seleciona tu equipo"}
-      handleClickCancelar={() => {}}
-      handleClickContinuar={() => {}}
-    >
-      <EquiposContainer
-        handleClickItem={handleClick}
-        setSelectedEquipo={setSelectedEquipo}
-        selectedEquipo={selectedEquipo}
-        equipos={equipos}
-      />
-    </EstudianteFormLayout>
+    <EquiposContainer
+      handleClickItem={handleClick}
+      setSelectedEquipo={setSelectedEquipo}
+      selectedEquipo={selectedEquipo}
+      equipos={equipos}
+    />
   );
 };
 
