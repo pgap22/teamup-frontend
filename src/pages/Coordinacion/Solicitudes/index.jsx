@@ -1,42 +1,32 @@
 import Tabla from "src/components/ui/Tabla"
 import CoordinacionLayout from "../../../components/layout/CoordinacionLayout"
 import Button from "src/components/form/Button"
+import { useFetch } from "src/hooks/useFetch"
+import { obtenerPartidosCoordinacionPendientes } from "src/api/partidos"
+import { solicitudesTablaCoordinacion } from "src/helper/transformarDatos"
+import { Link } from "react-router-dom"
 
 const Solicitudes = () => {
-  const solicitudes = [
-    {
-    "ID": 1,
-    "Zona De Juego": "Cancha Techada",
-    "Solicitante": "Juanito",
-    "Maestro": "Pachaca",
-    "Hora": "12:00PM"
-  },
-    {
-    "ID": 1,
-    "Zona De Juego": "Cancha Techada",
-    "Solicitante": "Juanito",
-    "Maestro": "Pachaca",
-    "Hora": "12:00PM"
-  },
-    {
-    "ID": 1,
-    "Zona De Juego": "Cancha Techada",
-    "Solicitante": "Juanito",
-    "Maestro": "Pachaca",
-    "Hora": "12:00PM"
-  },
-]
+
+  const { isLoading, solicitudes } = useFetch("solicitudes", obtenerPartidosCoordinacionPendientes, solicitudesTablaCoordinacion)
+
+  if (isLoading) return <p>Cargando...</p>
+
   return (
     <CoordinacionLayout titulo={"Solicitudes"}>
-        <Tabla 
+      <Tabla
         titulo={"Solicitudes Pendientes"}
         cantidadTexto={"1 Solicitud"}
         listaDatos={solicitudes}
         boton={false}
         acciones={false}
         accionesCustomLabel={" "}
-        AccionesCustomElement={() => <Button>Mas Informacion</Button>}
-        />
+        AccionesCustomElement={({dato}) => (
+          <Link to={""+dato.ID}>
+            <Button>Mas Informacion</Button>
+          </Link>
+        )}
+      />
     </CoordinacionLayout>
   )
 }
