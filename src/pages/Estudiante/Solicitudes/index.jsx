@@ -12,12 +12,6 @@ import MultiStepForm from "src/components/estudiante/MultiStepForm";
 const Solicitudes = () => {
   const Forms = [
     {
-      name: "Plantilla",
-      Componet: TeamStaffForm,
-      title: "Crea tu plantilla",
-      fields: ["jugadores"],
-    },
-    {
       name: "Deportes",
       Componet: SportsForm,
       title: "Seleciona un deporte",
@@ -28,6 +22,12 @@ const Solicitudes = () => {
       Componet: TeamForm,
       title: "Seleciona tu equipo",
       fields: ["id_equipo_local"],
+    },
+    {
+      name: "Plantilla",
+      Componet: TeamStaffForm,
+      title: "Crea tu plantilla",
+      fields: ["jugadores"],
     },
     {
       name: "EquipoVisitante",

@@ -74,29 +74,44 @@ export const miembrosEquipo = ({ data }) => {
     nombre: data.nombre,
     avatar_url: data.avatar_url,
     lider: data.lider,
-    rango: data.rango
-
-  }
+    rango: data.rango,
+  };
   return { ...formatedData, jugadores: [...sortedUsuarios] };
-
 };
 
 export const solicitudesTabla = ({ data }) => {
-  return data.map(solicitud => ({
+  return data.map((solicitud) => ({
     ID: solicitud.id,
     solicitante: solicitud.equipo_local.lider.nombre,
     "Zona de juego": solicitud.ZonaDejuego.nombre,
     deporte: solicitud.deporte.nombre,
     fecha: solicitud.fecha,
-  }))
-}
+  }));
+};
+
 export const solicitudesTablaCoordinacion = ({ data }) => {
-  return data.map(solicitud => ({
+  return data.map((solicitud) => ({
     ID: solicitud.id,
     solicitante: solicitud.equipo_local.lider.nombre,
     "Zona de juego": solicitud.ZonaDejuego.nombre,
     maestro: solicitud.usuarioMaestro.nombre,
     fecha: solicitud.fecha,
-    deporte: solicitud.deporte.nombre
-  }))
-}
+    deporte: solicitud.deporte.nombre,
+  }));
+};
+
+export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
+  const { titular, reserva } = stateMiembrosValues;
+
+  if (data.length === 0) return { headLinesPlayers: [], reservePlayers: [] };
+
+  const headLinesPlayers = data.filter((miembro) => {
+    return miembro.estado === titular;
+  });
+
+  const reservePlayers = data.filter((miembro) => {
+    return miembro.estado === reserva;
+  });
+
+  return { headLinesPlayers, reservePlayers };
+};

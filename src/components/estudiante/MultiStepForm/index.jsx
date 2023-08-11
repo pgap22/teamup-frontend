@@ -15,14 +15,14 @@ const formatedFormData = ({ FormsData }) => {
   const result = {};
   const formIdentificator = [];
 
-  FormsData?.forEach((formData, i) => {
+  FormsData?.forEach((formData) => {
     const { name, fields } = formData;
     const fieldValues = {};
 
     formIdentificator.push({ name });
 
     fields.forEach((field) => {
-      fieldValues[field] = "";
+      fieldValues[field] = null;
     });
 
     result[name] = {
