@@ -7,11 +7,11 @@ export default function Partido({ url = "1", partido = {}}) {
     
     const hayZonaJuego = partido.id && !!partido.ZonaDejuego.id;
     const imagenZonaJuego = hayZonaJuego ? new URL(import.meta.env.VITE_URL + partido.ZonaDejuego.imagenes[0].imagen_url).toString() : '';
-
+    
     return (
         <div className="border shadow-md p-4 rounded-lg">
 
-            <div style={hayZonaJuego && { backgroundImage: `url(${imagenZonaJuego})` }} className="bg-[#D9D9D9] bg-cover bg-center min-h-[100px] flex justify-center items-center rounded-lg">
+            <div style={hayZonaJuego && { backgroundImage: `url('${imagenZonaJuego}')` }} className="bg-[#D9D9D9] bg-cover bg-center min-h-[100px] flex justify-center items-center rounded-lg">
                 {!hayZonaJuego && <GiTennisCourt size={52} strokeWidth={4} color="#8C8C8C" />}
             </div>
 

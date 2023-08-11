@@ -52,10 +52,9 @@ export const zonaJuegoTabla = function ({ data }) {
   }));
 };
 
-export const miembrosEquipo = ({ data }) => {
-  const { usuarios } = data;
-  const { lider } = data;
-
+export const miembrosEquipo = ({ equipo }) => {
+  const { usuarios } = equipo;
+  const { lider } = equipo;
   lider.rango = "lider";
 
   const DatosUsuarios = usuarios?.map((jugador) => {
@@ -69,49 +68,30 @@ export const miembrosEquipo = ({ data }) => {
     a.rango === "lider" && b.rango !== "lider" ? -1 : 1
   );
 
-  const formatedData = {
-    id: data.id,
-    nombre: data.nombre,
-    avatar_url: data.avatar_url,
-    lider: data.lider,
-    rango: data.rango,
-  };
-  return { ...formatedData, jugadores: [...sortedUsuarios] };
+  return { jugadores: sortedUsuarios };
 };
 
-export const solicitudesTabla = ({ data }) => {
-  return data.map((solicitud) => ({
+export const solicitudesTabla = ({data})=>{
+  return data.map(solicitud => ({
     ID: solicitud.id,
     solicitante: solicitud.equipo_local.lider.nombre,
-    "Zona de juego": solicitud.ZonaDejuego.nombre,
     deporte: solicitud.deporte.nombre,
     fecha: solicitud.fecha,
-  }));
-};
-
-export const solicitudesTablaCoordinacion = ({ data }) => {
-  return data.map((solicitud) => ({
+  }))
+}
+export const solicitudesTablaCoordinacion = ({data})=>{
+  return data.map(solicitud => ({
     ID: solicitud.id,
     solicitante: solicitud.equipo_local.lider.nombre,
-    "Zona de juego": solicitud.ZonaDejuego.nombre,
-    maestro: solicitud.usuarioMaestro.nombre,
+    maestro:  solicitud.usuarioMaestro.nombre,
     fecha: solicitud.fecha,
-    deporte: solicitud.deporte.nombre,
+    deporte: solicitud.deporte.nombre
+  }))
+}
+
+export const zonaJuegosSelect = ({data})=>{
+  return data.map((zonaDeJuego) => ({
+    value: zonaDeJuego.id,
+    label: zonaDeJuego.nombre,
   }));
-};
-
-export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
-  const { titular, reserva } = stateMiembrosValues;
-
-  if (data.length === 0) return { headLinesPlayers: [], reservePlayers: [] };
-
-  const headLinesPlayers = data.filter((miembro) => {
-    return miembro.estado === titular;
-  });
-
-  const reservePlayers = data.filter((miembro) => {
-    return miembro.estado === reserva;
-  });
-
-  return { headLinesPlayers, reservePlayers };
-};
+}

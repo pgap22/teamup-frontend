@@ -23,6 +23,7 @@ const Dashboard = () => {
     },
     {
       nombre: "📩 Ver Solicitudes Pendientes",
+      url: "/coordinacion/solicitudes",
     },
   ];
 

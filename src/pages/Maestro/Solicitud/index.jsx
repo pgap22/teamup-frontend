@@ -1,17 +1,22 @@
+import { useToggle } from "@uidotdev/usehooks"
+import clsx from "clsx"
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { aceptarPartidoMaestro, obtenerUnPartido } from "src/api/partidos"
+import { aceptarPartidoMaestro, cancelarPartidoMaestro, colocarAsistenciaMaestro, obtenerUnPartido } from "src/api/partidos"
 import EquipoCard from "src/components/estudiante/EquipoCard/EquipoCard"
 import InfoCampo from "src/components/estudiante/InfoCampo"
 import Button from "src/components/form/Button"
 import MaestroLayout from "src/components/layout/MaestroLayout"
 import Caja from "src/components/ui/Cajas/Caja"
+import { useModal } from "src/hooks/useModal"
 
 const Solicitud = () => {
     const [partido, setPartido] = useState({});
     const [partidoAceptado, setPartidoAceptado] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
+
+    const [ModalAsistencia, modalAsistecia] = useModal();
 
     useEffect(() => {
         (async () => {
@@ -24,10 +29,29 @@ const Solicitud = () => {
         })()
     }, [])
 
-    const cuidarPartido = async() => {
+    const cuidarPartido = async () => {
         try {
-            const partidoAceptado = await aceptarPartidoMaestro(id);
-            console.log(partidoAceptado);
+            await aceptarPartidoMaestro(id);
+            setPartidoAceptado(true);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const tomarAsistencia = async()=>{
+        try {
+            await colocarAsistenciaMaestro(id);
+            setPartidoAceptado(true);
+            modalAsistecia.toggleModal(false);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const cancelarPartidoClick = async()=>{
+        try {
+            await cancelarPartidoMaestro(id);
+            setPartidoAceptado(true);
+            modalAsistecia.toggleModal(false);
         } catch (error) {
             console.log(error)
         }
@@ -35,15 +59,15 @@ const Solicitud = () => {
 
     if (!partido.id) return <p>Cargando...</p>
 
+    if (partidoAceptado) return <MensajeExito />
 
     return (
-        <MaestroLayout titulo={"Solicitud N°1"}>
+        <MaestroLayout titulo={"Solicitud N°" + partido.id}>
             <Caja titulo={"Datos Generales"}>
                 <div className=" space-y-4">
-                    <InfoCampo title={"Zona De Juego"} value={partido.ZonaDejuego.nombre} />
+                    <InfoCampo title={"Zona De Juego"} value={!partido.ZonaDejuego ? 'Pendiente' : partido.ZonaDejuego.nombre} />
                     <InfoCampo title={"Deporte"} value={partido.deporte.nombre} />
                     <InfoCampo title={"Maestro Encargado"} value={!partido.usuarioMaestro ? 'Pendiente' : partido.usuarioMaestro.nombre} />
-                    <InfoCampo title={"Zona De Juego"} value={"Cancha Techada"} />
                 </div>
             </Caja>
 
@@ -61,12 +85,41 @@ const Solicitud = () => {
                 <Caja className={"flex flex-col gap-2"} titulo={"Acciones"}>
                     <div className="h-full justify-center flex flex-col">
                         {
-                            partido.estado.id == 2 && <Button onClick={cuidarPartido} className={"py-4 md:text-xl"} customBg={"#0F62FE"}>Cuidar Partido</Button>
+                            partido.estado.fase == 2 && <Button onClick={cuidarPartido} className={"py-4 md:text-xl"} customBg={"#0F62FE"}>Cuidar Partido</Button>
                         }
-                        {/* <Button className={"py-4 md:text-xl"} customBg={"#7E7E7E"}>Tomar Asistencia</Button> */}
+                        {
+                            partido.estado.fase == 4 && <Button onClick={() => modalAsistecia.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#7E7E7E"}>Tomar Asistencia</Button>
+                        }
                     </div>
                 </Caja>
             </div>
+
+            <ModalAsistencia desktopTitle="Tomar Asistencia" {...modalAsistecia}>
+                <div className="p-4">
+                    <div className="space-y-2">
+                        <p>Haz click para tomar la asistencia del equipo</p>             
+                        <Button onClick={tomarAsistencia}>Tomar Asistencia</Button>
+                    </div>
+                   
+                    <div className="mt-6 space-y-2">
+                        <p>Si no se presenta un equipo puedes cancelar el partido</p>
+                        <Button onClick={cancelarPartidoClick} customBg={"#7E7E7E"}>Cancelar Partido</Button>    
+                    </div>
+                </div>
+            </ModalAsistencia>
+        </MaestroLayout>
+    )
+}
+
+
+const MensajeExito = () => {
+    return (
+        <MaestroLayout titulo={"Solicitud Aceptada"}>
+            <Caja titulo={"Solicitud aceptada"}>
+                <p>Tu cuidaras este partido !</p>
+
+                <Link to={"/maestro"}>Volver al inicio</Link>
+            </Caja>
         </MaestroLayout>
     )
 }
