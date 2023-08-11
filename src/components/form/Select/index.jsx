@@ -1,9 +1,7 @@
 import SelectUI from "./SelectUI";
 import { SelectValueProvider } from "./SelectContext";
 
-const Select = ({ label, placeholder, opciones = [], setValue,valueLabel,id_valorPorDefecto }) => {
-  //Solo por autocompletadoxd
-  const props = { label, placeholder, opciones, setValue,valueLabel,id_valorPorDefecto };
+const Select = (props) => {
   return (
     <SelectValueProvider>
       <SelectUI {...props} />

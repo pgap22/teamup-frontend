@@ -4,7 +4,7 @@ import { useSelect } from "./useSelect";
 import Placeholder from "./Placeholder";
 import { useEffect } from "react";
 
-const SelectUI = ({ label, placeholder, opciones = [], setValue = () => { }, valueLabel, id_valorPorDefecto }) => {
+const SelectUI = ({ label, placeholder, opciones = [], setValue = () => { }, valueLabel, id_valorPorDefecto, noAbsolute = false }) => {
   const { value, menuOpciones, setMenuOpciones, setValue: setDefaultValue } = useSelect();
 
   const alternarMenuOpciones = () => {
@@ -32,7 +32,7 @@ const SelectUI = ({ label, placeholder, opciones = [], setValue = () => { }, val
         <MdChevronLeft className="-rotate-90" size={28} />
       </div>
       <div className="relative">
-        <Options mostrar={menuOpciones} opciones={opciones} />
+        <Options noAbsolute={noAbsolute} mostrar={menuOpciones} opciones={opciones} />
       </div>
     </div>
   );

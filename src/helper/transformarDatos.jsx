@@ -100,6 +100,13 @@ export const solicitudesTablaCoordinacion = ({ data }) => {
   }));
 };
 
+export const zonaJuegosSelect = ({data})=>{
+  return data.map((zonaDeJuego) => ({
+    value: zonaDeJuego.id,
+    label: zonaDeJuego.nombre,
+  }));
+}
+
 export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
   const { titular, reserva } = stateMiembrosValues;
 
@@ -143,92 +150,3 @@ export const mappedDataSolicitud = ({ data }) => {
 
 }
 
-// {
-//   "currentFormIndex": 4,
-//     "previousIndex": 4,
-//       "Deportes": {
-//     "valid": true,
-//       "values": {
-//       "id_deporte": 2,
-//         "deporte": {
-//         "0": {
-//           "id": 2,
-//             "nombre": "Ajedrez",
-//               "descripcion": "sexo",
-//                 "limiteJugadores": 1,
-//                   "limiteJugadoresCambio": 0,
-//                     "id_tipoDeporte": 2,
-//                       "tipoDeporte": {
-//             "id": 2,
-//               "nombre": "No Regulado",
-//                 "descripcion": "No hay personas que supervisen los partidos de estos deportes y las solicitudes no pasan por coordinacion ni por los maestros, pero los usuarios pueden tener un maestro si lo desean",
-//                   "skipMaestro": false,
-//                     "skipCoordinacion": false,
-//                       "skipAsistencia": false,
-//                         "opcionalMaestro": true
-//           }
-//         }
-//       }
-//     }
-//   },
-//   "EquipoLocal": {
-//     "valid": true,
-//       "values": {
-//       "id_equipo_local": 1,
-//         "previous_id_equipo": null
-//     }
-//   },
-//   "Plantilla": {
-//     "valid": true,
-//       "values": {
-//       "jugadores": [
-//         {
-//           "id": 2,
-//           "nombre": "FJ HM",
-//           "rango": "lider",
-//           "estado": "titular"
-//         },
-//         {
-//           "id": 3,
-//           "nombre": "aaaa aaaa",
-//           "rango": "miembro",
-//           "estado": null
-//         }
-//       ],
-//         "id_equipo_actual": 1
-//     }
-//   },
-//   "EquipoVisitante": {
-//     "valid": true,
-//       "values": {
-//       "id_equipo_visitante": 3
-//     }
-//   },
-//   "InformacionGeneral": {
-//     "valid": true,
-//       "values": {
-//       "descripcion": "Sexo hitler",
-//         "hora": "2023-08-11T16:48:03.521Z",
-//           "fecha": "2023-08-11T16:48:03.521Z",
-//             "maestro_intermediario": false
-//     }
-//   },
-//   "identificadores": [
-//     {
-//       "name": "Deportes"
-//     },
-//     {
-//       "name": "EquipoLocal"
-//     },
-//     {
-//       "name": "Plantilla"
-//     },
-//     {
-//       "name": "EquipoVisitante"
-//     },
-//     {
-//       "name": "InformacionGeneral"
-//     }
-//   ],
-//     "lastIndex": 4
-// }
