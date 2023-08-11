@@ -6,6 +6,7 @@ import {
 } from "src/components/estudiante/AsideEquipo";
 import { useFetch } from "src/hooks/useFetch";
 import { obtenerMisPartidos } from "src/api/partidos";
+import EquipoModal from "src/components/Modales/equipoModal/EquipoModal";
 
 const Partidos = () => {
   const {isLoading, partidos} = useFetch('partidos', obtenerMisPartidos);
@@ -22,9 +23,10 @@ const Partidos = () => {
     >
       <main className="flex flex-col sm:grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
          {
-          partidos.map(partido =>  <Partido url="" key={partido.id} partido={partido} />)
+          partidos?.map(partido =>  <Partido url="" key={partido.id} partido={partido} />)
          }
       </main>
+      <EquipoModal />
     </EstudianteLayaout>
   );
 };

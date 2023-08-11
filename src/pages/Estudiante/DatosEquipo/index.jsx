@@ -8,6 +8,7 @@ import EstudianteLayaout from "../../../components/layout/EstudianteLayout";
 import VistaLider from "./Components/VistaLider/VistaLider";
 import VistaMiembro from "./Components/VistaMiembro/VistaMiembro";
 import { useSession } from "src/hooks/useSession";
+import { miembrosEquipo } from "src/helper/transformarDatos";
 
 const VistaEquipo = ({ equipo }) => {
   const rango = equipo.rango;
@@ -24,15 +25,17 @@ const VistaEquipo = ({ equipo }) => {
 const DatosEquipo = () => {
   const { usuario } = useSession();
   const { id } = useParams();
-  const { isLoading, equipo } = useFetchId(id, obtenerUnEquipo, "equipo");
+  const { isLoading, equipo } = useFetchId(id, obtenerUnEquipo, "equipo", miembrosEquipo);
 
   if (isLoading) return <p>Loading....</p>;
+
+  console.log(equipo)
 
   const { id: id_usuario } = usuario;
   const { lider } = equipo;
 
   const invitarJugadores = lider.id === id_usuario;
-  const handleClick = () => {};
+  const handleClick = () => { };
 
   return (
     <EstudianteLayaout

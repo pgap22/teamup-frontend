@@ -16,7 +16,7 @@ import CambiarAvatarModal from "src/components/Modales/equipoModal/CambiarAvatar
 
 const VistaLider = ({ equipo }) => {
   const { id, avatar_url, nombre } = equipo;
-  const { jugadores } = miembrosEquipo({ equipo });
+  const { jugadores } = equipo;
   const { toggleModal } = useModal();
 
   return (
@@ -27,7 +27,7 @@ const VistaLider = ({ equipo }) => {
       </div>
       <Jugadores
         jugadores={jugadores}
-        id_lider={equipo.id_lider}
+        id_lider={equipo.lider.id}
         idEquipo={id}
       />
       <HacerLiderModal />

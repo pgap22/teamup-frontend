@@ -1,7 +1,7 @@
 import { AiOutlineCheck } from "react-icons/ai";
 
 const SportItem = ({ deporte, isSelected, handleClickSport }) => {
-  const { name, id } = deporte;
+  const { nombre, id } = deporte;
 
   const handleClick = () => {
     handleClickSport(id);
@@ -11,10 +11,10 @@ const SportItem = ({ deporte, isSelected, handleClickSport }) => {
   return (
     <div
       onClick={handleClick}
-      className={` transition-all ease-in-out duration-200 cursor-pointer w-[250px] border-2 h-[150px] border-[#E0E0E0] bg-[#E0E0E0] relative grid rounded-md ${isSelectedStyles} overflow-hidden `}
+      className={`  place-items-center transition-all ease-in-out duration-200 cursor-pointer w-[250px] border-2 h-[150px] border-[#E0E0E0] bg-[#E0E0E0] relative grid rounded-md ${isSelectedStyles} overflow-hidden `}
     >
       <SelectIndicator isSelected={isSelected} />
-      <p>{name}</p>
+      <p className="text-lg font-bold">{nombre}</p>
     </div>
   );
 };
