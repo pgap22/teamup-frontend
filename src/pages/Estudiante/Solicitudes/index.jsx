@@ -8,6 +8,7 @@ import OponnentForm from "./Forms/Oponnent";
 import GeneralDataForm from "./Forms/GeneralData";
 import TeamStaffForm from "./Forms/TeamStaff";
 import MultiStepForm from "src/components/estudiante/MultiStepForm";
+import { throwError } from "src/helper";
 
 const Solicitudes = () => {
   const Forms = [
@@ -45,8 +46,14 @@ const Solicitudes = () => {
   return (
     <EstudianteLayaout title={"Creando Solicitud"}>
       <MultiStepFormProvider>
-        <MultiStepForm FormsData={Forms} succesSubmit={({ data }) => {
-          console.log(data)
+        <MultiStepForm FormsData={Forms} succesSubmit={async ({ data }) => {
+          try {
+            const partido = await crearPartido(data)
+            console.log(partido)
+            return partido
+          } catch (error) {
+            throwError(error)
+          }
         }} />
       </MultiStepFormProvider>
     </EstudianteLayaout>

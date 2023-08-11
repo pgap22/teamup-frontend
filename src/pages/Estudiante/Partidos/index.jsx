@@ -13,7 +13,6 @@ const Partidos = () => {
 
   if(isLoading) return <p>Cargando...</p>
 
-  console.log(partidos)
   return (
     <EstudianteLayaout
       RightAsideButton={<IconButtonEquipos />}

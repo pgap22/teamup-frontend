@@ -100,7 +100,7 @@ export const solicitudesTablaCoordinacion = ({ data }) => {
   }));
 };
 
-export const zonaJuegosSelect = ({data})=>{
+export const zonaJuegosSelect = ({ data }) => {
   return data.map((zonaDeJuego) => ({
     value: zonaDeJuego.id,
     label: zonaDeJuego.nombre,
@@ -132,16 +132,40 @@ export const mappedDataSolicitud = ({ data }) => {
     const { values } = data[name]
 
     if (name === "Deportes") {
-      delete values.deporte
+      const { id_deporte } = values
+      result["id_deporte"] = id_deporte
+
     }
     if (name === "EquipoLocal") {
-      delete values.previous_id_equipo
+      const { id_equipo_local } = values
+      result["id_equipo_local"] = id_equipo_local
+
     }
     if (name === "Plantilla") {
-      delete values.id_equipo_actual
+      const { jugadores } = values
+      result["jugadores"] = jugadores
+
     }
-    result[name] = {
-      ...values
+    if (name === "EquipoVisitante") {
+      const { id_equipo_visitante } = values
+      result["id_equipo_visitante"] = id_equipo_visitante
+
+    }
+    if (name === "EquipoVisitante") {
+      const { id_equipo_visitante } = values
+      result["id_equipo_visitante"] = id_equipo_visitante
+
+    }
+    if (name === "InformacionGeneral") {
+      const { descripcion } = values
+      result["descripcion"] = descripcion
+
+      const { hora } = values
+      result["hora"] = hora
+
+      const { fecha } = values
+      result["fecha"] = fecha
+
     }
 
   });
