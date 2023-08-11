@@ -36,7 +36,10 @@ const TeamForm = () => {
   if (isLoading) return <p>Cargando . . .</p>;
 
   const handleClick = (value) => {
+    const formStateCopy = { ...currentFormState };
+    formStateCopy.previousValues.id_equipo_local = selectedEquipo;
     setSelectedEquipo(value === selectedEquipo ? null : value);
+    setForm({ ...form, [currentFormName]: { ...formStateCopy } });
   };
   return (
     <EquiposContainer

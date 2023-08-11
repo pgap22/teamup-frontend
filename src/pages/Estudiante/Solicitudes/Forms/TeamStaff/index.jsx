@@ -26,6 +26,9 @@ const TeamStaffForm = () => {
   const { form, currentFormState, currentFormName } = useConstantes();
 
   const { id_equipo_local } = form.EquipoLocal.values;
+  const { id_equipo_local: preoviousId_equipo_local } =
+    form.EquipoLocal.previousValues;
+
   const { id_deporte } = form.Deportes.values;
   const { jugadores: miembrosState } = currentFormState.values;
 
@@ -45,7 +48,11 @@ const TeamStaffForm = () => {
       setSelectedJugadores(miembrosStateData({ miembros: jugadores }));
     };
 
-    if (miembrosState) {
+    if (
+      miembrosState &&
+      (preoviousId_equipo_local === null ||
+        preoviousId_equipo_local !== id_equipo_local)
+    ) {
       setSelectedJugadores([...miembrosState]);
       return;
     }

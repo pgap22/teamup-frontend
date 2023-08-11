@@ -9,6 +9,7 @@ import EstudianteFormLayout from "../form";
 const object_default = {
   valid: false,
   values: {},
+  previousValues: {},
 };
 
 const formatedFormData = ({ FormsData }) => {
@@ -28,6 +29,7 @@ const formatedFormData = ({ FormsData }) => {
     result[name] = {
       ...object_default,
       values: { ...fieldValues },
+      previousValues: { ...fieldValues },
     };
   });
 
@@ -44,7 +46,7 @@ const MultiStepForm = ({ FormsData = [] }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5 w-full">
+    <div className="flex flex-col items-center justify-center w-full gap-5">
       {form.identificadores && <Forms FormComponents={FormsData} />}
       {form.identificadores && <ProgresiverIndicator FormsData={FormsData} />}
     </div>
