@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { obtenerPartidosPendientes } from "src/api/partidos"
+import { obtenerPartidosCuidarMaestro, obtenerPartidosPendientes } from "src/api/partidos"
 import Partido from "src/components/estudiante/PartidoCard/Partido"
 import Button from "src/components/form/Button"
 import MaestroLayout from "src/components/layout/MaestroLayout"
@@ -10,26 +10,25 @@ import { useFetch } from "src/hooks/useFetch"
 
 const Dashboard = () => {
 
-  const { isLoading ,solicitudes } = useFetch('solicitudes', obtenerPartidosPendientes, solicitudesTabla);
+  const { isLoading: isLoadingPartidos, partidos } = useFetch('partidos', obtenerPartidosCuidarMaestro)
+  const { isLoading, solicitudes } = useFetch('solicitudes', obtenerPartidosPendientes, solicitudesTabla);
 
-  if(isLoading) return <p>Cargando...</p>
+
+  if (isLoading) return <p>Cargando...</p>
+  if (isLoadingPartidos) return <p>Cargando...</p>
 
   return (
     <MaestroLayout titulo={"Inicio"}>
       <div className=" space-y-4">
         <Caja titulo={"Partidos que cuidar"}>
           <div className="max-w-full scroll-p-2 flex gap-5 overflow-auto">
-
-            <div className="min-w-[300px]">
-              <Partido url="solicitud/1"  />
-            </div>
-            <div className="min-w-[300px]">
-              <Partido url="solicitud/1"  />
-            </div>
-            <div className="min-w-[300px]">
-              <Partido url="solicitud/1"  />
-            </div>
-
+            {
+              partidos.map(partidoItem => (
+                <div key={partidoItem.id} className="min-w-[300px]">
+                  <Partido partido={partidoItem} url={"solicitud/"} />
+                </div>
+              ))
+            }
           </div>
         </Caja>
 
@@ -40,8 +39,8 @@ const Dashboard = () => {
           boton={false}
           acciones={false}
           accionesCustomLabel={" "}
-          AccionesCustomElement={({dato}) => (
-            <Link to={"solicitud/"+dato.ID}>
+          AccionesCustomElement={({ dato }) => (
+            <Link to={"solicitud/" + dato.ID}>
               <Button>Mas Informacion</Button>
             </Link>
           )}

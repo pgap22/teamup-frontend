@@ -16,7 +16,7 @@ const Solicitudes = () => {
     <CoordinacionLayout titulo={"Solicitudes"}>
       <Tabla
         titulo={"Solicitudes Pendientes"}
-        cantidadTexto={"1 Solicitud"}
+        cantidadTexto={solicitudes.length+" Solicitud"}
         listaDatos={solicitudes}
         boton={false}
         acciones={false}

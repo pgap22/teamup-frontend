@@ -36,6 +36,8 @@ const PartidoInformacion = () => {
 
     if(!partido.id) return <p>Cargando...</p>
 
+
+    console.log(partido);
     return (
         <EstudianteLayaout
             RightAsideButton={<IconButtonEquipos />}
@@ -48,11 +50,10 @@ const PartidoInformacion = () => {
                     <h2 className="font-bold text-xl mb-4">Datos Generales</h2>
 
                     <div className="flex flex-col gap-4">
-                        <InfoCampo title={"Zona De Juego"} value={partido.ZonaDejuego.nombre} />
+                        <InfoCampo title={"Zona De Juego"} value={!partido.ZonaDejuego ? 'Pendiente' : partido.ZonaDejuego.nombre} />
                         <InfoCampo title={"Deporte"} value={partido.deporte.nombre} />
-                        <InfoCampo title={"Maestro Encargado"} value={!partido.usuarioMaestro ? 'Pendiente' : partido.usuarioMaestro.nombre } />
-                        <InfoCampo title={"Zona De Juego"} value={"Cancha Techada"} />
-                    </div>
+                        <InfoCampo title={"Maestro Encargado"} value={!partido.usuarioMaestro ? 'Pendiente' : partido.usuarioMaestro.nombre} />
+                </div>
                 </section>
 
                 <section className="max-w-md">
@@ -67,6 +68,10 @@ const PartidoInformacion = () => {
                         <Button className={"py-4 md:text-xl"} color={"verde"}>Aceptar Partido</Button>
                         <Button className={"py-4 md:text-xl"} color={"rojo"}>Rechazar Partido</Button>
                     </div> */}
+
+                    {
+                        partido.estado.fase == 5 && <Button className={"py-4 md:text-xl"} customBg={"d0c74f"}>Enviar Resultado</Button>
+                    }
                 </section>
 
 
