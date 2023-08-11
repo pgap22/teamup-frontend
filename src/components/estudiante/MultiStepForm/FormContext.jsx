@@ -9,7 +9,6 @@ export const MultiStepFormContext = createContext();
 
 export const MultiStepFormProvider = ({ children }) => {
   const [form, setForm] = useState(FORM_STATE);
-
   return (
     <MultiStepFormContext.Provider
       value={{

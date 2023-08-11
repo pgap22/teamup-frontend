@@ -15,19 +15,19 @@ const Solicitudes = () => {
       name: "Deportes",
       Componet: SportsForm,
       title: "Seleciona un deporte",
-      fields: ["id_deporte"],
+      fields: ["id_deporte", "deporte"],
     },
     {
       name: "EquipoLocal",
       Componet: TeamForm,
       title: "Seleciona tu equipo",
-      fields: ["id_equipo_local"],
+      fields: ["id_equipo_local", "previous_id_equipo"],
     },
     {
       name: "Plantilla",
       Componet: TeamStaffForm,
       title: "Crea tu plantilla",
-      fields: ["jugadores"],
+      fields: ["jugadores", "id_equipo_actual"],
     },
     {
       name: "EquipoVisitante",
@@ -39,13 +39,15 @@ const Solicitudes = () => {
       name: "InformacionGeneral",
       Componet: GeneralDataForm,
       title: "Rellena la informacion general",
-      fields: ["descripcion", "fecha", "maestro_intermediario"],
+      fields: ["descripcion", "hora", "fecha", "maestro_intermediario"],
     },
   ];
   return (
     <EstudianteLayaout title={"Creando Solicitud"}>
       <MultiStepFormProvider>
-        <MultiStepForm FormsData={Forms} />
+        <MultiStepForm FormsData={Forms} succesSubmit={({ data }) => {
+          console.log(data)
+        }} />
       </MultiStepFormProvider>
     </EstudianteLayaout>
   );

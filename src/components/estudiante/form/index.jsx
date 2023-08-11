@@ -1,7 +1,9 @@
 import Button from "src/components/form/Button";
+
 import { useMultiStepForm } from "../MultiStepForm/useMultiStepForm";
-import { useEffect } from "react";
 import { useConstantes } from "../MultiStepForm/useConstantes";
+
+import { mappedDataSolicitud } from "src/helper/transformarDatos";
 
 const EstudianteFormLayout = ({ children, title }) => {
   return (
@@ -34,8 +36,15 @@ const FormButtons = () => {
     setForm(data);
   };
 
+  const { succesSubmit, lastIndex } = form
+
   const handleClickContinuar = () => {
     if (currentFormValid) {
+      if (lastIndex === currentIndex) {
+
+        succesSubmit(mappedDataSolicitud({ data: form }))
+        return
+      }
       setForm({ ...form, currentFormIndex: currentIndex + 1 });
     }
   };
@@ -49,7 +58,7 @@ const FormButtons = () => {
         color={"morado"}
         disabled={!currentFormValid}
       >
-        Continuar
+        {lastIndex === currentIndex ? 'Enviar' : 'Continuar'}
       </Button>
     </div>
   );

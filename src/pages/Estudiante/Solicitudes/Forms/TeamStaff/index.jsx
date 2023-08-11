@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useConstantes } from "src/components/estudiante/MultiStepForm/useConstantes";
 import { useMultiStepForm } from "src/components/estudiante/MultiStepForm/useMultiStepForm";
 
@@ -26,8 +26,9 @@ const TeamStaffForm = () => {
   const { form, currentFormState, currentFormName } = useConstantes();
 
   const { id_equipo_local } = form.EquipoLocal.values;
-  const { id_equipo_local: preoviousId_equipo_local } =
-    form.EquipoLocal.previousValues;
+  const { previous_id_equipo } = form.EquipoLocal.values;
+
+
 
   const { id_deporte } = form.Deportes.values;
   const { jugadores: miembrosState } = currentFormState.values;
@@ -37,6 +38,7 @@ const TeamStaffForm = () => {
     obtenerUnDeporte,
     "deporte"
   );
+
   const { limiteJugadores, limiteJugadoresCambio } = deporte;
 
   const [selectedJugadores, setSelectedJugadores] = useState([]);
@@ -47,12 +49,7 @@ const TeamStaffForm = () => {
       const { jugadores } = miembrosEquipo({ data: equipo });
       setSelectedJugadores(miembrosStateData({ miembros: jugadores }));
     };
-
-    if (
-      miembrosState &&
-      (preoviousId_equipo_local === null ||
-        preoviousId_equipo_local !== id_equipo_local)
-    ) {
+    if (miembrosState && previous_id_equipo === id_equipo_local) {
       setSelectedJugadores([...miembrosState]);
       return;
     }
@@ -71,7 +68,7 @@ const TeamStaffForm = () => {
     if (NoTitulares === limiteJugadores) {
       formStateCopy.valid = true;
       formStateCopy.values.jugadores = [...selectedJugadores];
-
+      formStateCopy.values.id_equipo_actual = id_equipo_local
       setForm({ ...form, [currentFormName]: { ...formStateCopy } });
       return;
     }
@@ -115,6 +112,9 @@ const TeamStaffForm = () => {
         if (NoTitulares === limiteJugadores) {
           objCopy.estado = reserva;
         }
+        if (limiteJugadoresCambio === NoReservas && NoTitulares === limiteJugadores ) {
+          objCopy.estado = null;
+        }
       }
 
       const selectedPlayersMapped = selectedJugadores.map((jugador) =>
@@ -124,6 +124,7 @@ const TeamStaffForm = () => {
       setSelectedJugadores(selectedPlayersMapped);
     };
   };
+
 
   if (isLoadingDeporte) return <p>Cargando . . . </p>;
 

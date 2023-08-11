@@ -22,6 +22,7 @@ const SportsForm = () => {
       if (sport) {
         formStateCopy.valid = true;
         formStateCopy.values.id_deporte = sport;
+        formStateCopy.values.deporte = { ...deportes.filter((deporte) => deporte.id === sport) }
         setForm({ ...form, [currentFormName]: { ...formStateCopy } });
         return;
       }

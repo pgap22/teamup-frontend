@@ -9,7 +9,6 @@ import EstudianteFormLayout from "../form";
 const object_default = {
   valid: false,
   values: {},
-  previousValues: {},
 };
 
 const formatedFormData = ({ FormsData }) => {
@@ -29,21 +28,23 @@ const formatedFormData = ({ FormsData }) => {
     result[name] = {
       ...object_default,
       values: { ...fieldValues },
-      previousValues: { ...fieldValues },
     };
   });
 
   return { ...result, identificadores: [...formIdentificator] };
 };
 
-const MultiStepForm = ({ FormsData = [] }) => {
+const MultiStepForm = ({ FormsData = [], succesSubmit }) => {
   const { form, setForm } = useMultiStepForm();
 
   useEffect(() => {
+    const lastIndex = FormsData.length
     const data = formatedFormData({ FormsData });
-    const new_form = { ...form, ...data };
+    const new_form = { ...form, ...data, succesSubmit: succesSubmit, lastIndex: lastIndex - 1 };
     setForm(new_form);
   }, []);
+
+  // console.log(form)
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-5">
