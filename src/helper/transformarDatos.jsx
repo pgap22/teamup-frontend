@@ -52,7 +52,7 @@ export const zonaJuegoTabla = function ({ data }) {
   }));
 };
 
-export const miembrosEquipo = ({ equipo }) => {
+export const miembrosEquipo = ({ data: equipo }) => {
   const { usuarios } = equipo;
   const { lider } = equipo;
   lider.rango = "lider";
@@ -68,7 +68,7 @@ export const miembrosEquipo = ({ equipo }) => {
     a.rango === "lider" && b.rango !== "lider" ? -1 : 1
   );
 
-  return { jugadores: sortedUsuarios };
+  return { ...equipo, jugadores: sortedUsuarios };
 };
 
 export const solicitudesTabla = ({data})=>{
@@ -95,3 +95,19 @@ export const zonaJuegosSelect = ({data})=>{
     label: zonaDeJuego.nombre,
   }));
 }
+
+export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
+  const { titular, reserva } = stateMiembrosValues;
+
+  if (data.length === 0) return { headLinesPlayers: [], reservePlayers: [] };
+
+  const headLinesPlayers = data.filter((miembro) => {
+    return miembro.estado === titular;
+  });
+
+  const reservePlayers = data.filter((miembro) => {
+    return miembro.estado === reserva;
+  });
+
+  return { headLinesPlayers, reservePlayers };
+};

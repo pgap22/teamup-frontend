@@ -10,7 +10,12 @@ import EquipoCard from "../../../components/estudiante/EquipoCard/EquipoCard";
 import EstadoPartido from "src/components/estudiante/PartidoCard/EstadoPartido";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { obtenerUnPartido } from "src/api/partidos";
+import { enviarResultadosPartido, obtenerUnPartido } from "src/api/partidos";
+import { useModal } from "src/hooks/useModal";
+import Input from "src/components/form/Input";
+import clsx from "clsx";
+import { useForm } from "react-hook-form";
+import EquipoCardResultado from "src/components/estudiante/EquipoCard/EquipoCardResultado";
 
 const Titulo = ({ id, estado }) => {
     return <PartidoTitulo titulo={"Partido N° " + id} estado={<EstadoPartido titulo={estado} />} />
@@ -21,6 +26,18 @@ const PartidoInformacion = () => {
     const [partido, setPartido] = useState({});
     const navigate = useNavigate();
     const { id } = useParams();
+    const [ModalResultado, modalResultado] = useModal();
+
+    const { register, handleSubmit } = useForm();
+
+    const enviarResultadosSubmit = async (datos) => {
+        try {
+            await enviarResultadosPartido(id, datos);
+            console.log("Bien !")
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         (async () => {
@@ -34,10 +51,9 @@ const PartidoInformacion = () => {
     }, [])
 
 
-    if(!partido.id) return <p>Cargando...</p>
+    if (!partido.id) return <p>Cargando...</p>
 
 
-    console.log(partido);
     return (
         <EstudianteLayaout
             RightAsideButton={<IconButtonEquipos />}
@@ -53,34 +69,41 @@ const PartidoInformacion = () => {
                         <InfoCampo title={"Zona De Juego"} value={!partido.ZonaDejuego ? 'Pendiente' : partido.ZonaDejuego.nombre} />
                         <InfoCampo title={"Deporte"} value={partido.deporte.nombre} />
                         <InfoCampo title={"Maestro Encargado"} value={!partido.usuarioMaestro ? 'Pendiente' : partido.usuarioMaestro.nombre} />
-                </div>
+                    </div>
                 </section>
 
                 <section className="max-w-md">
                     <h2 className="font-bold text-xl mb-4">Equipos</h2>
 
                     <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6">
-                        <EquipoCard equipo={partido.equipo_local}/>
-                        <EquipoCard equipo={partido.equipo_visitante}/>
+                        <EquipoCard equipo={partido.equipo_local} />
+                        <EquipoCard equipo={partido.equipo_visitante} />
                     </div>
 
-                    {/* <div className=" space-y-4 mt-4">
-                        <Button className={"py-4 md:text-xl"} color={"verde"}>Aceptar Partido</Button>
-                        <Button className={"py-4 md:text-xl"} color={"rojo"}>Rechazar Partido</Button>
-                    </div> */}
+                    <div className=" space-y-4 mt-4">
+                        {
+                            (partido.estado.fase == 5 && !partido.id_usuarioMaestro) && <Button onClick={() => modalResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#cfb93d"}>Enviar Resultado</Button>
+                        }
+                        {/* <Button className={"py-4 md:text-xl"} color={"verde"}>Aceptar Partido</Button>
+                        <Button className={"py-4 md:text-xl"} color={"rojo"}>Rechazar Partido</Button> */}
+                    </div>
 
-                    {
-                        partido.estado.fase == 5 && <Button className={"py-4 md:text-xl"} customBg={"d0c74f"}>Enviar Resultado</Button>
-                    }
                 </section>
 
 
             </main>
+            <ModalResultado desktopTitle="Resultados" {...modalResultado}>
+                <form onSubmit={handleSubmit(enviarResultadosSubmit)} className="p-4 space-y-2">
+                    <p>Envia aqui los resultados del partido !</p>
+                    <div className="space-y-2">
+                        <EquipoCardResultado register={register("resultado_local", { required: true, valueAsNumber: true })} equipo={partido.equipo_local} />
+                        <EquipoCardResultado register={register("resultado_visitante", { required: true, valueAsNumber: true })} equipo={partido.equipo_visitante} />
+                    </div>
+                    <Button>Enviar Resultado !</Button>
+                </form>
+            </ModalResultado>
         </EstudianteLayaout>
     )
 };
-
-
-
 
 export default PartidoInformacion;

@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 
 const useFetchId = (id, obtenerItem, key, transformarDatosTabla) => {
-  const { data, isLoading, error } = useQuery([key, id], () => obtenerItem(id)); 
+  const { data, isLoading, error } = useQuery([key, id], () => obtenerItem(id), {refetchOnWindowFocus: false}); 
 
   if (isLoading) {
     return { isLoading: true, [key]: {} };

@@ -26,15 +26,13 @@ const DatosEquipo = () => {
   const { usuario } = useSession();
   const { id } = useParams();
   const { isLoading, equipo } = useFetchId(id, obtenerUnEquipo, "equipo", miembrosEquipo);
-
+  
   if (isLoading) return <p>Loading....</p>;
 
-  console.log(equipo)
 
   const { id: id_usuario } = usuario;
-  const { lider } = equipo;
 
-  const invitarJugadores = lider.id === id_usuario;
+  const invitarJugadores = equipo.id_lider === id_usuario;
   const handleClick = () => { };
 
   return (
