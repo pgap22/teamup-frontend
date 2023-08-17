@@ -8,7 +8,11 @@ import OponnentForm from "./Forms/Oponnent";
 import GeneralDataForm from "./Forms/GeneralData";
 import TeamStaffForm from "./Forms/TeamStaff";
 import MultiStepForm from "src/components/estudiante/MultiStepForm";
+
+import ExitoForm from "src/router/estudiante/exito/ExitoForm";
+
 import { throwError } from "src/helper";
+import { crearPartido } from "src/api/partidos";
 
 const Solicitudes = () => {
   const Forms = [
@@ -43,18 +47,15 @@ const Solicitudes = () => {
       fields: ["descripcion", "hora", "fecha", "maestro_intermediario"],
     },
   ];
+
   return (
     <EstudianteLayaout title={"Creando Solicitud"}>
       <MultiStepFormProvider>
-        <MultiStepForm FormsData={Forms} succesSubmit={async ({ data }) => {
-          try {
-            const partido = await crearPartido(data)
-            console.log(partido)
-            return partido
-          } catch (error) {
-            throwError(error)
-          }
-        }} />
+        <MultiStepForm
+          Exito={ExitoForm}
+          FormsData={Forms}
+          sender={crearPartido}
+        />
       </MultiStepFormProvider>
     </EstudianteLayaout>
   );

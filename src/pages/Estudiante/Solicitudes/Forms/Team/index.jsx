@@ -21,13 +21,13 @@ const TeamForm = () => {
   useEffect(() => {
     const funct = () => {
       const formStateCopy = { ...currentFormState };
-      const id_equipo_plantilla = form["Plantilla"].values.id_equipo_actual
-      
+      const id_equipo_plantilla = form["Plantilla"].values.id_equipo_actual;
+
       if (selectedEquipo) {
         formStateCopy.valid = true;
         formStateCopy.values.id_equipo_local = selectedEquipo;
-        
-        if (id_equipo_plantilla) {  
+
+        if (id_equipo_plantilla) {
           formStateCopy.values.previous_id_equipo = id_equipo_plantilla;
         }
 
@@ -40,6 +40,7 @@ const TeamForm = () => {
     };
     funct();
   }, [selectedEquipo]);
+
   if (isLoading) return <p>Cargando . . .</p>;
 
   const handleClick = (value) => {

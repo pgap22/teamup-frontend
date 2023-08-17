@@ -18,6 +18,7 @@ const EstudianteFormLayout = ({ children, title }) => {
 const FormHeader = ({ title }) => {
   return <h1 className=" text-[#565656] font-bold text-3xl">{title}</h1>;
 };
+
 const FormButtons = () => {
   const { form, setForm } = useMultiStepForm();
 
@@ -36,14 +37,13 @@ const FormButtons = () => {
     setForm(data);
   };
 
-  const { succesSubmit, lastIndex } = form
+  const { succesSubmit, lastIndex } = form;
 
-  const handleClickContinuar = () => {
+  const handleClickContinuar = async () => {
     if (currentFormValid) {
       if (lastIndex === currentIndex) {
-
-        succesSubmit(mappedDataSolicitud({ data: form }))
-        return
+        await succesSubmit(mappedDataSolicitud({ data: form }));
+        return;
       }
       setForm({ ...form, currentFormIndex: currentIndex + 1 });
     }
@@ -58,7 +58,7 @@ const FormButtons = () => {
         color={"morado"}
         disabled={!currentFormValid}
       >
-        {lastIndex === currentIndex ? 'Enviar' : 'Continuar'}
+        {lastIndex === currentIndex ? "Enviar" : "Continuar"}
       </Button>
     </div>
   );

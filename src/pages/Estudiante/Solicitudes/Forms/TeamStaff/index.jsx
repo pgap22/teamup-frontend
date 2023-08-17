@@ -28,8 +28,6 @@ const TeamStaffForm = () => {
   const { id_equipo_local } = form.EquipoLocal.values;
   const { previous_id_equipo } = form.EquipoLocal.values;
 
-
-
   const { id_deporte } = form.Deportes.values;
   const { jugadores: miembrosState } = currentFormState.values;
 
@@ -68,7 +66,7 @@ const TeamStaffForm = () => {
     if (NoTitulares === limiteJugadores) {
       formStateCopy.valid = true;
       formStateCopy.values.jugadores = [...selectedJugadores];
-      formStateCopy.values.id_equipo_actual = id_equipo_local
+      formStateCopy.values.id_equipo_actual = id_equipo_local;
       setForm({ ...form, [currentFormName]: { ...formStateCopy } });
       return;
     }
@@ -112,7 +110,10 @@ const TeamStaffForm = () => {
         if (NoTitulares === limiteJugadores) {
           objCopy.estado = reserva;
         }
-        if (limiteJugadoresCambio === NoReservas && NoTitulares === limiteJugadores ) {
+        if (
+          limiteJugadoresCambio === NoReservas &&
+          NoTitulares === limiteJugadores
+        ) {
           objCopy.estado = null;
         }
       }
@@ -124,7 +125,6 @@ const TeamStaffForm = () => {
       setSelectedJugadores(selectedPlayersMapped);
     };
   };
-
 
   if (isLoadingDeporte) return <p>Cargando . . . </p>;
 

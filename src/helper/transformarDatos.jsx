@@ -105,7 +105,7 @@ export const zonaJuegosSelect = ({ data }) => {
     value: zonaDeJuego.id,
     label: zonaDeJuego.nombre,
   }));
-}
+};
 
 export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
   const { titular, reserva } = stateMiembrosValues;
@@ -124,53 +124,44 @@ export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
 };
 
 export const mappedDataSolicitud = ({ data }) => {
-  const { identificadores } = data
-  let result = {}
+  const { identificadores } = data;
+  let result = {};
 
-  identificadores.forEach(form => {
-    const { name } = form
-    const { values } = data[name]
+  identificadores.forEach((form) => {
+    const { name } = form;
+    const { values } = data[name];
 
     if (name === "Deportes") {
-      const { id_deporte } = values
-      result["id_deporte"] = id_deporte
-
+      const { id_deporte } = values;
+      result["id_deporte"] = id_deporte;
     }
     if (name === "EquipoLocal") {
-      const { id_equipo_local } = values
-      result["id_equipo_local"] = id_equipo_local
-
+      const { id_equipo_local } = values;
+      result["id_equipo_local"] = id_equipo_local;
     }
     if (name === "Plantilla") {
-      const { jugadores } = values
-      result["jugadores"] = jugadores
-
+      const { jugadores } = values;
+      result["jugadores"] = jugadores;
     }
     if (name === "EquipoVisitante") {
-      const { id_equipo_visitante } = values
-      result["id_equipo_visitante"] = id_equipo_visitante
-
+      const { id_equipo_visitante } = values;
+      result["id_equipo_visitante"] = id_equipo_visitante;
     }
     if (name === "EquipoVisitante") {
-      const { id_equipo_visitante } = values
-      result["id_equipo_visitante"] = id_equipo_visitante
-
+      const { id_equipo_visitante } = values;
+      result["id_equipo_visitante"] = id_equipo_visitante;
     }
     if (name === "InformacionGeneral") {
-      const { descripcion } = values
-      result["descripcion"] = descripcion
+      const { descripcion } = values;
+      result["descripcion"] = descripcion;
 
-      const { hora } = values
-      result["hora"] = hora
+      const { fecha } = values;
+      result["fecha"] = new Date(fecha);
 
-      const { fecha } = values
-      result["fecha"] = fecha
-
+      const { maestro_intermediario } = values;
+      result["maestro_intermediario"] = maestro_intermediario;
     }
-
   });
 
-  return { data: result }
-
-}
-
+  return { datos: result };
+};

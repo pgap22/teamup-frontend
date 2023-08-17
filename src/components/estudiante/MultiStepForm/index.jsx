@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProgresiverIndicator from "./Components/ProgresiveIndicator";
 import EstudianteFormLayout from "../form";
 
+import { crearPartido } from "src/api/partidos";
 const object_default = {
   valid: false,
   values: {},
@@ -34,22 +35,46 @@ const formatedFormData = ({ FormsData }) => {
   return { ...result, identificadores: [...formIdentificator] };
 };
 
-const MultiStepForm = ({ FormsData = [], succesSubmit }) => {
-  const { form, setForm } = useMultiStepForm();
+const MultiStepForm = ({ FormsData = [], sender, Exito }) => {
+  const { form, setForm, setError } = useMultiStepForm();
+
+  const succesSubmit = async ({ datos }) => {
+    try {
+      const { id_equipo_local } = datos;
+      const { data } = await sender(datos, id_equipo_local);
+
+      const formCpy = { ...form };
+      formCpy.id_partido = data.id;
+      formCpy.envioCompletado = true;
+
+      setForm({ ...formCpy });
+      console.log(partido);
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   useEffect(() => {
-    const lastIndex = FormsData.length
+    const lastIndex = FormsData.length;
     const data = formatedFormData({ FormsData });
-    const new_form = { ...form, ...data, succesSubmit: succesSubmit, lastIndex: lastIndex - 1 };
+    const new_form = {
+      ...form,
+      ...data,
+      succesSubmit: succesSubmit,
+      lastIndex: lastIndex - 1,
+    };
     setForm(new_form);
   }, []);
 
-  // console.log(form)
-
   return (
     <div className="flex flex-col items-center justify-center w-full gap-5">
-      {form.identificadores && <Forms FormComponents={FormsData} />}
-      {form.identificadores && <ProgresiverIndicator FormsData={FormsData} />}
+      {form.identificadores && !form.envioCompletado && (
+        <Forms FormComponents={FormsData} />
+      )}
+      {form.identificadores && !form.envioCompletado && (
+        <ProgresiverIndicator FormsData={FormsData} />
+      )}
+      {form.envioCompletado && <Exito idPartido={form.id_partido} />}
     </div>
   );
 };

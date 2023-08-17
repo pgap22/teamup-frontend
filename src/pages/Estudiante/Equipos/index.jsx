@@ -26,7 +26,6 @@ const Equipos = () => {
         <h1 className="text-[#828282] text-4xl font-bold">Tus equipos</h1>
         <TeamItems equipos={equipos} />
       </div>
-      <EquipoModal />
       <UnirseEquipoModal />
     </EstudianteLayaout>
   );
