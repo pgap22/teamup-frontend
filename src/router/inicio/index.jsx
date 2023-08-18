@@ -9,6 +9,7 @@ const router = {
     children: [
         {
             index: true,
+
             element: (
                 <ProtectedRoute needLogged={false}>
                     <PaginaPrincipal />

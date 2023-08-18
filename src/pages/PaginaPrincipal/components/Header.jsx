@@ -11,17 +11,17 @@ const Header = () => {
     <header>
       <div className="flex justify-between md:grid md:grid-cols-2">
         <Logo />
-        
+
         <RxHamburgerMenu className="md:hidden" onClick={toggleMenu} size={28} />
 
         <div className="hidden md:flex w-full gap-4 max-w-xs justify-self-end">
-          <Link to={"/login"} className="w-full">
+          <Link to={"/login/"} className="w-full">
             <Button color={"blanco"} textColor={"azul"}>
               Iniciar Sesion
             </Button>
           </Link>
-          
-          <Link to={"/signup"} className="w-full">
+
+          <Link to={"/signup/"} className="w-full">
             <Button border={"blanco"}>Registrate</Button>
           </Link>
         </div>

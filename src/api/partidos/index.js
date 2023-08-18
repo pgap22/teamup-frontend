@@ -70,3 +70,6 @@ export const crearPartido = async (datos, id) => {
     throwError(error);
   }
 };
+
+export const cancelarPartidoEstudiante = (id) =>
+  obtenerUnRegistro("/partidos/estudiante/cancelar", id)();

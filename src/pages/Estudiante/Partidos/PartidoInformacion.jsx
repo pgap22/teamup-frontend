@@ -11,6 +11,11 @@ import EstadoPartido from "src/components/estudiante/PartidoCard/EstadoPartido";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { obtenerUnPartido } from "src/api/partidos";
+import { useSession } from "src/hooks/useSession";
+import { useModal } from "src/store/useModal";
+import CancelarPartidoModal from "./components/ModalCancelarPartido";
+import ModalRechazarPartido from "./components/ModalRechazarPartido";
+import PartidosRealizados from "src/pages/Coordinacion/Dashboard/components/PartidosRealizados";
 
 const Titulo = ({ id, estado }) => {
   return (
@@ -25,6 +30,8 @@ const PartidoInformacion = () => {
   const [partido, setPartido] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
+  const { usuario } = useSession()
+  const { toggleModal } = useModal()
 
   useEffect(() => {
     (async () => {
@@ -77,19 +84,34 @@ const PartidoInformacion = () => {
             <EquipoCard equipo={partido.equipo_visitante} />
           </div>
 
-          {/* <div className=" space-y-4 mt-4">
-                        <Button className={"py-4 md:text-xl"} color={"verde"}>Aceptar Partido</Button>
-                        <Button className={"py-4 md:text-xl"} color={"rojo"}>Rechazar Partido</Button>
-                    </div> */}
+          <div className=" space-y-4 mt-4">
+            {partido.equipo_visitante.id_lider === usuario.id && partido.estado &&
+              <>
+                < Button className={"py-3 md:text-xl"} color={"verde"}>Aceptar Partido</Button>
+                <Button onClick={() => {
+                  toggleModal("RechazarInvitacion")
+                }} className={"py-3 md:text-xl"} color={"rojo"}>Rechazar Invitacion</Button>
 
+              </>
+            }
+
+            {partido.equipo_visitante.id_lider !== usuario.id && partido.estado.fase === 1 &&
+              < Button onClick={() => {
+                toggleModal("CancelarPartido")
+              }} className={"py-3 md:text-xl"} color={"rojo"}>Cancelar Partido</Button>
+            }
+
+          </div>
           {partido.estado.fase == 5 && (
             <Button className={"py-4 md:text-xl"} customBg={"d0c74f"}>
               Enviar Resultado
             </Button>
           )}
         </section>
+        <CancelarPartidoModal id={partido.id} />
+        <ModalRechazarPartido id={partido.id} />
       </main>
-    </EstudianteLayaout>
+    </EstudianteLayaout >
   );
 };
 

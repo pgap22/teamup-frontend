@@ -6,7 +6,6 @@ import {
 } from "src/components/estudiante/AsideEquipo";
 import { useFetch } from "src/hooks/useFetch";
 import { obtenerMisPartidos } from "src/api/partidos";
-import EquipoModal from "src/components/Modales/equipoModal/EquipoModal";
 import { Link } from "react-router-dom";
 
 const Partidos = () => {

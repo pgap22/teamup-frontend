@@ -7,8 +7,8 @@ export default function Partido({ url = "1", partido = {} }) {
   const hayZonaJuego = partido.id && !!partido.ZonaDejuego;
   const imagenZonaJuego = hayZonaJuego
     ? new URL(
-        import.meta.env.VITE_URL + partido.ZonaDejuego.imagenes[0].imagen_url
-      ).toString()
+      import.meta.env.VITE_URL + partido.ZonaDejuego.imagenes[0].imagen_url
+    ).toString()
     : "";
 
   return (
@@ -27,17 +27,17 @@ export default function Partido({ url = "1", partido = {} }) {
       <div className="flex flex-col gap-4 mt-2">
         <h2>
           <span className="font-bold">Deporte:</span>{" "}
-          {hayZonaJuego && partido.deporte.nombre}
+          {partido.deporte.nombre}
         </h2>
 
-        <EstadoPartido titulo={hayZonaJuego && partido.estado.nombre} />
+        <EstadoPartido titulo={partido.estado.nombre} />
 
         <div>
-          <p className="max-w-[25ch] font-bold overflow-auto">
-            {hayZonaJuego && partido.equipo_local.nombre}
+          <p title={partido.equipo_local.nombre} className="max-w-[25ch] grid-cols-[max-content_1fr] gap-2 flex font-bold truncate">
+           <span className="font-bold">Equipo Local:</span> {partido.equipo_local.nombre}
           </p>
-          <p className="max-w-[25ch] font-bold overflow-auto">
-            {hayZonaJuego && partido.equipo_visitante.nombre}
+          <p title={partido.equipo_visitante.nombre} className="max-w-[25ch] grid grid-cols-[max-content_1fr] gap-2 font-bold truncate">
+          <span className="font-bold">Equipo Visitante:</span> {partido.equipo_visitante.nombre}
           </p>
         </div>
 
