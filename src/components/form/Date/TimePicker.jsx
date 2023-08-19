@@ -10,9 +10,8 @@ import dayjs from "dayjs";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import InputDateBody from "./Components/InputDateBody";
 
-const TimePicker = ({ label }) => {
+const TimePicker = ({ label, time, setTime }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [time, setTime] = useState(dayjs(new Date()));
 
   const onChangeHandler = (_date) => {
     if (_date) {

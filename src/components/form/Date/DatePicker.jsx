@@ -9,9 +9,9 @@ import { useState } from "react";
 import { BiCalendar } from "react-icons/bi";
 import InputDateBody from "./Components/InputDateBody";
 
-const DatePicker = ({ label }) => {
+const DatePicker = ({ label, date, setDate }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [date, setDate] = useState(dayjs(new Date()));
+  // const [date, setDate] = useState(dayjs(new Date()));
   const onChangeHandler = (_date) => {
     if (_date) {
       setDate(_date);

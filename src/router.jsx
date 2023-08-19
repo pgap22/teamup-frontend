@@ -10,6 +10,7 @@ const router = createBrowserRouter([
   {
     element: <Animador />,
     children: [
+
       InicioRoutes,
       CoordinacionRoutes,
       MaestroRoutes,

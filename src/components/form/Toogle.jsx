@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const Toggle = () => {
-  const [enabled, setEnabled] = useState(false);
+const Toggle = ({ enabled, setEnabled }) => {
+
 
   return (
     <div className="flex flex-col items-center gap-5 sm:flex-row">

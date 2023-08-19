@@ -15,15 +15,22 @@ const TeamForm = () => {
   const defaultValueForm = id_equipo_local ? id_equipo_local : null;
 
   const [selectedEquipo, setSelectedEquipo] = useState(defaultValueForm);
+
   const { equipos, isLoading } = useFetch("equipos", equiposCreados);
 
   useEffect(() => {
     const funct = () => {
       const formStateCopy = { ...currentFormState };
+      const id_equipo_plantilla = form["Plantilla"].values.id_equipo_actual;
 
       if (selectedEquipo) {
         formStateCopy.valid = true;
         formStateCopy.values.id_equipo_local = selectedEquipo;
+
+        if (id_equipo_plantilla) {
+          formStateCopy.values.previous_id_equipo = id_equipo_plantilla;
+        }
+
         setForm({ ...form, [currentFormName]: { ...formStateCopy } });
         return;
       }
@@ -33,13 +40,11 @@ const TeamForm = () => {
     };
     funct();
   }, [selectedEquipo]);
+
   if (isLoading) return <p>Cargando . . .</p>;
 
   const handleClick = (value) => {
-    const formStateCopy = { ...currentFormState };
-    formStateCopy.previousValues.id_equipo_local = selectedEquipo;
     setSelectedEquipo(value === selectedEquipo ? null : value);
-    setForm({ ...form, [currentFormName]: { ...formStateCopy } });
   };
   return (
     <EquiposContainer

@@ -1,6 +1,6 @@
 import Button from "src/components/form/Button";
+
 import { useMultiStepForm } from "../MultiStepForm/useMultiStepForm";
-import { useEffect } from "react";
 import { useConstantes } from "../MultiStepForm/useConstantes";
 
 const EstudianteFormLayout = ({ children, title }) => {
@@ -16,8 +16,10 @@ const EstudianteFormLayout = ({ children, title }) => {
 const FormHeader = ({ title }) => {
   return <h1 className=" text-[#565656] font-bold text-3xl">{title}</h1>;
 };
+
 const FormButtons = () => {
   const { form, setForm } = useMultiStepForm();
+  const { identificadores } = form;
 
   const { currentIndex, currentFormValid } = useConstantes({
     form,
@@ -34,22 +36,31 @@ const FormButtons = () => {
     setForm(data);
   };
 
-  const handleClickContinuar = () => {
+  const { succesSubmit, lastIndex } = form;
+
+  const handleClickContinuar = async () => {
     if (currentFormValid) {
+      if (lastIndex === currentIndex) {
+        await succesSubmit({ form });
+        return;
+      }
       setForm({ ...form, currentFormIndex: currentIndex + 1 });
     }
   };
   return (
     <div className="flex w-full md:max-w-[750px] max-w-[400px] sm:flex-row gap-3 flex-col ">
-      <Button onClick={handleClickRegresar} color={"blanco"} border="negro">
-        Regresar
-      </Button>
+      {identificadores.length > 1 && (
+        <Button onClick={handleClickRegresar} color={"blanco"} border="negro">
+          Regresar
+        </Button>
+      )}
+
       <Button
         onClick={handleClickContinuar}
         color={"morado"}
         disabled={!currentFormValid}
       >
-        Continuar
+        {lastIndex === currentIndex ? "Enviar" : "Continuar"}
       </Button>
     </div>
   );

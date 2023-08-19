@@ -14,6 +14,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { RiTeamLine } from "react-icons/ri";
 import { MdSportsSoccer } from "react-icons/md";
 import { AiOutlinePullRequest } from "react-icons/ai";
+import EquipoModal from "src/components/Modales/equipoModal/EquipoModal";
 
 const links = [
   {
@@ -79,6 +80,7 @@ const EstudianteLayaout = ({
         <AnimatePresence>
           <NavMobile links={links} />
         </AnimatePresence>
+        <EquipoModal />
       </div>
     </FondoColor>
   );

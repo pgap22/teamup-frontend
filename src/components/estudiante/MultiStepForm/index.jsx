@@ -6,10 +6,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProgresiverIndicator from "./Components/ProgresiveIndicator";
 import EstudianteFormLayout from "../form";
 
+import { crearPartido } from "src/api/partidos";
 const object_default = {
   valid: false,
   values: {},
-  previousValues: {},
 };
 
 const formatedFormData = ({ FormsData }) => {
@@ -29,26 +29,59 @@ const formatedFormData = ({ FormsData }) => {
     result[name] = {
       ...object_default,
       values: { ...fieldValues },
-      previousValues: { ...fieldValues },
     };
   });
 
   return { ...result, identificadores: [...formIdentificator] };
 };
 
-const MultiStepForm = ({ FormsData = [] }) => {
-  const { form, setForm } = useMultiStepForm();
+const MultiStepForm = ({
+  FormsData = [],
+  sender,
+  Exito,
+  mappedFunction,
+  keyName,
+}) => {
+  const { form, setForm, setError } = useMultiStepForm();
+
+  const succesSubmit = async ({ form }) => {
+    try {
+      const { datos } = mappedFunction({ form });
+      const key_id = datos[keyName];
+      const { data } = await sender(datos, key_id);
+
+      const formCpy = { ...form };
+      formCpy.id_partido = data.id;
+      formCpy.envioCompletado = true;
+
+      setForm({ ...formCpy });
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
+  };
 
   useEffect(() => {
+    const lastIndex = FormsData.length;
     const data = formatedFormData({ FormsData });
-    const new_form = { ...form, ...data };
+    const new_form = {
+      ...form,
+      ...data,
+      succesSubmit: succesSubmit,
+      lastIndex: lastIndex - 1,
+    };
     setForm(new_form);
   }, []);
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-5">
-      {form.identificadores && <Forms FormComponents={FormsData} />}
-      {form.identificadores && <ProgresiverIndicator FormsData={FormsData} />}
+      {form.identificadores && !form.envioCompletado && (
+        <Forms FormComponents={FormsData} />
+      )}
+      {form.identificadores && !form.envioCompletado && (
+        <ProgresiverIndicator FormsData={FormsData} />
+      )}
+      {form.envioCompletado && <Exito idPartido={form.id_partido} />}
     </div>
   );
 };
@@ -58,7 +91,7 @@ const Forms = ({ FormComponents }) => {
     form: { currentFormIndex, previousIndex },
   } = useMultiStepForm();
 
-  const { name, title, Componet } = FormComponents[currentFormIndex];
+  const { name, title, Componet, props } = FormComponents[currentFormIndex];
 
   const initialAnimation = { opacity: 0 };
   const animateAnimation = {
@@ -79,7 +112,7 @@ const Forms = ({ FormComponents }) => {
         style={{ width: "100%" }}
       >
         <EstudianteFormLayout title={title}>
-          <Componet formName={name} />
+          <Componet {...props} formName={name} />
         </EstudianteFormLayout>
       </motion.div>
     </AnimatePresence>
