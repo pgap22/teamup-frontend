@@ -5,38 +5,39 @@ import SignUp from "../../pages/SignUp/SignUp";
 import Redirect from "../../redirect";
 
 const router = {
-    path: "/",
-    children: [
-        {
-            index: true,
+  caseSensitive: true,
+  path: "/",
+  children: [
+    {
+      index: true,
 
-            element: (
-                <ProtectedRoute needLogged={false}>
-                    <PaginaPrincipal />
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "redirect",
-            element: <Redirect />,
-        },
-        {
-            path: "login",
-            element: (
-                <ProtectedRoute needLogged={false}>
-                    <Login />
-                </ProtectedRoute>
-            ),
-        },
-        {
-            path: "signup",
-            element: (
-                <ProtectedRoute needLogged={false}>
-                    <SignUp />
-                </ProtectedRoute>
-            ),
-        },
-    ]
-}
+      element: (
+        <ProtectedRoute needLogged={false}>
+          <PaginaPrincipal />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "redirect",
+      element: <Redirect />,
+    },
+    {
+      path: "login",
+      element: (
+        <ProtectedRoute needLogged={false}>
+          <Login />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "signup",
+      element: (
+        <ProtectedRoute needLogged={false}>
+          <SignUp />
+        </ProtectedRoute>
+      ),
+    },
+  ],
+};
 
 export default router;

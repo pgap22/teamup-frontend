@@ -35,21 +35,28 @@ const formatedFormData = ({ FormsData }) => {
   return { ...result, identificadores: [...formIdentificator] };
 };
 
-const MultiStepForm = ({ FormsData = [], sender, Exito }) => {
+const MultiStepForm = ({
+  FormsData = [],
+  sender,
+  Exito,
+  mappedFunction,
+  keyName,
+}) => {
   const { form, setForm, setError } = useMultiStepForm();
 
-  const succesSubmit = async ({ datos }) => {
+  const succesSubmit = async ({ form }) => {
     try {
-      const { id_equipo_local } = datos;
-      const { data } = await sender(datos, id_equipo_local);
+      const { datos } = mappedFunction({ form });
+      const key_id = datos[keyName];
+      const { data } = await sender(datos, key_id);
 
       const formCpy = { ...form };
       formCpy.id_partido = data.id;
       formCpy.envioCompletado = true;
 
       setForm({ ...formCpy });
-      console.log(partido);
     } catch (error) {
+      console.log(error);
       setError(error);
     }
   };
@@ -84,7 +91,7 @@ const Forms = ({ FormComponents }) => {
     form: { currentFormIndex, previousIndex },
   } = useMultiStepForm();
 
-  const { name, title, Componet } = FormComponents[currentFormIndex];
+  const { name, title, Componet, props } = FormComponents[currentFormIndex];
 
   const initialAnimation = { opacity: 0 };
   const animateAnimation = {
@@ -105,7 +112,7 @@ const Forms = ({ FormComponents }) => {
         style={{ width: "100%" }}
       >
         <EstudianteFormLayout title={title}>
-          <Componet formName={name} />
+          <Componet {...props} formName={name} />
         </EstudianteFormLayout>
       </motion.div>
     </AnimatePresence>

@@ -3,8 +3,6 @@ import Button from "src/components/form/Button";
 import { useMultiStepForm } from "../MultiStepForm/useMultiStepForm";
 import { useConstantes } from "../MultiStepForm/useConstantes";
 
-import { mappedDataSolicitud } from "src/helper/transformarDatos";
-
 const EstudianteFormLayout = ({ children, title }) => {
   return (
     <section className="flex flex-col items-center justify-center w-full gap-10">
@@ -21,6 +19,7 @@ const FormHeader = ({ title }) => {
 
 const FormButtons = () => {
   const { form, setForm } = useMultiStepForm();
+  const { identificadores } = form;
 
   const { currentIndex, currentFormValid } = useConstantes({
     form,
@@ -42,7 +41,7 @@ const FormButtons = () => {
   const handleClickContinuar = async () => {
     if (currentFormValid) {
       if (lastIndex === currentIndex) {
-        await succesSubmit(mappedDataSolicitud({ data: form }));
+        await succesSubmit({ form });
         return;
       }
       setForm({ ...form, currentFormIndex: currentIndex + 1 });
@@ -50,9 +49,12 @@ const FormButtons = () => {
   };
   return (
     <div className="flex w-full md:max-w-[750px] max-w-[400px] sm:flex-row gap-3 flex-col ">
-      <Button onClick={handleClickRegresar} color={"blanco"} border="negro">
-        Regresar
-      </Button>
+      {identificadores.length > 1 && (
+        <Button onClick={handleClickRegresar} color={"blanco"} border="negro">
+          Regresar
+        </Button>
+      )}
+
       <Button
         onClick={handleClickContinuar}
         color={"morado"}

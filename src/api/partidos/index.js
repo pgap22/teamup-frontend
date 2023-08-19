@@ -73,3 +73,20 @@ export const crearPartido = async (datos, id) => {
 
 export const cancelarPartidoEstudiante = (id) =>
   obtenerUnRegistro("/partidos/estudiante/cancelar", id)();
+
+export const obtenerMiembrosPartido = (id) =>
+  obtenerUnRegistro("/partidos/miembros", id)();
+
+export const aceptarSolictudRival = async (datos, id) => {
+  try {
+    const partidoAceptado = await clienteAxios.post(
+      "/partidos/estudiante/rival/aceptar/" + id,
+      datos,
+      headers()
+    );
+
+    return partidoAceptado;
+  } catch (error) {
+    throw error;
+  }
+};

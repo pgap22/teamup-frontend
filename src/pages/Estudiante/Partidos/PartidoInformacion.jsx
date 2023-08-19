@@ -28,10 +28,10 @@ const Titulo = ({ id, estado }) => {
 
 const PartidoInformacion = () => {
   const [partido, setPartido] = useState({});
-  const navigate = useNavigate();
   const { id } = useParams();
-  const { usuario } = useSession()
-  const { toggleModal } = useModal()
+  const { usuario } = useSession();
+  const { toggleModal } = useModal();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -85,22 +85,42 @@ const PartidoInformacion = () => {
           </div>
 
           <div className=" space-y-4 mt-4">
-            {partido.equipo_visitante.id_lider === usuario.id && partido.estado &&
-              <>
-                < Button className={"py-3 md:text-xl"} color={"verde"}>Aceptar Partido</Button>
-                <Button onClick={() => {
-                  toggleModal("RechazarInvitacion")
-                }} className={"py-3 md:text-xl"} color={"rojo"}>Rechazar Invitacion</Button>
+            {partido.equipo_visitante.id_lider === usuario.id &&
+              partido.estado.fase === 1 && (
+                <>
+                  <Button
+                    onClick={() => {
+                      navigate(`/estudiante/partidos/aceptar/${partido.id}`);
+                    }}
+                    className={"py-3 md:text-xl"}
+                    color={"verde"}
+                  >
+                    Aceptar Partido
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      toggleModal("RechazarInvitacion");
+                    }}
+                    className={"py-3 md:text-xl"}
+                    color={"rojo"}
+                  >
+                    Rechazar Invitacion
+                  </Button>
+                </>
+              )}
 
-              </>
-            }
-
-            {partido.equipo_visitante.id_lider !== usuario.id && partido.estado.fase === 1 &&
-              < Button onClick={() => {
-                toggleModal("CancelarPartido")
-              }} className={"py-3 md:text-xl"} color={"rojo"}>Cancelar Partido</Button>
-            }
-
+            {partido.equipo_visitante.id_lider !== usuario.id &&
+              partido.estado.fase === 1 && (
+                <Button
+                  onClick={() => {
+                    toggleModal("CancelarPartido");
+                  }}
+                  className={"py-3 md:text-xl"}
+                  color={"rojo"}
+                >
+                  Cancelar Partido
+                </Button>
+              )}
           </div>
           {partido.estado.fase == 5 && (
             <Button className={"py-4 md:text-xl"} customBg={"d0c74f"}>
@@ -111,7 +131,7 @@ const PartidoInformacion = () => {
         <CancelarPartidoModal id={partido.id} />
         <ModalRechazarPartido id={partido.id} />
       </main>
-    </EstudianteLayaout >
+    </EstudianteLayaout>
   );
 };
 

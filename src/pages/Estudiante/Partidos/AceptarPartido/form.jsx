@@ -1,59 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useConstantes } from "src/components/estudiante/MultiStepForm/useConstantes";
 import { useMultiStepForm } from "src/components/estudiante/MultiStepForm/useMultiStepForm";
 
-import { Jugadores } from "./Components/Jugadores";
-import { useFetchId } from "src/hooks/useFetchId";
+import { Jugadores } from "../../Solicitudes/Forms/TeamStaff/Components/Jugadores";
+import Indicadores from "../../Solicitudes/Forms/TeamStaff/Components/Indicadores";
 
-import { obtenerUnDeporte, obtenerUnEquipo } from "src/api";
-import {
-  jugadoresSeleccionados,
-  miembrosEquipo,
-} from "src/helper/transformarDatos";
-import Indicadores from "./Components/Indicadores";
+import { jugadoresSeleccionados } from "src/helper/transformarDatos";
 
-import { stateMiembrosValues } from "./helper";
+import { stateMiembrosValues } from "../../Solicitudes/Forms/TeamStaff/helper";
 
-const miembrosStateData = ({ miembros }) => {
-  return miembros.map((miembro) => ({
-    ...miembro,
-    estado: null,
-  }));
-};
-
-const TeamStaffForm = () => {
+const TeamStaffForm = ({ deporte, miembros }) => {
   const { setForm } = useMultiStepForm();
   const { form, currentFormState, currentFormName } = useConstantes();
 
-  const { id_equipo_local } = form.EquipoLocal.values;
-  const { previous_id_equipo } = form.EquipoLocal.values;
-
-  const { id_deporte } = form.Deportes.values;
-  const { jugadores: miembrosState } = currentFormState.values;
-
-  const { deporte, isLoading: isLoadingDeporte } = useFetchId(
-    id_deporte,
-    obtenerUnDeporte,
-    "deporte"
-  );
-
   const { limiteJugadores, limiteJugadoresCambio } = deporte;
 
-  const [selectedJugadores, setSelectedJugadores] = useState([]);
-
-  useEffect(() => {
-    const fetcher = async () => {
-      const { data: equipo } = await obtenerUnEquipo(id_equipo_local);
-      const { jugadores } = miembrosEquipo({ data: equipo });
-      setSelectedJugadores(miembrosStateData({ miembros: jugadores }));
-    };
-    if (miembrosState && previous_id_equipo === id_equipo_local) {
-      setSelectedJugadores([...miembrosState]);
-      return;
-    }
-
-    fetcher();
-  }, []);
+  const [selectedJugadores, setSelectedJugadores] = useState(miembros);
 
   useEffect(() => {
     const { headLinesPlayers } = jugadoresSeleccionados({
@@ -66,7 +28,6 @@ const TeamStaffForm = () => {
     if (NoTitulares === limiteJugadores) {
       formStateCopy.valid = true;
       formStateCopy.values.jugadores = [...selectedJugadores];
-      formStateCopy.values.id_equipo_actual = id_equipo_local;
       setForm({ ...form, [currentFormName]: { ...formStateCopy } });
       return;
     }
@@ -125,8 +86,6 @@ const TeamStaffForm = () => {
       setSelectedJugadores(selectedPlayersMapped);
     };
   };
-
-  if (isLoadingDeporte) return <p>Cargando . . . </p>;
 
   return (
     <div className="flex gap-10 h-[500px] w-full px-16 justify-start md:flex-row flex-col">

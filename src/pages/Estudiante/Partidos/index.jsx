@@ -53,7 +53,11 @@ const PartidosContainer = ({ partidos }) => {
   return (
     <main className="flex flex-col sm:grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
       {partidos?.map((partido) => (
-        <Partido url="" key={partido.id} partido={partido} />
+        <Partido
+          url="/estudiante/partidos/"
+          key={partido.id}
+          partido={partido}
+        />
       ))}
     </main>
   );

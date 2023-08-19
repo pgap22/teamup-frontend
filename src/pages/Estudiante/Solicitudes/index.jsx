@@ -11,7 +11,7 @@ import MultiStepForm from "src/components/estudiante/MultiStepForm";
 
 import ExitoForm from "src/router/estudiante/exito/ExitoForm";
 
-import { throwError } from "src/helper";
+import { mappedDataSolicitud } from "src/helper/transformarDatos";
 import { crearPartido } from "src/api/partidos";
 
 const Solicitudes = () => {
@@ -55,6 +55,8 @@ const Solicitudes = () => {
           Exito={ExitoForm}
           FormsData={Forms}
           sender={crearPartido}
+          mappedFunction={mappedDataSolicitud}
+          keyName={"id_equipo_local"}
         />
       </MultiStepFormProvider>
     </EstudianteLayaout>

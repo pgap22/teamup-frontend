@@ -1,4 +1,6 @@
 import { BsSquareFill } from "react-icons/bs";
+import { AiOutlineCloseSquare } from "react-icons/ai";
+
 import { motion } from "framer-motion";
 
 import { stateMiembrosValues } from "../helper";
@@ -14,7 +16,7 @@ export const Jugadores = ({ jugadores, handleClick }) => {
 };
 
 const JugadorItem = ({ jugador, handleClick }) => {
-  const { id, nombre, rango, estado } = jugador;
+  const { id, nombre, rango, estado, jugadorYaUsado } = jugador;
   const { titular, reserva } = stateMiembrosValues;
   let color = "#A1A1A1";
 
@@ -38,12 +40,16 @@ const JugadorItem = ({ jugador, handleClick }) => {
         exit={exitAnimation}
         transition={transitionProps}
       >
-        <BsSquareFill
-          size={25}
-          color={color}
-          onClick={handleClick(id)}
-          className="cursor-pointer"
-        />
+        {jugadorYaUsado ? (
+          <AiOutlineCloseSquare className="cursor-pointer" size={30} />
+        ) : (
+          <BsSquareFill
+            size={25}
+            color={color}
+            onClick={handleClick(id)}
+            className="cursor-pointer"
+          />
+        )}
       </motion.div>
       <p className="truncate text-[#565656] text-lg font-bold">
         {nombre} {rango === "lider" && "(Tu)"}
