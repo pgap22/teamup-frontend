@@ -52,6 +52,7 @@ export const zonaJuegoTabla = function ({ data }) {
   }));
 };
 
+
 export const miembrosEquipo = ({ data }) => {
   const { usuarios } = data;
   const { lider } = data;
@@ -69,6 +70,7 @@ export const miembrosEquipo = ({ data }) => {
     a.rango === "lider" && b.rango !== "lider" ? -1 : 1
   );
 
+
   const formatedData = {
     id: data.id,
     nombre: data.nombre,
@@ -77,6 +79,7 @@ export const miembrosEquipo = ({ data }) => {
     rango: data.rango,
   };
   return { ...formatedData, jugadores: [...sortedUsuarios] };
+
 };
 
 export const solicitudesTabla = ({ data }) => {
@@ -119,7 +122,9 @@ export const zonaJuegosSelect = ({ data }) => {
     value: zonaDeJuego.id,
     label: zonaDeJuego.nombre,
   }));
-};
+
+}
+
 
 export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
   const { titular, reserva } = stateMiembrosValues;
@@ -135,6 +140,7 @@ export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
   });
 
   return { headLinesPlayers, reservePlayers };
+
 };
 
 export const mappedDataSolicitud = ({ form }) => {

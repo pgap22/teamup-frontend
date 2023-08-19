@@ -23,7 +23,10 @@ function DeporteEditar() {
 
     const { isLoading: loading, tiposDeportes } = useFetch("tiposDeportes", obtenerTipoDeportes, tipoDeporteTransformar);
 
-
+    useEffect(()=>{
+        console.log(isLoading)
+    },[deporte])
+    
     useEffect(() => {
         setValue("id", id);
     }, [])
