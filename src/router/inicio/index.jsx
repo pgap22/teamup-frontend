@@ -1,8 +1,10 @@
 import ProtectedRoute from "../../components/routes/ProtectedRoute";
+import ForgotPassword from "src/pages/ForgotPassword";
 import Login from "../../pages/Login/Login";
 import PaginaPrincipal from "../../pages/PaginaPrincipal/PaginaPrincipal";
 import SignUp from "../../pages/SignUp/SignUp";
 import Redirect from "../../redirect";
+import ResetPassword from "src/pages/ResetPassword";
 
 const router = {
   caseSensitive: true,
@@ -34,6 +36,22 @@ const router = {
       element: (
         <ProtectedRoute needLogged={false}>
           <SignUp />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "recover",
+      element: (
+        <ProtectedRoute needLogged={false}>
+          <ForgotPassword />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "reset-password/:token",
+      element: (
+        <ProtectedRoute needLogged={false}>
+          <ResetPassword />
         </ProtectedRoute>
       ),
     },
