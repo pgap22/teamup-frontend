@@ -24,38 +24,47 @@ const miembrosStateData = ({ miembros }) => {
 const TeamStaffForm = () => {
   const { setForm } = useMultiStepForm();
   const { form, currentFormState, currentFormName } = useConstantes();
+  const deporte = form.Deportes.values.deporte[0];
 
   const { id_equipo_local } = form.EquipoLocal.values;
   const { previous_id_equipo } = form.EquipoLocal.values;
 
-  const { id_deporte } = form.Deportes.values;
   const { jugadores: miembrosState } = currentFormState.values;
-
-  const { deporte, isLoading: isLoadingDeporte } = useFetchId(
-    id_deporte,
-    obtenerUnDeporte,
-    "deporte"
-  );
 
   const { limiteJugadores, limiteJugadoresCambio } = deporte;
 
   const [selectedJugadores, setSelectedJugadores] = useState([]);
 
   useEffect(() => {
-    const fetcher = async () => {
+    if (miembrosState && previous_id_equipo === id_equipo_local) {
+      //Hay que ver si los titulares y reservas que hay coinciden con los limites si no chao
+      const { headLinesPlayers, reservePlayers } = jugadoresSeleccionados({
+        stateMiembrosValues,
+        data: miembrosState,
+      });
+
+      const NoTitulares = headLinesPlayers.length;
+      const NoReservas = reservePlayers.length;
+
+      if (
+        NoTitulares <= limiteJugadores &&
+        NoReservas <= limiteJugadoresCambio
+      ) {
+        setSelectedJugadores([...miembrosState]);
+        return;
+      }
+    }
+
+    (async () => {
       const { data: equipo } = await obtenerUnEquipo(id_equipo_local);
       const { jugadores } = miembrosEquipo({ data: equipo });
       setSelectedJugadores(miembrosStateData({ miembros: jugadores }));
-    };
-    if (miembrosState && previous_id_equipo === id_equipo_local) {
-      setSelectedJugadores([...miembrosState]);
-      return;
-    }
-
-    fetcher();
+    })();
   }, []);
 
   useEffect(() => {
+    if (!deporte || !selectedJugadores) return;
+
     const { headLinesPlayers } = jugadoresSeleccionados({
       stateMiembrosValues,
       data: selectedJugadores,
@@ -125,8 +134,6 @@ const TeamStaffForm = () => {
       setSelectedJugadores(selectedPlayersMapped);
     };
   };
-
-  if (isLoadingDeporte) return <p>Cargando . . . </p>;
 
   return (
     <div className="flex gap-10 h-[500px] w-full px-16 justify-start md:flex-row flex-col">

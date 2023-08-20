@@ -10,7 +10,8 @@ const ProgresiverIndicator = ({ FormsData }) => {
 
   const handleClickRegresarProgresiveIndicator = (i) => {
     return () => {
-      const formClicked = form.identificadores[i].name
+      const idForm = i - 1 < 0 ? 0 : i - 1;
+      const formClickedMinus = form.identificadores[idForm].name;
 
       const data = {
         ...form,
@@ -18,14 +19,13 @@ const ProgresiverIndicator = ({ FormsData }) => {
         previousIndex: form.currentFormIndex,
       };
 
-      console.log(form[formClicked])
-
       if (i > currentIndex) {
-
-        if (i > currentIndex && currentFormValid) {
+        if (
+          (i === currentIndex + 1 && currentFormValid) ||
+          form[formClickedMinus].valid
+        ) {
           setForm(data);
         }
-
       }
 
       if (i < currentIndex) {
