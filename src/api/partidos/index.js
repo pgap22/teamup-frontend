@@ -1,7 +1,6 @@
 import { clienteAxios } from "src/config/axios";
 import { obtenerRegistros, obtenerUnRegistro } from "../helpers";
 import { headers } from "src/helper";
-import axios from "axios";
 
 export const obtenerMisPartidos = obtenerRegistros("/partidos");
 
@@ -54,11 +53,16 @@ export const obtenerPartidosCuidarMaestro = obtenerRegistros(
   "/partidos/maestro/cuidar"
 );
 
+export const colocarAsistencia = (id) =>
+  obtenerUnRegistro("/partidos/asistencia", id)();
+export const cancelarPartido = (id) =>
+  obtenerUnRegistro("/partidos/cancelar", id)();
 
-export const colocarAsistenciaMaestro = (id) =>
-  obtenerUnRegistro("/partidos/maestro/asistencia", id)();
-export const cancelarPartidoMaestro = (id) =>
-  obtenerUnRegistro("/partidos/maestro/cancelar", id)();
+export const aceptarResultados = (id) =>
+  obtenerUnRegistro("/partidos/estudiante/aceptar-resultado", id)();
+  
+export const cancelarResultados = (id) =>
+  obtenerUnRegistro("/partidos/estudiante/cancelar-resultado", id)();
 
 export const crearPartido = async (datos, id) => {
   try {
@@ -93,11 +97,15 @@ export const aceptarSolictudRival = async (datos, id) => {
   }
 };
 
-export const enviarResultadosPartido = async (id,datos) => {
-    try {
-        const resultados = await clienteAxios.post("/partidos/enviar-resultado/"+id, datos, headers())
-        return resultados
-    } catch (error) {
-        throw error
-    }
-}
+export const enviarResultadosPartido = async (id, datos) => {
+  try {
+    const resultados = await clienteAxios.post(
+      "/partidos/enviar-resultado/" + id,
+      datos,
+      headers()
+    );
+    return resultados;
+  } catch (error) {
+    throw error;
+  }
+};

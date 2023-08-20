@@ -1,9 +1,7 @@
-import { useToggle } from "@uidotdev/usehooks"
-import clsx from "clsx"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { aceptarPartidoMaestro, cancelarPartidoMaestro, colocarAsistenciaMaestro, enviarResultadosPartido, obtenerUnPartido } from "src/api/partidos"
+import { aceptarPartidoMaestro, cancelarPartido, colocarAsistencia, enviarResultadosPartido, obtenerUnPartido } from "src/api/partidos"
 import EquipoCard from "src/components/estudiante/EquipoCard/EquipoCard"
 import EquipoCardResultado from "src/components/estudiante/EquipoCard/EquipoCardResultado"
 import InfoCampo from "src/components/estudiante/InfoCampo"
@@ -39,7 +37,7 @@ const Solicitud = () => {
                 const { data } = await obtenerUnPartido(id);
                 setPartido(data)
             } catch (error) {
-                navigate("/maestros")
+                navigate("/maestro")
             }
         })()
     }, [])
@@ -55,16 +53,17 @@ const Solicitud = () => {
 
     const tomarAsistencia = async () => {
         try {
-            await colocarAsistenciaMaestro(id);
+            await colocarAsistencia(id);
             setPartidoAceptado(true);
             modalAsistecia.toggleModal(false);
         } catch (error) {
             console.log(error)
         }
     }
+
     const cancelarPartidoClick = async () => {
         try {
-            await cancelarPartidoMaestro(id);
+            await cancelarPartido(id);
             setPartidoAceptado(true);
             modalAsistecia.toggleModal(false);
         } catch (error) {
