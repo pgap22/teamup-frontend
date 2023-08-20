@@ -66,6 +66,7 @@ export const cancelarResultados = (id) =>
 
 export const crearPartido = async (datos, id) => {
   try {
+    console.log(datos);
     const { data } = await clienteAxios.post(
       `/partidos/${id}`,
       datos,

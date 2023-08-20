@@ -8,7 +8,7 @@ const Animador = () => {
   const initialAnimation = { opacity: 0 };
   const animateAnimation = { opacity: 1 };
   const exitAnimation = { opacity: 0 };
-  const transitionProps = { duration: 0.6 };
+  const transitionProps = { duration: 0.4 };
 
   return (
     <AnimatePresence mode="wait">

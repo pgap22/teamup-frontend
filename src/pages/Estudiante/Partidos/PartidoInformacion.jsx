@@ -18,6 +18,7 @@ import { useSession } from "src/hooks/useSession";
 import { useModal } from "src/store/useModal";
 import CancelarPartidoModal from "./components/ModalCancelarPartido";
 import ModalRechazarPartido from "./components/ModalRechazarPartido";
+import { fechaNormal } from "src/helper";
 // import PartidosRealizados from "src/pages/Coordinacion/Dashboard/components/PartidosRealizados";
 
 const Titulo = ({ id, estado }) => {
@@ -146,6 +147,10 @@ const PartidoInformacion = () => {
               value={
                 !partido.ZonaDejuego ? "Pendiente" : partido.ZonaDejuego.nombre
               }
+            />
+            <InfoCampo
+              title={"Fecha/Hora"}
+              value={fechaNormal(partido.fecha)}
             />
             <InfoCampo title={"Deporte"} value={partido.deporte.nombre} />
             <InfoCampo

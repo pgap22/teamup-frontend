@@ -3,12 +3,16 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker as TimePickerMUI } from "@mui/x-date-pickers/TimePicker";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
 import { useState } from "react";
-
-import dayjs from "dayjs";
-
 import { AiOutlineClockCircle } from "react-icons/ai";
 import InputDateBody from "./Components/InputDateBody";
+import dayjs from "dayjs";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const TimePicker = ({ label, time, setTime }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +27,7 @@ const TimePicker = ({ label, time, setTime }) => {
       <TimePickerMUI
         desktopModeMediaQuery="@media (max-width: 0px)"
         value={time}
+        timezone="America/El_Salvador"
         onChange={onChangeHandler}
         open={isOpen}
         onClose={() => {

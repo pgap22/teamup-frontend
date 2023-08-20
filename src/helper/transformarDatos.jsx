@@ -145,6 +145,8 @@ export const jugadoresSeleccionados = ({ data, stateMiembrosValues }) => {
 
 export const mappedDataSolicitud = ({ form }) => {
   const { identificadores } = form;
+
+
   let result = {};
 
   identificadores.forEach((names) => {
@@ -174,9 +176,16 @@ export const mappedDataSolicitud = ({ form }) => {
     if (name === "InformacionGeneral") {
       const { descripcion } = values;
       result["descripcion"] = descripcion;
+      
 
-      const { fecha } = values;
-      result["fecha"] = new Date(fecha);
+
+
+      let hora = values.hora.$d
+      let dia =  values.fecha.$d
+
+      dia.setHours(hora.getHours(), hora.getMinutes());
+
+      result["fecha"] = new Date(dia.toISOString());
 
       const { maestro_intermediario } = values;
       result["maestro_intermediario"] = maestro_intermediario;
