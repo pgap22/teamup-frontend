@@ -30,7 +30,6 @@ const Titulo = ({ id, estado }) => {
 };
 
 const PartidoInformacion = () => {
-
   const [partido, setPartido] = useState({});
   const [ModalResultado, modalResultado] = useModalPro();
   const [ModalAsistencia, modalAsistecia] = useModalPro();
@@ -139,7 +138,7 @@ const PartidoInformacion = () => {
     >
       <main className="flex flex-col gap-4">
         <section>
-          <h2 className="font-bold text-xl mb-4">Datos Generales</h2>
+          <h2 className="mb-4 text-xl font-bold">Datos Generales</h2>
 
           <div className="flex flex-col gap-4">
             <InfoCampo
@@ -161,14 +160,14 @@ const PartidoInformacion = () => {
         </section>
 
         <section className="max-w-md">
-          <h2 className="font-bold text-xl mb-4">Equipos</h2>
+          <h2 className="mb-4 text-xl font-bold">Equipos</h2>
 
-          <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
             <EquipoCard equipo={partido.equipo_local} />
             <EquipoCard equipo={partido.equipo_visitante} />
           </div>
 
-          <div className=" space-y-4 mt-4">
+          <div className="mt-4 space-y-4 ">
             {partido.equipo_visitante.id_lider === usuario.id &&
               partido.estado.fase === 1 && (
                 <>

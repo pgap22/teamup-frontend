@@ -72,7 +72,6 @@ const MultiStepForm = ({
     };
     setForm(new_form);
   }, []);
-
   return (
     <div className="flex flex-col items-center justify-center w-full gap-5">
       {form.identificadores && !form.envioCompletado && (
@@ -94,15 +93,12 @@ const Forms = ({ FormComponents }) => {
   const { name, title, Componet, props } = FormComponents[currentFormIndex];
 
   const initialAnimation = { opacity: 0 };
-  const animateAnimation = {
-    opacity: 1,
-    transition: { delay: previousIndex === null ? 0 : 0.5 },
-  };
+  const animateAnimation = { opacity: 1 };
   const exitAnimation = { opacity: 0 };
   const transitionProps = { duration: 0.5 };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <motion.div
         key={currentFormIndex}
         initial={initialAnimation}

@@ -5,6 +5,7 @@ const FORM_STATE = {
   previousIndex: null,
   id_partido: null,
   envioCompletado: false,
+  deporte: {},
 };
 
 export const MultiStepFormContext = createContext();
