@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import { clienteAxios } from "../config/axios";
 import { headers, headersForm, throwError } from "../helper";
 import {
@@ -235,6 +236,24 @@ export const eliminarMaestro = async (id) => {
   try {
     await clienteAxios.delete("/usuario/" + id, headers());
     return true;
+  } catch (error) {
+    throwError(error);
+  }
+};
+
+export const passwordRecovery = async (datos) => {
+  try {
+    const { data } = await clienteAxios.post("/usuario/recovery", datos);
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+};
+
+export const changePassword = async (datos) => {
+  try {
+    const { data } = await clienteAxios.post("/usuario/changePassword", datos);
+    return data;
   } catch (error) {
     throwError(error);
   }

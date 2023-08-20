@@ -12,15 +12,10 @@ import { useIconPassword } from "../../../hooks/useIconPassword";
 
 const Form = () => {
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    mensajeError,
-    registroExitoso,
-    data,
-  } = useFormulario(iniciarSesion);
-  
-  const {mostrarOcultarPassword, mostrarPassword} = useIconPassword();
+  const { register, handleSubmit, mensajeError, registroExitoso, data } =
+    useFormulario(iniciarSesion);
+
+  const { mostrarOcultarPassword, mostrarPassword } = useIconPassword();
 
   const { t } = useTranslation(["login"]);
   const { login } = useSession();
@@ -37,7 +32,7 @@ const Form = () => {
       <p>{mensajeError}</p>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md flex flex-col gap-6"
+        className="flex flex-col w-full max-w-md gap-6"
       >
         <Input
           register={register("email")}
@@ -55,10 +50,13 @@ const Form = () => {
           placeholder={"Ingrese su contraseña"}
         />
 
-        <div className="text-center flex flex-col gap-3">
+        <div className="flex flex-col gap-3 text-center">
           <Button color={"azul"}>Iniciar Sesion</Button>
           <Link to={"/signup"} className="text-primary">
             ¿ No tienes cuenta ?
+          </Link>
+          <Link to={"/recover"} className="text-primary">
+            ¿ Olvidaste tu contraseña ?
           </Link>
         </div>
       </form>
