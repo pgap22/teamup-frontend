@@ -4,6 +4,7 @@ import EstudianteRoutes from "./router/estudiante"
 import CoordinacionRoutes from "./router/coordinacion"
 import { createBrowserRouter } from "react-router-dom";
 import Animador from "./components/routes/Animador";
+import Error404 from "./pages/error";
 
 
 const router = createBrowserRouter([
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
       MaestroRoutes,
       EstudianteRoutes,
     ],
-    errorElement: <p>Componente de error</p>
+    errorElement: <Error404/>
   }
 ]);
 
