@@ -211,7 +211,7 @@ const PartidoInformacion = () => {
               )}
           </div>
           {
-            (partido.estado.fase == 5 && !partido.id_usuarioMaestro && (!partido.resultado || (!partido.resultado.enviadoListo && partido.resultado.id_usuario_resultadoAceptar==usuario.id))) && <Button onClick={() => modalResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#cfb93d"}>Enviar Resultado</Button>
+            (partido.estado.fase == 5 && !partido.id_usuarioMaestro && (!partido.resultado || (!partido.resultado.enviadoListo && partido.resultado.id_usuario_resultadoPublicar==usuario.id))) && <Button onClick={() => modalResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#cfb93d"}>Enviar Resultado</Button>
           }
           {
             partidoAsistencia && <Button onClick={() => modalAsistecia.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#7E7E7E"}>Tomar Asistencia</Button>

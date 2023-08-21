@@ -57,6 +57,7 @@ const EquipoInformacion = () => {
 
                 <Caja titulo={"Estudiantes"}>
                     <div className='flex flex-col gap-4'>
+                        <p>{equipo.lider.nombre}</p>
                         {equipo.usuarios.map(usuario => (
                             <p key={usuario.id} >{usuario.nombre}</p>
                         ))}

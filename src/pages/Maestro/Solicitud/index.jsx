@@ -45,7 +45,11 @@ const Solicitud = () => {
     const cuidarPartido = async () => {
         try {
             await aceptarPartidoMaestro(id);
-            setPartidoAceptado(true);
+            setPartidoAceptado({
+                titulo: "Solicitud Cuidar",
+                subtitulo: "Solicitud Aceptada",
+                descripcion: "Ahora tu cuidaras este partido"
+            });
         } catch (error) {
             console.log(error)
         }
@@ -54,7 +58,11 @@ const Solicitud = () => {
     const tomarAsistencia = async () => {
         try {
             await colocarAsistencia(id);
-            setPartidoAceptado(true);
+            setPartidoAceptado({
+                titulo: "Asistencia Tomada",
+                subtitulo: "Asistencia Tomada",
+                descripcion: "La asistencia de este partido fue exitosa !"
+            });
             modalAsistecia.toggleModal(false);
         } catch (error) {
             console.log(error)
@@ -64,8 +72,11 @@ const Solicitud = () => {
     const cancelarPartidoClick = async () => {
         try {
             await cancelarPartido(id);
-            setPartidoAceptado(true);
-            modalAsistecia.toggleModal(false);
+            setPartidoAceptado({
+                titulo: "Solicitud Cancelada",
+                subtitulo: "Solicitud Cancelada",
+                descripcion: "Haz cancelado esta solicitud"
+            }); modalAsistecia.toggleModal(false);
         } catch (error) {
             console.log(error)
         }
@@ -73,7 +84,7 @@ const Solicitud = () => {
 
     if (!partido.id) return <p>Cargando...</p>
 
-    if (partidoAceptado) return <MensajeExito />
+    if (partidoAceptado) return <MensajeExito partidoAceptado={partidoAceptado} />
 
     return (
         <MaestroLayout titulo={"Solicitud N°" + partido.id}>
@@ -140,11 +151,11 @@ const Solicitud = () => {
 }
 
 
-const MensajeExito = () => {
+const MensajeExito = ({ partidoAceptado }) => {
     return (
-        <MaestroLayout titulo={"Solicitud Aceptada"}>
-            <Caja titulo={"Solicitud aceptada"}>
-                <p>Tu cuidaras este partido !</p>
+        <MaestroLayout titulo={partidoAceptado.titulo}>
+            <Caja titulo={partidoAceptado.subtitulo}>
+                <p>{partidoAceptado.descripcion}</p>
 
                 <Link to={"/maestro"}>Volver al inicio</Link>
             </Caja>

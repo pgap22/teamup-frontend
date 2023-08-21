@@ -73,7 +73,7 @@ const MultiStepForm = ({
     setForm(new_form);
   }, []);
   return (
-    <div className="flex border flex-col items-center justify-center w-full gap-5">
+    <div className="flex flex-col items-center justify-center w-full gap-5">
       {error && typeof error == 'string' && <AlertaImprovisada message={error}/>}
       {form.identificadores && !form.envioCompletado && (
         <Forms FormComponents={FormsData} />
