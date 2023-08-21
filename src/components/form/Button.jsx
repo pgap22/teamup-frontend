@@ -57,7 +57,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
       style={customBg && {backgroundColor: customBg}}
-      className={`text-white shadow-md w-full flex justify-center items-center gap-4 hover:scale-[1.02] transition-all rounded-lg p-2 font-bold border ${colorBoton} ${borderBoton} ${color_text} ${roundedBoton} ${disabledStyles} ${className}`}
+      className={`text-white shadow-md w-full flex justify-center items-center gap-4 hover:scale-[1.02] disabled:hover:scale-100 transition-all rounded-lg p-2 font-bold border ${colorBoton} ${borderBoton} ${color_text} ${roundedBoton} ${disabledStyles} ${className}`}
     >
       {children}
     </button>

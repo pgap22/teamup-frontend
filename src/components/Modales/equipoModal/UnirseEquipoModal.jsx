@@ -2,16 +2,19 @@ import { useModal } from "../../../store/useModal";
 import { useFormulario } from "../../../hooks/useFormulario";
 
 import Input from "../../form/Input";
-import Button from "../../ui/Button";
+import Button from "src/components/form/Button";
 import TemplateModal from "../ModalTemplate";
 
 import { unirseEquipo } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Skeleton from "src/components/ui/Skeleton";
+
+import {HashLoader} from "react-spinners"
 
 const FormUniseEquipo = ({ toggleModal }) => {
   const navigate = useNavigate();
-  const { data, register, handleSubmit, mensajeError, registroExitoso } =
+  const { data, register, handleSubmit, mensajeError, registroExitoso, isLoading } =
     useFormulario(unirseEquipo);
 
   useEffect(() => {
@@ -46,13 +49,11 @@ const FormUniseEquipo = ({ toggleModal }) => {
           type="password"
           register={register("password_access")}
         />
-        <Button
-          disabled={registroExitoso}
-          type={"s"}
-          px={50}
-          textButton={"Unirse al equipo"}
-          onClickButton={() => {}}
-        />
+        <Button disabled={isLoading}>
+          <Skeleton loading={isLoading} fallback={<HashLoader size={28} color="white" />}>
+            Unirse Equipo
+          </Skeleton>
+        </Button>
       </form>
     </>
   );

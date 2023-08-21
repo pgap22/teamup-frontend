@@ -1,6 +1,6 @@
 import { clienteAxios } from "src/config/axios";
 import { obtenerRegistros, obtenerUnRegistro } from "../helpers";
-import { headers } from "src/helper";
+import { headers, throwError } from "src/helper";
 
 export const obtenerMisPartidos = obtenerRegistros("/partidos");
 
@@ -74,7 +74,8 @@ export const crearPartido = async (datos, id) => {
     );
     return data;
   } catch (error) {
-    throwError(error);
+    console.log(error);
+    throw  error
   }
 };
 

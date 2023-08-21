@@ -7,7 +7,7 @@ import Button from "src/components/form/Button"
 
 import { useFetch } from "src/hooks/useFetch"
 
-import { crearZonaDeJuego, obtenerDeportes } from "src/api"
+import { crearZonaDeJuego, obtenerDeportes, obtenerDeportesCancha } from "src/api"
 
 import { deportesSelect } from "src/helper/transformarDatos"
 import ImageDrop from "src/components/form/ImageDrop"
@@ -17,7 +17,7 @@ import Exito from "src/components/coordinacion/Exito"
 
 
 const Crear = () => {
-  const { deportes } = useFetch("deportes", obtenerDeportes, deportesSelect)
+  const { deportes } = useFetch("deportes", obtenerDeportesCancha, deportesSelect)
   const { register, setValue, handleSubmit, registroExitoso } = useFormulario(crearZonaDeJuego);
 
   if(registroExitoso) return(

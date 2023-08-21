@@ -12,13 +12,16 @@ import { useFormulario } from "../../../hooks/useFormulario";
 import { crearCuentaEstudiante } from "../../../api";
 import { useIconPassword } from "../../../hooks/useIconPassword";
 
+import { HashLoader } from "react-spinners";
+import Skeleton from "src/components/ui/Skeleton";
+
 const Form = () => {
   const navigate = useNavigate();
   const { nivelesAcademicos, isLoading, error } = useNivelesAcademicos();
   const { mostrarOcultarPassword, mostrarPassword } = useIconPassword();
 
   const { t } = useTranslation(["signup"]);
-  const { register, handleSubmit, setValue, mensajeError, registroExitoso } =
+  const { register, handleSubmit, setValue, mensajeError, registroExitoso, isLoading: formLoading } =
     useFormulario(crearCuentaEstudiante);
 
   if (isLoading) return <p>Cargando...</p>;
@@ -70,7 +73,11 @@ const Form = () => {
         />
 
         <div className="text-center flex flex-col gap-3">
-          <Button color={"azul"}>Registrarse</Button>
+          <Button disabled={formLoading} color={"azul"}>
+            <Skeleton loading={formLoading} fallback={<HashLoader size={24} color="white" /> }>
+              Registrate
+            </Skeleton>
+          </Button>
           <Link to={"/login"} className="text-primary">
             ¿ Ya tienes cuenta ?
           </Link>

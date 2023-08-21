@@ -18,6 +18,8 @@ import TemplateModal from "../ModalTemplate";
 import { convertArrayToFileList } from "src/helper";
 
 import { actualizarAvatar } from "src/api";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 const ContentModal = ({ id, toggleModal, name }) => {
   const { data, setImagen, setData } = useSingleImage();
@@ -25,6 +27,7 @@ const ContentModal = ({ id, toggleModal, name }) => {
   const [imageURL, setImageURL] = useState(null);
   const [cropedImage, setCropedImage] = useState(null);
   const [zoom, setZoom] = useState(2.5);
+  const [isLoading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const zoomMinmax = [1, 5];
@@ -37,6 +40,7 @@ const ContentModal = ({ id, toggleModal, name }) => {
 
   const succesSubmitAvatar = async (imageBlob) => {
     try {
+      setLoading(true)
       const formData = new FormData();
       formData.append(
         "avatar",
@@ -64,6 +68,9 @@ const ContentModal = ({ id, toggleModal, name }) => {
       }
     } catch (error) {
       console.log(error);
+    }
+    finally{
+      setLoading(false);
     }
   };
 
@@ -104,6 +111,7 @@ const ContentModal = ({ id, toggleModal, name }) => {
           handleClickReset={resetForm}
           setCropedImage={setCropedImage}
           cropedImage={cropedImage}
+          isLoading={isLoading}
           succesSubmitAvatar={succesSubmitAvatar}
         />
       )}
@@ -132,6 +140,7 @@ const AjustarImagen = ({
   handleClickReset,
   setCropedImage,
   succesSubmitAvatar,
+  isLoading
 }) => {
   const editor = useRef();
   const handleClickGuardar = () => {
@@ -160,8 +169,10 @@ const AjustarImagen = ({
       />
       <Zoom minmax={minmax} step={step} setValue={setValue} value={value} />
       <div className="grid grid-cols-2 gap-4">
-        <Button onClick={handleClickGuardar} color={"verde"}>
-          Guardar
+        <Button disabled={isLoading} onClick={handleClickGuardar} color={"verde"}>
+          <Skeleton loading={isLoading} fallback={<Loader />}>
+              Guardar
+          </Skeleton>
         </Button>
         <Button onClick={handleClickReset} color={"blanco"}>
           Cancelar

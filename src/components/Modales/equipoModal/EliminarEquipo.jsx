@@ -6,9 +6,38 @@ import TemplateModal from "../ModalTemplate";
 
 import { eliminarEquipo } from "../../../api";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
+import { useState } from "react";
 
 const ContentModal = ({ toggleModal, id }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const eliminarClick = async () => {
+    try {
+      setLoading(true);
+      const status = await eliminarEquipo(id);
+
+      if (status) {
+        toggleModal(false);
+        navigate("/estudiante/exito", {
+          state: {
+            titulo: "Equipo eliminado",
+            subtitulo: "Eliminacion del equipo completada",
+            descripcion: "Has eliminado el equipo correctamente",
+            url: `/estudiante/equipos`,
+            linkText: "Volver a tus equipos",
+          },
+        });
+      }
+    } catch (error) {
+
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
@@ -16,25 +45,13 @@ const ContentModal = ({ toggleModal, id }) => {
 
         <div className="grid grid-cols-2 gap-4">
           <Button
-            onClick={() => {
-              const status = eliminarEquipo(id);
-
-              if (status) {
-                toggleModal(false);
-                navigate("/estudiante/exito", {
-                  state: {
-                    titulo: "Equipo eliminado",
-                    subtitulo: "Eliminacion del equipo completada",
-                    descripcion: "Has eliminado el equipo correctamente",
-                    url: `/estudiante/equipos`,
-                    linkText: "Volver a tus equipos",
-                  },
-                });
-              }
-            }}
+            onClick={eliminarClick}
+            disabled={loading}
             color={"rojo"}
           >
-            Eliminar
+            <Skeleton loading={loading} fallback={<Loader />}>
+              Eliminar
+            </Skeleton>
           </Button>
           <Button
             onClick={() => {

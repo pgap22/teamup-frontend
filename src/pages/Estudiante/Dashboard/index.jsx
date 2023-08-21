@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import EstudianteLayaout from "../../../components/layout/EstudianteLayout";
 
 import AccionesRapidas from "../../Coordinacion/Dashboard/components/AccionesRapidas/index";
@@ -11,6 +12,7 @@ import {
   Equipos,
   IconButtonEquipos,
 } from "src/components/estudiante/AsideEquipo";
+import { obtenerEstadisticasEstudiante } from "src/api";
 
 const DasboardEstudiante = () => {
   const acciones = [
@@ -30,26 +32,42 @@ const DasboardEstudiante = () => {
 
   const resumen = [
     {
-      titulo: "Invitaciones a equipos",
+      key: 'cantidadEquipos',
+      titulo: "Cantidad de equipos",
       icon: AiOutlineUser,
       cantidad: 0,
     },
     {
-      titulo: "Invitaciones a partidos",
+      key: 'partidosCompletados',
+      titulo: "Partidos Completados",
       icon: MdInsertInvitation,
       cantidad: 0,
     },
     {
-      titulo: "Solicitudes en proceso",
+      key: 'solicitudesCreadas',
+      titulo: "Solicitudes Creadas",
       icon: AiOutlinePullRequest,
       cantidad: 0,
     },
   ];
 
+  const [estadistica, setEstadistica] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await obtenerEstadisticasEstudiante();
+        setEstadistica(data);
+      } catch (error) {
+
+      }
+    })()
+  }, [])
+
   return (
     <EstudianteLayaout title={"Inicio"}>
       <AccionesRapidas acciones={acciones} />
-      <Resumen resumen={resumen} />
+      <Resumen resumen={resumen} estadistica={estadistica} />
     </EstudianteLayaout>
   );
 };

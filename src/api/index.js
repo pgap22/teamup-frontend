@@ -133,6 +133,14 @@ export const obtenerDeportes = async () => {
     throwError(error);
   }
 };
+export const obtenerDeportesCancha = async () => {
+  try {
+    const { data } = await clienteAxios.get("/deporte/canchas");
+    return data;
+  } catch (error) {
+    throwError(error);
+  }
+};
 export const obtenerUnDeporte = async (id) => {
   try {
     const { data } = await clienteAxios.get("/deporte/" + id);
@@ -258,3 +266,6 @@ export const changePassword = async (datos) => {
     throwError(error);
   }
 };
+
+export const obtenerEstadisticasCoordinacion = obtenerRegistros("/usuario/estadisticas-coordinacion")
+export const obtenerEstadisticasEstudiante = obtenerRegistros("/usuario/estadisticas-estudiante")

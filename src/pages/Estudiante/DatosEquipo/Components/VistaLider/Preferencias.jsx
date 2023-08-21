@@ -5,6 +5,8 @@ import { actualizarDatos } from "../../../../../api";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useModal } from "src/hooks/useModal";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 const Preferencias = ({ equipo }) => {
   const {
@@ -14,6 +16,7 @@ const Preferencias = ({ equipo }) => {
     setValue,
     registroExitoso,
     data,
+    isLoading
   } = useFormulario(actualizarDatos);
 
   const navigate = useNavigate();
@@ -61,7 +64,11 @@ const Preferencias = ({ equipo }) => {
           placeholder={"Contraseña"}
           register={register("new_password_access", {required: true})}
         />
-          <Button>Guardar</Button>
+          <Button disabled={isLoading}>
+            <Skeleton loading={isLoading} fallback={<Loader />}>
+              Guardar
+            </Skeleton>
+          </Button>
       </form>
 
 

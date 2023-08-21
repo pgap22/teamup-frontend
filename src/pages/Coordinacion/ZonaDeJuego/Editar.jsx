@@ -8,6 +8,7 @@ import { useFormulario } from "src/hooks/useFormulario";
 import {
   editarUnaZonaDeJuego,
   obtenerDeportes,
+  obtenerDeportesCancha,
   obtenerUnaZonaDeJuego,
 } from "src/api";
 import { deportesSelect } from "src/helper/transformarDatos";
@@ -28,7 +29,7 @@ export default function Editar() {
     "zonaDeJuego"
   );
 
-  const { deportes } = useFetch("deportes", obtenerDeportes, deportesSelect);
+  const { deportes } = useFetch("deportes", obtenerDeportesCancha, deportesSelect);
 
   const { handleSubmit, register, setValue, registroExitoso } =
     useFormulario(editarUnaZonaDeJuego);

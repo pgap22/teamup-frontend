@@ -9,10 +9,12 @@ import { iniciarSesion } from "../../../api";
 import { useEffect } from "react";
 import { useSession } from "../../../hooks/useSession";
 import { useIconPassword } from "../../../hooks/useIconPassword";
+import Skeleton from "src/components/ui/Skeleton";
+import { HashLoader } from "react-spinners"
 
 const Form = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, mensajeError, registroExitoso, data } =
+  const { register, handleSubmit, mensajeError, registroExitoso, data, isLoading } =
     useFormulario(iniciarSesion);
 
   const { mostrarOcultarPassword, mostrarPassword } = useIconPassword();
@@ -51,7 +53,11 @@ const Form = () => {
         />
 
         <div className="flex flex-col gap-3 text-center">
-          <Button color={"azul"}>Iniciar Sesion</Button>
+          <Button disabled={isLoading} color={"azul"}>
+            <Skeleton loading={isLoading} fallback={<HashLoader size={24} color="white" />}>
+              Iniciar Sesion
+            </Skeleton>
+          </Button>
           <Link to={"/signup"} className="text-primary">
             ¿ No tienes cuenta ?
           </Link>

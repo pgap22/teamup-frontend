@@ -2,16 +2,19 @@ import { useModal } from "../../../store/useModal";
 import { useFormulario } from "../../../hooks/useFormulario";
 
 import Input from "../../form/Input";
-import Button from "../../ui/Button";
+import Button from "src/components/form/Button";
 import TemplateModal from "../ModalTemplate";
 
 import { crearEquipo } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Loader from "src/components/ui/Loader";
+import Skeleton from "src/components/ui/Skeleton";
+
 
 const FormCrearEquipo = ({ toggleModal }) => {
   const navigate = useNavigate();
-  const { data, register, handleSubmit, mensajeError, registroExitoso } =
+  const { data, register, handleSubmit, mensajeError, registroExitoso, isLoading } =
     useFormulario(crearEquipo);
 
   useEffect(() => {
@@ -46,13 +49,11 @@ const FormCrearEquipo = ({ toggleModal }) => {
           type="password"
           register={register("password_access")}
         />
-        <Button
-          disabled={registroExitoso}
-          type={"s"}
-          px={50}
-          textButton={"Crear equipo"}
-          onClickButton={() => {}}
-        />
+        <Button disabled={isLoading}>
+          <Skeleton loading={isLoading} fallback={<Loader />}>
+            Crear Equipo
+          </Skeleton>
+        </Button>
       </form>
     </>
   );

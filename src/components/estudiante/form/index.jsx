@@ -2,6 +2,9 @@ import Button from "src/components/form/Button";
 
 import { useMultiStepForm } from "../MultiStepForm/useMultiStepForm";
 import { useConstantes } from "../MultiStepForm/useConstantes";
+import { useState } from "react";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 const EstudianteFormLayout = ({ children, title }) => {
   return (
@@ -21,6 +24,8 @@ const FormButtons = () => {
   const { form, setForm } = useMultiStepForm();
   const { identificadores } = form;
 
+  const [loading, setLoading] = useState(false)
+
   const { currentIndex, currentFormValid } = useConstantes({
     form,
   });
@@ -39,12 +44,18 @@ const FormButtons = () => {
   const { succesSubmit, lastIndex } = form;
 
   const handleClickContinuar = async () => {
-    if (currentFormValid) {
-      if (lastIndex === currentIndex) {
-        await succesSubmit({ form });
-        return;
+    setLoading(true);
+    try {
+      if (currentFormValid) {
+        if (lastIndex === currentIndex) {
+          await succesSubmit({ form });
+          return;
+        }
+        setForm({ ...form, currentFormIndex: currentIndex + 1 });
       }
-      setForm({ ...form, currentFormIndex: currentIndex + 1 });
+    } catch (error) {
+    }finally{
+      setLoading(false);
     }
   };
   return (
@@ -58,9 +69,11 @@ const FormButtons = () => {
       <Button
         onClick={handleClickContinuar}
         color={"morado"}
-        disabled={!currentFormValid}
+        disabled={!currentFormValid || loading}
       >
-        {lastIndex === currentIndex ? "Enviar" : "Continuar"}
+        <Skeleton loading={loading} fallback={<Loader />}>
+          {lastIndex === currentIndex ? "Enviar" : "Continuar"}
+        </Skeleton>
       </Button>
     </div>
   );
