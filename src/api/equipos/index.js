@@ -1,5 +1,6 @@
 import { clienteAxios } from "src/config/axios";
 import { headers, throwError } from "src/helper";
+import { obtenerUnRegistro } from "../helpers";
 
 export const buscarEquipo = async (nombre) => {
   try {
@@ -12,3 +13,6 @@ export const buscarEquipo = async (nombre) => {
     throwError(error);
   }
 };
+
+export const unirsePorToken = token => obtenerUnRegistro("/equipo/unirse", token)();
+

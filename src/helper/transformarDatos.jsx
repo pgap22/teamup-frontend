@@ -57,6 +57,8 @@ export const miembrosEquipo = ({ data }) => {
   const { usuarios } = data;
   const { lider } = data;
 
+  if(!lider) return false;
+
   lider.rango = "lider";
 
   const DatosUsuarios = usuarios?.map((jugador) => {
@@ -77,6 +79,7 @@ export const miembrosEquipo = ({ data }) => {
     avatar_url: data.avatar_url,
     lider: data.lider,
     rango: data.rango,
+    token: data.invitaciones_token
   };
   return { ...formatedData, jugadores: [...sortedUsuarios] };
 

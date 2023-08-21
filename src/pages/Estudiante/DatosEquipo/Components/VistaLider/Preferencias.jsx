@@ -1,9 +1,10 @@
 import { useFormulario } from "../../../../../hooks/useFormulario";
 import Input from "../../../../../components/form/Input";
-import Button from "../../../../../components/ui/Button";
+import Button from "src/components/form/Button";
 import { actualizarDatos } from "../../../../../api";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useModal } from "src/hooks/useModal";
 
 const Preferencias = ({ equipo }) => {
   const {
@@ -55,24 +56,15 @@ const Preferencias = ({ equipo }) => {
           register={register("nombre", { value: equipo.nombre })}
         />
         <Input
-          label={"Antigua contraseña del equipo"}
-          type="password"
-          placeholder={"Contraseña"}
-          register={register("old_password_access")}
-        />
-        <Input
           label={"Nueva contraseña del equipo"}
           type="password"
           placeholder={"Contraseña"}
-          register={register("new_password_access")}
+          register={register("new_password_access", {required: true})}
         />
-        <Button
-          textButton={"Guardar"}
-          onClickButton={() => {}}
-          px={50}
-          type={"s"}
-        />
+          <Button>Guardar</Button>
       </form>
+
+
     </div>
   );
 };

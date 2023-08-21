@@ -1,6 +1,6 @@
 import Equipos from "../../../pages/Estudiante/Equipos";
 import DatosEquipo from "../../../pages/Estudiante/DatosEquipo";
-import UnirseEquipoPage from "../../../pages/Estudiante/Equipos/UnirseEquipo/index";
+import UnirseToken from "src/pages/Estudiante/Equipos/unirseToken";
 
 const routes = {
   path: "equipos",
@@ -14,8 +14,8 @@ const routes = {
       element: <DatosEquipo />,
     },
     {
-      path: "unirse",
-      element: <UnirseEquipoPage />,
+      path: "unirse/:token",
+      element: <UnirseToken />,
     },
   ],
 };

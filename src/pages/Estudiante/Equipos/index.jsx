@@ -16,9 +16,9 @@ const Equipos = () => {
   if (isLoading) return <p>Cargando...</p>;
   return (
     <EstudianteLayaout
-      textButton="Crear equipo"
+      textButton="Unirse a un equipo"
       onClickButton={() => {
-        toggleModal("CrearEquipo");
+        toggleModal("UnirseEquipo");
       }}
       title={"Equipos"}
     >
