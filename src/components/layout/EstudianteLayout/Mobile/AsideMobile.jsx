@@ -3,6 +3,10 @@ import Logo from "../../../Logo/Logo";
 import { motion } from "framer-motion";
 import AsideLinks from "../Aside/AsideLinks";
 
+import {BiLogOut} from "react-icons/bi"
+import Button from "src/components/form/Button";
+import { useSession } from "src/hooks/useSession";
+
 const AsideMobile = ({ links }) => {
   const salirMenu = { transform: "translateX(100%)" };
   const mostrarMenu = { transform: "translateX(0)" };
@@ -19,8 +23,21 @@ const AsideMobile = ({ links }) => {
         <Logo width={168} />
         <div className="flex flex-col items-center gap-4 mt-4">
           <AsideLinks links={links} />
+          <Bottom />
         </div>
       </motion.div>
+    </>
+  );
+};
+
+const Bottom = () => {
+  const { logout } = useSession();
+  return (
+    <>
+      <Button onClick={logout} color={"rojo"}>
+        <BiLogOut size={35} />
+        <p className="text-xl md:hidden lg:block">Cerrar sesion</p>
+      </Button>
     </>
   );
 };

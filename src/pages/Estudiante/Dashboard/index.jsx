@@ -13,8 +13,12 @@ import {
   IconButtonEquipos,
 } from "src/components/estudiante/AsideEquipo";
 import { obtenerEstadisticasEstudiante } from "src/api";
+import { useSession } from "src/hooks/useSession";
 
 const DasboardEstudiante = () => {
+
+  const {usuario} = useSession();
+
   const acciones = [
     {
       nombre: "👨‍🏫 Crear equipos",
@@ -65,7 +69,7 @@ const DasboardEstudiante = () => {
   }, [])
 
   return (
-    <EstudianteLayaout title={"Inicio"}>
+    <EstudianteLayaout title={"Bienvenido "+usuario.nombre}>
       <AccionesRapidas acciones={acciones} />
       <Resumen resumen={resumen} estadistica={estadistica} />
     </EstudianteLayaout>

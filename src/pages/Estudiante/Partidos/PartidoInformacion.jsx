@@ -128,7 +128,7 @@ const PartidoInformacion = () => {
   if (!partido.id) return <p>Cargando...</p>;
 
 
-  const partidoAsistencia = !partido.maestro_intermediario && partido.id_estado == 4 && partido.equipo_local.id_lider == usuario.id
+  const partidoAsistencia = !partido.maestro_intermediario && partido.id_estado == 4 && partido.equipo_local.id_lider == usuario.id && !partido.usuarioMaestro
 
   return (
     <EstudianteLayaout
@@ -168,12 +168,13 @@ const PartidoInformacion = () => {
           <h2 className="mb-4 text-xl font-bold">Equipos</h2>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
-            <EquipoCard equipo={partido.equipo_local} />
-            <EquipoCard equipo={partido.equipo_visitante} />
+            <EquipoCard equipo={partido.equipo_local} resultado={partido.resultado} esLocal />
+            <EquipoCard equipo={partido.equipo_visitante} resultado={partido.resultado} />
           </div>
+          
 
           <div className="mt-4 space-y-4 ">
-            {partido.equipo_visitante.id_lider === usuario.id &&
+            {partido.equipo_visitante.id_lider == usuario.id &&
               partido.estado.fase === 1 && (
                 <>
                   <Button
@@ -198,7 +199,7 @@ const PartidoInformacion = () => {
               )}
 
             {partido.equipo_visitante.id_lider !== usuario.id &&
-              partido.estado.fase === 1 && (
+              partido.estado.fase === 1 && partido.equipo_local.id_lider==usuario.id && (
                 <Button
                   onClick={() => {
                     toggleModal("CancelarPartido");
@@ -221,6 +222,7 @@ const PartidoInformacion = () => {
           }
         </section>
 
+      
         <ModalResultado desktopTitle="Resultados" {...modalResultado}>
           <form onSubmit={handleSubmit(enviarResultadosSubmit)} className="p-4 space-y-2">
             <p>Envia aqui los resultados del partido !</p>

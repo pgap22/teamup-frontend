@@ -7,6 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useModal } from "src/hooks/useModal";
 import Skeleton from "src/components/ui/Skeleton";
 import Loader from "src/components/ui/Loader";
+import { useIconPassword } from "src/hooks/useIconPassword";
+import { LuEye } from "react-icons/lu";
 
 const Preferencias = ({ equipo }) => {
   const {
@@ -20,6 +22,9 @@ const Preferencias = ({ equipo }) => {
   } = useFormulario(actualizarDatos);
 
   const navigate = useNavigate();
+
+  const { mostrarOcultarPassword, mostrarPassword } = useIconPassword();
+
 
   useEffect(() => {
     setValue("id", equipo.id);
@@ -60,7 +65,14 @@ const Preferencias = ({ equipo }) => {
         />
         <Input
           label={"Nueva contraseña del equipo"}
-          type="password"
+          type={mostrarPassword ? "text" : "password"}
+          Icon={(props) => (
+            <LuEye
+              className="cursor-pointer select-none"
+              onClick={mostrarOcultarPassword}
+              {...props}
+            />
+          )}
           placeholder={"Contraseña"}
           register={register("new_password_access", {required: true})}
         />

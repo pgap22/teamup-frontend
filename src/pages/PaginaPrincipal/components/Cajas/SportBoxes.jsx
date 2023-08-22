@@ -17,15 +17,15 @@ const SportBoxes = () => {
       <Box invert>
         <img src="./bkb.svg" alt="Siluta de persona jugando futbol" />
         <BoxText
-          titulo={t("futbol_titulo")}
-          descripcion={t("futbol_descripcion")}
+          titulo={t("basketbol_titulo")}
+          descripcion={t("basketbol_descripcion")}
         />
       </Box>
       <Box>
         <img src="./volley.svg" alt="Siluta de persona jugando futbol" />
         <BoxText
-          titulo={t("futbol_titulo")}
-          descripcion={t("futbol_descripcion")}
+          titulo={t("volleyball_titulo")}
+          descripcion={t("volleyball_descripcion")}
         />
       </Box>
     </section>

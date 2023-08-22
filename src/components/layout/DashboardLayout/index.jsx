@@ -32,8 +32,8 @@ const DashboardLayout = ({
         </div>
       </FondoColor>
 
-      <AnimatePresence>{menu && <AsideMobile links={links} />}</AnimatePresence>
-      <NavMobile links={links} />
+      <AnimatePresence>{menu && <AsideMobile links={links} bottom={bottom} />}</AnimatePresence>
+      <NavMobile bottom={bottom} links={links} />
     </>
   );
 };

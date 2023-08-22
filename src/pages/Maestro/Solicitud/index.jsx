@@ -24,7 +24,11 @@ const Solicitud = () => {
     const enviarResultadosSubmit = async (datos) => {
         try {
             await enviarResultadosPartido(id, datos);
-            setPartidoAceptado(true)
+            setPartidoAceptado({
+                titulo: "Resultados Enviados",
+                subtitulo: "Resultados Enviados",
+                descripcion: "El partido ha finalizado y los resultados han sido guardados !"
+            });
         } catch (error) {
             console.log(error)
         }

@@ -2,6 +2,7 @@ import { GiTennisCourt } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import Button from "src/components/form/Button";
 import EstadoPartido from "./EstadoPartido";
+import { fechaNormal } from "src/helper";
 
 export default function Partido({ url = "1", partido = {} }) {
   const hayZonaJuego = partido.id && !!partido.ZonaDejuego;
@@ -25,10 +26,16 @@ export default function Partido({ url = "1", partido = {} }) {
       </div>
 
       <div className="flex flex-col gap-4 mt-2">
-        <h2>
-          <span className="font-bold">Deporte:</span>{" "}
-          {partido.deporte.nombre}
-        </h2>
+        <div>
+          <h2>
+            <span className="font-bold">Deporte:</span>{" "}
+            {partido.deporte.nombre}
+          </h2>
+          <p className="mt-1">
+            <span className="font-bold">Fecha: </span>
+            {fechaNormal(partido.fecha)}
+          </p>
+        </div>
 
         <EstadoPartido titulo={partido.estado.nombre} />
 

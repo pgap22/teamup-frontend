@@ -3,7 +3,7 @@ import Logo from "../../../Logo/Logo";
 import { motion } from "framer-motion";
 import AsideLinks from "../Aside/AsideLinks";
 
-const AsideMobile = ({ links }) => {
+const AsideMobile = ({ links, bottom }) => {
   const salirMenu = { transform: "translateX(100%)" };
   const mostrarMenu = { transform: "translateX(0)" };
 
@@ -19,6 +19,7 @@ const AsideMobile = ({ links }) => {
         <Logo width={168} />
         <div className="flex flex-col items-center gap-4 mt-4">
           <AsideLinks links={links} />
+          {bottom}
         </div>
       </motion.div>
     </>

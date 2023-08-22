@@ -2,8 +2,14 @@
     "titulo": "Practica tu deporte favorito jugando partidos",
     "subtitulo": "Simplifica la organización de tus partidos amistosos con nuestro sistema en línea",
 
-    "futbol_titulo": "Ullamcorper. Proin vitae ligula ex.",
-    "futbol_descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id tempus sapien. Nunc cursus scelerisque enim sit amet viverra.",
+    "futbol_titulo": "Disfruta del Fútbol en su Máxima Expresión",
+    "futbol_descripcion": "Sumérgete en la pasión del fútbol mientras te enfrentas a desafiantes rivales en el campo de juego. Experimenta la emoción y la camaradería que solo el fútbol puede ofrecer.",
     
-    "cta": "Integer velit dolor vulputate"
+    "basketbol_titulo": "Vive la Intensidad del Baloncesto",
+    "basketbol_descripcion": "Suma canastas y siente la adrenalina en cada dribbling mientras participas en emocionantes partidos de baloncesto. Desde tiros de larga distancia hasta jugadas estratégicas en equipo.",
+   
+    "volleyball_titulo": "Sumérgete en la Emoción del Voleibol",
+    "volleyball_descripcion": "Disfruta de emocionantes partidos de voleibol donde cada saque y remate cuenta. Desde bloqueos perfectamente sincronizados hasta defensas espectaculares, el voleibol te desafía a trabajar en equipo y a dar lo mejor de ti en la cancha.",
+
+    "cta": "Comieza a jugar ya"
 }
