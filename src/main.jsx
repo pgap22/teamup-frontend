@@ -9,14 +9,15 @@ import { router } from "./router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { SessionProvider } from "./context/Session";
 
+import TranslationComponent from "./components/ui/TranslationComponent";
+
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <SessionProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router}></RouterProvider>
-      </QueryClientProvider>
-    </SessionProvider>
-  </React.StrictMode>
+  <SessionProvider>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}></RouterProvider>
+      <TranslationComponent />
+    </QueryClientProvider>
+  </SessionProvider>
 );

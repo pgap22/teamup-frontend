@@ -6,5 +6,29 @@
 }
 
 .bloque-hijo {
-  @apply max-w-6xl w-full flex items-start;
+  @apply flex items-start w-full max-w-6xl;
+}
+.goog-te-gadget-simple {
+  @apply bg-white text-white border-y-0 border-x-0 !important;
+}
+
+div iframe {
+  display: none !important;
+}
+
+img[src='https://www.google.com/images/cleardot.gif']
+{
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+span a {
+  @apply text-primary !important;
+}
+
+.goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span[style] {
+  display: none;
 }
