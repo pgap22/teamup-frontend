@@ -8,16 +8,16 @@ import "./index.css";
 import { router } from "./router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { SessionProvider } from "./context/Session";
-
-import TranslationComponent from "./components/ui/TranslationComponent";
+import { TranaslationProvider } from "./context/Translate";
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <SessionProvider>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router}></RouterProvider>
-      <TranslationComponent />
+      <TranaslationProvider>
+        <RouterProvider router={router} />
+      </TranaslationProvider>
     </QueryClientProvider>
   </SessionProvider>
 );

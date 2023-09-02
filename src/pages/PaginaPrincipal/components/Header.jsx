@@ -3,6 +3,7 @@ import Logo from "../../../components/Logo/Logo";
 import { useMenu } from "../../../store/useMenu";
 import Button from "../../../components/form/Button";
 import { Link } from "react-router-dom";
+import ButtonTranslate from "src/components/translate/ButtonTranslate";
 
 const Header = () => {
   const { toggleMenu } = useMenu((state) => state);
@@ -14,7 +15,7 @@ const Header = () => {
 
         <RxHamburgerMenu className="md:hidden" onClick={toggleMenu} size={28} />
 
-        <div className="hidden md:flex w-full gap-4 max-w-xs justify-self-end">
+        <div className="hidden w-full max-w-md gap-4 md:flex justify-self-end">
           <Link to={"/login/"} className="w-full">
             <Button color={"blanco"} textColor={"azul"}>
               Iniciar Sesion
@@ -24,6 +25,7 @@ const Header = () => {
           <Link to={"/signup/"} className="w-full">
             <Button border={"blanco"}>Registrate</Button>
           </Link>
+          <ButtonTranslate />
         </div>
       </div>
     </header>
