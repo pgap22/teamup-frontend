@@ -3,9 +3,10 @@ import Logo from "../../../Logo/Logo";
 import { motion } from "framer-motion";
 import AsideLinks from "../Aside/AsideLinks";
 
-import {BiLogOut} from "react-icons/bi"
+import { BiLogOut } from "react-icons/bi";
 import Button from "src/components/form/Button";
 import { useSession } from "src/hooks/useSession";
+import ButtonTranslate from "src/components/translate/ButtonTranslate";
 
 const AsideMobile = ({ links }) => {
   const salirMenu = { transform: "translateX(100%)" };
@@ -24,6 +25,7 @@ const AsideMobile = ({ links }) => {
         <div className="flex flex-col items-center gap-4 mt-4">
           <AsideLinks links={links} />
           <Bottom />
+          <ButtonTranslate w="w-full" />
         </div>
       </motion.div>
     </>

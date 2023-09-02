@@ -4,9 +4,12 @@ import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useModal } from "../../store/useModal";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const TemplateModal = ({ children, desktopTitle, identificator }) => {
   const { modalState, toggleModal } = useModal();
+  const { t } = useTranlate();
+
   const dekstop = useMediaQuery("(min-width: 768px)");
 
   const MODAL_DURATION = 0.5;
@@ -64,7 +67,7 @@ const TemplateModal = ({ children, desktopTitle, identificator }) => {
 
               <div className="items-center justify-between hidden w-full gap-4 md:flex">
                 <h3 className={clsx("text-xl font-bold md:p-4 md:text-2xl")}>
-                  {desktopTitle}
+                  {t(desktopTitle)}
                 </h3>
                 <div
                   onClick={() => toggleModal(false)}

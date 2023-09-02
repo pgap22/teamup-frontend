@@ -6,34 +6,42 @@ import TemplateModal from "../ModalTemplate";
 import { HacerLider } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { datosJugador } from "src/store/datos_jugador";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const ContentModal = ({ toggleModal }) => {
   const { id_equipo, id_usuarios, nombre } = datosJugador();
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    const status = HacerLider(id_equipo, { id_lider: id_usuarios });
+  const { t } = useTranlate();
 
-    if (status) {
-      toggleModal(false);
-      navigate("/estudiante/exito", {
-        state: {
-          titulo: "Solicitud completada",
-          subtitulo: "Cambio de lider",
-          descripcion: `${nombre} es el nuevo lider del equipo te has convertido en un miebro`,
-          url: `/estudiante/equipos/datos/${id_equipo}`,
-          linkText: "Volver al equipo",
-        },
-      });
+  const handleClick = async () => {
+    try {
+      const status = await HacerLider(id_equipo, { id_lider: id_usuarios });
+
+      if (status) {
+        toggleModal(false);
+        navigate("/estudiante/exito", {
+          state: {
+            titulo: t("solicitudCompletada"),
+            subtitulo: t("cambioLider"),
+            descripcion: `${nombre} ${t("nuevoLider")}`,
+            url: `/estudiante/equipos/datos/${id_equipo}`,
+            linkText: t("volverAlEquipo"),
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
-        <h2>Estas seguro que {nombre} sea el nuevo lider del grupo?</h2>
+        <h2>{t("seguroNuevoLider")}</h2>
         <div className="grid grid-cols-2 gap-4">
           <Button onClick={handleClick} color={"verde"}>
-            Aceptar
+            {t("aceptar")}
           </Button>
           <Button
             onClick={() => {
@@ -41,7 +49,7 @@ const ContentModal = ({ toggleModal }) => {
             }}
             color={"blanco"}
           >
-            Cancelar
+            {t("cancelar")}
           </Button>
         </div>
       </div>
@@ -51,11 +59,12 @@ const ContentModal = ({ toggleModal }) => {
 
 const HacerLiderModal = ({ id, nombre, idEquipo }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"HacerLider"}
-      desktopTitle={"Cambiar de lider"}
+      desktopTitle={t("cambiarLider")}
     >
       <ContentModal
         toggleModal={toggleModal}

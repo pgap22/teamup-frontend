@@ -20,9 +20,11 @@ import { convertArrayToFileList } from "src/helper";
 import { actualizarAvatar } from "src/api";
 import Skeleton from "src/components/ui/Skeleton";
 import Loader from "src/components/ui/Loader";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const ContentModal = ({ id, toggleModal, name }) => {
   const { data, setImagen, setData } = useSingleImage();
+  const { t } = useTranlate();
 
   const [imageURL, setImageURL] = useState(null);
   const [cropedImage, setCropedImage] = useState(null);
@@ -40,7 +42,7 @@ const ContentModal = ({ id, toggleModal, name }) => {
 
   const succesSubmitAvatar = async (imageBlob) => {
     try {
-      setLoading(true)
+      setLoading(true);
       const formData = new FormData();
       formData.append(
         "avatar",
@@ -58,18 +60,17 @@ const ContentModal = ({ id, toggleModal, name }) => {
         toggleModal(false);
         navigate("/estudiante/exito", {
           state: {
-            titulo: "Actualizacion de avatar",
-            subtitulo: "Cambiaste el avatar correctamente",
-            descripcion: "Has cambiado el avatar de tu equipo correctamente",
+            titulo: "actualizacionAvatar",
+            subtitulo: "cambiasteAvatarCorrectamente",
+            descripcion: "hasCambiadoAvatarCorrectamente",
             url: `/estudiante/equipos/datos/${id}`,
-            linkText: "Volver a tu equipo",
+            linkText: "volverATuEquipo",
           },
         });
       }
     } catch (error) {
       console.log(error);
-    }
-    finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -96,7 +97,7 @@ const ContentModal = ({ id, toggleModal, name }) => {
   return (
     <div className="flex flex-col gap-5 p-4">
       <h2 className="font-bold">
-        {!imageURL ? "Sube el avatar que vas usar" : "Ajusta bien tu imagen"}
+        {!imageURL ? t("subeAvatar") : t("ajustaImagen")}
       </h2>
 
       {!imageURL && <ImageDrop />}
@@ -120,13 +121,15 @@ const ContentModal = ({ id, toggleModal, name }) => {
 };
 
 const ImageDrop = () => {
+  const { t } = useTranlate();
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <SingleImageDrop label={"Avatar"} />
+      <SingleImageDrop />
     </motion.div>
   );
 };
@@ -140,15 +143,16 @@ const AjustarImagen = ({
   handleClickReset,
   setCropedImage,
   succesSubmitAvatar,
-  isLoading
+  isLoading,
 }) => {
+  const { t } = useTranlate();
+
   const editor = useRef();
   const handleClickGuardar = () => {
     if (editor) {
       const canvas = editor.current.getImage();
       canvas.toBlob((blob) => {
         succesSubmitAvatar(blob);
-        // setCropedImage(URL.createObjectURL(blob));
       });
     }
   };
@@ -169,20 +173,24 @@ const AjustarImagen = ({
       />
       <Zoom minmax={minmax} step={step} setValue={setValue} value={value} />
       <div className="grid grid-cols-2 gap-4">
-        <Button disabled={isLoading} onClick={handleClickGuardar} color={"verde"}>
+        <Button
+          disabled={isLoading}
+          onClick={handleClickGuardar}
+          color={"verde"}
+        >
           <Skeleton loading={isLoading} fallback={<Loader />}>
-              Guardar
+            {t("guardar")}
           </Skeleton>
         </Button>
         <Button onClick={handleClickReset} color={"blanco"}>
-          Cancelar
+          {t("cancelar")}
         </Button>
       </div>
     </motion.div>
   );
 };
 
-const Zoom = ({ minmax, step, setValue, value }) => {
+const Zoom = ({ minmax, step, setValue, value, t }) => {
   const handleClickPlus = () => {
     if (value + 0.25 >= minmax[1]) {
       setValue(5);
@@ -223,11 +231,12 @@ const Zoom = ({ minmax, step, setValue, value }) => {
 
 const CambiarAvatarModal = ({ id, name }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"CambiarAvatar"}
-      desktopTitle={"Cambiar avatar del equipo"}
+      desktopTitle={"CambiarAvatar"}
     >
       <ContentModal id={id} toggleModal={toggleModal} name={name} />
     </TemplateModal>

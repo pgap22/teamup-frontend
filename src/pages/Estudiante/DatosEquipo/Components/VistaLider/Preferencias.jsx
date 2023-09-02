@@ -9,6 +9,8 @@ import Skeleton from "src/components/ui/Skeleton";
 import Loader from "src/components/ui/Loader";
 import { useIconPassword } from "src/hooks/useIconPassword";
 import { LuEye } from "react-icons/lu";
+import { useTranslation } from "react-i18next";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const Preferencias = ({ equipo }) => {
   const {
@@ -18,13 +20,13 @@ const Preferencias = ({ equipo }) => {
     setValue,
     registroExitoso,
     data,
-    isLoading
+    isLoading,
   } = useFormulario(actualizarDatos);
 
   const navigate = useNavigate();
 
   const { mostrarOcultarPassword, mostrarPassword } = useIconPassword();
-
+  const { t } = useTranlate();
 
   useEffect(() => {
     setValue("id", equipo.id);
@@ -34,11 +36,11 @@ const Preferencias = ({ equipo }) => {
     if (registroExitoso) {
       navigate("/estudiante/exito", {
         state: {
-          titulo: "Datos actualizados",
-          subtitulo: "Preferencias de equipo",
-          descripcion: "Has actualizado los datos del equipo correctamente",
+          titulo: t("datosActualizados"),
+          subtitulo: t("preferenciasEquipo"),
+          descripcion: t("datosActualizadosDescripcion"),
           url: `/estudiante/equipos/datos/${data.data.id}`,
-          linkText: "Volver al equipo",
+          linkText: t("volverAlEquipo"),
         },
       });
     }
@@ -46,25 +48,27 @@ const Preferencias = ({ equipo }) => {
 
   return (
     <div className="flex flex-col items-center gap-5 md:items-start ">
-      <h1 className="text-[#828282] text-4xl font-bold">Preferencias</h1>
+      <h1 className="text-[#828282] text-4xl font-bold">
+        {t("preferenciasEquipo")}
+      </h1>{" "}
       {mensajeError && !registroExitoso && (
         <p className="text-red-500">{mensajeError}</p>
       )}
-
-      {registroExitoso && <p className="text-green-500">Datos actualizados</p>}
-
+      {registroExitoso && (
+        <p className="text-green-500">{t("datosActualizados")}</p>
+      )}{" "}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center max-w-xs gap-4 md:items-start"
       >
         <Input
-          label={"Nombre del equipo"}
+          label={t("nombreEquipo")}
           type="text"
-          placeholder={"Nombre del equipo"}
+          placeholder={t("nombreEquipoPlaceholder")}
           register={register("nombre", { value: equipo.nombre })}
         />
         <Input
-          label={"Nueva contraseña del equipo"}
+          label={t("nuevaContraseñaEquipo")}
           type={mostrarPassword ? "text" : "password"}
           Icon={(props) => (
             <LuEye
@@ -73,17 +77,15 @@ const Preferencias = ({ equipo }) => {
               {...props}
             />
           )}
-          placeholder={"Contraseña"}
-          register={register("new_password_access", {required: true})}
+          placeholder={t("contraseñaPlaceholder")}
+          register={register("new_password_access")}
         />
-          <Button disabled={isLoading}>
-            <Skeleton loading={isLoading} fallback={<Loader />}>
-              Guardar
-            </Skeleton>
-          </Button>
+        <Button disabled={isLoading}>
+          <Skeleton loading={isLoading} fallback={<Loader />}>
+            {t("guardar")} {/* Identificador para el botón de guardar */}
+          </Skeleton>
+        </Button>
       </form>
-
-
     </div>
   );
 };

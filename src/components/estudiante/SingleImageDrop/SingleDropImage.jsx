@@ -1,9 +1,11 @@
 import { useSingleImage } from "src/store/useSingleImage";
 import { convertArrayToFileList } from "src/helper";
 import { useEffect } from "react";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const SingleImageDrop = ({ label, id = "image" }) => {
   const { imagen, setImagen, setData } = useSingleImage();
+  const { t } = useTranlate();
 
   const agregarImagen = (e) => {
     setImagen([{ ...e.target.files }[0]]);
@@ -25,7 +27,7 @@ const SingleImageDrop = ({ label, id = "image" }) => {
   }, [imagen]);
 
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col w-full gap-1">
       <p className="font-bold select-none">{label}</p>
       <label
         onDrop={dropImagen}
@@ -34,7 +36,7 @@ const SingleImageDrop = ({ label, id = "image" }) => {
         htmlFor={id}
       >
         <p className="text-gray-400 mx-auto max-w-[200px] text-center">
-          Haz click aqui o arrastra tus imagenes aqui !
+          {t("dropImagesHere")}
         </p>
       </label>
       <input onChange={agregarImagen} id={id} type="file" hidden />

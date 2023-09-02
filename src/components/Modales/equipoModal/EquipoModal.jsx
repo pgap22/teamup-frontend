@@ -10,12 +10,19 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Loader from "src/components/ui/Loader";
 import Skeleton from "src/components/ui/Skeleton";
-
+import { useTranlate } from "src/hooks/useTranslation";
 
 const FormCrearEquipo = ({ toggleModal }) => {
   const navigate = useNavigate();
-  const { data, register, handleSubmit, mensajeError, registroExitoso, isLoading } =
-    useFormulario(crearEquipo);
+  const {
+    data,
+    register,
+    handleSubmit,
+    mensajeError,
+    registroExitoso,
+    isLoading,
+  } = useFormulario(crearEquipo);
+  const { t } = useTranlate();
 
   useEffect(() => {
     if (registroExitoso) {
@@ -32,26 +39,26 @@ const FormCrearEquipo = ({ toggleModal }) => {
         className="flex flex-col items-start justify-center gap-3 p-5"
       >
         {mensajeError && !registroExitoso && (
-          <p className="text-red-500">{mensajeError}</p>
+          <p className="text-red-500">{t("errors:" + mensajeError)}</p>
         )}
         {registroExitoso && (
-          <p className="text-green-500">Equipo creado correctamente</p>
+          <p className="text-green-500">{t("equipoCreado")}</p>
         )}
         <Input
-          placeholder={"Ingresa el nombre del equipo"}
-          label="Nombre del equipo"
+          placeholder={t("nombreEquipoPlaceholder")}
+          label={t("nombreEquipoLabel")}
           type="text"
           register={register("nombre")}
         />
         <Input
-          placeholder={"Ingresa la contraseña del equipo"}
-          label="Contraseña del equipo"
+          placeholder={t("contrasenaEquipoPlaceholder")}
+          label={t("contrasenaEquipoLabel")}
           type="password"
           register={register("password_access")}
         />
         <Button disabled={isLoading}>
           <Skeleton loading={isLoading} fallback={<Loader />}>
-            Crear Equipo
+            {t("crearEquipo")}
           </Skeleton>
         </Button>
       </form>
@@ -61,9 +68,12 @@ const FormCrearEquipo = ({ toggleModal }) => {
 
 const EquipoModal = () => {
   const { modalState, toggleModal } = useModal();
-
+  const { t } = useTranlate();
   return (
-    <TemplateModal desktopTitle={"Crear equipo"} identificator={"CrearEquipo"}>
+    <TemplateModal
+      desktopTitle={t("crearEquipo")}
+      identificator={"CrearEquipo"}
+    >
       <FormCrearEquipo toggleModal={toggleModal} />
     </TemplateModal>
   );

@@ -1,4 +1,10 @@
 {
   "en": "Ingles",
-  "es": "Español"
+  "es": "Español",
+
+  "Inicio": "Inicio",
+  "Equipo": "Equipo",
+  "Partidos": "Partidos",
+  "Solicitudes": "Solicitudes",
+  "cerrarSesion": "Cerrar Sesion"
 }

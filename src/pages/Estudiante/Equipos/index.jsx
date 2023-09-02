@@ -8,22 +8,24 @@ import { useModal } from "../../../store/useModal";
 import { useFetch } from "../../../hooks/useFetch";
 
 import { obtenerEquiposDelUsuario } from "../../../api";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const Equipos = () => {
   const { isLoading, equipos } = useFetch("equipos", obtenerEquiposDelUsuario);
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   if (isLoading) return <p>Cargando...</p>;
   return (
     <EstudianteLayaout
-      textButton="Unirse a un equipo"
+      textButton={t("UnirseEquipo")}
       onClickButton={() => {
         toggleModal("UnirseEquipo");
       }}
-      title={"Equipos"}
+      title={t("Equipos")}
     >
       <div className="flex flex-col w-full gap-5 ">
-        <h1 className="text-[#828282] text-4xl font-bold">Tus equipos</h1>
+        <h1 className="text-[#828282] text-4xl font-bold">{t("TusEquipos")}</h1>
         <TeamItems equipos={equipos} />
       </div>
       <UnirseEquipoModal />

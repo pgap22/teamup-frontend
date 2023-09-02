@@ -1,12 +1,15 @@
 import { useModal } from "src/store/useModal";
 import Button from "../../../../../components/ui/Button";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const Avatar = ({ avatar_url }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
+
   return (
     <div className="flex flex-col items-center gap-4">
       <h1 className="text-[#828282] text-4xl font-bold text-center">
-        Avatar de equipo
+        {t("avatar")}
       </h1>
 
       <div className="w-[220px] border-2 border-[#CECECE] rounded-md p-3 grid place-items-center">
@@ -20,7 +23,7 @@ const Avatar = ({ avatar_url }) => {
         />
       </div>
       <Button
-        textButton={"Cambiar avatar"}
+        textButton={t("cambiarAvatar")}
         onClickButton={() => {
           toggleModal("CambiarAvatar");
         }}

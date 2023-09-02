@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 import Skeleton from "src/components/ui/Skeleton";
 import Loader from "src/components/ui/Loader";
 import { useState } from "react";
+import { useTranlate } from "src/hooks/useTranslation";
 
-const ContentModal = ({ toggleModal, id }) => {
+const ContentModal = ({ toggleModal, id, t }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -23,34 +24,29 @@ const ContentModal = ({ toggleModal, id }) => {
         toggleModal(false);
         navigate("/estudiante/exito", {
           state: {
-            titulo: "Equipo eliminado",
-            subtitulo: "Eliminacion del equipo completada",
-            descripcion: "Has eliminado el equipo correctamente",
+            titulo: t("equipoEliminado"),
+            subtitulo: t("eliminacionEquipoCompletada"),
+            descripcion: t("hasEliminadoEquipoCorrectamente"),
             url: `/estudiante/equipos`,
-            linkText: "Volver a tus equipos",
+            linkText: t("volverATusEquipos"),
           },
         });
       }
     } catch (error) {
-
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
-        <h2>Seguro que quieres eliminar este equipo ?</h2>
+        <h2>{t("seguroEliminarEquipo")}</h2>
 
         <div className="grid grid-cols-2 gap-4">
-          <Button
-            onClick={eliminarClick}
-            disabled={loading}
-            color={"rojo"}
-          >
+          <Button onClick={eliminarClick} disabled={loading} color={"rojo"}>
             <Skeleton loading={loading} fallback={<Loader />}>
-              Eliminar
+              {t("eliminar")}
             </Skeleton>
           </Button>
           <Button
@@ -59,7 +55,7 @@ const ContentModal = ({ toggleModal, id }) => {
             }}
             color={"blanco"}
           >
-            Cancelar
+            {t("cancelar")}
           </Button>
         </div>
       </div>
@@ -69,13 +65,14 @@ const ContentModal = ({ toggleModal, id }) => {
 
 const EliminarEquipoModal = ({ id }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"EliminarEquipo"}
-      desktopTitle={"Eliminar equipo"}
+      desktopTitle={t("eliminarEquipo")}
     >
-      <ContentModal toggleModal={toggleModal} id={id} />
+      <ContentModal toggleModal={toggleModal} id={id} t={t} />
     </TemplateModal>
   );
 };

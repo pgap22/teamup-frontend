@@ -1,4 +1,10 @@
 {
   "en": "English",
-  "es": "Spanish"
+  "es": "Spanish",
+
+  "Inicio": "Home",
+  "Equipo": "Team",
+  "Partidos": "Matches",
+  "Solicitudes": "Requests",
+  "cerrarSesion": "Log out"
 }
