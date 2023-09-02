@@ -1,4 +1,11 @@
 {
-    "titulo": "Hello, Welcome! 👋",
-    "subtitulo": "Log in to access your account."
+  "titulo": "Hello, Welcome! 👋",
+  "subtitulo": "Log in to access your account.",
+  "correoLabel": "Institutional Email",
+  "correoPlaceholder": "Enter your institutional email",
+  "contrasenaLabel": "Password",
+  "contrasenaPlaceholder": "Enter your password",
+  "iniciarSesion": "Log In",
+  "noTienesCuenta": "Don't have an account?",
+  "olvidasteContrasena": "Forgot your password?"
 }

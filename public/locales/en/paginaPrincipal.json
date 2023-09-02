@@ -1,6 +1,10 @@
 {
+  "iniciarSesion": "Log In",
+  "registrate": "Register",
+
   "titulo": "Practice Your Favorite Sport by Playing Matches",
   "subtitulo": "Simplify the organization of your friendly matches with our online system",
+  "boton_hero": "Let's start",
 
   "futbol_titulo": "Enjoy Football at It's Best",
   "futbol_descripcion": "Immerse yourself in the passion of football as you face challenging rivals on the field. Experience the excitement and camaraderie that only football can offer.",
@@ -11,5 +15,6 @@
   "volleyball_titulo": "Dive into the Excitement of Volleyball",
   "volleyball_descripcion": "Enjoy thrilling volleyball matches where every serve and spike counts. From perfectly synchronized blocks to spectacular defenses, volleyball challenges you to work as a team and give your best on the court.",
 
-  "cta": "Start Playing Now"
+  "cta": "Start Playing Now",
+  "boton_cita": "Lets' start"
 }

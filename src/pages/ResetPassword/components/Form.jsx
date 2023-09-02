@@ -10,6 +10,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormulario } from "src/hooks/useFormulario";
 import { changePassword } from "src/api";
 import { useEffect } from "react";
+import { useTranlate } from "src/hooks/useTranslation";
+import ButtonTranslate from "src/components/translate/ButtonTranslate";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ const Form = () => {
     isLoading,
     handleSubmit,
   } = useFormulario(changePassword);
-  const { t } = useTranslation(["resetPassword"]);
+  const { t } = useTranlate();
   const { token } = useParams();
 
   useEffect(() => {
@@ -42,22 +44,20 @@ const Form = () => {
 
   return (
     <FormLayout
-      titulo={t("Hola, estas listo para jugar?")}
-      subtitulo={t(
-        "Enhorabuena estas a pocos pasos de recuperar tu contraseña"
-      )}
+      titulo={t("HolaEstasListoParaJugar")}
+      subtitulo={t("EnhorabuenaEstasAPocosPasosDeRecuperarTuContrasena")}
     >
       {registroExitoso && (
         <p className="font-bold text-green-500 ">
-          Contraseña restaurada correctamente.{" "}
+          {t("ContrasenaRestauradaCorrectamente")}.{" "}
           <span className="text-blue-500">
             {" "}
-            Redireccionando al formulario . . . .
+            {t("RedireccionandoAlFormulario")}
           </span>
         </p>
       )}
       {mensajeError && !registroExitoso && (
-        <p className="font-bold text-red-500">{mensajeError}</p>
+        <p className="font-bold text-red-500">{t("errors:" + mensajeError)}</p>
       )}
       <form onSubmit={handleSubmit} className="flex flex-col w-full gap-6">
         <Input
@@ -70,8 +70,8 @@ const Form = () => {
               {...props}
             />
           )}
-          label={"Contraseña"}
-          placeholder={"Ingrese su contraseña"}
+          label={t("Contrasena")}
+          placeholder={t("IngreseSuContrasena")}
         />
 
         <Input
@@ -84,14 +84,15 @@ const Form = () => {
               {...props}
             />
           )}
-          label={"Confirmacion de contraseña"}
-          placeholder={"Ingrese su contraseña"}
+          label={t("ConfirmacionContrasena")}
+          placeholder={t("IngreseSuContrasena")}
         />
 
-        <div className="flex flex-col gap-3 text-center">
+        <div className="flex flex-col items-center gap-3 text-center">
           <Button disabled={isLoading} color={"azul"}>
-            Cambiar contraseña
+            {t("CambiarContrasena")}
           </Button>
+          <ButtonTranslate bg={"primary"} />
         </div>
       </form>
     </FormLayout>

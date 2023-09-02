@@ -164,8 +164,6 @@ export const obtenerPerfil = async (token) => {
 };
 export const crearCuentaEstudiante = async (data) => {
   try {
-    data.nombre = data.nombre + " " + data.apellido;
-
     await clienteAxios.post("/usuario", data);
 
     return true;
@@ -267,5 +265,9 @@ export const changePassword = async (datos) => {
   }
 };
 
-export const obtenerEstadisticasCoordinacion = obtenerRegistros("/usuario/estadisticas-coordinacion")
-export const obtenerEstadisticasEstudiante = obtenerRegistros("/usuario/estadisticas-estudiante")
+export const obtenerEstadisticasCoordinacion = obtenerRegistros(
+  "/usuario/estadisticas-coordinacion"
+);
+export const obtenerEstadisticasEstudiante = obtenerRegistros(
+  "/usuario/estadisticas-estudiante"
+);

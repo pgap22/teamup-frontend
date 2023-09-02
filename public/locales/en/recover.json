@@ -1,0 +1,10 @@
+{
+  "TienesUnaMalaMemoria": "Do you have a bad memory?",
+  "OlvidasteContrasena": "Did you forget your password? Don't worry, you can try to recover it.",
+  "InstruccionesCorreo": "We have sent you an email with instructions to reset your password.",
+  "CorreoElectronico": "Email",
+  "IngreseSuCorreo": "Enter your email",
+  "Enviar": "Send",
+  "LaRecordaste": "Remembered it?",
+  "RegresarAlFormulario": "Go back to the login form"
+}

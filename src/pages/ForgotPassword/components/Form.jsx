@@ -7,8 +7,11 @@ import Input from "src/components/form/Input";
 import { passwordRecovery } from "src/api";
 import { useFormulario } from "src/hooks/useFormulario";
 import { useEffect } from "react";
+import { useTranlate } from "src/hooks/useTranslation";
+import ButtonTranslate from "src/components/translate/ButtonTranslate";
 
 const Form = () => {
+  const { t } = useTranlate(); // Obtiene la función t() para traducir
   const navigate = useNavigate();
   const {
     register,
@@ -27,39 +30,37 @@ const Form = () => {
 
   return (
     <FormLayout
-      titulo={"¿Tienes una mala memoria?"}
-      subtitulo={
-        "Acaso olvidaste tu contraseña no te preocupes aqui puedes tratar de recuperarla."
-      }
+      titulo={t("TienesUnaMalaMemoria")}
+      subtitulo={t("OlvidasteContrasena")}
     >
       {registroExitoso && (
         <p className="font-bold text-green-500 ">
-          Le enviamos un correo con las instrucciones para reestablecer su
-          contraseña.{" "}
+          {t("InstruccionesCorreo")}{" "}
           <Link className="text-blue-500 " to={"/login"}>
-            Regresar al formulario
+            {t("RegresarAlFormulario")}
           </Link>
         </p>
       )}
       {mensajeError && !registroExitoso && (
-        <p className="font-bold text-red-500">{mensajeError}</p>
+        <p className="font-bold text-red-500">{t("errors:" + mensajeError)}</p>
       )}
 
       <form onSubmit={handleSubmit} className="flex flex-col w-full gap-6">
         <Input
           register={register("email")}
-          label={"Email"}
+          label={t("CorreoElectronico")}
           type="email"
-          placeholder={"Ingrese su correo electronico"}
+          placeholder={t("IngreseSuCorreo")}
         />
 
-        <div className="flex flex-col gap-3 text-center">
+        <div className="flex flex-col items-center gap-3 text-center">
           <Button disabled={isLoading} color={"azul"}>
-            Enviar
+            {t("Enviar")}
           </Button>
           <Link to={"/login"} className="text-primary">
-            ¿ La recordaste ?
+            {t("LaRecordaste")}
           </Link>
+          <ButtonTranslate bg={"primary"} />
         </div>
       </form>
     </FormLayout>

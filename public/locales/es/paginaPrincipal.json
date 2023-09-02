@@ -1,7 +1,10 @@
 {
+  "iniciarSesion": "Iniciar Sesion",
+  "registrate": "Regístrate",
+
   "titulo": "Practica tu deporte favorito jugando partidos",
   "subtitulo": "Simplifica la organización de tus partidos amistosos con nuestro sistema en línea",
-
+  "boton_hero": "Empezar",
   "futbol_titulo": "Disfruta del Fútbol en su Máxima Expresión",
   "futbol_descripcion": "Sumérgete en la pasión del fútbol mientras te enfrentas a desafiantes rivales en el campo de juego. Experimenta la emoción y la camaradería que solo el fútbol puede ofrecer.",
 
@@ -11,5 +14,6 @@
   "volleyball_titulo": "Sumérgete en la Emoción del Voleibol",
   "volleyball_descripcion": "Disfruta de emocionantes partidos de voleibol, donde cada saque y remate cuenta. Desde bloqueos perfectamente sincronizados hasta defensas espectaculares, el voleibol te desafía a trabajar en equipo y a dar lo mejor de ti en la cancha.",
 
-  "cta": "Comieza a jugar ya"
+  "cta": "Comieza a jugar ya",
+  "boton_cita": "Empezar"
 }
