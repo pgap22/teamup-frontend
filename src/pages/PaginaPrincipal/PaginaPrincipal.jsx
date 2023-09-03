@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import Cta from "./components/Cta";
 import SportBoxes from "./components/Cajas/SportBoxes";
 import { useEffect } from "react";
+import { PageLoader } from "src/components/ui/PageLoader";
 
 const PaginaPrincipal = () => {
   const { menu, toggleMenu } = useMenu((state) => state);
@@ -17,7 +18,7 @@ const PaginaPrincipal = () => {
   }, []);
 
   return (
-    <Suspense fallback="Cargando...">
+    <Suspense fallback={<PageLoader />  }>
       <div className="bg-primary text-white p-4 w-full md:p-8 flex justify-center">
         <div className="max-w-[1280px]  w-full">
           <Header />

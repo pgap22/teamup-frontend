@@ -6,15 +6,18 @@ import TemplateModal from "../ModalTemplate";
 import { HacerLider } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { datosJugador } from "src/store/datos_jugador";
+import { useEffect } from "react";
+import { useFetchClick } from "src/hooks/useFetchClick";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 const ContentModal = ({ toggleModal }) => {
   const { id_equipo, id_usuarios, nombre } = datosJugador();
+  const {isLoading, registroExitoso, refetch} = useFetchClick("liderEquipo", HacerLider(id_equipo, { id_lider: id_usuarios }));
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    const status = HacerLider(id_equipo, { id_lider: id_usuarios });
-
-    if (status) {
+  useEffect(()=>{
+    if (registroExitoso) {
       toggleModal(false);
       navigate("/estudiante/exito", {
         state: {
@@ -26,14 +29,16 @@ const ContentModal = ({ toggleModal }) => {
         },
       });
     }
-  };
+  },[registroExitoso])
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
-        <h2>Estas seguro que {nombre} sea el nuevo lider del grupo?</h2>
+        <h2>Estas seguro que <span className="font-bold">{nombre}</span> sea el nuevo lider del grupo?</h2>
         <div className="grid grid-cols-2 gap-4">
-          <Button onClick={handleClick} color={"verde"}>
-            Aceptar
+          <Button disabled={isLoading} onClick={refetch} color={"verde"}>
+            <Skeleton loading={isLoading} fallback={<Loader />}>
+                Aceptar
+            </Skeleton>
           </Button>
           <Button
             onClick={() => {

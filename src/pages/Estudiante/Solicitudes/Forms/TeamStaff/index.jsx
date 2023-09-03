@@ -13,6 +13,8 @@ import {
 import Indicadores from "./Components/Indicadores";
 
 import { stateMiembrosValues } from "./helper";
+import { useFetchClick } from "src/hooks/useFetchClick";
+import Loader from "src/components/ui/Loader";
 
 const miembrosStateData = ({ miembros }) => {
   return miembros.map((miembro) => ({
@@ -35,6 +37,8 @@ const TeamStaffForm = () => {
 
   const [selectedJugadores, setSelectedJugadores] = useState([]);
 
+  const { isLoading, equipo_form, registroExitoso } = useFetchId(id_equipo_local, obtenerUnEquipo, "equipo_form")
+
   useEffect(() => {
     if (miembrosState && previous_id_equipo === id_equipo_local) {
       //Hay que ver si los titulares y reservas que hay coinciden con los limites si no chao
@@ -55,12 +59,12 @@ const TeamStaffForm = () => {
       }
     }
 
-    (async () => {
-      const { data: equipo } = await obtenerUnEquipo(id_equipo_local);
-      const { jugadores } = miembrosEquipo({ data: equipo });
+    if (registroExitoso) {
+      const { jugadores } = miembrosEquipo({ data: equipo_form });
       setSelectedJugadores(miembrosStateData({ miembros: jugadores }));
-    })();
-  }, []);
+    }
+
+  }, [registroExitoso]);
 
   useEffect(() => {
     if (!deporte || !selectedJugadores) return;
@@ -135,9 +139,15 @@ const TeamStaffForm = () => {
     };
   };
 
+
   return (
-    <div className="flex gap-10 h-[500px] w-full px-16 justify-start md:flex-row flex-col">
-      <Jugadores handleClick={handleClick} jugadores={selectedJugadores} />
+    <div className="flex flex-col gap-10 w-full max-w-7xl  justify-start lg:grid lg:grid-cols-2 ">
+      {
+        isLoading
+          ? <Loader color="blue" />
+          : <Jugadores handleClick={handleClick} jugadores={selectedJugadores} />
+
+      }
       <Indicadores selectedJugadores={selectedJugadores} deporte={deporte} />
     </div>
   );

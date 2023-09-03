@@ -10,14 +10,16 @@ import { tipoNivelesAcademicos } from "src/helper/transformarDatos"
 import Button from "src/components/form/Button"
 import { useFormulario } from "src/hooks/useFormulario"
 import Exito from "src/components/coordinacion/Exito"
+import Skeleton from "src/components/ui/Skeleton"
+import Loader from "src/components/ui/Loader"
 
 export default function Crear() {
-    const { register, setValue, handleSubmit, registroExitoso } = useFormulario(crearCuentaMaestro);
+    const { register, setValue, handleSubmit, registroExitoso, isLoading } = useFormulario(crearCuentaMaestro);
     const { tipoNivelAcademico } = useFetch("tipoNivelAcademico", obtenerNivelesAcademicos, tipoNivelesAcademicos);
     const { mostrarPassword, mostrarOcultarPassword } = useIconPassword();
     const OjoPassword = function (props) {
 
-        return <AiOutlineEyeInvisible{...props} onClick={mostrarOcultarPassword} className="cursor-pointer" />
+        return <AiOutlineEyeInvisible {...props} onClick={mostrarOcultarPassword} className="cursor-pointer" />
     }
 
     
@@ -37,7 +39,7 @@ export default function Crear() {
                 <Select setValue={setValue} valueLabel={"id_nivelAcademico"} opciones={tipoNivelAcademico} label={"Nivel del docente"} placeholder={"Nivel academico del docente"} />
                 <Input register={register("email")} label={"Email"} type="email" placeholder={"Email"} />
                 <Input register={register("password")} Icon={OjoPassword} label={"Password"} type={mostrarPassword ? "text" : "password"} placeholder={"Password"} />
-                <Button> Crear Maestro</Button>
+                <Button disabled={isLoading}><Skeleton loading={isLoading} fallback={<Loader />}>Crear Cuenta Maestro</Skeleton></Button>
             </CoordinacionForm>
         </CoordinacionLayout>
     )

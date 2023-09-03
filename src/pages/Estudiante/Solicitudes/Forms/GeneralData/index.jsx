@@ -20,7 +20,7 @@ const GeneralDataForm = () => {
     maestro_intermediario: maestroIntermediarioState,
   } = currentFormState.values;
 
-  const deporte = form.Deportes.values.deporte[0];
+  const deporte = form.Deportes.values.deporte[0]
   const { skipMaestro, opcionalMaestro } = deporte.tipoDeporte;
 
   const [descripcion, setDescripcion] = useState(() =>

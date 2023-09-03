@@ -10,12 +10,13 @@ import { useSession } from "src/hooks/useSession";
 import { miembrosEquipo } from "src/helper/transformarDatos";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { PageLoader } from "src/components/ui/PageLoader";
 
-const VistaEquipo = ({ equipo }) => {
+const VistaEquipo = ({ equipo, actualizarDatos }) => {
   const rango = equipo.rango;
   const err = equipo.error;
   const View = () => {
-    if (rango === "Lider") return <VistaLider equipo={equipo} />;
+    if (rango === "Lider") return <VistaLider actualizarDatos={actualizarDatos} equipo={equipo} />;
     if (rango === "Miembro") return <VistaMiembro equipo={equipo} />;
     return err ? <p>{err}</p> : <p>Error desconocido</p>;
   };
@@ -25,7 +26,7 @@ const VistaEquipo = ({ equipo }) => {
 
 const DatosEquipo = () => {
   const { id } = useParams();
-  const { isLoading, equipo } = useFetchId(id, obtenerUnEquipo, "equipo", miembrosEquipo);
+  const { isLoading, equipo, refetch } = useFetchId(id, obtenerUnEquipo, "equipo", miembrosEquipo);
   const navigate = useNavigate();
 
   const [copiado, setCopiado] = useState(false);
@@ -36,8 +37,7 @@ const DatosEquipo = () => {
     }
   },[])
 
-  if (isLoading) return <p>Loading....</p>;
-
+  if (isLoading) return <PageLoader />
 
 
   const handleClick = async () => {
@@ -56,7 +56,7 @@ const DatosEquipo = () => {
       onClickButton={handleClick}
     >
       <AlertaImprovisada open={copiado} setOpen={setCopiado} />
-      <VistaEquipo equipo={equipo} />
+      <VistaEquipo equipo={equipo} actualizarDatos={refetch} />
     </EstudianteLayaout>
   );
 };

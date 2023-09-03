@@ -14,6 +14,7 @@ import { useIconPassword } from "../../../hooks/useIconPassword";
 
 import { HashLoader } from "react-spinners";
 import Skeleton from "src/components/ui/Skeleton";
+import { PageLoader } from "src/components/ui/PageLoader";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Form = () => {
   const { register, handleSubmit, setValue, mensajeError, registroExitoso, isLoading: formLoading } =
     useFormulario(crearCuentaEstudiante);
 
-  if (isLoading) return <p>Cargando...</p>;
+  if (isLoading) return <PageLoader /> 
   if (error) return <p>Hubo un error, recarga la pagina</p>;
   if (registroExitoso) {
     navigate("/login");

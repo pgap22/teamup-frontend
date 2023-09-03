@@ -13,7 +13,6 @@ const Deportes = () => {
   const { isLoading, deportes, eliminar } = useFetchAndDelete("deportes", obtenerDeportes, eliminarDeporte, deportesTransformar);
 
 
-
   return (
     <CoordinacionLayout titulo={"Deportes"}>
       <Skeleton loading={isLoading} fallback={<TablaSkeleton />}>
@@ -25,7 +24,7 @@ const Deportes = () => {
             listaDatos={deportes}
             botonUrl={"/coordinacion/deportes/crear"}
             editarUrl={"/coordinacion/deportes/editar"}
-            borrarElemento={eliminar.mutate}
+            borrarElemento={eliminar}
           />)
         }
       </Skeleton>

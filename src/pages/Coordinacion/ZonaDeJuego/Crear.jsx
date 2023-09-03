@@ -13,12 +13,14 @@ import { deportesSelect } from "src/helper/transformarDatos"
 import ImageDrop from "src/components/form/ImageDrop"
 import { useFormulario } from "src/hooks/useFormulario"
 import Exito from "src/components/coordinacion/Exito"
+import Skeleton from "src/components/ui/Skeleton"
+import Loader from "src/components/ui/Loader"
 
 
 
 const Crear = () => {
   const { deportes } = useFetch("deportes", obtenerDeportesCancha, deportesSelect)
-  const { register, setValue, handleSubmit, registroExitoso } = useFormulario(crearZonaDeJuego);
+  const { register, setValue, handleSubmit, registroExitoso, isLoading } = useFormulario(crearZonaDeJuego);
 
   if(registroExitoso) return(
     <Exito
@@ -42,7 +44,11 @@ const Crear = () => {
 
         <ImageDrop setValue={setValue} name="imagenes" label={"Imagenes"} />
 
-        <Button>Crear Zona De Juego</Button>
+        <Button disabled={isLoading}>
+          <Skeleton loading={isLoading} fallback={<Loader />}>
+           Crear Zona De Juego
+          </Skeleton>
+        </Button>
       </CoordinacionForm>
     </CoordinacionLayout>
   )

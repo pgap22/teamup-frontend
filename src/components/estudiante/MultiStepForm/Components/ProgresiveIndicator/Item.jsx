@@ -3,7 +3,7 @@ const Item = ({ isActive, handleClick }) => {
   return (
     <div
       onClick={handleClick}
-      className={` cursor-pointer rounded-full w-[70px] h-4 ${stylesisActive}`}
+      className={`w-4 cursor-pointer rounded-full md:w-[70px] h-4 ${stylesisActive}`}
     />
   );
 };

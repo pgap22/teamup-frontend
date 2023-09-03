@@ -20,7 +20,7 @@ const ZonaDeJuego = () => {
           editarUrl={"/coordinacion/zonadejuego/editar"}
           listaDatos={zonadejuego}
           botonUrl={"/coordinacion/zonadejuego/crear"}
-          borrarElemento={eliminar.mutate}
+          borrarElemento={eliminar}
         />)}
       </Skeleton>
     </CoordinacionLayout>

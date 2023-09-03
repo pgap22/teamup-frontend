@@ -7,6 +7,8 @@ import Input from "src/components/form/Input";
 import { passwordRecovery } from "src/api";
 import { useFormulario } from "src/hooks/useFormulario";
 import { useEffect } from "react";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -55,7 +57,9 @@ const Form = () => {
 
         <div className="flex flex-col gap-3 text-center">
           <Button disabled={isLoading} color={"azul"}>
-            Enviar
+            <Skeleton loading={isLoading} fallback={<Loader />}>
+              Enviar
+            </Skeleton>
           </Button>
           <Link to={"/login"} className="text-primary">
             ¿ La recordaste ?

@@ -4,6 +4,7 @@ import { buscarEquipo } from 'src/api/equipos';
 import Partido from 'src/components/estudiante/PartidoCard/Partido';
 import MaestroLayout from 'src/components/layout/MaestroLayout'
 import Caja from 'src/components/ui/Cajas/Caja';
+import { PageLoader } from 'src/components/ui/PageLoader';
 import { useEquipo } from 'src/store/useEquipo'
 
 const EquipoInformacion = () => {
@@ -35,7 +36,7 @@ const EquipoInformacion = () => {
     }, [mounted])
 
 
-    if (!equipo.id) return <p>Cargando...</p>
+    if (!equipo.id) return <PageLoader />
 
 
     return (

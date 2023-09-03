@@ -1,5 +1,6 @@
 import React from "react";
 import CajaEstadistica from "src/components/ui/Cajas/CajaEstadistica";
+import Loader from "src/components/ui/Loader";
 
 const ListaResumen = ({ resumen = [], estadisticas= {} }) => {
   return (
@@ -9,7 +10,7 @@ const ListaResumen = ({ resumen = [], estadisticas= {} }) => {
           key={data.titulo+"-stat"}
           titulo={data.titulo}
           Icon={data.icon}
-          cantidad={estadisticas[data.key]}
+          cantidad={estadisticas[data.key] ?? <Loader color="gray" />}
         />
       ))}
     </div>

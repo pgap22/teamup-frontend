@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 
 import Button from "../../form/Button";
 import { useModal } from "../../../hooks/useModal.jsx";
+import Skeleton from "../Skeleton";
+import Loader from "../Loader";
+import { useEffect } from "react";
 
 const TablaAcciones = ({
   dato,
   editarUrl,
-  borrarElemento = () => {},
+  borrarElemento = {mutate: ()=>{}, isLoading: false, status: ''},
   eliminar,
   editar,
 }) => {
@@ -19,6 +22,12 @@ const TablaAcciones = ({
   const esconderModal = () => {
     modalState.toggleModal(false);
   };
+
+  useEffect(()=>{
+    if(borrarElemento.status == 'success'){
+      esconderModal();
+    }
+  },[borrarElemento.status])
 
   return (
     <div className="flex gap-4">
@@ -39,12 +48,14 @@ const TablaAcciones = ({
           <div className="grid grid-cols-2 gap-4">
             <Button
               onClick={() => {
-                borrarElemento(dato.ID);
-                esconderModal();
+                borrarElemento.mutate(dato.ID);
               }}
+              disabled={borrarElemento.isLoading}
               color={"rojo"}
             >
-              Eliminar
+              <Skeleton loading={borrarElemento.isLoading} fallback={<Loader />}>
+                Eliminar
+              </Skeleton>
             </Button>
             <Button onClick={esconderModal} color={"blanco"}>
               Cancelar

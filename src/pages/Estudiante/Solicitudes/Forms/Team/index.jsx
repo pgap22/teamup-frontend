@@ -6,6 +6,8 @@ import { equiposCreados } from "src/api";
 import EquiposContainer from "../../Components/Equipos";
 import { useConstantes } from "src/components/estudiante/MultiStepForm/useConstantes";
 import { useMultiStepForm } from "src/components/estudiante/MultiStepForm/useMultiStepForm";
+import { PageLoader } from "src/components/ui/PageLoader";
+import Loader from "src/components/ui/Loader";
 
 const TeamForm = () => {
   const { setForm } = useMultiStepForm();
@@ -41,7 +43,7 @@ const TeamForm = () => {
     funct();
   }, [selectedEquipo]);
 
-  if (isLoading) return <p>Cargando . . .</p>;
+  if (isLoading) return <Loader color="blue" />;
 
   const handleClick = (value) => {
     setSelectedEquipo(value === selectedEquipo ? null : value);

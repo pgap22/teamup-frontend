@@ -6,6 +6,8 @@ import { equiposRivalesUsuario } from "src/api";
 import EquiposContainer from "../../Components/Equipos";
 import { useMultiStepForm } from "src/components/estudiante/MultiStepForm/useMultiStepForm";
 import { useConstantes } from "src/components/estudiante/MultiStepForm/useConstantes";
+import { PageLoader } from "src/components/ui/PageLoader";
+import Loader from "src/components/ui/Loader";
 
 const OponnentForm = () => {
   const { setForm } = useMultiStepForm();
@@ -38,7 +40,7 @@ const OponnentForm = () => {
     equiposRivalesUsuario
   );
 
-  if (isLoading) return <p>Cargando . . .</p>;
+  if (isLoading) return <Loader  color="blue" />;
 
   const handleClick = (value) => {
     setSelectedEquipo(value === selectedEquipo ? null : value);

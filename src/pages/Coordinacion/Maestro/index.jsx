@@ -20,7 +20,7 @@ const Maestro = () => {
             cantidadTexto={maestros.length + " Maestro"}
             botonTexto={"Nuevo Maestro"}
             listaDatos={maestros}
-            borrarElemento={eliminar.mutate}
+            borrarElemento={eliminar}
             botonUrl={"/coordinacion/maestros/crear"}
           />
         }

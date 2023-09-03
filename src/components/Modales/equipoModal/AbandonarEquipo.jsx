@@ -5,9 +5,29 @@ import TemplateModal from "../ModalTemplate";
 
 import { abandonarEquipo } from "../../../api";
 import { useNavigate } from "react-router-dom";
+import { useFetchClick } from "src/hooks/useFetchClick";
+import { useEffect } from "react";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 const ContentModal = ({ toggleModal, id }) => {
   const navigate = useNavigate();
+  const { isLoading, refetch, registroExitoso } = useFetchClick("abandonar_equipo", () => abandonarEquipo(id));
+
+  useEffect(() => {
+    if (registroExitoso) {
+      toggleModal(false);
+      navigate("/estudiante/exito", {
+        state: {
+          titulo: "Saliste del grupo",
+          subtitulo: "Has salido del grupo",
+          descripcion: "Has salido del grupo correctamente",
+          url: `/estudiante/equipos`,
+          linkText: "Volver a tus equipos",
+        },
+      });
+    }
+  }, [registroExitoso])
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
@@ -15,25 +35,13 @@ const ContentModal = ({ toggleModal, id }) => {
 
         <div className="grid grid-cols-2 gap-4">
           <Button
-            onClick={() => {
-              const status = abandonarEquipo(id);
-
-              if (status) {
-                toggleModal(false);
-                navigate("/estudiante/exito", {
-                  state: {
-                    titulo: "Saliste del grupo",
-                    subtitulo: "Has salido del grupo",
-                    descripcion: "Has salido del grupo correctamente",
-                    url: `/estudiante/equipos`,
-                    linkText: "Volver a tus equipos",
-                  },
-                });
-              }
-            }}
+            onClick={refetch}
             color={"rojo"}
+            disabled={isLoading}
           >
-            Abandonar
+            <Skeleton loading={isLoading} fallback={<Loader />}>
+              Abandonar
+            </Skeleton>
           </Button>
           <Button
             onClick={() => {

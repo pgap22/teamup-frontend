@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { AxiosError } from "axios"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useParams } from "react-router-dom"
 import { aceptarPartidoCoordinacion, obtenerUnPartido, obtenerZonaJuegosPorPartido, posponerPartido, rechazarPartido } from "src/api/partidos"
@@ -9,17 +10,22 @@ import Button from "src/components/form/Button"
 import Input from "src/components/form/Input"
 import Select from "src/components/form/Select"
 import CoordinacionLayout from "src/components/layout/CoordinacionLayout"
+import { AlertaError } from "src/components/ui/AlertaError"
 import Caja from "src/components/ui/Cajas/Caja"
+import Loader from "src/components/ui/Loader"
+import { PageLoader } from "src/components/ui/PageLoader"
+import Skeleton from "src/components/ui/Skeleton"
 import { zonaJuegosSelect } from "src/helper/transformarDatos"
+import { useFetchClick } from "src/hooks/useFetchClick"
 import { useFetchId } from "src/hooks/useFetchId"
 import { useModal } from "src/hooks/useModal"
 
 const SolicitudesInformacion = () => {
-    
+
     const { id } = useParams();
     const { isLoading, partido } = useFetchId(id, obtenerUnPartido, 'partido');
-    const {isLoading: loadingZonaJuegos, zonaDeJuegos} = useFetchId(id, obtenerZonaJuegosPorPartido, 'zonaDeJuegos', zonaJuegosSelect);
-
+    const { isLoading: loadingZonaJuegos, zonaDeJuegos } = useFetchId(id, obtenerZonaJuegosPorPartido, 'zonaDeJuegos', zonaJuegosSelect);
+    const { refetch: rechazarPartidoClick, registroExitoso, isLoading: cargandoRechazar } = useFetchClick("cancelarPartido", () => rechazarPartido(id));
 
     const [modificacion, setModificacion] = useState(false);
 
@@ -28,29 +34,26 @@ const SolicitudesInformacion = () => {
     const [ModalAceptar, modalAceptar] = useModal();
 
 
-    const { register, handleSubmit } = useForm();
-    const {setValue, handleSubmit: submitAceptar} = useForm();
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting: cargandoPosponer } } = useForm();
+    const { setValue, handleSubmit: submitAceptar, formState: { isSubmitting: cargandoAceptar } } = useForm();
 
-
-    const aceptarPartidoSubmit = async(dato)=>{
+    const aceptarPartidoSubmit = async (dato) => {
         try {
             await aceptarPartidoCoordinacion(id, dato);
             modalAceptar.toggleModal(false);
             setModificacion(true);
         } catch (error) {
-            console.log(error)
+
         }
     }
 
-    const rechazarPartidoClick = async () => {
-        try {
-            await rechazarPartido(id);
+
+    useEffect(() => {
+        if (registroExitoso) {
             modalRechzar.toggleModal(false);
             setModificacion(true);
-        } catch (error) {
-            console.log(error)
         }
-    }
+    }, [registroExitoso])
 
     const posponerSubmit = async (data) => {
         try {
@@ -59,12 +62,13 @@ const SolicitudesInformacion = () => {
             setModificacion(true);
             console.log(partidoPospueto);
         } catch (error) {
-            console.log(error)
+            if (error instanceof AxiosError) {
+                setError("fecha", { type: 'custom', message: error.response.data.error });
+            }
         }
     }
 
-    if (isLoading) return <p>Cargando...</p>
-    if (loadingZonaJuegos) return <p>Cargando...</p>
+    if (isLoading || loadingZonaJuegos) return <PageLoader />
 
     if (modificacion) return <ModificacionMensaje />
 
@@ -113,32 +117,48 @@ const SolicitudesInformacion = () => {
             <ModalAceptar desktopTitle="Aceptar Solicitud" {...modalAceptar}>
                 <form onSubmit={submitAceptar(aceptarPartidoSubmit)} className="p-4 space-y-4">
                     <p>Selecciona la cancha a prestar para este partido !d</p>
-                    <Select 
+                    <Select
                         setValue={setValue}
                         valueLabel="id_zona_juego"
                         label="Zona De Juego"
-                        noAbsolute 
-                        opciones={zonaDeJuegos} 
+                        noAbsolute
+                        opciones={zonaDeJuegos}
                         placeholder={"Selecciona Zona De Juego"} />
 
-                    <Button>Aceptar Partido</Button>
+                    <Button disabled={cargandoAceptar}>
+                        <Skeleton fallback={<Loader />} loading={cargandoAceptar}>
+                            Aceptar Partido
+                        </Skeleton>
+                    </Button>
                 </form>
             </ModalAceptar>
 
             <ModalPosponer {...modalPosponer} desktopTitle="Posponer Fecha">
-                <form onSubmit={handleSubmit(posponerSubmit)} className="p-4 space-y-4">
+                <form onSubmit={handleSubmit(posponerSubmit)} className="p-4 max-w-md space-y-4">
+                    <div className="space-y-2">
+                        {errors.fecha && <AlertaError message={errors.fecha.message} />}
+                        <p>Se desligara al maestro que estaba encargado de este partido, y los estudiantes volveran a esperar a que un nuevo maestro les apruebe</p>
+                    </div>
                     <Input register={{
-                        ...register("fecha", { required: true }),
-                        min: new Date().toJSON().split("T")[0]
+                        ...register("fecha", { required: { value: true, message: 'Ingresa una fecha' } }),
+                        min: new Date().toLocaleDateString("sv", { hour: 'numeric', minute: 'numeric' })
                     }} label={"Seleccione una nueva fecha"} type="datetime-local" />
-                    <Button>Posponer Partido</Button>
+                    <Button disabled={cargandoPosponer}>
+                        <Skeleton fallback={<Loader />} loading={cargandoPosponer}>
+                            Posponer
+                        </Skeleton>
+                    </Button>
                 </form>
             </ModalPosponer>
 
             <ModalRechazar {...modalRechzar} desktopTitle="Rechazar Solicitud">
                 <div className="p-4 space-y-4">
                     <p>Deseas rechazar esta solicitud de partido</p>
-                    <Button onClick={rechazarPartidoClick}>Rechazar Solictud</Button>
+                    <Button disabled={cargandoRechazar} onClick={rechazarPartidoClick}>
+                        <Skeleton loading={cargandoRechazar} fallback={<Loader />}>
+                            Rechazar Solictud
+                        </Skeleton>
+                    </Button>
                 </div>
             </ModalRechazar>
 

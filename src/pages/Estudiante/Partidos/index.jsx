@@ -7,11 +7,12 @@ import {
 import { useFetch } from "src/hooks/useFetch";
 import { obtenerMisPartidos } from "src/api/partidos";
 import { Link } from "react-router-dom";
+import { PageLoader } from "src/components/ui/PageLoader";
 
 const Partidos = () => {
   const { isLoading, partidos } = useFetch("partidos", obtenerMisPartidos);
 
-  if (isLoading) return <p>Cargando...</p>;
+  if (isLoading) return <PageLoader />;
 
   return (
     <EstudianteLayaout

@@ -10,7 +10,7 @@ import Loader from "src/components/ui/Loader";
 import { useIconPassword } from "src/hooks/useIconPassword";
 import { LuEye } from "react-icons/lu";
 
-const Preferencias = ({ equipo }) => {
+const Preferencias = ({ equipo, actualizarDatos: actualizarEquipoDatos }) => {
   const {
     register,
     handleSubmit,
@@ -30,19 +30,11 @@ const Preferencias = ({ equipo }) => {
     setValue("id", equipo.id);
   }, []);
 
-  useEffect(() => {
-    if (registroExitoso) {
-      navigate("/estudiante/exito", {
-        state: {
-          titulo: "Datos actualizados",
-          subtitulo: "Preferencias de equipo",
-          descripcion: "Has actualizado los datos del equipo correctamente",
-          url: `/estudiante/equipos/datos/${data.data.id}`,
-          linkText: "Volver al equipo",
-        },
-      });
+  useEffect(()=>{
+    if(registroExitoso){
+     actualizarEquipoDatos()
     }
-  }, [registroExitoso]);
+  },[registroExitoso])
 
   return (
     <div className="flex flex-col items-center gap-5 md:items-start ">
@@ -74,7 +66,7 @@ const Preferencias = ({ equipo }) => {
             />
           )}
           placeholder={"Contraseña"}
-          register={register("new_password_access", {required: true})}
+          register={register("new_password_access")}
         />
           <Button disabled={isLoading}>
             <Skeleton loading={isLoading} fallback={<Loader />}>

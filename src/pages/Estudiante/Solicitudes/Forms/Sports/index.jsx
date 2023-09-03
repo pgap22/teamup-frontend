@@ -5,6 +5,8 @@ import { useFetch } from "src/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { useMultiStepForm } from "src/components/estudiante/MultiStepForm/useMultiStepForm";
 import { useConstantes } from "src/components/estudiante/MultiStepForm/useConstantes";
+import { PageLoader } from "src/components/ui/PageLoader";
+import Loader from "src/components/ui/Loader";
 
 const SportsForm = () => {
   const { setForm } = useMultiStepForm();
@@ -19,7 +21,7 @@ const SportsForm = () => {
     const funct = () => {
       const formStateCopy = { ...currentFormState };
 
-      if (sport) {
+      if (sport && !isLoading) {
         formStateCopy.valid = true;
         formStateCopy.values.id_deporte = sport;
         formStateCopy.values.deporte = {
@@ -33,9 +35,9 @@ const SportsForm = () => {
       setForm({ ...form, [currentFormName]: { ...formStateCopy } });
     };
     funct();
-  }, [sport]);
+  }, [sport, isLoading]);
 
-  if (isLoading) return <p>Cargando</p>;
+  if (isLoading) return <Loader  color="blue" />;
 
   const handleClick = (value) => {
     toogleSport(value === sport ? false : value);

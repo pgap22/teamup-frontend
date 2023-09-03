@@ -12,39 +12,36 @@ import { useFetch } from "../../../hooks/useFetch";
 import { tipoDeporteTransformar } from "../../../helper/transformarDatos";
 import { useFetchId } from "../../../hooks/useFetchId";
 import Exito from "src/components/coordinacion/Exito";
+import { PageLoader } from "src/components/ui/PageLoader";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 function DeporteEditar() {
 
     const { id } = useParams();
-
     const { isLoading, deporte } = useFetchId(id, obtenerUnDeporte, "deporte");
-
-    const { register, handleSubmit, setValue, registroExitoso } = useFormulario(editarDeporte);
-
+    const { register, handleSubmit, setValue, registroExitoso, isLoading: editarLoading } = useFormulario(editarDeporte);
     const { isLoading: loading, tiposDeportes } = useFetch("tiposDeportes", obtenerTipoDeportes, tipoDeporteTransformar);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(isLoading)
-    },[deporte])
-    
+    }, [deporte])
+
     useEffect(() => {
         setValue("id", id);
     }, [])
 
-    if (isLoading || loading) return <p>Cargando...</p>
-
-    if (registroExitoso) return(
+    if (isLoading || loading) return <PageLoader />
+    if (registroExitoso) return (
         <Exito
             titulo={"Deporte editado"}
             subtitulo={"El deporte se ha editado exitosamente"}
             linkText={"Volver a deportes"}
             url={"/coordinacion/deportes"}
-      />
+        />
     )
 
     const idTipoDeporte = tiposDeportes.findIndex(tipoDeporte => tipoDeporte.value == deporte.tipoDeporte.id);
-
-
     return (
         <CoordinacionLayout titulo={"Editar Deporte"} center>
             <CoordinacionForm handleSubmit={handleSubmit} titulo={"Datos Generales"} imagenUrl={"/deporte_1.jpg"}>
@@ -79,7 +76,11 @@ function DeporteEditar() {
                     id_valorPorDefecto={idTipoDeporte}
 
                 />
-                <Button>Editar Deporte</Button>
+                <Button disabled={editarLoading}>
+                    <Skeleton loading={editarLoading} fallback={<Loader />}>
+                        Editar Deporte
+                    </Skeleton>
+                </Button>
             </CoordinacionForm>
         </CoordinacionLayout>
     )

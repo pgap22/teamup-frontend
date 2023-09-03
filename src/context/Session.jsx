@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { obtenerPerfil } from "../api";
+import Loader from "src/components/ui/Loader";
+import { PageLoader } from "src/components/ui/PageLoader";
 const SessionContext = createContext();
 
 const SessionProvider = ({ children }) => {
@@ -32,7 +34,7 @@ const SessionProvider = ({ children }) => {
     perfil();
   }, []);
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading) return <PageLoader />;
 
   return (
     <SessionContext.Provider
@@ -46,5 +48,8 @@ const SessionProvider = ({ children }) => {
     </SessionContext.Provider>
   );
 };
+
+
+
 
 export { SessionContext, SessionProvider };

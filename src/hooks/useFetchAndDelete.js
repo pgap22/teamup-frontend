@@ -6,7 +6,7 @@ const useFetchAndDelete = (
   eliminarItem,
   transformarDatosTabla
 ) => {
-  const { data, isLoading, error } = useQuery(key, obtenerItems);
+  const { data, isLoading, error } = useQuery(key, obtenerItems,{cacheTime: 0});
 
   const queryClient = useQueryClient();
 

@@ -8,18 +8,74 @@ import InfoCampo from "src/components/estudiante/InfoCampo"
 import Button from "src/components/form/Button"
 import MaestroLayout from "src/components/layout/MaestroLayout"
 import Caja from "src/components/ui/Cajas/Caja"
+import Loader from "src/components/ui/Loader"
+import { MostrarBoton } from "src/components/ui/MostrarBoton"
+import { PageLoader } from "src/components/ui/PageLoader"
+import Skeleton from "src/components/ui/Skeleton"
+import { useFetchClick } from "src/hooks/useFetchClick"
 import { useModal } from "src/hooks/useModal"
 
 const Solicitud = () => {
     const [partido, setPartido] = useState({});
     const [partidoAceptado, setPartidoAceptado] = useState(false);
+
     const navigate = useNavigate();
     const { id } = useParams();
 
     const [ModalAsistencia, modalAsistecia] = useModal();
     const [ModalResultado, modalResultado] = useModal();
 
-    const { register, handleSubmit } = useForm();
+    const { refetch: cuidarPartido, isLoading: loadingCuidar, registroExitoso: cuidarExitoso } = useFetchClick("cuidar_partido", () => aceptarPartidoMaestro(id));
+    const { refetch: tomarAsistencia, registroExitoso: asistenciaExito, isLoading: asistenciaLoading } = useFetchClick("tomarAsistencia", () => colocarAsistencia(id));
+    const { refetch: cancelarPartidoClick, registroExitoso: cancelarExito, isLoading: cancelarLoading } = useFetchClick("cancelarPartido", () => cancelarPartido(id));
+
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+
+
+
+    useEffect(() => {
+        if (cuidarExitoso) {
+            setPartidoAceptado({
+                titulo: "Solicitud Cuidar",
+                subtitulo: "Solicitud Aceptada",
+                descripcion: "Ahora tu cuidaras este partido"
+            });
+        }
+    }, [cuidarExitoso])
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const { data } = await obtenerUnPartido(id);
+                setPartido(data)
+            } catch (error) {
+                navigate("/maestro")
+            }
+        })()
+    }, [])
+
+    useEffect(() => {
+        (async () => {
+            if (asistenciaExito) {
+                modalAsistecia.toggleModal(false);
+                setPartido({});
+                const { data } = await obtenerUnPartido(id);
+                setPartido(data)
+            }
+        })()
+    }, [asistenciaExito])
+
+    useEffect(() => {
+        if (cancelarExito) {
+            setPartidoAceptado({
+                titulo: "Solicitud Cancelada",
+                subtitulo: "Solicitud Cancelada",
+                descripcion: "Haz cancelado esta solicitud"
+            });
+            modalAsistecia.toggleModal(false);
+        }
+    }, [cancelarExito])
+
 
     const enviarResultadosSubmit = async (datos) => {
         try {
@@ -35,58 +91,9 @@ const Solicitud = () => {
     }
 
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const { data } = await obtenerUnPartido(id);
-                setPartido(data)
-            } catch (error) {
-                navigate("/maestro")
-            }
-        })()
-    }, [])
 
-    const cuidarPartido = async () => {
-        try {
-            await aceptarPartidoMaestro(id);
-            setPartidoAceptado({
-                titulo: "Solicitud Cuidar",
-                subtitulo: "Solicitud Aceptada",
-                descripcion: "Ahora tu cuidaras este partido"
-            });
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
-    const tomarAsistencia = async () => {
-        try {
-            await colocarAsistencia(id);
-            setPartidoAceptado({
-                titulo: "Asistencia Tomada",
-                subtitulo: "Asistencia Tomada",
-                descripcion: "La asistencia de este partido fue exitosa !"
-            });
-            modalAsistecia.toggleModal(false);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const cancelarPartidoClick = async () => {
-        try {
-            await cancelarPartido(id);
-            setPartidoAceptado({
-                titulo: "Solicitud Cancelada",
-                subtitulo: "Solicitud Cancelada",
-                descripcion: "Haz cancelado esta solicitud"
-            }); modalAsistecia.toggleModal(false);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    if (!partido.id) return <p>Cargando...</p>
+    if (!partido.id) return <PageLoader />
 
     if (partidoAceptado) return <MensajeExito partidoAceptado={partidoAceptado} />
 
@@ -112,16 +119,20 @@ const Solicitud = () => {
                     </div>
                 </Caja>
                 <Caja className={"flex flex-col gap-2"} titulo={"Acciones"}>
-                    <div className="h-full justify-center flex flex-col">
-                        {
-                            partido.estado.fase == 2 && <Button onClick={cuidarPartido} className={"py-4 md:text-xl"} customBg={"#0F62FE"}>Cuidar Partido</Button>
-                        }
-                        {
-                            partido.estado.fase == 4 && <Button onClick={() => modalAsistecia.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#7E7E7E"}>Tomar Asistencia</Button>
-                        }
-                        {
-                            partido.estado.fase == 5 && <Button onClick={() => modalResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#cfb93d"}>Enviar Resultado</Button>
-                        }
+                    <div className="h-full gap-4 justify-center flex flex-col">
+                        <MostrarBoton condicion={partido.estado.fase == 2}>
+                            <Button disabled={loadingCuidar} onClick={cuidarPartido} className={"py-4 md:text-xl"} customBg={"#0F62FE"}>
+                                <Skeleton loading={loadingCuidar} fallback={<Loader />}>
+                                    Cuidar Partido
+                                </Skeleton>
+                            </Button>
+                        </MostrarBoton>
+                        <MostrarBoton condicion={partido.estado.fase == 4}>
+                            <Button onClick={() => modalAsistecia.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#7E7E7E"}>Tomar Asistencia</Button>
+                        </MostrarBoton>
+                        <MostrarBoton condicion={partido.estado.fase == 5}>
+                            <Button onClick={() => modalResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#cfb93d"}>Enviar Resultado</Button>
+                        </MostrarBoton>
                     </div>
                 </Caja>
             </div>
@@ -130,12 +141,20 @@ const Solicitud = () => {
                 <div className="p-4">
                     <div className="space-y-2">
                         <p>Haz click para tomar la asistencia del equipo</p>
-                        <Button onClick={tomarAsistencia}>Tomar Asistencia</Button>
+                        <Button disabled={asistenciaLoading} onClick={tomarAsistencia}>
+                            <Skeleton loading={asistenciaLoading} fallback={<Loader />}>
+                                Tomar Asistencia
+                            </Skeleton>
+                        </Button>
                     </div>
 
                     <div className="mt-6 space-y-2">
                         <p>Si no se presenta un equipo puedes cancelar el partido</p>
-                        <Button onClick={cancelarPartidoClick} customBg={"#7E7E7E"}>Cancelar Partido</Button>
+                        <Button disabled={cancelarLoading} onClick={cancelarPartidoClick} customBg={"#7E7E7E"}>
+                            <Skeleton fallback={<Loader />} loading={cancelarLoading}>
+                                Cancelar Partido
+                            </Skeleton>
+                        </Button>
                     </div>
                 </div>
             </ModalAsistencia>
@@ -147,7 +166,11 @@ const Solicitud = () => {
                         <EquipoCardResultado register={register("resultado_local", { required: true, valueAsNumber: true })} equipo={partido.equipo_local} />
                         <EquipoCardResultado register={register("resultado_visitante", { required: true, valueAsNumber: true })} equipo={partido.equipo_visitante} />
                     </div>
-                    <Button>Enviar Resultado !</Button>
+                    <Button disabled={isSubmitting}>
+                        <Skeleton loading={isSubmitting} fallback={<Loader />}>
+                            Enviar Resultados
+                        </Skeleton>
+                    </Button>
                 </form>
             </ModalResultado>
         </MaestroLayout>

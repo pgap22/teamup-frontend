@@ -6,11 +6,13 @@ import Button from "src/components/form/Button"
 import Input from "src/components/form/Input"
 import MaestroLayout from "src/components/layout/MaestroLayout"
 import Caja from "src/components/ui/Cajas/Caja"
+import Loader from "src/components/ui/Loader"
+import Skeleton from "src/components/ui/Skeleton"
 import { useEquipo } from "src/store/useEquipo"
 
 
 const BuscarEquipo = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm();
     const navigate = useNavigate();
     const [mensaje, setMensaje] = useState('');
     const { setEquipo } = useEquipo();
@@ -19,7 +21,7 @@ const BuscarEquipo = () => {
         try {
             const equipo = await buscarEquipo(data);
             setEquipo(equipo);
-            navigate("/maestro/equipo/"+equipo.nombre);
+            navigate("/maestro/equipo/" + equipo.nombre);
         } catch (error) {
             setMensaje(error)
             setEquipo({});
@@ -37,7 +39,11 @@ const BuscarEquipo = () => {
 
                     <Input register={register("nombre")} placeholder={"Nombre Del Equipo"} />
 
-                    <Button>Buscar</Button>
+                    <Button disabled={isSubmitting}>
+                        <Skeleton loading={isSubmitting} fallback={<Loader />}>
+                            Buscar
+                        </Skeleton>
+                    </Button>
 
                 </form>
 

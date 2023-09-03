@@ -19,6 +19,9 @@ import { useFetchId } from "src/hooks/useFetchId";
 import ImageSelector from "src/components/form/ImageSelector/";
 import { useEffect } from "react";
 import Exito from "src/components/coordinacion/Exito";
+import { PageLoader } from "src/components/ui/PageLoader";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 export default function Editar() {
   const { id } = useParams();
@@ -31,14 +34,14 @@ export default function Editar() {
 
   const { deportes } = useFetch("deportes", obtenerDeportesCancha, deportesSelect);
 
-  const { handleSubmit, register, setValue, registroExitoso } =
+  const { handleSubmit, register, setValue, registroExitoso, isLoading: editarLoading } =
     useFormulario(editarUnaZonaDeJuego);
 
   useEffect(() => {
     setValue("id", id);
   }, []);
 
-  if (isLoading) return <p>Cargando...</p>;
+  if (isLoading) return <PageLoader />;
 
   if (registroExitoso)
     return (
@@ -83,7 +86,11 @@ export default function Editar() {
 
         <ImageDrop setValue={setValue} name="imagenes" label={"Imagenes"} />
 
-        <Button>Editar Zona De Juego</Button>
+        <Button disabled={editarLoading}>
+          <Skeleton loading={editarLoading} fallback={<Loader />}>
+            Editar Zona De Juego
+          </Skeleton>
+        </Button>
       </CoordinacionForm>
     </CoordinacionLayout>
   );

@@ -7,10 +7,11 @@ import {
   obtenerRegistros,
   obtenerUnRegistro,
 } from "./helpers";
+import axios from "axios";
 
 export const actualizarAvatar = async (data) =>
   editarUnRegistroForm("/equipo/actualizarAvatar", data)();
-export const HacerLider = async (idEquipo, datos) => {
+export const HacerLider = (idEquipo, datos) => async () => {
   try {
     await clienteAxios.patch(
       `/equipo/cambiarLider/${idEquipo}`,
@@ -58,8 +59,7 @@ export const equiposRivalesUsuario = async () => {
     throwError(error);
   }
 };
-export const abandonarEquipo = (id) =>
-  eliminarUnRegistro("/equipo/abandonarEquipo", id)();
+export const abandonarEquipo = (id) => eliminarUnRegistro("/equipo/abandonarEquipo", id)();
 export const eliminarEquipo = (id) => eliminarUnRegistro("/equipo", id)();
 export const actualizarDatos = async (datos) => {
   try {
@@ -267,5 +267,19 @@ export const changePassword = async (datos) => {
   }
 };
 
+export const verificarTokenPassword = token => obtenerUnRegistro("/usuario/verificar-token",token)();
+
 export const obtenerEstadisticasCoordinacion = obtenerRegistros("/usuario/estadisticas-coordinacion")
 export const obtenerEstadisticasEstudiante = obtenerRegistros("/usuario/estadisticas-estudiante")
+
+export const obtenerEstadoServidor = async() => { 
+  try {
+  const {data: {data}} = await axios.get("/", {baseURL: import.meta.env.VITE_URL});
+  return data;     
+  } catch (error) {
+    throw {
+      server: 0,
+      db: 0,
+    }
+  }
+}

@@ -8,6 +8,7 @@ import { useFetchId } from "src/hooks/useFetchId";
 import { obtenerMiembrosPartido, obtenerUnPartido } from "src/api/partidos";
 
 import AceptarPartido from "..";
+import { PageLoader } from "src/components/ui/PageLoader";
 
 const AceptarPartidosLayout = () => {
   const { id } = useParams();
@@ -44,8 +45,9 @@ const AceptarPartidosLayout = () => {
       navigate("/estudiante/partidos");
     }
   }, []);
+
   if (error) navigate("/estudiante/partidos");
-  if (isLoadingPartido) return <p>Cargando . . . .</p>;
+  if (isLoadingPartido) return <PageLoader />;
 
   return (
     partido &&

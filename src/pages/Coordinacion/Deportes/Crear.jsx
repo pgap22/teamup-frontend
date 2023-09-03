@@ -9,10 +9,12 @@ import { crearDeporte, obtenerTipoDeportes } from "../../../api";
 import { useFetch } from "../../../hooks/useFetch"
 import { tipoDeporteTransformar } from "../../../helper/transformarDatos"
 import Exito from "src/components/coordinacion/Exito";
+import Skeleton from "src/components/ui/Skeleton";
+import Loader from "src/components/ui/Loader";
 
 const DeporteCrear = () => {
 
-  const { register, setValue, handleSubmit, registroExitoso } = useFormulario(crearDeporte);
+  const { register, setValue, handleSubmit, registroExitoso, isLoading } = useFormulario(crearDeporte);
 
   const { tiposDeportes } = useFetch("tiposDeportes", obtenerTipoDeportes, tipoDeporteTransformar);
 
@@ -63,7 +65,11 @@ const DeporteCrear = () => {
           opciones={tiposDeportes}
         />
 
-        <Button>Añadir Deporte</Button>
+        <Button disabled={isLoading}>
+          <Skeleton loading={isLoading} fallback={<Loader />}>
+            Añadir Deporte
+          </Skeleton>
+        </Button>
       </CoordinacionForm>
 
     </CoordinacionLayout>

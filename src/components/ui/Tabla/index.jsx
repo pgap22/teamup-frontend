@@ -3,7 +3,21 @@ import TablaBotonAdd from './TablaBotonAdd';
 import TablaRowHeader from './TablaRowHeader';
 import TablaListaDeFilas from './TablaListaDeFilas';
 
-const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], boton = true, botonTexto, botonUrl, editarUrl, borrarElemento, acciones = true, AccionesCustomElement, accionesCustomLabel, eliminar = true, editar = true }) => {
+const Tabla = ({
+  titulo,
+  cantidadTexto,
+  listaDatos = [{}],
+  boton = true,
+  botonTexto,
+  botonUrl,
+  editarUrl,
+  borrarElemento,
+  acciones =
+  true,
+  AccionesCustomElement,
+  accionesCustomLabel,
+  eliminar = true,
+  editar = true }) => {
 
   let filas = listaDatos.length ? [...Object.keys(listaDatos[0])] : [];
 
@@ -34,7 +48,15 @@ const Tabla = ({ titulo, cantidadTexto, listaDatos = [{}], boton = true, botonTe
           }
           {
             listaDatos.length
-              ? <TablaListaDeFilas filas={filas} listaDatos={listaDatos} editarUrl={editarUrl} borrarElemento={borrarElemento} acciones={acciones} AccionesCustomElement={AccionesCustomElement} editar={editar} eliminar={eliminar} />
+              ? <TablaListaDeFilas
+                filas={filas}
+                listaDatos={listaDatos}
+                editarUrl={editarUrl}
+                borrarElemento={borrarElemento}
+                acciones={acciones}
+                AccionesCustomElement={AccionesCustomElement}
+                editar={editar}
+                eliminar={eliminar} />
               : <p className='p-4'>No hay ningun item...</p>
           }
         </tbody>
