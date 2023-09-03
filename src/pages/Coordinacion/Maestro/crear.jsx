@@ -35,7 +35,8 @@ export default function Crear() {
     return (
         <CoordinacionLayout titulo={"Crear Maestros"}>
             <CoordinacionForm handleSubmit={handleSubmit} imagenUrl={"/Docente.jpg"} titulo={"Datos Generales"}>
-                <Input register={register("nombre")} label={"Nombre"} placeholder={"Nombre maestro"} />
+                <Input register={register("nombre")} label={"Nombre"} placeholder={"Nombres del maestro"} />
+                <Input register={register("apellido")} label={"Apellido"} placeholder={"Apellidos del maestro"} />
                 <Select setValue={setValue} valueLabel={"id_nivelAcademico"} opciones={tipoNivelAcademico} label={"Nivel del docente"} placeholder={"Nivel academico del docente"} />
                 <Input register={register("email")} label={"Email"} type="email" placeholder={"Email"} />
                 <Input register={register("password")} Icon={OjoPassword} label={"Password"} type={mostrarPassword ? "text" : "password"} placeholder={"Password"} />
