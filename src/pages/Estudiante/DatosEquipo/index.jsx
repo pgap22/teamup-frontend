@@ -27,7 +27,7 @@ const VistaEquipo = ({ equipo, actualizarDatos }) => {
 
 const DatosEquipo = () => {
   const { id } = useParams();
-  const { isLoading, equipo } = useFetchId(
+  const { isLoading, equipo, refetch } = useFetchId(
     id,
     obtenerUnEquipo,
     "equipo",
