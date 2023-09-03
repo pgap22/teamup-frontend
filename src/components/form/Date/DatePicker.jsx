@@ -8,9 +8,12 @@ import { useState } from "react";
 
 import { BiCalendar } from "react-icons/bi";
 import InputDateBody from "./Components/InputDateBody";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const DatePicker = ({ label, date, setDate }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranlate();
+
   // const [date, setDate] = useState(dayjs(new Date()));
   const onChangeHandler = (_date) => {
     if (_date) {
@@ -37,7 +40,7 @@ const DatePicker = ({ label, date, setDate }) => {
             isOpen: isOpen,
             title: label,
             Icon: BiCalendar,
-            label: "Selecciona una hora",
+            label: t("SeleccionaDia"),
           },
         }}
       />

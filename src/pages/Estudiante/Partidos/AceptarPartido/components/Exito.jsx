@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import Button from "src/components/form/Button";
-
 import { motion } from "framer-motion";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const Exito = ({ idPartido }) => {
+  const { t } = useTranlate();
+
   const initialAnimation = { opacity: 0 };
   const animateAnimation = {
     opacity: 1,
   };
   const exitAnimation = { opacity: 0 };
   const transitionProps = { duration: 0.5 };
+
   return (
     <motion.div
       initial={initialAnimation}
@@ -18,24 +21,27 @@ const Exito = ({ idPartido }) => {
       transition={transitionProps}
       style={{ width: "100%" }}
     >
-      <div className="w-full flex flex-col items-center text-center gap-10 p-10">
-        <h1 className="text-[#565656] text-3xl font-bold">Ready !</h1>
+      <div className="flex flex-col items-center w-full gap-10 p-10 text-center">
+        <h1 className="text-[#565656] text-3xl font-bold">{t("ready")}</h1>
         <p className="text-[#565656] text-xl font-normal">
-          Now your request is on{" "}
-          <span className=" text-orange-500 font-bold">TEACHER PENDING</span>,
-          wait for a teacher who cares of the match
+          {t("requestOnPending")}
+          <span className="font-bold text-orange-500">
+            {t("teacherPending")}
+          </span>
+          , {t("waitTeacherAcceptance")}
         </p>
         <p className="text-[#565656] text-xl font-normal">
-          You can check the status of your request by clicking on the button
+          {t("checkStatusByClickingButton")}
         </p>
         <Link
           to={`/estudiante/partidos/${idPartido}`}
           className={`text-white shadow-md w-full max-w-[400px] flex justify-center items-center gap-4 hover:scale-[1.02] transition-all p-2 font-bold border bg-primary rounded-full`}
         >
-          See my application
+          {t("seeMyApplication")}
         </Link>
       </div>
     </motion.div>
   );
 };
+
 export default Exito;

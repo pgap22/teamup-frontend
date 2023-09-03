@@ -7,6 +7,7 @@ import ProgresiverIndicator from "./Components/ProgresiveIndicator";
 import EstudianteFormLayout from "../form";
 
 import { crearPartido } from "src/api/partidos";
+import { useTranlate } from "src/hooks/useTranslation";
 const object_default = {
   valid: false,
   values: {},
@@ -57,7 +58,7 @@ const MultiStepForm = ({
 
       setForm({ ...formCpy });
     } catch (error) {
-      setError(error.response.data.error)
+      setError(error.response.data.error);
     }
   };
 
@@ -74,7 +75,9 @@ const MultiStepForm = ({
   }, []);
   return (
     <div className="flex flex-col items-center justify-center w-full gap-5">
-      {error && typeof error == 'string' && <AlertaImprovisada message={error}/>}
+      {error && typeof error == "string" && (
+        <AlertaImprovisada message={error} />
+      )}
       {form.identificadores && !form.envioCompletado && (
         <Forms FormComponents={FormsData} />
       )}
@@ -116,7 +119,9 @@ const Forms = ({ FormComponents }) => {
   );
 };
 
-const AlertaImprovisada = ({message}) => {
+const AlertaImprovisada = ({ message }) => {
+  const { t } = useTranlate();
+
   return (
     <div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4">
       <div class="flex items-center gap-2 text-red-800">
@@ -133,14 +138,12 @@ const AlertaImprovisada = ({message}) => {
           />
         </svg>
 
-        <strong class="block font-medium"> Ha ocurrido un error </strong>
+        <strong class="block font-medium"> {t("error")} </strong>
       </div>
 
-      <p class="mt-2 text-sm text-red-700">
-        {message}
-      </p>
+      <p class="mt-2 text-sm text-red-700">{t("errors:" + message)}</p>
     </div>
-  )
-}
+  );
+};
 
 export default MultiStepForm;

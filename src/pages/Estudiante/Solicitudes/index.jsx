@@ -13,43 +13,46 @@ import ExitoForm from "src/router/estudiante/exito/ExitoForm";
 
 import { mappedDataSolicitud } from "src/helper/transformarDatos";
 import { crearPartido } from "src/api/partidos";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const Solicitudes = () => {
+  const { t } = useTranlate();
+
   const Forms = [
     {
       name: "Deportes",
       Componet: SportsForm,
-      title: "Seleciona un deporte",
+      title: t("seleccionaDeporte"),
       fields: ["id_deporte", "deporte"],
     },
     {
       name: "EquipoLocal",
       Componet: TeamForm,
-      title: "Seleciona tu equipo",
+      title: t("seleccionaEquipo"),
       fields: ["id_equipo_local", "previous_id_equipo"],
     },
     {
       name: "Plantilla",
       Componet: TeamStaffForm,
-      title: "Crea tu plantilla",
+      title: t("creaPlantilla"),
       fields: ["jugadores", "id_equipo_actual"],
     },
     {
       name: "EquipoVisitante",
       Componet: OponnentForm,
-      title: "Seleciona a tu rival",
+      title: t("seleccionaRival"),
       fields: ["id_equipo_visitante"],
     },
     {
       name: "InformacionGeneral",
       Componet: GeneralDataForm,
-      title: "Rellena la informacion general",
+      title: t("rellenaInformacion"),
       fields: ["descripcion", "hora", "fecha", "maestro_intermediario"],
     },
   ];
 
   return (
-    <EstudianteLayaout title={"Creando Solicitud"}>
+    <EstudianteLayaout title={t("creandoSolicitud")}>
       <MultiStepFormProvider>
         <MultiStepForm
           Exito={ExitoForm}

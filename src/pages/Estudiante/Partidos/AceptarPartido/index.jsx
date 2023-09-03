@@ -6,21 +6,24 @@ import Exito from "./components/Exito";
 import TeamStaffForm from "./form";
 
 import { aceptarSolictudRival } from "src/api/partidos";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const AceptarPartido = ({ partido, miembros }) => {
   const { deporte } = partido;
+  const { t } = useTranlate();
+
   const Forms = [
     {
       name: "Plantilla",
       Componet: TeamStaffForm,
-      title: "Crea tu plantilla",
+      title: t("creaPlantilla"),
       fields: ["jugadores"],
       props: { partido, deporte, miembros },
     },
   ];
 
   return (
-    <EstudianteLayaout title={"Aceptar invitacion"}>
+    <EstudianteLayaout title={t("aceptarInvitacion")}>
       <MultiStepFormProvider>
         <MultiStepForm
           Exito={Exito}

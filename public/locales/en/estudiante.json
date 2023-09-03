@@ -99,5 +99,87 @@
   "contraseñaEquipo": "Team Password",
 
   "teHasUnidoCorrectamente": "You have successfully joined the team",
-  "unirseEquipo": "Join Team"
+  "unirseEquipo": "Join Team",
+  "regresar": "Back",
+
+  "seleccionaDeporte": "Select a sport",
+  "seleccionaEquipo": "Select your team",
+  "creaPlantilla": "Create your roster",
+  "seleccionaRival": "Select your opponent",
+  "rellenaInformacion": "Fill in general information",
+  "creandoSolicitud": "Creating Request",
+  "siguiente": "Next",
+
+  "titulares": "Headlines",
+  "noTitulares": "There are currently no headlines",
+  "reserva": "Reserves",
+  "noReserva": "There are currently no reserves",
+  "enviar": "Send",
+
+  "seleccionaHora": "Select a hour",
+  "SeleccionaDia": "Select a day",
+  "reasonToPlay": "Why do you want to play this game?",
+  "playDate": "On what day are you going to play?",
+  "playTime": "At what time are you going to play?",
+  "isMaestroIntermediario": "Intermediate master",
+
+  "error": "An error has occurred",
+  "ready": "Ready!",
+  "requestOnPending": "Now your request is on",
+  "rivalPending": "RIVAL PENDING",
+  "waitRivalAcceptance": "wait for the rival team to accept your match!",
+  "checkStatusByClickingButton": "You can check the status of your request by clicking on the button",
+  "seeMyApplication": "See my application",
+  "equipos": "Teams",
+  "partidos": "Matches",
+  "noScheduledMatch": "You don't have any scheduled match",
+  "makeRequestToCreateOne": "You can make the request to create one by",
+  "clickingHere": "clicking here",
+
+  "sport": "Sport",
+  "date": "Date",
+  "localTeam": "Local Team",
+  "visitorTeam": "Visitor Team",
+  "viewMoreInfo": "View More Information",
+
+  "partido": "Match ",
+
+  "datosGenerales": "General Data",
+  "zonaDeJuego": "Game Zone",
+  "pendiente": "Pending",
+  "fechaHora": "Date/Time",
+  "deporte": "Sport",
+  "maestroEncargado": "Assigned Teacher",
+  "aceptarPartido": "Accept Match",
+  "rechazarInvitacion": "Decline Invitation",
+  "cancelarPartido": "Cancel Match",
+  "enviarResultado": "Submit Results",
+  "tomarAsistencia": "Take Attendance",
+  "tomarAsistenciaInstruccion": "Click to take team attendance",
+  "cancelarPartidoInstruccion": "If a team doesn't show up, you can cancel the match",
+  "resultados": "Results",
+  "resultadosLiderEquipoLocal": "These are the results sent by the local team leader",
+  "aceptarResultado": "Accept Results",
+  "cancelarResultado": "Cancel Results",
+
+  "PartidoCancelado": "Match Canceled",
+  "CancelacionSubitulo": "Match cancellation completed",
+  "CanceladoDescripcion": "You have canceled the match due to lack of attendance",
+  "volverPartido": "Back to Matches",
+
+  "confirmarAbandonoEquipo": "Are you sure you want to leave this team?",
+
+  "confirmarCancelarPartido": "Are you sure you want to cancel this match?",
+  "partidoCancelado": "Match canceled",
+  "cancelacionPartidoCompletada": "Match cancellation completed",
+  "partidoCanceladoCorrectamente": "You have canceled the match successfully",
+  "volverAPartidos": "Back to matches",
+
+  "confirmarRechazarInvitacion": "Are you sure you want to reject the invitation for this match?",
+  "rechazoInvitacionCorrectamente": "You have successfully rejected the match invitation",
+  "rechazar": "Decline",
+  "aceptarInvitacion": "Accept invitation",
+
+  "teacherPending": "TEACHER PENDING",
+  "waitTeacherAcceptance": "wait for a teacher who cares of the match"
 }

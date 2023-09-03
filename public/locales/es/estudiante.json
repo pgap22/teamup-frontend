@@ -93,5 +93,90 @@
   "ingresaContraseñaEquipo": "Ingresa la contraseña del equipo",
   "contraseñaEquipo": "Contraseña del equipo",
   "teHasUnidoCorrectamente": "Te has unido correctamente al equipo",
-  "unirseEquipo": "Unirse Equipo"
+  "unirseEquipo": "Unirse Equipo",
+  "regresar": "Regresar",
+
+  "seleccionaDeporte": "Selecciona un deporte",
+  "seleccionaEquipo": "Selecciona tu equipo",
+  "creaPlantilla": "Crea tu plantilla",
+  "seleccionaRival": "Selecciona a tu rival",
+  "rellenaInformacion": "Rellena la información general",
+  "creandoSolicitud": "Creando Solicitud",
+  "siguiente": "Siguiente",
+
+  "titulares": "Titulares",
+  "noTitulares": "No hay titulares actualmente ",
+  "reserva": "Reservas",
+  "noReserva": "No hay reservas actualmente",
+  "enviar": "Enviar",
+
+  "seleccionaHora": "Selecciona una hora",
+  "SeleccionaDia": "Selecciona un dia",
+  "reasonToPlay": "¿Por qué quieres jugar este juego?",
+  "playDate": "¿Qué día van a jugar?",
+  "playTime": "¿A qué hora van a jugar?",
+  "isMaestroIntermediario": "Maestro intermediario",
+
+  "error": "Ha ocurrido un error",
+
+  "ready": "¡Listo!",
+  "requestOnPending": "Ahora tu solicitud está en",
+  "rivalPending": "ESPERA DEL RIVAL",
+  "waitRivalAcceptance": "Espera a que el equipo rival acepte tu partido.",
+  "checkStatusByClickingButton": "Puedes verificar el estado de tu solicitud haciendo clic en el botón.",
+  "seeMyApplication": "Ver mi solicitud",
+  "equipos": "Equipos",
+  "partidos": "Partidos",
+
+  "noScheduledMatch": "No tienes ningún partido programado",
+  "makeRequestToCreateOne": "Puedes hacer la solicitud para crear uno haciendo",
+  "clickingHere": "clic aquí",
+
+  "sport": "Deporte",
+  "date": "Fecha",
+  "localTeam": "Equipo Local",
+  "visitorTeam": "Equipo Visitante",
+  "viewMoreInfo": "Ver más información",
+
+  "partido": "Partido ",
+
+  "datosGenerales": "Datos Generales",
+  "zonaDeJuego": "Zona de Juego",
+  "pendiente": "Pendiente",
+  "fechaHora": "Fecha/Hora",
+  "deporte": "Deporte",
+  "maestroEncargado": "Maestro Encargado",
+  "aceptarPartido": "Aceptar Partido",
+  "rechazarInvitacion": "Rechazar Invitación",
+  "cancelarPartido": "Cancelar Partido",
+  "enviarResultado": "Enviar Resultado",
+  "tomarAsistencia": "Tomar Asistencia",
+  "tomarAsistenciaInstruccion": "Haz clic para tomar la asistencia del equipo",
+  "cancelarPartidoInstruccion": "Si un equipo no se presenta, puedes cancelar el partido",
+  "resultados": "Resultados",
+  "resultadosLiderEquipoLocal": "Estos son los resultados que el líder del equipo local envió",
+  "aceptarResultado": "Aceptar Resultado",
+  "cancelarResultado": "Cancelar Resultado",
+
+  "PartidoCancelado": "Partido Cancelado",
+  "CancelacionSubitulo": "Cancelación del partido completada",
+  "CanceladoDescripcion": "Has cancelado el partido por falta de asistencia",
+  "volverPartido": "Volver a partidos",
+
+  "confirmarAbandonoEquipo": "¿Seguro que deseas abandonar este equipo?",
+
+  "confirmarCancelarPartido": "¿Seguro que quieres cancelar este partido?",
+  "partidoCancelado": "Partido cancelado",
+  "cancelacionPartidoCompletada": "Cancelación del partido completada",
+  "partidoCanceladoCorrectamente": "Has cancelado el partido correctamente",
+  "volverAPartidos": "Volver a partidos",
+
+  "confirmarRechazarInvitacion": "¿Seguro que quieres rechazar la invitación de este partido?",
+  "rechazoInvitacionCorrectamente": "Has rechazado la invitación al partido correctamente",
+  "rechazar": "Rechazar",
+
+  "aceptarInvitacion": "Aceptar invitacion",
+
+  "teacherPending": " PENDIENTE DEL MAESTRO",
+  "waitTeacherAcceptance": "espera a un profesor que se encargue del partido"
 }

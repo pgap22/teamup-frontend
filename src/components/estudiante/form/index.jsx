@@ -5,6 +5,7 @@ import { useConstantes } from "../MultiStepForm/useConstantes";
 import { useState } from "react";
 import Skeleton from "src/components/ui/Skeleton";
 import Loader from "src/components/ui/Loader";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const EstudianteFormLayout = ({ children, title }) => {
   return (
@@ -23,8 +24,9 @@ const FormHeader = ({ title }) => {
 const FormButtons = () => {
   const { form, setForm } = useMultiStepForm();
   const { identificadores } = form;
+  const { t } = useTranlate();
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const { currentIndex, currentFormValid } = useConstantes({
     form,
@@ -54,7 +56,7 @@ const FormButtons = () => {
         setForm({ ...form, currentFormIndex: currentIndex + 1 });
       }
     } catch (error) {
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -62,7 +64,7 @@ const FormButtons = () => {
     <div className="flex w-full md:max-w-[750px] max-w-[400px] sm:flex-row gap-3 flex-col ">
       {identificadores.length > 1 && (
         <Button onClick={handleClickRegresar} color={"blanco"} border="negro">
-          Regresar
+          {t("regresar")}
         </Button>
       )}
 
@@ -72,7 +74,7 @@ const FormButtons = () => {
         disabled={!currentFormValid || loading}
       >
         <Skeleton loading={loading} fallback={<Loader />}>
-          {lastIndex === currentIndex ? "Enviar" : "Continuar"}
+          {lastIndex === currentIndex ? t("enviar") : t("siguiente")}
         </Skeleton>
       </Button>
     </div>

@@ -4,10 +4,11 @@ import { AiOutlineCloseSquare } from "react-icons/ai";
 import { motion } from "framer-motion";
 
 import { stateMiembrosValues } from "../helper";
+import { useTranlate } from "src/hooks/useTranslation";
 
 export const Jugadores = ({ jugadores, handleClick }) => {
   return (
-    <div className="flex flex-col gap-2 w-full max-h-96">
+    <div className="flex flex-col w-full gap-2 max-h-96">
       {jugadores?.map((jugador, i) => (
         <JugadorItem key={i} jugador={jugador} handleClick={handleClick} />
       ))}
@@ -16,6 +17,8 @@ export const Jugadores = ({ jugadores, handleClick }) => {
 };
 
 const JugadorItem = ({ jugador, handleClick }) => {
+  const { t } = useTranlate();
+
   const { id, nombre, rango, estado, jugadorYaUsado } = jugador;
   const { titular, reserva } = stateMiembrosValues;
   let color = "#A1A1A1";
@@ -52,7 +55,7 @@ const JugadorItem = ({ jugador, handleClick }) => {
         )}
       </motion.div>
       <p className="truncate text-[#565656] text-lg font-bold">
-        {nombre} {rango === "lider" && "(Tu)"}
+        {nombre} {rango === "lider" && t("tu")}
       </p>
     </div>
   );

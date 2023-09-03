@@ -1,16 +1,19 @@
+import React from "react";
 import { useModal } from "src/store/useModal";
 import TemplateModal from "src/components/Modales/ModalTemplate";
-
 import { useNavigate } from "react-router-dom";
 import Button from "src/components/form/Button";
 import { cancelarPartidoEstudiante } from "src/api/partidos";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const ContentModal = ({ toggleModal, id }) => {
   const navigate = useNavigate();
+  const { t } = useTranlate();
+
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
-        <h2>Seguro que quieres rechazar la invitacion de este partido?</h2>
+        <h2>{t("confirmarRechazarInvitacion")}</h2>
         <div className="grid grid-cols-2 gap-4">
           <Button
             onClick={() => {
@@ -20,19 +23,18 @@ const ContentModal = ({ toggleModal, id }) => {
                 toggleModal(false);
                 navigate("/estudiante/exito", {
                   state: {
-                    titulo: "Partido cancelado",
-                    subtitulo: "Cancelacion del partido completada",
-                    descripcion:
-                      "Has rechazado la invitacion el partido correctamente",
+                    titulo: "partidoCancelado",
+                    subtitulo: "cancelacionPartidoCompletada",
+                    descripcion: "rechazoInvitacionCorrectamente",
                     url: `/estudiante/partidos`,
-                    linkText: "Volver a partidos",
+                    linkText: "volverAPartidos",
                   },
                 });
               }
             }}
             color={"rojo"}
           >
-            Rechazar
+            {t("rechazar")}
           </Button>
         </div>
       </div>
@@ -42,11 +44,12 @@ const ContentModal = ({ toggleModal, id }) => {
 
 const ModalRechazarPartido = ({ id = 2 }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"RechazarInvitacion"}
-      desktopTitle={"Rechazar invitacion"}
+      desktopTitle={t("rechazarInvitacion")}
     >
       <ContentModal toggleModal={toggleModal} id={id} />
     </TemplateModal>

@@ -8,10 +8,12 @@ import { useState } from "react";
 import { useConstantes } from "src/components/estudiante/MultiStepForm/useConstantes";
 import { useMultiStepForm } from "src/components/estudiante/MultiStepForm/useMultiStepForm";
 import { useEffect } from "react";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const GeneralDataForm = () => {
   const { setForm } = useMultiStepForm();
   const { form, currentFormState, currentFormName } = useConstantes();
+  const { t } = useTranlate();
 
   const {
     descripcion: descripcionState,
@@ -61,28 +63,19 @@ const GeneralDataForm = () => {
     setForm({ ...form, [currentFormName]: { ...formStateCopy } });
   }, [descripcion, hora, maestroIntermediario, fecha]);
 
-  // setForm({ ...form, [currentFormName]: { ...formStateCopy } });
-
   return (
     <div className="max-w-[400px] w-full h-full flex flex-col items-center gap-10">
       <Textarea
         setDescripcion={setDescripcion}
         descripcion={descripcion}
         rows="4"
-        label={"¿Porque quieres jugar este juego?"}
+        label={t("reasonToPlay")}
       />
-      <DatePicker
-        date={fecha}
-        setDate={setFecha}
-        label={"¿Que dia van a jugar?"}
-      />
-      <TimePicker
-        time={hora}
-        setTime={setHora}
-        label={"¿A que hora van a jugar?"}
-      />
+      <DatePicker date={fecha} setDate={setFecha} label={t("playDate")} />
+      <TimePicker time={hora} setTime={setHora} label={t("playTime")} />
       {!skipMaestro && opcionalMaestro && (
         <Toggle
+          label={t("isMaestroIntermediario")}
           enabled={maestroIntermediario}
           setEnabled={setMaestro_intermediario}
         />
