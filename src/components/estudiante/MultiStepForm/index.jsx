@@ -142,7 +142,7 @@ const AlertaImprovisada = ({ message }) => {
         <strong class="block font-medium"> {t("error")} </strong>
       </div>
 
-      <p class="mt-2 text-sm text-red-700">{t("errors:" + message)}</p>
+      <p class="mt-2 text-sm text-red-700">{/*t("errors:" + message)*/message}</p>
     </div>
   );
 };
