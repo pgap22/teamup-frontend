@@ -6,14 +6,18 @@ import { useState } from "react";
 
 const Animador = () => {
   const location = useLocation();
-
+  const { cambiarPaginaDiccionario } = useTranlate()
   const initialAnimation = { opacity: 0 };
   const animateAnimation = { opacity: 1 };
   const exitAnimation = { opacity: 0 };
   const transitionProps = { duration: 0.4 };
 
+  const terminarAnimacion = ()=>{
+    cambiarPaginaDiccionario();
+  }
+
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence onExitComplete={terminarAnimacion} mode="wait">
       <motion.div
         key={location.pathname}
         initial={initialAnimation}

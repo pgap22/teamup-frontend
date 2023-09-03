@@ -33,9 +33,9 @@ const TranaslationProvider = ({ children }) => {
     es: { value: "es", name: "español" },
   };
 
-  useEffect(() => {
+  const cambiarPaginaDiccionario = ()=>{
     setCurrenPage(getCurrentPage(location.pathname));
-  }, [location.pathname]);
+  }
 
   const handleTranslation = (value) => {
     i18n.changeLanguage(value);
@@ -48,6 +48,7 @@ const TranaslationProvider = ({ children }) => {
       value={{
         t,
         handleTranslation,
+        cambiarPaginaDiccionario,
         languaje,
         languajes,
       }}
