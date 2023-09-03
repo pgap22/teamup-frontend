@@ -35,11 +35,11 @@ export default function Crear() {
     return (
         <CoordinacionLayout titulo={"Crear Maestros"}>
             <CoordinacionForm handleSubmit={handleSubmit} imagenUrl={"/Docente.jpg"} titulo={"Datos Generales"}>
-                <Input register={register("nombre")} label={"Nombre"} placeholder={"Nombres del maestro"} />
-                <Input register={register("apellido")} label={"Apellido"} placeholder={"Apellidos del maestro"} />
+                <Input register={register("nombre", {required: true})} label={"Nombre"} placeholder={"Nombres del maestro"} />
+                <Input register={register("apellido", {required: true})} label={"Apellido"} placeholder={"Apellidos del maestro"} />
                 <Select setValue={setValue} valueLabel={"id_nivelAcademico"} opciones={tipoNivelAcademico} label={"Nivel del docente"} placeholder={"Nivel academico del docente"} />
-                <Input register={register("email")} label={"Email"} type="email" placeholder={"Email"} />
-                <Input register={register("password")} Icon={OjoPassword} label={"Password"} type={mostrarPassword ? "text" : "password"} placeholder={"Password"} />
+                <Input register={register("email", {required: true})} label={"Email"} type="email" placeholder={"Email"} />
+                <Input register={register("password", {required: true})} Icon={OjoPassword} label={"Password"} type={mostrarPassword ? "text" : "password"} placeholder={"Password"} />
                 <Button disabled={isLoading}><Skeleton loading={isLoading} fallback={<Loader />}>Crear Cuenta Maestro</Skeleton></Button>
             </CoordinacionForm>
         </CoordinacionLayout>
