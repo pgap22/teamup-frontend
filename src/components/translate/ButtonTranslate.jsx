@@ -11,7 +11,8 @@ const SelectorButtons = ({ languaje, handleTranslation, bg_color }) => {
         handleTranslation(languaje[0]);
       }}
     >
-      {t("default:" + languaje[0])}
+      <span className="hidden lg:block"> {t("default:" + languaje[0])} </span>
+      <span className="uppercase lg:hidden"> {languaje[0]} </span>
     </div>
   );
 };
@@ -65,7 +66,11 @@ const ButtonTranslate = ({ bg = "white", w = "max-w-[150px]" }) => {
         }}
         className={`relative grid h-10 w-full font-bold rounded-md cursor-pointer select-none place-items-center ${bg_color} ${text_color} ${w}`}
       >
-        {t("default:" + languajes[languaje].value)}
+        <span className="hidden lg:block">
+          {t("default:" + languajes[languaje].value)}
+        </span>
+        <span className="uppercase lg:hidden">{languajes[languaje].value}</span>
+
         <Selector
           bg={bg_color}
           handleTranslation={handleTranslation}
