@@ -3,13 +3,16 @@ import { jugadoresSeleccionados } from "src/helper/transformarDatos";
 import { motion } from "framer-motion";
 
 import { stateMiembrosValues } from "../helper";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const HeadLines = ({ headLinesPlayers, noTitulares }) => {
+  const { t } = useTranlate();
+
   const arrayLength = headLinesPlayers?.length;
   return (
-    <div className="h-full w-full flex flex-col gap-2">
+    <div className="flex flex-col w-full h-full gap-2">
       <h1 className="text-lg font-bold">
-        Titulares ({arrayLength}/{noTitulares})
+        {t("titulares")} ({arrayLength}/{noTitulares})
       </h1>
       <div className="flex flex-col max-w-[300px] overflow-auto">
         {arrayLength !== 0 &&
@@ -18,9 +21,7 @@ const HeadLines = ({ headLinesPlayers, noTitulares }) => {
           ))}
 
         {arrayLength === 0 && (
-          <p className="text-sm text-[#A1A1A1]">
-            No hay jugadores titulares acutalmente
-          </p>
+          <p className="text-sm text-[#A1A1A1]">{t("noTitulares")}</p>
         )}
       </div>
     </div>
@@ -29,22 +30,21 @@ const HeadLines = ({ headLinesPlayers, noTitulares }) => {
 
 const Reservers = ({ reservePlayers, maxReservas }) => {
   const arrayLength = reservePlayers.length;
+  const { t } = useTranlate();
 
   return (
-    <div className="h-full w-full flex flex-col gap-2">
+    <div className="flex flex-col w-full h-full gap-2">
       <h1 className="text-lg font-bold">
-        Reservas ({arrayLength}/{maxReservas})
+        {t("reserva")} ({arrayLength}/{maxReservas})
       </h1>
-      <div className="flex flex-col overflow-auto w-full">
+      <div className="flex flex-col w-full overflow-auto">
         {arrayLength !== 0 &&
           reservePlayers.map((player) => (
             <JugadorInfo key={player.id} jugador={player} esTitular={false} />
           ))}
 
         {arrayLength === 0 && (
-          <p className="text-sm text-[#A1A1A1]">
-            No hay jugadores de reserva acutalmente
-          </p>
+          <p className="text-sm text-[#A1A1A1]">{t("noReserva")}</p>
         )}
       </div>
     </div>
@@ -90,7 +90,7 @@ const JugadorInfo = ({ jugador, esTitular }) => {
       exit={exitAnimation}
       transition={transitionProps}
     >
-      <div className="flex gap-3 w-full items-center ">
+      <div className="flex items-center w-full gap-3 ">
         <BsCircleFill size={20} color={colorCircle} />
         <p className={`text-base font-bold ${stylesJugador}`}>{nombre}</p>
       </div>

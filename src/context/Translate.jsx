@@ -1,30 +1,41 @@
-import { createContext, useEffect, useState } from "react";
+import { Suspense, createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 const getCurrentLanguajes = () => {
   const languaje = window.localStorage.getItem("teamup-languaje");
   return languaje ? languaje : "es";
 };
 
-const languajes = {
-  en: { value: "en", name: "Ingles" },
-  es: { value: "es", name: "Español" },
-};
+function getCurrentPage(pathname = "") {
+  if (pathname === "/") return "paginaPrincipal";
+
+  const partes = pathname.split("/");
+  const nombrePagina = partes[1];
+  return nombrePagina;
+}
 
 const TranslationContext = createContext();
 
 const TranaslationProvider = ({ children }) => {
+  const location = useLocation();
   const [languaje, setLanguaje] = useState(() => {
     return getCurrentLanguajes();
   });
-  const [currentPage, setCurrenPage] = useState();
-  const { i18n } = useTranslation();
+  const [currentPage, setCurrenPage] = useState(() => {
+    return getCurrentPage(location.pathname);
+  });
+
+  const { t, i18n } = useTranslation([currentPage, "default", "errors"]);
+
+  const languajes = {
+    en: { value: "en", name: "ingles" },
+    es: { value: "es", name: "español" },
+  };
 
   useEffect(() => {
-    const currentLanguaje = getCurrentLanguajes();
-    i18n.changeLanguage(currentLanguaje);
-    setLanguaje(currentLanguaje);
-  }, []);
+    setCurrenPage(getCurrentPage(location.pathname));
+  }, [location.pathname]);
 
   const handleTranslation = (value) => {
     i18n.changeLanguage(value);
@@ -35,6 +46,7 @@ const TranaslationProvider = ({ children }) => {
   return (
     <TranslationContext.Provider
       value={{
+        t,
         handleTranslation,
         languaje,
         languajes,

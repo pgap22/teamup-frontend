@@ -10,12 +10,20 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Skeleton from "src/components/ui/Skeleton";
 
-import {HashLoader} from "react-spinners"
+import { HashLoader } from "react-spinners";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const FormUniseEquipo = ({ toggleModal }) => {
   const navigate = useNavigate();
-  const { data, register, handleSubmit, mensajeError, registroExitoso, isLoading } =
-    useFormulario(unirseEquipo);
+  const {
+    data,
+    register,
+    handleSubmit,
+    mensajeError,
+    registroExitoso,
+    isLoading,
+  } = useFormulario(unirseEquipo);
+  const { t } = useTranlate();
 
   useEffect(() => {
     if (registroExitoso) {
@@ -32,26 +40,29 @@ const FormUniseEquipo = ({ toggleModal }) => {
         className="flex flex-col items-start justify-center gap-3 p-5"
       >
         {mensajeError && !registroExitoso && (
-          <p className="text-red-500">{mensajeError}</p>
+          <p className="text-red-500">{t("errors:" + mensajeError)}</p>
         )}
         {registroExitoso && (
-          <p className="text-green-500">Te has unido correctamente al equipo</p>
+          <p className="text-green-500">{t("teHasUnidoCorrectamente")}</p>
         )}
         <Input
-          placeholder={"Ingresa el nombre del equipo"}
-          label="Nombre del equipo"
+          placeholder={t("ingresaNombreEquipo")}
+          label={t("nombreEquipo")}
           type="text"
           register={register("nombre")}
         />
         <Input
-          placeholder={"Ingresa la contraseña del equipo"}
-          label="Contraseña del equipo"
+          placeholder={t("ingresaContraseñaEquipo")}
+          label={t("contraseñaEquipo")}
           type="password"
           register={register("password_access")}
         />
         <Button disabled={isLoading}>
-          <Skeleton loading={isLoading} fallback={<HashLoader size={28} color="white" />}>
-            Unirse Equipo
+          <Skeleton
+            loading={isLoading}
+            fallback={<HashLoader size={28} color="white" />}
+          >
+            {t("unirseEquipo")}
           </Skeleton>
         </Button>
       </form>
@@ -61,11 +72,12 @@ const FormUniseEquipo = ({ toggleModal }) => {
 
 const UnirseEquipoModal = () => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"UnirseEquipo"}
-      desktopTitle={"Unirse a un equipo"}
+      desktopTitle={t("unirseEquipo")}
     >
       <FormUniseEquipo toggleModal={toggleModal} />
     </TemplateModal>

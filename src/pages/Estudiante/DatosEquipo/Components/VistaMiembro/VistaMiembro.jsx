@@ -5,17 +5,18 @@ import { useModal } from "../../../../../store/useModal";
 
 import { miembrosEquipo } from "../../../../../helper/transformarDatos.jsx";
 import AbandonarEquipoModal from "../../../../../components/Modales/equipoModal/AbandonarEquipo.jsx";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const VistaMiembro = ({ equipo }) => {
   const { toggleModal } = useModal();
   const { jugadores } = equipo;
+  const { t } = useTranlate();
 
   return (
     <div className="flex flex-col items-center gap-4 md:items-start">
-      <Jugadores id_lider={equipo.lider.id}
-        jugadores={jugadores} />
+      <Jugadores id_lider={equipo.lider.id} jugadores={jugadores} />
       <Button
-        textButton={"Abandonar equipo"}
+        textButton={t("abandonar")}
         onClickButton={() => {
           toggleModal("AbandonarEquipo");
         }}

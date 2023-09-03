@@ -1,13 +1,9 @@
 import { useState } from "react";
 
-const Toggle = ({ enabled, setEnabled }) => {
-
-
+const Toggle = ({ enabled, setEnabled, label }) => {
   return (
     <div className="flex flex-col items-center gap-5 sm:flex-row">
-      <span className="ml-2 text-xl font-bold text-gray-900">
-        Maestro intermediario
-      </span>
+      <span className="ml-2 text-xl font-bold text-gray-900">{label}</span>
       <div className="flex">
         <label className="relative inline-flex items-center mr-5 cursor-pointer">
           <input

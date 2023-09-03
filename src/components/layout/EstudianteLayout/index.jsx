@@ -15,31 +15,7 @@ import { RiTeamLine } from "react-icons/ri";
 import { MdSportsSoccer } from "react-icons/md";
 import { AiOutlinePullRequest } from "react-icons/ai";
 import EquipoModal from "src/components/Modales/equipoModal/EquipoModal";
-
-const links = [
-  {
-    nombre: "Inicio",
-    ruta: "/estudiante",
-    principal: true,
-    icon: AiOutlineHome,
-  },
-
-  {
-    nombre: "Equipo",
-    ruta: "/estudiante/equipos",
-    icon: RiTeamLine,
-  },
-  {
-    nombre: "Partidos",
-    ruta: "/estudiante/partidos",
-    icon: MdSportsSoccer,
-  },
-  {
-    nombre: "Solicitudes",
-    ruta: "/estudiante/solicitudes",
-    icon: AiOutlinePullRequest,
-  },
-];
+import { useTranlate } from "src/hooks/useTranslation";
 
 const EstudianteLayaout = ({
   children,
@@ -51,6 +27,32 @@ const EstudianteLayaout = ({
   RightAsideTitulo,
 }) => {
   const { menu, toggleMenu } = useMenu();
+  const { t } = useTranlate();
+
+  const links = [
+    {
+      nombre: t("default:Inicio"),
+      ruta: "/estudiante",
+      principal: true,
+      icon: AiOutlineHome,
+    },
+    {
+      nombre: t("default:Equipo"),
+      ruta: "/estudiante/equipos",
+      icon: RiTeamLine,
+    },
+    {
+      nombre: t("default:Partidos"),
+      ruta: "/estudiante/partidos",
+      icon: MdSportsSoccer,
+    },
+    {
+      nombre: t("default:Solicitudes"),
+      ruta: "/estudiante/solicitudes",
+      icon: AiOutlinePullRequest,
+    },
+  ];
+
   useEffect(() => {
     toggleMenu(false);
   }, []);

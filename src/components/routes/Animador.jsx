@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import PaginaActual from "./PaginaActual";
+import { useTranlate } from "src/hooks/useTranslation";
+import { useState } from "react";
 
 const Animador = () => {
   const location = useLocation();

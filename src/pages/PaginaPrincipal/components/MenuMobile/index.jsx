@@ -12,8 +12,8 @@ const MenuMobile = () => {
       transition={{ duration: 0.3 }}
     >
       <FondoSombra />
-      <div className="absolute w-full top-0 p-2 z-30">
-        <div className="bg-white p-4 rounded-md flex flex-col gap-8">
+      <div className="absolute top-0 z-30 w-full p-2 md:hidden">
+        <div className="flex flex-col gap-8 p-4 bg-white rounded-md">
           <LogoCancelButton />
           <MenuLinks />
         </div>

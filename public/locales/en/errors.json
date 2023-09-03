@@ -1,0 +1,65 @@
+{
+  "nombre_requerido": "The name must be a string",
+  "nombre_vacio": "The name must not be empty",
+
+  "apellido_requerido": "The last name must be a string",
+  "apellido_vacio": "The last name must not be empty",
+
+  "email_requerido": "The email must be a string",
+  "email_invalido": "The email address is not valid",
+  "email_dominio_especifico": "The email address must be from a specific domain",
+
+  "password_requerido": "The password must be a string",
+  "password_vacio": "The password must not be empty",
+  "password_min_length": "The password must be at least 8 characters long",
+
+  "nivel_academico_requerido": "Select the academic level",
+  "nivel_academico_invalido": "Invalid academic level",
+
+  "token_invalido": "Invalid token",
+
+  "error_correo": "Error sending email",
+  "correo_existente": "The email address has already been used",
+
+  "usuario_existente": "The user already exists",
+  "usuario_no_encontrado": "User not found",
+
+  "credenciales_incorrectas": "Incorrect credentials",
+  "contrasena_no_coincide": "Passwords do not match",
+  "usuario_no_existe": "User does not exist",
+
+  "token_invalido_cambio_contrasena": "The token is invalid for password change",
+  "error_enviar_correo": "Error sending email",
+
+  "limiteJugadores_requerido": "The player limit must be a number",
+  "limiteJugadores_vacio": "The player limit must not be empty",
+  "limiteJugadoresCambio_requerido": "The player limit for change must be a number",
+  "limiteJugadoresCambio_vacio": "The player limit for change must not be empty",
+
+  "id_tipoDeporte_requerido": "The sport type ID must be a number",
+  "id_tipoDeporte_vacio": "The sport type ID must not be empty",
+
+  "number_requerido": "The number is required.",
+  "positive_number": "The number must be positive.",
+
+  "descripcion_required": "Description is required.",
+  "descripcion_vacia": "Description cannot be empty.",
+
+  "fecha_requerida": "Date is required.",
+  "fecha_vacia": "Date cannot be empty.",
+  "fecha_invalida": "The provided date is invalid.",
+
+  "jugadores_required": "At least one player is required.",
+  "jugadores_vacio": "The player list cannot be empty.",
+
+  "rango_required": "A range is required.",
+  "rango_vacio": "The range cannot be empty.",
+
+  "estado_required": "State is required.",
+  "estado_vacio": "State cannot be empty.",
+
+  "zona_de_juego_required": "A game zone is required.",
+
+  "resultado_local_required": "The local team result is required.",
+  "resultado_visitante_required": "The visitor team result is required."
+}

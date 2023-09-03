@@ -1,12 +1,16 @@
+import { useTranlate } from "src/hooks/useTranslation";
 import MenuButton from "./MenuButton";
+import ButtonTranslate from "src/components/translate/ButtonTranslate";
 
 const MenuLinks = () => {
+  const { t } = useTranlate();
   return (
     <div className="flex flex-col gap-4">
-      <MenuButton to="/login">Iniciar Sesión</MenuButton>
+      <MenuButton to="/login">{t("iniciarSesion")}</MenuButton>
       <MenuButton to="/signup" color="blanco" border="negro">
-        Registrate
+        {t("registrate")}
       </MenuButton>
+      <ButtonTranslate w="w-full" bg={"primary"} />
     </div>
   );
 };

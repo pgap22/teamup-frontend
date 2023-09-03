@@ -1,5 +1,6 @@
 import { useModal } from "src/store/useModal";
 import TemplateModal from "src/components/Modales/ModalTemplate";
+import { useTranlate } from "src/hooks/useTranslation";
 
 import { useNavigate } from "react-router-dom";
 import { cancelarPartidoEstudiante } from "src/api/partidos";
@@ -11,17 +12,18 @@ import Loader from "src/components/ui/Loader";
 
 const ContentModal = ({ toggleModal, id }) => {
   const navigate = useNavigate();
+  const { t } = useTranlate();
   const {refetch, registroExitoso, isLoading} = useFetchClick("cancelarPartido", ()=> cancelarPartidoEstudiante(id) );
   useEffect(()=>{
     if (registroExitoso) {
       toggleModal(false);
       navigate("/estudiante/exito", {
         state: {
-          titulo: "Partido cancelado",
-          subtitulo: "Cancelacion del partido completada",
-          descripcion: "Has cancelado el partido correctamente",
+          titulo: t("partidoCancelado"),
+          subtitulo: t("cancelacionPartidoCompletada"),
+          descripcion: t("partidoCanceladoCorrectamente"),
           url: `/estudiante/partidos`,
-          linkText: "Volver a partidos",
+          linkText: t("volverAPartidos"),
         },
       });
     }
@@ -29,7 +31,7 @@ const ContentModal = ({ toggleModal, id }) => {
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
-        <h2>Seguro que quieres cancelar este partido ?</h2>
+        <h2>{t("confirmarCancelarPartido")}</h2>
         <div className="grid grid-cols-2 gap-4">
           <Button
             onClick={refetch}
@@ -37,7 +39,7 @@ const ContentModal = ({ toggleModal, id }) => {
             color={"rojo"}
           >
             <Skeleton loading={isLoading} fallback={<Loader />}>
-              Cancelar
+            {t("cancelar")}
             </Skeleton>
           </Button>
         </div>
@@ -48,11 +50,12 @@ const ContentModal = ({ toggleModal, id }) => {
 
 const CancelarPartidoModal = ({ id = 2 }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"CancelarPartido"}
-      desktopTitle={"Cancelar partido"}
+      desktopTitle={t("cancelarPartido")}
     >
       <ContentModal toggleModal={toggleModal} id={id} />
     </TemplateModal>

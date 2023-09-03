@@ -1,0 +1,18 @@
+{
+  "en": "Ingles",
+  "es": "Español",
+
+  "Inicio": "Inicio",
+  "Equipo": "Equipo",
+  "Partidos": "Partidos",
+  "Solicitudes": "Solicitudes",
+  "cerrarSesion": "Cerrar Sesion",
+
+  "Pendienterival": "Pendiente rival",
+  "Pendientemaestro": "Pendiente maestro",
+  "Pendientecoordinacion": "Pendiente coordinacion",
+  "Pendienteasistencia": "Pendiente asistencia",
+  "Partidoenjuego": "Partido en juego",
+  "Partidofinalizado": "Partido finalizado",
+  "Partidocancelado": "Partido cancelado"
+}

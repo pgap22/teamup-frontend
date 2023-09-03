@@ -1,7 +1,7 @@
 import { useModal } from "../../../store/useModal";
-
 import Button from "../../form/Button.jsx";
 import TemplateModal from "../ModalTemplate";
+import { useTranlate } from "src/hooks/useTranslation";
 
 import { abandonarEquipo } from "../../../api";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,8 @@ import Loader from "src/components/ui/Loader";
 
 const ContentModal = ({ toggleModal, id }) => {
   const navigate = useNavigate();
+  const { t } = useTranlate();
+  
   const { isLoading, refetch, registroExitoso } = useFetchClick("abandonar_equipo", () => abandonarEquipo(id));
 
   useEffect(() => {
@@ -19,11 +21,11 @@ const ContentModal = ({ toggleModal, id }) => {
       toggleModal(false);
       navigate("/estudiante/exito", {
         state: {
-          titulo: "Saliste del grupo",
-          subtitulo: "Has salido del grupo",
-          descripcion: "Has salido del grupo correctamente",
+          titulo: "salirDelGrupo",
+          subtitulo: "hasSalidoDelGrupo",
+          descripcion: "salirExitosamente",
           url: `/estudiante/equipos`,
-          linkText: "Volver a tus equipos",
+          linkText: "volverATusEquipos",
         },
       });
     }
@@ -31,7 +33,7 @@ const ContentModal = ({ toggleModal, id }) => {
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
-        <h2>Seguro abandonar este equipo ?</h2>
+        <h2>{t("seguroAbandonarEquipo")}</h2>
 
         <div className="grid grid-cols-2 gap-4">
           <Button
@@ -40,7 +42,7 @@ const ContentModal = ({ toggleModal, id }) => {
             disabled={isLoading}
           >
             <Skeleton loading={isLoading} fallback={<Loader />}>
-              Abandonar
+               {t("abandonar")}
             </Skeleton>
           </Button>
           <Button
@@ -49,7 +51,7 @@ const ContentModal = ({ toggleModal, id }) => {
             }}
             color={"blanco"}
           >
-            Cancelar
+            {t("cancelar")}
           </Button>
         </div>
       </div>
@@ -59,11 +61,12 @@ const ContentModal = ({ toggleModal, id }) => {
 
 const AbandonarEquipoModal = ({ id }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"AbandonarEquipo"}
-      desktopTitle={"Abandonar equipo"}
+      desktopTitle={t("salirDelGrupo")}
     >
       <ContentModal toggleModal={toggleModal} id={id} />
     </TemplateModal>

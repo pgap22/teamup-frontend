@@ -2,6 +2,7 @@ import { useModal } from "../../../store/useModal";
 
 import Button from "../../form/Button.jsx";
 import TemplateModal from "../ModalTemplate";
+import { useTranlate } from "src/hooks/useTranslation";
 
 import { HacerLider } from "../../../api";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ import Loader from "src/components/ui/Loader";
 const ContentModal = ({ toggleModal }) => {
   const { id_equipo, id_usuarios, nombre } = datosJugador();
   const {isLoading, registroExitoso, refetch} = useFetchClick("liderEquipo", HacerLider(id_equipo, { id_lider: id_usuarios }));
+  const { t } = useTranlate();
 
   const navigate = useNavigate();
   useEffect(()=>{
@@ -21,11 +23,11 @@ const ContentModal = ({ toggleModal }) => {
       toggleModal(false);
       navigate("/estudiante/exito", {
         state: {
-          titulo: "Solicitud completada",
-          subtitulo: "Cambio de lider",
-          descripcion: `${nombre} es el nuevo lider del equipo te has convertido en un miebro`,
+          titulo: t("solicitudCompletada"),
+          subtitulo: t("cambioLider"),
+          descripcion: `${nombre} ${t("nuevoLider")}`,
           url: `/estudiante/equipos/datos/${id_equipo}`,
-          linkText: "Volver al equipo",
+          linkText: t("volverAlEquipo"),
         },
       });
     }
@@ -37,7 +39,7 @@ const ContentModal = ({ toggleModal }) => {
         <div className="grid grid-cols-2 gap-4">
           <Button disabled={isLoading} onClick={refetch} color={"verde"}>
             <Skeleton loading={isLoading} fallback={<Loader />}>
-                Aceptar
+              {t("aceptar")}
             </Skeleton>
           </Button>
           <Button
@@ -46,7 +48,7 @@ const ContentModal = ({ toggleModal }) => {
             }}
             color={"blanco"}
           >
-            Cancelar
+            {t("cancelar")}
           </Button>
         </div>
       </div>
@@ -56,11 +58,12 @@ const ContentModal = ({ toggleModal }) => {
 
 const HacerLiderModal = ({ id, nombre, idEquipo }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"HacerLider"}
-      desktopTitle={"Cambiar de lider"}
+      desktopTitle={t("cambiarLider")}
     >
       <ContentModal
         toggleModal={toggleModal}

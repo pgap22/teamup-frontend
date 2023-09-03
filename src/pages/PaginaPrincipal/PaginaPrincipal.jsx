@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import MenuMobile from "./components/MenuMobile";
@@ -18,20 +17,20 @@ const PaginaPrincipal = () => {
   }, []);
 
   return (
-    <Suspense fallback={<PageLoader />  }>
-      <div className="bg-primary text-white p-4 w-full md:p-8 flex justify-center">
+    <>
+      <div className="flex justify-center w-full p-4 text-white bg-primary md:p-8">
         <div className="max-w-[1280px]  w-full">
           <Header />
           <Hero />
         </div>
       </div>
-      
+
       <SportBoxes />
 
       <Cta />
 
       <AnimatePresence>{menu && <MenuMobile />}</AnimatePresence>
-    </Suspense>
+    </>
   );
 };
 

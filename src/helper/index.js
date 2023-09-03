@@ -48,6 +48,13 @@ export const convertArrayToFileList = (fileArray) => {
   return dataTransfer.files;
 };
 
-export const fechaNormal=(date)=>{
-  return new Date(date).toLocaleDateString("es-ES", {weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', hour12: false})
-}
+export const fechaNormal = (date, languaje = "en") => {
+  return new Date(date).toLocaleDateString(languaje, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  });
+};

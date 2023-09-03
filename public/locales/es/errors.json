@@ -1,0 +1,65 @@
+{
+  "nombre_requerido": "El nombre debe ser un string",
+  "nombre_vacio": "El nombre no debe estar vacío",
+
+  "apellido_requerido": "El apellido debe ser un string",
+  "apellido_vacio": "El apellido no debe estar vacío",
+
+  "email_requerido": "El correo debe ser un string",
+  "email_invalido": "El correo electrónico no es válido",
+  "email_dominio_especifico": "El correo electrónico debe ser de un dominio específico",
+
+  "password_requerido": "La contraseña debe ser un string",
+  "password_vacio": "La contraseña no debe estar vacía",
+  "password_min_length": "La contraseña debe tener al menos 8 caracteres",
+
+  "nivel_academico_requerido": "Selecciona el nivel académico",
+  "nivel_academico_invalido": "Nivel académico inválido",
+
+  "token_invalido": "Token no válido",
+
+  "error_correo": "Error al enviar el correo",
+  "correo_existente": "El correo ya ha sido utilizado",
+
+  "usuario_existente": "El usuario ya existe",
+  "usuario_no_encontrado": "Usuario no encontrado",
+
+  "credenciales_incorrectas": "Credenciales incorrectas",
+  "contrasena_no_coincide": "Las contraseñas no coinciden",
+  "usuario_no_existe": "El usuario no existe",
+
+  "token_invalido_cambio_contrasena": "El token es inválido para cambiar la contraseña",
+  "error_enviar_correo": "Error al enviar el correo",
+
+  "limiteJugadores_requerido": "El límite de jugadores debe ser un número",
+  "limiteJugadores_vacio": "El límite de jugadores no debe estar vacío",
+  "limiteJugadoresCambio_requerido": "El límite de jugadores para cambio debe ser un número",
+  "limiteJugadoresCambio_vacio": "El límite de jugadores para cambio no debe estar vacío",
+
+  "id_tipoDeporte_requerido": "El ID del tipo de deporte debe ser un número",
+  "id_tipoDeporte_vacio": "El ID del tipo de deporte no debe estar vacío",
+
+  "number_requerido": "El número es requerido.",
+  "positive_nmber": "El número debe ser positivo.",
+
+  "descripcion_required": "La descripción es requerida.",
+  "descripcion_vacia": "La descripción no puede estar vacía.",
+
+  "fecha_requerida": "La fecha es requerida.",
+  "fecha_vacia": "La fecha no puede estar vacía.",
+  "fecha_invalida": "La fecha proporcionada es inválida.",
+
+  "jugadores_required": "Se requiere al menos un jugador.",
+  "jugadores_vacio": "La lista de jugadores no puede estar vacía.",
+
+  "rango_required": "Se requiere un rango.",
+  "rango_vacio": "El rango no puede estar vacío.",
+
+  "estado_required": "El estado es requerido.",
+  "estado_vacio": "El estado no puede estar vacío.",
+
+  "zona_de_juego_required": "Se requiere una zona de juego.",
+
+  "resultado_local_required": "Se requiere el resultado del equipo local.",
+  "resultado_visitante_required": "Se requiere el resultado del equipo visitante."
+}

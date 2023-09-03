@@ -1,4 +1,11 @@
 {
-    "titulo": "¡Hola, Bienvenido! 👋",
-    "subtitulo": "Inicia sesión para acceder a tu cuenta."
+  "titulo": "¡Hola, Bienvenido! 👋",
+  "subtitulo": "Inicia sesión para acceder a tu cuenta.",
+  "correoLabel": "Correo Institucional",
+  "correoPlaceholder": "Ingrese su correo institucional",
+  "contrasenaLabel": "Contraseña",
+  "contrasenaPlaceholder": "Ingrese su contraseña",
+  "iniciarSesion": "Iniciar Sesión",
+  "noTienesCuenta": "¿No tienes cuenta?",
+  "olvidasteContrasena": "¿Olvidaste tu contraseña?"
 }

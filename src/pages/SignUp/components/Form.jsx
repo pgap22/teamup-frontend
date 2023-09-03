@@ -15,48 +15,56 @@ import { useIconPassword } from "../../../hooks/useIconPassword";
 import { HashLoader } from "react-spinners";
 import Skeleton from "src/components/ui/Skeleton";
 import { PageLoader } from "src/components/ui/PageLoader";
+import { useTranlate } from "src/hooks/useTranslation";
+import ButtonTranslate from "src/components/translate/ButtonTranslate";
 
 const Form = () => {
   const navigate = useNavigate();
   const { nivelesAcademicos, isLoading, error } = useNivelesAcademicos();
   const { mostrarOcultarPassword, mostrarPassword } = useIconPassword();
 
-  const { t } = useTranslation(["signup"]);
-  const { register, handleSubmit, setValue, mensajeError, registroExitoso, isLoading: formLoading } =
-    useFormulario(crearCuentaEstudiante);
+  const { t } = useTranlate();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    mensajeError,
+    registroExitoso,
+    isLoading: formLoading,
+  } = useFormulario(crearCuentaEstudiante);
 
-  if (isLoading) return <PageLoader /> 
-  if (error) return <p>Hubo un error, recarga la pagina</p>;
+  if (isLoading) return <PageLoader /> ;
+  if (error) return <p>{t("Hubo un error, recarga la página")}</p>;
   if (registroExitoso) {
     navigate("/login");
   }
 
   return (
     <FormLayout titulo={t("titulo")} subtitulo={t("subtitulo")}>
-      <p className="text-red-500 font-bold">{mensajeError}</p>
-      <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
+      <p className="font-bold text-red-500">{t("errors:" + mensajeError)}</p>
+      <form onSubmit={handleSubmit} className="flex flex-col w-full gap-6">
         <Input
           register={register("nombre")}
-          label={"Nombre"}
-          placeholder={"Ingrese su nombre"}
+          label={t("nombreLabel")}
+          placeholder={t("nombrePlaceholder")}
         />
         <Input
           register={register("apellido")}
-          label={"Apellido"}
-          placeholder={"Ingrese su apellido"}
+          label={t("apellidoLabel")}
+          placeholder={t("apellidoPlaceholder")}
         />
         <Select
           valueLabel={"id_nivelAcademico"}
           setValue={setValue}
-          label={"Nivel Academico"}
-          placeholder={"Nivel academico"}
+          label={t("nivelAcademicoLabel")}
+          placeholder={t("nivelAcademicoPlaceholder")}
           opciones={nivelesAcademicos}
         />
         <Input
           register={register("email")}
           type="email"
-          label={"Correo Institucional"}
-          placeholder={"Ingrese su correo institucional"}
+          label={t("correoLabel")}
+          placeholder={t("correoPlaceholder")}
         />
 
         <Input
@@ -69,19 +77,25 @@ const Form = () => {
               {...props}
             />
           )}
-          label={"Contraseña"}
-          placeholder={"Ingrese su contraseña"}
+          label={t("contrasenaLabel")}
+          placeholder={t("contrasenaPlaceholder")}
         />
 
-        <div className="text-center flex flex-col gap-3">
+        <div className="flex flex-col items-center gap-3 text-center">
           <Button disabled={formLoading} color={"azul"}>
-            <Skeleton loading={formLoading} fallback={<HashLoader size={24} color="white" /> }>
-              Registrate
+            <Skeleton
+              loading={formLoading}
+              fallback={<HashLoader size={24} color="white" />}
+            >
+              {t("registrar")}
             </Skeleton>
           </Button>
-          <Link to={"/login"} className="text-primary">
-            ¿ Ya tienes cuenta ?
-          </Link>
+          <div className="flex items-center justify-center w-full gap-3 mb-5">
+            <ButtonTranslate bg={"primary"} />
+            <Link to={"/login"} className="text-primary">
+              {t("yaTienesCuenta")}
+            </Link>
+          </div>
         </div>
       </form>
     </FormLayout>

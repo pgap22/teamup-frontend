@@ -8,18 +8,20 @@ import { useFetch } from "src/hooks/useFetch";
 import { obtenerMisPartidos } from "src/api/partidos";
 import { Link } from "react-router-dom";
 import { PageLoader } from "src/components/ui/PageLoader";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const Partidos = () => {
   const { isLoading, partidos } = useFetch("partidos", obtenerMisPartidos);
+  const { t } = useTranlate();
 
   if (isLoading) return <PageLoader />;
 
   return (
     <EstudianteLayaout
       RightAsideButton={<IconButtonEquipos />}
-      RightAsideTitulo={"Equipos"}
+      RightAsideTitulo={t("equipos")}
       RightAsideContent={<Equipos />}
-      title={"Partidos"}
+      title={t("partidos")}
     >
       {<VistasPartido partidos={partidos} />}
     </EstudianteLayaout>
@@ -35,16 +37,19 @@ const VistasPartido = ({ partidos }) => {
 };
 
 const NoHayPartidos = () => {
+  const { t } = useTranlate();
+
   return (
-    <div className="w-full flex flex-col gap-4 items-center text-center">
+    <div className="flex flex-col items-center w-full gap-4 text-center">
       <p className="text-[#A1A1A1] font-bold text-xl">
-        You don't have any scheduled match
+        {t("noScheduledMatch")}
       </p>
       <p className="text-[#A1A1A1] font-bold text-xl">
-        You can make the request to create one by{" "}
+        {t("makeRequestToCreateOne")}
         <Link to={"/estudiante/solicitudes"} className="text-primary">
-          clicking here!
+          {t("clickingHere")}
         </Link>
+        !
       </p>
     </div>
   );
@@ -52,7 +57,7 @@ const NoHayPartidos = () => {
 
 const PartidosContainer = ({ partidos }) => {
   return (
-    <main className="flex flex-col sm:grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
+    <main className="flex flex-col grid-cols-2 gap-4 sm:grid md:grid-cols-1 lg:grid-cols-2">
       {partidos?.map((partido) => (
         <Partido
           url="/estudiante/partidos/"

@@ -164,8 +164,6 @@ export const obtenerPerfil = async (token) => {
 };
 export const crearCuentaEstudiante = async (data) => {
   try {
-    data.nombre = data.nombre + " " + data.apellido;
-
     await clienteAxios.post("/usuario", data);
 
     return true;

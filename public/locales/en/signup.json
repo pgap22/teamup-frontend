@@ -1,4 +1,18 @@
 {
-    "titulo": "¡Regístrate y únete a nosotros! 👋",
-    "subtitulo": "Crea una cuenta para acceder a todas las características emocionantes."
+  "titulo": "Register and join us! 👋",
+  "subtitulo": "Create an account to access all the exciting features.",
+  "Cargando...": "Loading...",
+  "Hubo un error, recarga la página": "An error occurred, please reload the page",
+  "nombreLabel": "Name",
+  "nombrePlaceholder": "Enter your name",
+  "apellidoLabel": "Last Name",
+  "apellidoPlaceholder": "Enter your last name",
+  "nivelAcademicoLabel": "Academic Level",
+  "nivelAcademicoPlaceholder": "Academic level",
+  "correoLabel": "Institutional Email",
+  "correoPlaceholder": "Enter your institutional email",
+  "contrasenaLabel": "Password",
+  "contrasenaPlaceholder": "Enter your password",
+  "registrar": "Register",
+  "yaTienesCuenta": "Already have an account?"
 }

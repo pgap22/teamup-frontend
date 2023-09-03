@@ -1,8 +1,10 @@
+import React from "react";
 import { useModal } from "src/store/useModal";
 import TemplateModal from "src/components/Modales/ModalTemplate";
-
 import { useNavigate } from "react-router-dom";
 import Button from "src/components/form/Button";
+import { useTranlate } from "src/hooks/useTranslation";
+
 import { cancelarPartidoEstudiante } from "src/api/partidos";
 import { useFetchClick } from "src/hooks/useFetchClick";
 import Skeleton from "src/components/ui/Skeleton";
@@ -11,6 +13,7 @@ import { useEffect } from "react";
 
 const ContentModal = ({ toggleModal, id }) => {
   const navigate = useNavigate();
+  const { t } = useTranlate();
   const { registroExitoso, refetch, isLoading } = useFetchClick("rechazarPartido", () => cancelarPartidoEstudiante(id));
 
   useEffect(() => {
@@ -18,12 +21,11 @@ const ContentModal = ({ toggleModal, id }) => {
       toggleModal(false);
       navigate("/estudiante/exito", {
         state: {
-          titulo: "Partido cancelado",
-          subtitulo: "Cancelacion del partido completada",
-          descripcion:
-            "Has rechazado la invitacion el partido correctamente",
+          titulo: "partidoCancelado",
+          subtitulo: "cancelacionPartidoCompletada",
+          descripcion: "rechazoInvitacionCorrectamente",
           url: `/estudiante/partidos`,
-          linkText: "Volver a partidos",
+          linkText: "volverAPartidos",
         },
       });
     }
@@ -31,7 +33,7 @@ const ContentModal = ({ toggleModal, id }) => {
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
-        <h2>Seguro que quieres rechazar la invitacion de este partido?</h2>
+        <h2>{t("confirmarRechazarInvitacion")}</h2>
         <div className="grid grid-cols-2 gap-4">
           <Button
             onClick={refetch}
@@ -39,7 +41,7 @@ const ContentModal = ({ toggleModal, id }) => {
             color={"rojo"}
           >
             <Skeleton loading={isLoading} fallback={<Loader />}>
-              Rechazar
+            {t("rechazar")}
             </Skeleton>
           </Button>
         </div>
@@ -50,11 +52,12 @@ const ContentModal = ({ toggleModal, id }) => {
 
 const ModalRechazarPartido = ({ id = 2 }) => {
   const { toggleModal } = useModal();
+  const { t } = useTranlate();
 
   return (
     <TemplateModal
       identificator={"RechazarInvitacion"}
-      desktopTitle={"Rechazar invitacion"}
+      desktopTitle={t("rechazarInvitacion")}
     >
       <ContentModal toggleModal={toggleModal} id={id} />
     </TemplateModal>

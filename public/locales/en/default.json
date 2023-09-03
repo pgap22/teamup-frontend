@@ -1,0 +1,18 @@
+{
+  "en": "English",
+  "es": "Spanish",
+
+  "Inicio": "Home",
+  "Equipo": "Team",
+  "Partidos": "Matches",
+  "Solicitudes": "Requests",
+  "cerrarSesion": "Log out",
+
+  "Pendienterival": "Opponent pending",
+  "Pendientemaestro": "Master pending",
+  "Pendientecoordinacion": "Coordination pending",
+  "Pendienteasistencia": "Attendance pending",
+  "Partidoenjuego": "In-game",
+  "Partidofinalizado": "Finished",
+  "Partidocancelado": "Canceled"
+}
