@@ -40,7 +40,7 @@ const Crear = () => {
 
         <Input register={register("nombre")} label={"Nombre"} placeholder={"Nombre de la zona de juego"} />
 
-        <Select setValue={setValue} valueLabel={"id_tipoDeporte"} placeholder={"Selecciona un deporte"} label={"Deporte"} opciones={deportes} />
+        <Select setValue={setValue} valueLabel={"id_deporte"} placeholder={"Selecciona un deporte"} label={"Deporte"} opciones={deportes} />
 
         <ImageDrop setValue={setValue} name="imagenes" label={"Imagenes"} />
 
