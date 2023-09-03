@@ -71,7 +71,7 @@ export default function Editar() {
         <Select
           setValue={setValue}
           id_valorPorDefecto={idDeporte}
-          valueLabel={"id_deporte"}
+          valueLabel={"id_tipoDeporte"}
           placeholder={"Selecciona un deporte"}
           label={"Deporte"}
           opciones={deportes}
