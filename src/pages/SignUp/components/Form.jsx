@@ -33,7 +33,7 @@ const Form = () => {
     isLoading: formLoading,
   } = useFormulario(crearCuentaEstudiante);
 
-  if (isLoading) return <PageLoader /> ;
+  if (isLoading) return <PageLoader />;
   if (error) return <p>{t("Hubo un error, recarga la página")}</p>;
   if (registroExitoso) {
     navigate("/login");
@@ -47,11 +47,6 @@ const Form = () => {
           register={register("nombre")}
           label={t("nombreLabel")}
           placeholder={t("nombrePlaceholder")}
-        />
-        <Input
-          register={register("apellido")}
-          label={t("apellidoLabel")}
-          placeholder={t("apellidoPlaceholder")}
         />
         <Select
           valueLabel={"id_nivelAcademico"}
