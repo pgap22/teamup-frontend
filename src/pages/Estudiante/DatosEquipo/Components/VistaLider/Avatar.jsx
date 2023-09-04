@@ -14,7 +14,7 @@ const Avatar = ({ avatar_url }) => {
 
       <div className="w-[220px] border-2 border-[#CECECE] rounded-md p-3 grid place-items-center">
         <img
-          src={import.meta.env.VITE_URL + avatar_url}
+          src={avatar_url}
           alt="Preview"
           className="object-cover w-[128px] h-[128px]"
           style={{
