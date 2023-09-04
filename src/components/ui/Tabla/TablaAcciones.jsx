@@ -6,16 +6,17 @@ import { useModal } from "../../../hooks/useModal.jsx";
 import Skeleton from "../Skeleton";
 import Loader from "../Loader";
 import { useEffect } from "react";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const TablaAcciones = ({
   dato,
   editarUrl,
-  borrarElemento = {mutate: ()=>{}, isLoading: false, status: ''},
+  borrarElemento = { mutate: () => { }, isLoading: false, status: '' },
   eliminar,
   editar,
 }) => {
   const [Modal, modalState] = useModal();
-
+  const {t} = useTranlate();
   const mostrarModal = () => {
     modalState.toggleModal(true);
   };
@@ -23,11 +24,11 @@ const TablaAcciones = ({
     modalState.toggleModal(false);
   };
 
-  useEffect(()=>{
-    if(borrarElemento.status == 'success'){
+  useEffect(() => {
+    if (borrarElemento.status == 'success') {
       esconderModal();
     }
-  },[borrarElemento.status])
+  }, [borrarElemento.status])
 
   return (
     <div className="flex gap-4">
@@ -41,9 +42,9 @@ const TablaAcciones = ({
         <MdDelete className="cursor-pointer" onClick={mostrarModal} size={24} />
       )}
 
-      <Modal desktopTitle="Deseas eliminar este item?" {...modalState}>
+      <Modal desktopTitle={t('modal.confirmDelete')} {...modalState}>
         <div className="flex flex-col gap-4 p-4">
-          <h2>Seguro que quieres eliminar este item ?</h2>
+          <h2>{t('modal.areYouSure')}</h2>
 
           <div className="grid grid-cols-2 gap-4">
             <Button
@@ -54,11 +55,11 @@ const TablaAcciones = ({
               color={"rojo"}
             >
               <Skeleton loading={borrarElemento.isLoading} fallback={<Loader />}>
-                Eliminar
+                {t('modal.delete')}
               </Skeleton>
             </Button>
             <Button onClick={esconderModal} color={"blanco"}>
-              Cancelar
+              {t('modal.cancel')}
             </Button>
           </div>
         </div>

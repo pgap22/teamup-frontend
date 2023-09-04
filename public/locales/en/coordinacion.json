@@ -1,0 +1,204 @@
+{
+  "accionesRapidas": "Quick Actions",
+  "actions": {
+    "newTeacher": "👨‍🏫 New Teacher",
+    "newSport": "🥇 New Sport",
+    "newPlayZone": "⛳ New Play Zone",
+    "viewPendingRequests": "📩 View Pending Requests"
+  },
+  "summary": {
+    "pendingRequests": "Pending Requests",
+    "teachersCaringToday": "Teachers Caring Today",
+    "completedMatches": "Completed Matches"
+  },
+  "links": {
+    "home": "Home",
+    "sports": "Sports",
+    "playZone": "Play Zone",
+    "teachers": "Teachers",
+    "requests": "Requests"
+  },
+  "resumen": "Summary",
+  "inicio": "Home",
+  "partidosRealizados": "Matches Completed",
+  "cerrar": "Logout",
+  "sportsList": {
+    "title": "Sports List",
+    "numberOfSports": "{{count}} Sports",
+    "newSport": "New Sport"
+  },
+  "sportsPage": {
+    "title": "Sports"
+  },
+  "sportsKeys": {
+    "ID": "ID",
+    "Nombre": "Name",
+    "Descripcion": "Description",
+    "limiteJugadores": "Player Limit",
+    "limiteJugadoresCambio": "Player Change Limit",
+    "tipoDeporte": "Sport Type"
+  },
+  "acciones": "Actions",
+  "modal": {
+    "confirmDelete": "Do you want to delete this item?",
+    "areYouSure": "Are you sure you want to delete this item?",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "playZone": {
+    "title": "Play Zone",
+    "listTitle": "List of Play Zones",
+    "playZones": "Play Zones",
+    "newPlayZone": "New Play Zone"
+  },
+  "tableKeys": {
+    "ID": "ID",
+    "nombre": "Name",
+    "deporte": "Sport",
+    "imagenes": "Images"
+  },
+  "teachers": {
+    "title": "Teachers",
+    "listTitle": "List of Teachers",
+    "teachers": "Teachers",
+    "newTeacher": "New Teacher"
+  },
+  "keyMaestro": {
+    "ID": "ID",
+    "Nombre": "Name",
+    "Email": "Email",
+    "NivelAcademico": "Academic Level"
+  },
+  "solicitudes": {
+    "title": "Requests",
+    "pendingRequests": "Pending Requests",
+    "request": "Request",
+    "moreInformation": "More Information"
+  },
+  "solicitudesTable": {
+    "ID": "ID",
+    "solicitante": "Requester",
+    "Zonadejuego": "Play Zone",
+    "maestro": "Teacher",
+    "fecha": "Date",
+    "deporte": "Sport"
+  },
+  "createSport": {
+    "title": "Sport Created",
+    "successMessage": "The sport has been created successfully",
+    "returnToSports": "Return to sports",
+    "createSport": "Create Sport",
+    "generalData": "General Data",
+    "sportName": "Sport Name",
+    "exampleSportName": "E.g. Soccer",
+    "description": "Description",
+    "exampleDescription": "Sport description",
+    "playerLimit": "Player Limit",
+    "examplePlayerLimit": "E.g. 7",
+    "changeLimit": "Change Limit",
+    "exampleChangeLimit": "E.g. 2",
+    "sportType": "Sport Type",
+    "exampleSportType": "E.g. Court",
+    "addSport": "Add Sport"
+  },
+  "editSport": {
+    "title": "Sport Edited",
+    "successMessage": "The sport has been edited successfully",
+    "returnToSports": "Return to sports"
+  },
+  "editSportForm": {
+    "title": "Edit Sport",
+    "generalData": "General Data",
+    "sportName": "Sport Name",
+    "exampleSportName": "E.g. Soccer",
+    "description": "Description",
+    "exampleDescription": "Sport description",
+    "playerLimit": "Player Limit",
+    "examplePlayerLimit": "E.g. 7",
+    "changeLimit": "Change Limit",
+    "exampleChangeLimit": "E.g. 2",
+    "sportType": "Sport Type",
+    "exampleSportType": "E.g. Court",
+    "editSportButton": "Edit Sport"
+  },
+  "zonadejuegoCreate": {
+    "title": "Zone Created",
+    "successMessage": "The zone has been created successfully",
+    "returnToZonadejuego": "Return to zone"
+  },
+  "zonadejuegoCreateForm": {
+    "title": "Create Zone",
+    "generalData": "General Data",
+    "nameLabel": "Name",
+    "namePlaceholder": "Zone name",
+    "sportLabel": "Sport",
+    "sportPlaceholder": "Select a sport",
+    "imagesLabel": "Images",
+    "createButton": "Create Zone"
+  },
+  "zonadejuegoEdit": {
+    "title": "Zone Edited",
+    "successMessage": "The zone has been edited successfully",
+    "returnToZonadejuego": "Return to zone"
+  },
+  "zonadejuegoEditForm": {
+    "layoutTitle": "Edit Zone",
+    "generalData": "General Data",
+    "nameLabel": "Name",
+    "namePlaceholder": "Zone name",
+    "sportLabel": "Sport",
+    "sportPlaceholder": "Select a sport",
+    "editImagesLabel": "Edit Images",
+    "imagesLabel": "Images",
+    "editButton": "Edit Zone"
+  },
+  "maestroCreate": {
+    "title": "Profile Created",
+    "successMessage": "The teacher's profile has been created successfully",
+    "returnToMaestros": "Return to teachers"
+  },
+  "maestroCreateForm": {
+    "layoutTitle": "Create Teachers",
+    "generalData": "General Data",
+    "nameLabel": "Name",
+    "namePlaceholder": "Teacher's first name",
+    "lastNameLabel": "Last Name",
+    "lastNamePlaceholder": "Teacher's last name",
+    "teacherLevelLabel": "Teacher Level",
+    "teacherLevelPlaceholder": "Teacher's academic level",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Password",
+    "createAccountButton": "Create Teacher Account"
+  },
+  "solicitudDetalle": {
+    "title": "Request No. {{partido.id}}",
+    "estadoPartido": "Match Status",
+    "datosGenerales": "General Information",
+    "zonaDeJuego": "Game Zone",
+    "deporte": "Sport",
+    "maestroEncargado": "Responsible Teacher",
+    "equipos": "Teams",
+    "acciones": "Actions",
+    "accionesAceptar": "Accept Request",
+    "accionesPosponer": "Postpone Date",
+    "accionesRechazar": "Reject Request",
+    "accionesSinAcciones": "No actions available",
+    "modalAceptarTitle": "Accept Request",
+    "modalAceptarDescription": "Select the game zone to lend for this match",
+    "modalAceptarZonaDeJuego": "Game Zone",
+    "modalAceptarPlaceholder": "Select Game Zone",
+    "modalAceptarButton": "Accept Match",
+    "modalPosponerTitle": "Postpone Date",
+    "modalPosponerDescription": "The teacher responsible for this match will be unassigned, and the students will have to wait for a new teacher to approve them again",
+    "modalPosponerFecha": "Select a new date",
+    "modalPosponerButton": "Postpone",
+    "modalRechazarTitle": "Reject Request",
+    "modalRechazarDescription": "Do you want to reject this match request?",
+    "modalRechazarButton": "Reject Request",
+    "modificacionMensajeTitle": "Request Modified",
+    "modificacionMensajeDescription": "The request has been modified",
+    "modificacionMensajeLinkText": "Click here to go back"
+  }
+}

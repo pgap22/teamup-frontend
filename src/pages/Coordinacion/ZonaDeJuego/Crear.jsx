@@ -15,43 +15,41 @@ import { useFormulario } from "src/hooks/useFormulario"
 import Exito from "src/components/coordinacion/Exito"
 import Skeleton from "src/components/ui/Skeleton"
 import Loader from "src/components/ui/Loader"
+import { useTranlate } from "src/hooks/useTranslation"
 
 
 
 const Crear = () => {
   const { deportes } = useFetch("deportes", obtenerDeportesCancha, deportesSelect)
   const { register, setValue, handleSubmit, registroExitoso, isLoading } = useFormulario(crearZonaDeJuego);
-
-  if(registroExitoso) return(
-    <Exito
-        titulo={"Zona de Juego Creada"}
-        subtitulo={"La zona de juego se ha creado exitosamente"}
-        linkText={"Volver a zona de juego"}
-        url={"/coordinacion/zonadejuego"}
-  />
-)
-
-
+  const {t} = useTranlate();
+  if (registroExitoso) {
+    return (
+      <Exito
+        titulo={t('zonadejuegoCreate.title')}
+        subtitulo={t('zonadejuegoCreate.successMessage')}
+        linkText={t('zonadejuegoCreate.returnToZonadejuego')}
+        url="/coordinacion/zonadejuego"
+      />
+    );
+  }
+  
   return (
     <CoordinacionLayout
-      titulo={"Crear Zona De Juego"}
+      titulo={t('zonadejuegoCreateForm.title')}
     >
-      <CoordinacionForm handleSubmit={handleSubmit} titulo={"Datos Generales"} imagenUrl={"/cancha.jpg"}>
-
-        <Input register={register("nombre")} label={"Nombre"} placeholder={"Nombre de la zona de juego"} />
-
-        <Select setValue={setValue} valueLabel={"id_deporte"} placeholder={"Selecciona un deporte"} label={"Deporte"} opciones={deportes} />
-
-        <ImageDrop setValue={setValue} name="imagenes" label={"Imagenes"} />
-
+      <CoordinacionForm handleSubmit={handleSubmit} titulo={t('zonadejuegoCreateForm.generalData')} imagenUrl="/cancha.jpg">
+        <Input register={register("nombre")} label={t('zonadejuegoCreateForm.nameLabel')} placeholder={t('zonadejuegoCreateForm.namePlaceholder')} />
+        <Select setValue={setValue} valueLabel="id_deporte" placeholder={t('zonadejuegoCreateForm.sportPlaceholder')} label={t('zonadejuegoCreateForm.sportLabel')} opciones={deportes} />
+        <ImageDrop setValue={setValue} name="imagenes" label={t('zonadejuegoCreateForm.imagesLabel')} />
         <Button disabled={isLoading}>
           <Skeleton loading={isLoading} fallback={<Loader />}>
-           Crear Zona De Juego
+            {t('zonadejuegoCreateForm.createButton')}
           </Skeleton>
         </Button>
       </CoordinacionForm>
     </CoordinacionLayout>
-  )
+  );
 }
 
 

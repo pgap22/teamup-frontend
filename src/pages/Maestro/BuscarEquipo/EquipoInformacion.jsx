@@ -5,6 +5,7 @@ import Partido from 'src/components/estudiante/PartidoCard/Partido';
 import MaestroLayout from 'src/components/layout/MaestroLayout'
 import Caja from 'src/components/ui/Cajas/Caja';
 import { PageLoader } from 'src/components/ui/PageLoader';
+import { useTranlate } from 'src/hooks/useTranslation';
 import { useEquipo } from 'src/store/useEquipo'
 
 const EquipoInformacion = () => {
@@ -12,7 +13,7 @@ const EquipoInformacion = () => {
     const { equipo, setEquipo } = useEquipo();
     const nombreEquipo = useParams();
     const navigate = useNavigate();
-
+    const {t} = useTranlate();
 
 
     useEffect(() => {
@@ -44,7 +45,7 @@ const EquipoInformacion = () => {
             titulo={equipo.nombre}
         >
             <div className='space-y-4'>
-                <Caja titulo={"Partidos"}>
+                <Caja titulo={t('equipoDetails.partidosTitle')}>
                     <div className="max-w-full scroll-p-2 flex gap-5 overflow-auto">
                         {
                             equipo.partidos.map(partido => (
@@ -56,7 +57,7 @@ const EquipoInformacion = () => {
                     </div>
                 </Caja>
 
-                <Caja titulo={"Estudiantes"}>
+                <Caja titulo={t('equipoDetails.estudiantesTitle')}>
                     <div className='flex flex-col gap-4'>
                         <p>{equipo.lider.nombre}</p>
                         {equipo.usuarios.map(usuario => (

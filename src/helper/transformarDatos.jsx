@@ -1,24 +1,23 @@
 import Imagenes from "src/pages/Coordinacion/ZonaDeJuego/components/Imagenes";
 
-export const deportesTransformar = (data) => {
+export const deportesTransformar = (data, t = () => '') => {
   const datos = data?.data.map((deporte) => ({
-    ID: deporte.id,
-    Nombre: deporte.nombre,
-    Descripcion: deporte.descripcion,
-    "Limite Jugadores": deporte.limiteJugadores,
-    "Limite Jugadores Cambio": deporte.limiteJugadoresCambio,
-    "Tipo Deporte": deporte.tipoDeporte.nombre,
+    [t('sportsKeys.ID')]: deporte.id,
+    [t('sportsKeys.Nombre')]: deporte.nombre,
+    [t('sportsKeys.Descripcion')]: deporte.descripcion,
+    [t('sportsKeys.limiteJugadores')]: deporte.limiteJugadores,
+    [t('sportsKeys.limiteJugadoresCambio')]: deporte.limiteJugadoresCambio,
+    [t('sportsKeys.tipoDeporte')]: deporte.tipoDeporte.nombre,
   }));
-
   return datos;
 };
 
-export const docentesTransformarTabla = ({ data }) => {
+export const docentesTransformarTabla = ({ data }, t = () => '') => {
   return data.map((docente) => ({
-    ID: docente.id,
-    Nombre: docente.nombre,
-    Email: docente.email,
-    "Nivel Academico": docente.nivelAcademico.nivel,
+    [t('keyMaestro.ID')]: docente.id,
+    [t('keyMaestro.Nombre')]: docente.nombre,
+    [t('keyMaestro.Email')]: docente.email,
+    [t('keyMaestro.NivelAcademico')]: docente.nivelAcademico.nivel,
   }));
 };
 
@@ -43,12 +42,12 @@ export const deportesSelect = ({ data }) => {
   }));
 };
 
-export const zonaJuegoTabla = function ({ data }) {
+export const zonaJuegoTabla = function ({ data }, t = () => '') {
   return data.map((zonadejuego) => ({
-    ID: zonadejuego.id,
-    nombre: zonadejuego.nombre,
-    deporte: zonadejuego.deporte.nombre,
-    imagenes: <Imagenes imagenes={zonadejuego.imagenes} />,
+    [t('tableKeys.ID')]: zonadejuego.id,
+    [t('tableKeys.nombre')]: zonadejuego.nombre,
+    [t('tableKeys.deporte')]: zonadejuego.deporte.nombre,
+    [t('tableKeys.imagenes')]: <Imagenes imagenes={zonadejuego.imagenes} />,
   }));
 };
 
@@ -57,7 +56,7 @@ export const miembrosEquipo = ({ data }) => {
   const { usuarios } = data;
   const { lider } = data;
 
-  if(!lider) return false;
+  if (!lider) return false;
 
   lider.rango = "lider";
 
@@ -85,24 +84,25 @@ export const miembrosEquipo = ({ data }) => {
 
 };
 
-export const solicitudesTabla = ({ data }) => {
+export const solicitudesTabla = ({ data}, t = ()=> '') => {
   return data.map((solicitud) => {
-    let nombre = "Pendiente";
+    let nombre = t('solicitud.Pending');
     if (solicitud.ZonaDejuego) {
       nombre = solicitud.ZonaDejuego.nombre;
     }
 
     return {
-      ID: solicitud.id,
-      solicitante: solicitud.equipo_local.lider.nombre,
-      "Zona de juego": nombre,
-      deporte: solicitud.deporte.nombre,
-      fecha: solicitud.fecha,
+      [t('solicitud.ID')]: solicitud.id,
+      [t('solicitud.Requester')]: solicitud.equipo_local.lider.nombre,
+      [t('solicitud.Playground')]: nombre,
+      [t('solicitud.Sport')]: solicitud.deporte.nombre,
+      [t('solicitud.Date')]: new Date(solicitud.fecha).toLocaleDateString(localStorage.getItem("teamup-languaje"),{weekday: 'long', hour: '2-digit', hour12: true, month: 'long'}),
     };
   });
 };
 
-export const solicitudesTablaCoordinacion = ({ data }) => {
+export const solicitudesTablaCoordinacion = ({ data }, t = () => '') => {
+
   return data.map((solicitud) => {
     let nombre = "Pendiente";
     if (solicitud.ZonaDejuego) {
@@ -110,12 +110,12 @@ export const solicitudesTablaCoordinacion = ({ data }) => {
     }
 
     return {
-      ID: solicitud.id,
-      solicitante: solicitud.equipo_local.lider.nombre,
-      "Zona de juego": nombre,
-      maestro: solicitud.usuarioMaestro.nombre,
-      fecha: solicitud.fecha,
-      deporte: solicitud.deporte.nombre,
+      [t('solicitudesTable.ID')]: solicitud.id,
+      [t('solicitudesTable.solicitante')]: solicitud.equipo_local.lider.nombre,
+      [t('solicitudesTable.Zonadejuego')]: nombre,
+      [t('solicitudesTable.maestro')]: solicitud.usuarioMaestro.nombre,
+      [t('solicitudesTable.fecha')]: solicitud.fecha,
+      [t('solicitudesTable.deporte')]: solicitud.deporte.nombre,
     };
   });
 };
@@ -179,12 +179,12 @@ export const mappedDataSolicitud = ({ form }) => {
     if (name === "InformacionGeneral") {
       const { descripcion } = values;
       result["descripcion"] = descripcion;
-      
+
 
 
 
       let hora = values.hora.$d
-      let dia =  values.fecha.$d
+      let dia = values.fecha.$d
 
       dia.setHours(hora.getHours(), hora.getMinutes());
 

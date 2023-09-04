@@ -5,25 +5,28 @@ import { eliminarZonaDeJuego, obtenerZonasDeJuegos } from "src/api";
 import { zonaJuegoTabla } from "src/helper/transformarDatos";
 import Skeleton from "src/components/ui/Skeleton";
 import TablaSkeleton from "src/components/coordinacion/TablaSkeleton";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const ZonaDeJuego = () => {
   const { isLoading, zonadejuego, eliminar } = useFetchAndDelete("zonadejuego", obtenerZonasDeJuegos, eliminarZonaDeJuego, zonaJuegoTabla);
-
+  const {t} = useTranlate();
 
   return (
-    <CoordinacionLayout titulo={"Zona De Juego"}>
-      <Skeleton loading={isLoading} fallback={<TablaSkeleton />}>
-        {!isLoading && (<Tabla
-          titulo={"Lista De Zonas de juegos"}
-          cantidadTexto={`${zonadejuego.length} Zona de juegos`}
-          botonTexto={"Nueva Zona De Juego"}
+  <CoordinacionLayout titulo={t('playZone.title')}>
+    <Skeleton loading={isLoading} fallback={<TablaSkeleton />}>
+      {!isLoading && (
+        <Tabla
+          titulo={t('playZone.listTitle')}
+          cantidadTexto={`${zonadejuego.length} ${t('playZone.playZones')}`}
+          botonTexto={t('playZone.newPlayZone')}
           editarUrl={"/coordinacion/zonadejuego/editar"}
           listaDatos={zonadejuego}
           botonUrl={"/coordinacion/zonadejuego/crear"}
           borrarElemento={eliminar}
-        />)}
-      </Skeleton>
-    </CoordinacionLayout>
+        />
+      )}
+    </Skeleton>
+  </CoordinacionLayout>
   );
 };
 

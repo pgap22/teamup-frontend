@@ -4,7 +4,7 @@
   "Cargando...": "Cargando...",
   "Hubo un error, recarga la página": "Hubo un error, recarga la página",
   "nombreLabel": "Nombre",
-  "nombrePlaceholder": "Ingrese su nombre",
+  "nombrePlaceholder": "Ingrese su nombre completo",
   "apellidoLabel": "Apellido",
   "apellidoPlaceholder": "Ingrese su apellido",
   "nivelAcademicoLabel": "Nivel Academico",

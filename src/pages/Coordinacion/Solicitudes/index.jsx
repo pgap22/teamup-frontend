@@ -7,32 +7,32 @@ import { solicitudesTablaCoordinacion } from "src/helper/transformarDatos"
 import { Link } from "react-router-dom"
 import Skeleton from "src/components/ui/Skeleton"
 import TablaSkeleton from "src/components/coordinacion/TablaSkeleton"
+import { useTranlate } from "src/hooks/useTranslation"
 
 const Solicitudes = () => {
 
   const { isLoading, solicitudes } = useFetch("solicitudes", obtenerPartidosCoordinacionPendientes, solicitudesTablaCoordinacion)
+  const { t } = useTranlate();
 
 
   return (
-    <CoordinacionLayout titulo={"Solicitudes"}>
+    <CoordinacionLayout titulo={t('solicitudes.title')}>
       <Skeleton loading={isLoading} fallback={<TablaSkeleton />}>
-        {
-          !isLoading && (
-            <Tabla
-              titulo={"Solicitudes Pendientes"}
-              cantidadTexto={solicitudes.length + " Solicitud"}
-              listaDatos={solicitudes}
-              boton={false}
-              acciones={false}
-              accionesCustomLabel={" "}
-              AccionesCustomElement={({ dato }) => (
-                <Link to={"" + dato.ID}>
-                  <Button>Mas Informacion</Button>
-                </Link>
-              )}
-            />
-          )
-        }
+        {!isLoading && (
+          <Tabla
+            titulo={t('solicitudes.pendingRequests')}
+            cantidadTexto={`${solicitudes.length} ${t('solicitudes.request')}`}
+            listaDatos={solicitudes}
+            boton={false}
+            acciones={false}
+            accionesCustomLabel=" "
+            AccionesCustomElement={({ dato }) => (
+              <Link to={"" + dato.ID}>
+                <Button>{t('solicitudes.moreInformation')}</Button>
+              </Link>
+            )}
+          />
+        )}
       </Skeleton>
     </CoordinacionLayout>
   )

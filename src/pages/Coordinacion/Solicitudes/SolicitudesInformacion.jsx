@@ -19,10 +19,12 @@ import { zonaJuegosSelect } from "src/helper/transformarDatos"
 import { useFetchClick } from "src/hooks/useFetchClick"
 import { useFetchId } from "src/hooks/useFetchId"
 import { useModal } from "src/hooks/useModal"
+import { useTranlate } from "src/hooks/useTranslation"
 
 const SolicitudesInformacion = () => {
 
     const { id } = useParams();
+    const {t} = useTranlate();
     const { isLoading, partido } = useFetchId(id, obtenerUnPartido, 'partido');
     const { isLoading: loadingZonaJuegos, zonaDeJuegos } = useFetchId(id, obtenerZonaJuegosPorPartido, 'zonaDeJuegos', zonaJuegosSelect);
     const { refetch: rechazarPartidoClick, registroExitoso, isLoading: cargandoRechazar } = useFetchClick("cancelarPartido", () => rechazarPartido(id));
@@ -73,106 +75,104 @@ const SolicitudesInformacion = () => {
     if (modificacion) return <ModificacionMensaje />
 
     return (
-        <CoordinacionLayout titulo={"Solicitud N°" + partido.id}>
-            <Caja titulo={"Estado del partido"}>
-                <EstadoPartido titulo={partido.estado.nombre} />
-            </Caja>
-
-            <Caja className={"mt-5"} titulo={"Datos Generales"}>
-                <div className=" space-y-4">
-
-                    <InfoCampo title={"Zona De Juego"} value={!partido.ZonaDejuego ? 'Pendiente' : partido.ZonaDejuego.nombre} />
-                    <InfoCampo title={"Deporte"} value={partido.deporte.nombre} />
-                    <InfoCampo title={"Maestro Encargado"} value={!partido.usuarioMaestro ? 'Pendiente' : partido.usuarioMaestro.nombre} />
-                </div>
-            </Caja>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-4 max-w-4xl">
-                <Caja titulo={"Equipos"} className={"max-h-fit"}>
-                    <div className="md:max-w-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6">
-                        <Link to={"/maestro/equipo/" + partido.equipo_local.nombre}>
-                            <EquipoCard equipo={partido.equipo_local} />
-                        </Link>
-                        <Link to={"/maestro/equipo/" + partido.equipo_visitante.nombre}>
-                            <EquipoCard equipo={partido.equipo_visitante} />
-                        </Link>
-                    </div>
-                </Caja>
-                <Caja className={"flex flex-col gap-2"} titulo={"Acciones"}>
-                    <div className="h-full flex flex-col gap-4">
-                        {
-                            partido.estado.fase == 3 ? (
-                                <>
-                                    <Button onClick={() => modalAceptar.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#04BB16"}>Aceptar Solicitud</Button>
-                                    <Button onClick={() => modalPosponer.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#A0A0A0"}>Posponer Fecha</Button>
-                                    <Button onClick={() => modalRechzar.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#DD3535"}>Rechazar Solicitud</Button>
-                                </>
-                            )
-                                : <p>No hay acciones !</p>
-                        }
-                    </div>
-                </Caja>
+        <CoordinacionLayout titulo={t("solicitudDetalle.title", {partido})}>
+        <Caja titulo={t("solicitudDetalle.estadoPartido")}>
+          <EstadoPartido titulo={partido.estado.nombre} />
+        </Caja>
+    
+        <Caja className={"mt-5"} titulo={t("solicitudDetalle.datosGenerales")}>
+          <div className=" space-y-4">
+            <InfoCampo title={t("solicitudDetalle.zonaDeJuego")} value={!partido.ZonaDejuego ? t("solicitudDetalle.accionesSinAcciones") : partido.ZonaDejuego.nombre} />
+            <InfoCampo title={t("solicitudDetalle.deporte")} value={partido.deporte.nombre} />
+            <InfoCampo title={t("solicitudDetalle.maestroEncargado")} value={!partido.usuarioMaestro ? t("solicitudDetalle.accionesSinAcciones") : partido.usuarioMaestro.nombre} />
+          </div>
+        </Caja>
+    
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-4 max-w-4xl">
+          <Caja titulo={t("solicitudDetalle.equipos")} className={"max-h-fit"}>
+            <div className="md:max-w-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6">
+              <Link to={"/maestro/equipo/" + partido.equipo_local.nombre}>
+                <EquipoCard equipo={partido.equipo_local} />
+              </Link>
+              <Link to={"/maestro/equipo/" + partido.equipo_visitante.nombre}>
+                <EquipoCard equipo={partido.equipo_visitante} />
+              </Link>
             </div>
-
-            <ModalAceptar desktopTitle="Aceptar Solicitud" {...modalAceptar}>
-                <form onSubmit={submitAceptar(aceptarPartidoSubmit)} className="p-4 space-y-4">
-                    <p>Selecciona la cancha a prestar para este partido !d</p>
-                    <Select
-                        setValue={setValue}
-                        valueLabel="id_zona_juego"
-                        label="Zona De Juego"
-                        noAbsolute
-                        opciones={zonaDeJuegos}
-                        placeholder={"Selecciona Zona De Juego"} />
-
-                    <Button disabled={cargandoAceptar}>
-                        <Skeleton fallback={<Loader />} loading={cargandoAceptar}>
-                            Aceptar Partido
-                        </Skeleton>
-                    </Button>
-                </form>
-            </ModalAceptar>
-
-            <ModalPosponer {...modalPosponer} desktopTitle="Posponer Fecha">
-                <form onSubmit={handleSubmit(posponerSubmit)} className="p-4 max-w-md space-y-4">
-                    <div className="space-y-2">
-                        {errors.fecha && <AlertaError message={errors.fecha.message} />}
-                        <p>Se desligara al maestro que estaba encargado de este partido, y los estudiantes volveran a esperar a que un nuevo maestro les apruebe</p>
-                    </div>
-                    <Input register={{
-                        ...register("fecha", { required: { value: true, message: 'Ingresa una fecha' } }),
-                        min: new Date().toLocaleDateString("sv", { hour: 'numeric', minute: 'numeric' })
-                    }} label={"Seleccione una nueva fecha"} type="datetime-local" />
-                    <Button disabled={cargandoPosponer}>
-                        <Skeleton fallback={<Loader />} loading={cargandoPosponer}>
-                            Posponer
-                        </Skeleton>
-                    </Button>
-                </form>
-            </ModalPosponer>
-
-            <ModalRechazar {...modalRechzar} desktopTitle="Rechazar Solicitud">
-                <div className="p-4 space-y-4">
-                    <p>Deseas rechazar esta solicitud de partido</p>
-                    <Button disabled={cargandoRechazar} onClick={rechazarPartidoClick}>
-                        <Skeleton loading={cargandoRechazar} fallback={<Loader />}>
-                            Rechazar Solictud
-                        </Skeleton>
-                    </Button>
-                </div>
-            </ModalRechazar>
-
-
-        </CoordinacionLayout>
+          </Caja>
+          <Caja className={"flex flex-col gap-2"} titulo={t("solicitudDetalle.acciones")}>
+            <div className="h-full flex flex-col gap-4">
+              {
+                partido.estado.fase == 3 ? (
+                  <>
+                    <Button onClick={() => modalAceptar.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#04BB16"}>{t("solicitudDetalle.accionesAceptar")}</Button>
+                    <Button onClick={() => modalPosponer.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#A0A0A0"}>{t("solicitudDetalle.accionesPosponer")}</Button>
+                    <Button onClick={() => modalRechzar.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#DD3535"}>{t("solicitudDetalle.accionesRechazar")}</Button>
+                  </>
+                )
+                  : <p>{t("solicitudDetalle.accionesSinAcciones")}</p>
+              }
+            </div>
+          </Caja>
+        </div>
+    
+        <ModalAceptar desktopTitle={t("solicitudDetalle.modalAceptarTitle")} {...modalAceptar}>
+          <form onSubmit={submitAceptar(aceptarPartidoSubmit)} className="p-4 space-y-4">
+            <p>{t("solicitudDetalle.modalAceptarDescription")}</p>
+            <Select
+              setValue={setValue}
+              valueLabel="id_zona_juego"
+              label={t("solicitudDetalle.modalAceptarZonaDeJuego")}
+              noAbsolute
+              opciones={zonaDeJuegos}
+              placeholder={t("solicitudDetalle.modalAceptarPlaceholder")}
+            />
+            <Button disabled={cargandoAceptar}>
+              <Skeleton fallback={<Loader />} loading={cargandoAceptar}>
+                {t("solicitudDetalle.modalAceptarButton")}
+              </Skeleton>
+            </Button>
+          </form>
+        </ModalAceptar>
+    
+        <ModalPosponer {...modalPosponer} desktopTitle={t("solicitudDetalle.modalPosponerTitle")}>
+          <form onSubmit={handleSubmit(posponerSubmit)} className="p-4 max-w-md space-y-4">
+            <div className="space-y-2">
+              {errors.fecha && <AlertaError message={errors.fecha.message} />}
+              <p>{t("solicitudDetalle.modalPosponerDescription")}</p>
+            </div>
+            <Input register={{
+              ...register("fecha", { required: { value: true, message: 'Ingresa una fecha' } }),
+              min: new Date().toLocaleDateString("sv", { hour: 'numeric', minute: 'numeric' })
+            }} label={t("solicitudDetalle.modalPosponerFecha")} type="datetime-local" />
+            <Button disabled={cargandoPosponer}>
+              <Skeleton fallback={<Loader />} loading={cargandoPosponer}>
+                {t("solicitudDetalle.modalPosponerButton")}
+              </Skeleton>
+            </Button>
+          </form>
+        </ModalPosponer>
+    
+        <ModalRechazar {...modalRechzar} desktopTitle={t("solicitudDetalle.modalRechazarTitle")}>
+          <div className="p-4 space-y-4">
+            <p>{t("solicitudDetalle.modalRechazarDescription")}</p>
+            <Button disabled={cargandoRechazar} onClick={rechazarPartidoClick}>
+              <Skeleton loading={cargandoRechazar} fallback={<Loader />}>
+                {t("solicitudDetalle.modalRechazarButton")}
+              </Skeleton>
+            </Button>
+          </div>
+        </ModalRechazar>
+      </CoordinacionLayout>
     )
 }
 
 const ModificacionMensaje = () => {
+    const {t} = useTranlate();
     return (
-        <CoordinacionLayout titulo={"Solicitud Modificada"}>
-            <Caja titulo={"Solicitud Modificada"}>
-                <p>La solicitud ha sido Modificada</p>
-                <Link to={"/coordinacion/solicitudes"}>Haz click aca para regresar</Link>
+        <CoordinacionLayout titulo={t("solicitudDetalle.modificacionMensajeTitle")}>
+            <Caja titulo={t("solicitudDetalle.modificacionMensajeDescription")}>
+                <p>{t("solicitudDetalle.modificacionMensajeDescription")}</p>
+                <Link to={"/coordinacion/solicitudes"}>{t("solicitudDetalle.modificacionMensajeLinkText")}</Link>
             </Caja>
         </CoordinacionLayout>
     )

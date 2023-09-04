@@ -4,7 +4,7 @@
   "Cargando...": "Loading...",
   "Hubo un error, recarga la página": "An error occurred, please reload the page",
   "nombreLabel": "Name",
-  "nombrePlaceholder": "Enter your name",
+  "nombrePlaceholder": "Enter your full name",
   "apellidoLabel": "Last Name",
   "apellidoPlaceholder": "Enter your last name",
   "nivelAcademicoLabel": "Academic Level",

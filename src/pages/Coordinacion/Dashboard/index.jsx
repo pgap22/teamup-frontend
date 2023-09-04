@@ -8,46 +8,49 @@ import Resumen from "./components/Resumen";
 import PartidosRealizados from "./components/PartidosRealizados";
 import { useEffect, useState } from "react";
 import { obtenerEstadisticasCoordinacion } from "src/api";
+import {useTranlate} from "src/hooks/useTranslation";
 
 const Dashboard = () => {
+  const { t } = useTranlate();
   const acciones = [
     {
-      nombre: "👨‍🏫 Nuevo maestro",
+      nombre: t('actions.newTeacher'),
       url: "/coordinacion/maestros/crear",
     },
     {
-      nombre: "🥇 Nuevo deporte",
+      nombre: t('actions.newSport'),
       url: "/coordinacion/deportes/crear",
     },
     {
-      nombre: "⛳ Nueva Zona de Juego",
+      nombre: t('actions.newPlayZone'),
       url: "/coordinacion/zonadejuego/crear",
     },
     {
-      nombre: "📩 Ver Solicitudes Pendientes",
+      nombre: t('actions.viewPendingRequests'),
       url: "/coordinacion/solicitudes",
     },
   ];
+  
   const resumen = [
     {
       key: 'solicitudesPendientes',
-      titulo: "Solicitudes Pendientes",
+      titulo: t('summary.pendingRequests'),
       icon: MdOutlineArticle,
       cantidad: 0,
     },
     {
       key: 'maestroCuidandoHoy',
-      titulo: "Maestros Cuidando Hoy  ",
+      titulo: t('summary.teachersCaringToday'),
       icon: AiOutlineUser,
       cantidad: 0,
     },
     {
       key: 'partidosRealizados',
-      titulo: "Partidos Realizados",
+      titulo: t('summary.completedMatches'),
       icon: LuMedal,
       cantidad: 0,
     },
-  ]
+  ];
 
   const [estadistica, setEstadistica] = useState({});
 
@@ -64,7 +67,7 @@ const Dashboard = () => {
 
 
   return (
-    <CoordinacionLayout titulo="Inicio">
+    <CoordinacionLayout titulo={t('inicio')}>
       <div className="flex flex-col gap-4">
         <AccionesRapidas acciones={acciones} />
         <Resumen resumen={resumen} estadistica={estadistica} />

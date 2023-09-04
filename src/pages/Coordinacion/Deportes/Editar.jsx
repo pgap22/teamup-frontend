@@ -15,9 +15,10 @@ import Exito from "src/components/coordinacion/Exito";
 import { PageLoader } from "src/components/ui/PageLoader";
 import Skeleton from "src/components/ui/Skeleton";
 import Loader from "src/components/ui/Loader";
+import { useTranlate } from "src/hooks/useTranslation";
 
 function DeporteEditar() {
-
+    const {t} = useTranlate();
     const { id } = useParams();
     const { isLoading, deporte } = useFetchId(id, obtenerUnDeporte, "deporte");
     const { register, handleSubmit, setValue, registroExitoso, isLoading: editarLoading } = useFormulario(editarDeporte);
@@ -32,57 +33,63 @@ function DeporteEditar() {
     }, [])
 
     if (isLoading || loading) return <PageLoader />
-    if (registroExitoso) return (
-        <Exito
-            titulo={"Deporte editado"}
-            subtitulo={"El deporte se ha editado exitosamente"}
-            linkText={"Volver a deportes"}
+    if (registroExitoso) {
+        return (
+          <Exito
+            titulo={t('editSport.title')}
+            subtitulo={t('editSport.successMessage')}
+            linkText={t('editSport.returnToSports')}
             url={"/coordinacion/deportes"}
-        />
-    )
+          />
+        );
+      }
 
     const idTipoDeporte = tiposDeportes.findIndex(tipoDeporte => tipoDeporte.value == deporte.tipoDeporte.id);
     return (
-        <CoordinacionLayout titulo={"Editar Deporte"} center>
-            <CoordinacionForm handleSubmit={handleSubmit} titulo={"Datos Generales"} imagenUrl={"/deporte_1.jpg"}>
-                <Input
-                    register={register("nombre", { value: deporte.nombre })}
-                    label={"Nombre del deporte"}
-                    placeholder={"Ej: Futbol"} />
+<CoordinacionLayout titulo={t('editSportForm.title')} center>
+  <CoordinacionForm handleSubmit={handleSubmit} titulo={t('editSportForm.generalData')} imagenUrl={"/deporte_1.jpg"}>
+    <Input
+      register={register("nombre", { value: deporte.nombre })}
+      label={t('editSportForm.sportName')}
+      placeholder={t('editSportForm.exampleSportName')}
+    />
 
-                <Textarea
-                    register={register("descripcion", { value: deporte.descripcion })}
-                    label={"Descripcion"}
-                    placeholder={"Descripcion del deporte"} />
+    <Textarea
+      register={register("descripcion", { value: deporte.descripcion })}
+      label={t('editSportForm.description')}
+      placeholder={t('editSportForm.exampleDescription')}
+    />
 
-                <Input
-                    type="number"
-                    register={register("limiteJugadores", { value: deporte.limiteJugadores })}
-                    label={"Limite de jugadores"}
-                    placeholder={"Ej: 7"} />
+    <Input
+      type="number"
+      register={register("limiteJugadores", { value: deporte.limiteJugadores })}
+      label={t('editSportForm.playerLimit')}
+      placeholder={t('editSportForm.examplePlayerLimit')}
+    />
 
-                <Input
-                    type="number"
-                    register={register("limiteJugadoresCambio", { value: deporte.limiteJugadoresCambio })}
-                    label={"Limite de cambio"}
-                    placeholder={"Ej: 2"} />
+    <Input
+      type="number"
+      register={register("limiteJugadoresCambio", { value: deporte.limiteJugadoresCambio })}
+      label={t('editSportForm.changeLimit')}
+      placeholder={t('editSportForm.exampleChangeLimit')}
+    />
 
-                <Select
-                    label={"Tipo de Deporte"}
-                    placeholder={"Ej: Cancha"}
-                    setValue={setValue}
-                    valueLabel={"id_tipoDeporte"}
-                    opciones={tiposDeportes}
-                    id_valorPorDefecto={idTipoDeporte}
+    <Select
+      label={t('editSportForm.sportType')}
+      placeholder={t('editSportForm.exampleSportType')}
+      setValue={setValue}
+      valueLabel={"id_tipoDeporte"}
+      opciones={tiposDeportes}
+      id_valorPorDefecto={idTipoDeporte}
+    />
 
-                />
-                <Button disabled={editarLoading}>
-                    <Skeleton loading={editarLoading} fallback={<Loader />}>
-                        Editar Deporte
-                    </Skeleton>
-                </Button>
-            </CoordinacionForm>
-        </CoordinacionLayout>
+    <Button disabled={editarLoading}>
+      <Skeleton loading={editarLoading} fallback={<Loader />}>
+        {t('editSportForm.editSportButton')}
+      </Skeleton>
+    </Button>
+  </CoordinacionForm>
+</CoordinacionLayout>
     )
 }
 

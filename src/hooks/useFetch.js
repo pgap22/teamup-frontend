@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { useTranlate } from "./useTranslation";
 
 const useFetch = (key, obtenerItems, transformarDatosTabla) => {
   const { data, isLoading, error } = useQuery(
@@ -6,6 +7,8 @@ const useFetch = (key, obtenerItems, transformarDatosTabla) => {
     obtenerItems,
     {refetchOnWindowFocus: false, cacheTime: 0, retry: false}
   );
+
+  const {t} = useTranlate();
 
   if (isLoading) {
     return { isLoading: true, key: [], registroExitoso: false, };
@@ -18,7 +21,7 @@ const useFetch = (key, obtenerItems, transformarDatosTabla) => {
   let datos = data.data;
 
   if(transformarDatosTabla){
-     datos = data ? transformarDatosTabla(data) : []
+     datos = data ? transformarDatosTabla(data,t) : []
   }
 
   return { isLoading: false, [key]: datos, registroExitoso: true, error };
