@@ -23,7 +23,9 @@
         "Requester": "Solicitante",
         "Playground": "Zona de juego",
         "Sport": "Deporte",
-        "Date": "Fecha"
+        "Date": "Fecha",
+        "Pending": "Pendiente"
+
     },
     "buscarEquipo": {
         "pageTitle": "Buscar Equipo",

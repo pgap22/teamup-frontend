@@ -93,10 +93,10 @@ export const solicitudesTabla = ({ data}, t = ()=> '') => {
 
     return {
       [t('solicitud.ID')]: solicitud.id,
-      [t('solicitud.Requester', { nombre: solicitud.equipo_local.lider.nombre })]: solicitud.equipo_local.lider.nombre,
-      [t('solicitud.Playground', { nombre })]: nombre,
-      [t('solicitud.Sport', { nombre: solicitud.deporte.nombre })]: solicitud.deporte.nombre,
-      [t('solicitud.Date', { fecha: solicitud.fecha })]: solicitud.fecha,
+      [t('solicitud.Requester')]: solicitud.equipo_local.lider.nombre,
+      [t('solicitud.Playground')]: nombre,
+      [t('solicitud.Sport')]: solicitud.deporte.nombre,
+      [t('solicitud.Date')]: new Date(solicitud.fecha).toLocaleDateString(localStorage.getItem("teamup-languaje"),{weekday: 'long', hour: '2-digit', hour12: true, month: 'long'}),
     };
   });
 };

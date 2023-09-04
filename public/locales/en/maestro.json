@@ -23,7 +23,8 @@
         "Requester": "Requester",
         "Playground": "Playground",
         "Sport": "Sport",
-        "Date": "Date"
+        "Date": "Date",
+        "Pending": "Pending"
     },
     "buscarEquipo": {
         "pageTitle": "Search Team",
