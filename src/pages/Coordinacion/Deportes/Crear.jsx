@@ -11,67 +11,68 @@ import { tipoDeporteTransformar } from "../../../helper/transformarDatos"
 import Exito from "src/components/coordinacion/Exito";
 import Skeleton from "src/components/ui/Skeleton";
 import Loader from "src/components/ui/Loader";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const DeporteCrear = () => {
-
+  const {t} = useTranlate();
   const { register, setValue, handleSubmit, registroExitoso, isLoading } = useFormulario(crearDeporte);
 
   const { tiposDeportes } = useFetch("tiposDeportes", obtenerTipoDeportes, tipoDeporteTransformar);
 
-  if (registroExitoso) return (
-    <Exito
-      titulo={"Deporte Creado"}
-      subtitulo={"El deporte se ha creado exitosamente"}
-      linkText={"Volver a deportes"}
-      url={"/coordinacion/deportes"}
-    />
-  )
-
+  if (registroExitoso) {
+    return (
+      <Exito
+        titulo={t('createSport.title')}
+        subtitulo={t('createSport.successMessage')}
+        linkText={t('createSport.returnToSports')}
+        url={"/coordinacion/deportes"}
+      />
+    );
+  }
+  
   return (
-    <CoordinacionLayout titulo={"Crear Deporte"} center={true}>
-
+    <CoordinacionLayout titulo={t('createSport.createSport')} >
       <CoordinacionForm
         handleSubmit={handleSubmit}
         imagenUrl={"/deporte.jpg"}
-        titulo={"Datos Generales"}
+        titulo={t('createSport.generalData')}
       >
         <Input
           register={register("nombre")}
-          label={"Nombre del deporte"}
-          placeholder={"Ej: Futbol"} />
-
+          label={t('createSport.sportName')}
+          placeholder={t('createSport.exampleSportName')} />
+  
         <Textarea
           register={register("descripcion")}
-          label={"Descripcion"}
-          placeholder={"Descripcion del deporte"} />
-
+          label={t('createSport.description')}
+          placeholder={t('createSport.exampleDescription')} />
+  
         <Input
           type="number"
           register={register("limiteJugadores")}
-          label={"Limite de jugadores"}
-          placeholder={"Ej: 7"} />
-
+          label={t('createSport.playerLimit')}
+          placeholder={t('createSport.examplePlayerLimit')} />
+  
         <Input
           type="number"
           register={register("limiteJugadoresCambio")}
-          label={"Limite de cambio"}
-          placeholder={"Ej: 2"} />
-
+          label={t('createSport.changeLimit')}
+          placeholder={t('createSport.exampleChangeLimit')} />
+  
         <Select
-          label={"Tipo de Deporte"}
-          placeholder={"Ej: Cancha"}
+          label={t('createSport.sportType')}
+          placeholder={t('createSport.exampleSportType')}
           setValue={setValue}
           valueLabel={"id_tipoDeporte"}
           opciones={tiposDeportes}
         />
-
+  
         <Button disabled={isLoading}>
           <Skeleton loading={isLoading} fallback={<Loader />}>
-            Añadir Deporte
+            {t('createSport.addSport')}
           </Skeleton>
         </Button>
       </CoordinacionForm>
-
     </CoordinacionLayout>
   );
 };

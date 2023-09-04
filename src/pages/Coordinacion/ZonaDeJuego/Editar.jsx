@@ -22,10 +22,11 @@ import Exito from "src/components/coordinacion/Exito";
 import { PageLoader } from "src/components/ui/PageLoader";
 import Skeleton from "src/components/ui/Skeleton";
 import Loader from "src/components/ui/Loader";
+import { useTranlate } from "src/hooks/useTranslation";
 
 export default function Editar() {
   const { id } = useParams();
-
+  const { t } = useTranlate();
   const { isLoading, zonaDeJuego } = useFetchId(
     id,
     obtenerUnaZonaDeJuego,
@@ -43,37 +44,38 @@ export default function Editar() {
 
   if (isLoading) return <PageLoader />;
 
-  if (registroExitoso)
+  if (registroExitoso) {
     return (
       <Exito
-        titulo={"Zona de Juego Editada"}
-        subtitulo={"La zona de juego se ha editado exitosamente"}
-        linkText={"Volver a zona de juego"}
-        url={"/coordinacion/zonadejuego"}
+        titulo={t('zonadejuegoEdit.title')}
+        subtitulo={t('zonadejuegoEdit.successMessage')}
+        linkText={t('zonadejuegoEdit.returnToZonadejuego')}
+        url="/coordinacion/zonadejuego"
       />
     );
+  }
 
-  const idDeporte = deportes.findIndex(deporte => deporte.value == zonaDeJuego.deporte.id);
+  const idDeporte = deportes.findIndex((deporte) => deporte.value == zonaDeJuego.deporte.id);
 
   return (
-    <CoordinacionLayout titulo={"Editar Zona De Juego"}>
+    <CoordinacionLayout titulo={t('zonadejuegoEditForm.layoutTitle')}>
       <CoordinacionForm
         handleSubmit={handleSubmit}
-        titulo={"Datos Generales"}
-        imagenUrl={"/basquet.jpg"}
+        titulo={t('zonadejuegoEditForm.generalData')}
+        imagenUrl="/basquet.jpg"
       >
         <Input
           register={register("nombre", { value: zonaDeJuego.nombre })}
-          label={"Nombre"}
-          placeholder={"Nombre de la zona de juego"}
+          label={t('zonadejuegoEditForm.nameLabel')}
+          placeholder={t('zonadejuegoEditForm.namePlaceholder')}
         />
 
         <Select
           setValue={setValue}
           id_valorPorDefecto={idDeporte}
           valueLabel={"id_deporte"}
-          placeholder={"Selecciona un deporte"}
-          label={"Deporte"}
+          placeholder={t('zonadejuegoEditForm.sportPlaceholder')}
+          label={t('zonadejuegoEditForm.sportLabel')}
           opciones={deportes}
         />
 
@@ -81,14 +83,14 @@ export default function Editar() {
           setValue={setValue}
           valueLabel={"imagen_eliminadas"}
           imagenes={zonaDeJuego.imagenes}
-          label={"Editar Imagenes"}
+          label={t('zonadejuegoEditForm.editImagesLabel')}
         />
 
-        <ImageDrop setValue={setValue} name="imagenes" label={"Imagenes"} />
+        <ImageDrop setValue={setValue} name="imagenes" label={t('zonadejuegoEditForm.imagesLabel')} />
 
         <Button disabled={editarLoading}>
           <Skeleton loading={editarLoading} fallback={<Loader />}>
-            Editar Zona De Juego
+            {t('zonadejuegoEditForm.editButton')}
           </Skeleton>
         </Button>
       </CoordinacionForm>

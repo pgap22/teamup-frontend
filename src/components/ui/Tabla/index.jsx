@@ -2,6 +2,7 @@ import TablaHeader from './TablaHeader';
 import TablaBotonAdd from './TablaBotonAdd';
 import TablaRowHeader from './TablaRowHeader';
 import TablaListaDeFilas from './TablaListaDeFilas';
+import { useTranlate } from 'src/hooks/useTranslation';
 
 const Tabla = ({
   titulo,
@@ -20,9 +21,9 @@ const Tabla = ({
   editar = true }) => {
 
   let filas = listaDatos.length ? [...Object.keys(listaDatos[0])] : [];
-
+  const {t} = useTranlate();
   if (acciones) {
-    filas = [...filas, "Acciones"]
+    filas = [...filas, t('acciones')]
   }
 
   if (!acciones && accionesCustomLabel) {
@@ -57,7 +58,7 @@ const Tabla = ({
                 AccionesCustomElement={AccionesCustomElement}
                 editar={editar}
                 eliminar={eliminar} />
-              : <p className='p-4'>No hay ningun item...</p>
+              : <p className='p-4'>{t('no_item')}</p>
           }
         </tbody>
       </table>

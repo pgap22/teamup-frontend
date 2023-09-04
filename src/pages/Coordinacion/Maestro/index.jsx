@@ -5,25 +5,27 @@ import { useFetchAndDelete } from "src/hooks/useFetchAndDelete";
 import { docentesTransformarTabla } from "src/helper/transformarDatos";
 import Skeleton from "src/components/ui/Skeleton";
 import TablaSkeleton from "src/components/coordinacion/TablaSkeleton";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const Maestro = () => {
   const { isLoading, maestros, eliminar, } = useFetchAndDelete("maestros", obtenerMaestros, eliminarMaestro, docentesTransformarTabla);
 
+  const { t } = useTranlate();
 
   return (
-    <CoordinacionLayout titulo={"Maestros"}>
+    <CoordinacionLayout titulo={t('teachers.title')}>
       <Skeleton loading={isLoading} fallback={<TablaSkeleton />}>
-        {
-          !isLoading && <Tabla
+        {!isLoading && (
+          <Tabla
             editar={false}
-            titulo={"Lista de Maestros"}
-            cantidadTexto={maestros.length + " Maestro"}
-            botonTexto={"Nuevo Maestro"}
+            titulo={t('teachers.listTitle')}
+            cantidadTexto={`${maestros.length} ${t('teachers.teachers')}`}
+            botonTexto={t('teachers.newTeacher')}
             listaDatos={maestros}
             borrarElemento={eliminar}
             botonUrl={"/coordinacion/maestros/crear"}
           />
-        }
+        )}
       </Skeleton>
     </CoordinacionLayout>
   )

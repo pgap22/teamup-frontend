@@ -4,16 +4,19 @@ import { HiOutlineDocumentSearch } from "react-icons/hi";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 import { useSession } from "src/hooks/useSession";
 import Button from "src/components/form/Button";
+import ButtonTranslate from "src/components/translate/ButtonTranslate";
+import { useTranlate } from "src/hooks/useTranslation";
 const MaestroLayout = ({ children, titulo }) => {
+  const {t} = useTranlate();
   const links = [
     {
-      nombre: "Inicio",
+      nombre: t("links.inicio"),
       principal: true,
       ruta: "/maestro",
       icon: MdHouse,
     },
     {
-      nombre: "Buscar Equipo",
+      nombre: t("links.buscarEquipo"),
       ruta: "/maestro/buscar",
       icon: HiOutlineDocumentSearch,
     },
@@ -28,10 +31,11 @@ const MaestroLayout = ({ children, titulo }) => {
 
 const Bottom = () => {
   const { logout } = useSession();
-
+  const {t} = useTranlate();
   return (
     <>
-      <Button onClick={logout} color={"rojo"}>Cerrar Sesion</Button>
+      <Button onClick={logout} color={"rojo"}>{t('cerrar')}</Button>
+      <ButtonTranslate />
     </>
   );
 };

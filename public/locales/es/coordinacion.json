@@ -1,0 +1,207 @@
+{
+    "accionesRapidas": "Acciones Rapidas",
+    "actions": {
+        "newTeacher": "👨‍🏫 Nuevo maestro",
+        "newSport": "🥇 Nuevo deporte",
+        "newPlayZone": "⛳ Nueva Zona de Juego",
+        "viewPendingRequests": "📩 Ver Solicitudes Pendientes"
+    },
+    "summary": {
+        "pendingRequests": "Solicitudes Pendientes",
+        "teachersCaringToday": "Maestros Cuidando Hoy",
+        "completedMatches": "Partidos Realizados"
+    },
+    "links": {
+        "home": "Inicio",
+        "sports": "Deportes",
+        "playZone": "Zona De Juego",
+        "teachers": "Maestros",
+        "requests": "Solicitudes"
+    },
+    "resumen": "Resumen",
+    "inicio": "Inicio",
+    "partidosRealizados": "Partidos Realizados",
+    "cerrar": "Cerrar Sesion",
+    "sportsList": {
+        "title": "Lista de Deportes",
+        "numberOfSports": "{{count}} Deportes",
+        "newSport": "Nuevo Deporte"
+    },
+    "sportsPage": {
+        "title": "Deportes"
+    },
+    "sportsKeys": {
+        "ID": "ID",
+        "Nombre": "Nombre",
+        "Descripcion": "Descripción",
+        "limiteJugadores": "Límite de Jugadores",
+        "limiteJugadoresCambio": "Límite de Cambio de Jugadores",
+        "tipoDeporte": "Tipo de Deporte"
+    },
+    "acciones": "Acciones",
+    "modal": {
+        "confirmDelete": "¿Deseas eliminar este elemento?",
+        "areYouSure": "¿Estás seguro de que quieres eliminar este elemento?",
+        "delete": "Eliminar",
+        "cancel": "Cancelar"
+    },
+    "playZone": {
+        "title": "Zona de Juego",
+        "listTitle": "Lista de Zonas de Juego",
+        "playZones": "Zonas de Juego",
+        "newPlayZone": "Nueva Zona de Juego"
+    },
+    "tableKeys": {
+        "ID": "ID",
+        "nombre": "Nombre",
+        "deporte": "Deporte",
+        "imagenes": "Imágenes"
+    },
+
+    "teachers": {
+        "title": "Maestros",
+        "listTitle": "Lista de Maestros",
+        "teachers": "Maestros",
+        "newTeacher": "Nuevo Maestro"
+    },
+    "keyMaestro": {
+        "ID": "ID",
+        "Nombre": "Nombre",
+        "Email": "Email",
+        "NivelAcademico": "Nivel Académico"
+    },
+    "solicitudes": {
+        "title": "Solicitudes",
+        "pendingRequests": "Solicitudes Pendientes",
+        "request": "Solicitud",
+        "moreInformation": "Más Información"
+    },
+    "solicitudesTable": {
+        "ID": "ID",
+        "solicitante": "Solicitante",
+        "Zonadejuego": "Zona de Juego",
+        "maestro": "Maestro",
+        "fecha": "Fecha",
+        "deporte": "Deporte"
+    },
+    "createSport": {
+        "title": "Deporte Creado",
+        "successMessage": "El deporte se ha creado exitosamente",
+        "returnToSports": "Volver a deportes",
+        "createSport": "Crear Deporte",
+        "generalData": "Datos Generales",
+        "sportName": "Nombre del deporte",
+        "exampleSportName": "Ej: Futbol",
+        "description": "Descripcion",
+        "exampleDescription": "Descripcion del deporte",
+        "playerLimit": "Limite de jugadores",
+        "examplePlayerLimit": "Ej: 7",
+        "changeLimit": "Limite de cambio",
+        "exampleChangeLimit": "Ej: 2",
+        "sportType": "Tipo de Deporte",
+        "exampleSportType": "Ej: Cancha",
+        "addSport": "Añadir Deporte"
+    },
+    "editSport": {
+        "title": "Deporte Editado",
+        "successMessage": "El deporte se ha editado exitosamente",
+        "returnToSports": "Volver a deportes"
+    },
+    "editSportForm": {
+        "title": "Editar Deporte",
+        "generalData": "Datos Generales",
+        "sportName": "Nombre del deporte",
+        "exampleSportName": "Ej: Futbol",
+        "description": "Descripcion",
+        "exampleDescription": "Descripcion del deporte",
+        "playerLimit": "Limite de jugadores",
+        "examplePlayerLimit": "Ej: 7",
+        "changeLimit": "Limite de cambio",
+        "exampleChangeLimit": "Ej: 2",
+        "sportType": "Tipo de Deporte",
+        "exampleSportType": "Ej: Cancha",
+        "editSportButton": "Editar Deporte"
+    },
+    "zonadejuegoCreate": {
+        "title": "Zona de Juego Creada",
+        "successMessage": "La zona de juego se ha creado exitosamente",
+        "returnToZonadejuego": "Volver a zona de juego"
+    },
+    "zonadejuegoCreateForm": {
+        "title": "Crear Zona De Juego",
+        "generalData": "Datos Generales",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Nombre de la zona de juego",
+        "sportLabel": "Deporte",
+        "sportPlaceholder": "Selecciona un deporte",
+        "imagesLabel": "Imágenes",
+        "createButton": "Crear Zona De Juego"
+    },
+    "zonadejuegoEdit": {
+        "title": "Zona de Juego Editada",
+        "successMessage": "La zona de juego se ha editado exitosamente",
+        "returnToZonadejuego": "Volver a zona de juego"
+    },
+    "zonadejuegoEditForm": {
+        "layoutTitle": "Editar Zona De Juego",
+        "generalData": "Datos Generales",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Nombre de la zona de juego",
+        "sportLabel": "Deporte",
+        "sportPlaceholder": "Selecciona un deporte",
+        "editImagesLabel": "Editar Imágenes",
+        "imagesLabel": "Imágenes",
+
+        "editButton": "Editar Zona De Juego"
+    },
+    "maestroCreate": {
+        "title": "Perfil Creado",
+        "successMessage": "El perfil del maestro se ha creado exitosamente",
+        "returnToMaestros": "Volver a maestros"
+    },
+    "maestroCreateForm": {
+        "layoutTitle": "Crear Maestros",
+        "generalData": "Datos Generales",
+        "nameLabel": "Nombre",
+        "namePlaceholder": "Nombres del maestro",
+        "lastNameLabel": "Apellido",
+        "lastNamePlaceholder": "Apellidos del maestro",
+        "teacherLevelLabel": "Nivel del docente",
+        "teacherLevelPlaceholder": "Nivel academico del docente",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Email",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Password",
+        "createAccountButton": "Crear Cuenta Maestro"
+    },
+    "solicitudDetalle": {
+        "title": "Solicitud N° {{partido.id}}",
+        "estadoPartido": "Estado del partido",
+        "datosGenerales": "Datos Generales",
+        "zonaDeJuego": "Zona De Juego",
+        "deporte": "Deporte",
+        "maestroEncargado": "Maestro Encargado",
+        "equipos": "Equipos",
+        "acciones": "Acciones",
+        "accionesAceptar": "Aceptar Solicitud",
+        "accionesPosponer": "Posponer Fecha",
+        "accionesRechazar": "Rechazar Solicitud",
+        "accionesSinAcciones": "No hay acciones",
+        "modalAceptarTitle": "Aceptar Solicitud",
+        "modalAceptarDescription": "Selecciona la cancha a prestar para este partido",
+        "modalAceptarZonaDeJuego": "Zona De Juego",
+        "modalAceptarPlaceholder": "Selecciona Zona De Juego",
+        "modalAceptarButton": "Aceptar Partido",
+        "modalPosponerTitle": "Posponer Fecha",
+        "modalPosponerDescription": "Se desligará al maestro que estaba encargado de este partido, y los estudiantes volverán a esperar a que un nuevo maestro les apruebe",
+        "modalPosponerFecha": "Seleccione una nueva fecha",
+        "modalPosponerButton": "Posponer",
+        "modalRechazarTitle": "Rechazar Solicitud",
+        "modalRechazarDescription": "¿Deseas rechazar esta solicitud de partido?",
+        "modalRechazarButton": "Rechazar Solicitud",
+        "modificacionMensajeTitle": "Solicitud Modificada",
+        "modificacionMensajeDescription": "La solicitud ha sido modificada",
+        "modificacionMensajeLinkText": "Haz click aquí para regresar"
+    }
+
+}

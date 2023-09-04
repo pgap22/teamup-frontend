@@ -1,0 +1,73 @@
+{
+    "sport": "Sport",
+    "date": "Date",
+    "localTeam": "Local Team",
+    "visitorTeam": "Visitor Team",
+    "viewMoreInfo": "View More Information",
+    "links": {
+        "inicio": "Home",
+        "buscarEquipo": "Search Team"
+    },
+    "cerrar": "Logout",
+    "maestro": {
+        "inicio": "Home",
+        "partidosCuidar": "Matches to Care For",
+        "solicitudesPendientes": "Pending Requests",
+        "solicitudes": "Requests",
+        "masInformacion": "More Information",
+        "cargandoPartidos": "Loading Matches"
+    },
+    "no_item": "There isn't any item...",
+    "solicitud": {
+        "ID": "ID",
+        "Requester": "Requester",
+        "Playground": "Playground",
+        "Sport": "Sport",
+        "Date": "Date"
+    },
+    "buscarEquipo": {
+        "pageTitle": "Search Team",
+        "searchBoxTitle": "Search for a Team",
+        "searchBoxDescription": "Enter the team name to check if they have a match!",
+        "errorMessage": "Error message in English",
+        "inputPlaceholder": "Team Name",
+        "searchButton": "Search"
+    },
+    "equipoDetails": {
+        "partidosTitle": "Matches",
+        "estudiantesTitle": "Students"
+    },
+    "partidoDetails": {
+        "pageTitle": "Match Details",
+        "generalDataTitle": "General Information",
+        "zone": "Game Zone",
+        "sport": "Sport",
+        "teacher": "Assigned Teacher",
+        "teams": "Teams",
+        "actions": "Actions",
+        "careMatch": "Take Care of Match",
+        "takeAttendance": "Take Attendance",
+        "sendResult": "Send Result",
+        "attendanceTitle": "Take Attendance",
+        "clickAttendance": "Click to take attendance for the team",
+        "ifTeamNotPresent": "If a team does not show up, you can cancel the match",
+        "cancelMatch": "Cancel Match",
+        "resultTitle": "Results",
+        "sendMatchResults": "Enter the match results here!",
+        "cuidarSolicitud": {
+            "titulo": "Request to Care for Match",
+            "subtitulo": "Request Accepted",
+            "descripcion": "You are now responsible for taking care of this match."
+          },
+          "cancelarSolicitud": {
+            "titulo": "Request Canceled",
+            "subtitulo": "Request Canceled",
+            "descripcion": "You have canceled this request."
+          },
+          "enviarResultados": {
+            "titulo": "Match Results Sent",
+            "subtitulo": "Match Results Sent",
+            "descripcion": "The match has ended, and the results have been saved!"
+          }
+      }
+}

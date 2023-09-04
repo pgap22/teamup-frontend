@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useTranlate } from "./useTranslation";
 
 const useFetchAndDelete = (
   key,
@@ -6,6 +7,8 @@ const useFetchAndDelete = (
   eliminarItem,
   transformarDatosTabla
 ) => {
+  const {t} = useTranlate();
+
   const { data, isLoading, error } = useQuery(key, obtenerItems,{cacheTime: 0});
 
   const queryClient = useQueryClient();
@@ -35,7 +38,7 @@ const useFetchAndDelete = (
   let datos = data.data;
 
   if(transformarDatosTabla){
-     datos = data ? transformarDatosTabla(data) : []
+     datos = data ? transformarDatosTabla(data,t) : []
   }
 
   return { isLoading: false, [key]: datos, eliminar };

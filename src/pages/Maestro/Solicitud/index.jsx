@@ -14,8 +14,10 @@ import { PageLoader } from "src/components/ui/PageLoader"
 import Skeleton from "src/components/ui/Skeleton"
 import { useFetchClick } from "src/hooks/useFetchClick"
 import { useModal } from "src/hooks/useModal"
+import { useTranlate } from "src/hooks/useTranslation"
 
 const Solicitud = () => {
+    const { t } = useTranlate();
     const [partido, setPartido] = useState({});
     const [partidoAceptado, setPartidoAceptado] = useState(false);
 
@@ -32,17 +34,6 @@ const Solicitud = () => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
 
-
-    useEffect(() => {
-        if (cuidarExitoso) {
-            setPartidoAceptado({
-                titulo: "Solicitud Cuidar",
-                subtitulo: "Solicitud Aceptada",
-                descripcion: "Ahora tu cuidaras este partido"
-            });
-        }
-    }, [cuidarExitoso])
-
     useEffect(() => {
         (async () => {
             try {
@@ -53,6 +44,8 @@ const Solicitud = () => {
             }
         })()
     }, [])
+
+
 
     useEffect(() => {
         (async () => {
@@ -66,30 +59,38 @@ const Solicitud = () => {
     }, [asistenciaExito])
 
     useEffect(() => {
+        if (cuidarExitoso) {
+            setPartidoAceptado({
+                titulo: t("partidoDetails.cuidarSolicitud.titulo"),
+                subtitulo: t("partidoDetails.cuidarSolicitud.subtitulo"),
+                descripcion: t("partidoDetails.cuidarSolicitud.descripcion")
+            });
+        }
+    }, [cuidarExitoso]);
+
+    useEffect(() => {
         if (cancelarExito) {
             setPartidoAceptado({
-                titulo: "Solicitud Cancelada",
-                subtitulo: "Solicitud Cancelada",
-                descripcion: "Haz cancelado esta solicitud"
+                titulo: t("partidoDetails.cancelarSolicitud.titulo"),
+                subtitulo: t("partidoDetails.cancelarSolicitud.subtitulo"),
+                descripcion: t("partidoDetails.cancelarSolicitud.descripcion")
             });
             modalAsistecia.toggleModal(false);
         }
-    }, [cancelarExito])
-
+    }, [cancelarExito]);
 
     const enviarResultadosSubmit = async (datos) => {
         try {
             await enviarResultadosPartido(id, datos);
             setPartidoAceptado({
-                titulo: "Resultados Enviados",
-                subtitulo: "Resultados Enviados",
-                descripcion: "El partido ha finalizado y los resultados han sido guardados !"
+                titulo: t("partidoDetails.enviarResultados.titulo"),
+                subtitulo: t("partidoDetails.enviarResultados.subtitulo"),
+                descripcion: t("partidoDetails.enviarResultados.descripcion")
             });
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
-
+    };
 
 
 
@@ -98,17 +99,17 @@ const Solicitud = () => {
     if (partidoAceptado) return <MensajeExito partidoAceptado={partidoAceptado} />
 
     return (
-        <MaestroLayout titulo={"Solicitud N°" + partido.id}>
-            <Caja titulo={"Datos Generales"}>
-                <div className=" space-y-4">
-                    <InfoCampo title={"Zona De Juego"} value={!partido.ZonaDejuego ? 'Pendiente' : partido.ZonaDejuego.nombre} />
-                    <InfoCampo title={"Deporte"} value={partido.deporte.nombre} />
-                    <InfoCampo title={"Maestro Encargado"} value={!partido.usuarioMaestro ? 'Pendiente' : partido.usuarioMaestro.nombre} />
+        <MaestroLayout titulo={t('partidoDetails.pageTitle', { partidoId: partido.id })}>
+            <Caja titulo={t('partidoDetails.generalDataTitle')}>
+                <div className="space-y-4">
+                    <InfoCampo title={t('partidoDetails.zone')} value={!partido.ZonaDejuego ? t('partidoDetails.pending') : partido.ZonaDejuego.nombre} />
+                    <InfoCampo title={t('partidoDetails.sport')} value={partido.deporte.nombre} />
+                    <InfoCampo title={t('partidoDetails.teacher')} value={!partido.usuarioMaestro ? t('partidoDetails.pending') : partido.usuarioMaestro.nombre} />
                 </div>
             </Caja>
 
             <div className="grid grid-cols-1 md:grid-cols-2 mt-5 gap-4 max-w-4xl">
-                <Caja titulo={"Equipos"}>
+                <Caja titulo={t('partidoDetails.teams')}>
                     <div className="md:max-w-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-6">
                         <Link to={"/maestro/equipo/" + partido.equipo_local.nombre}>
                             <EquipoCard equipo={partido.equipo_local} />
@@ -118,63 +119,63 @@ const Solicitud = () => {
                         </Link>
                     </div>
                 </Caja>
-                <Caja className={"flex flex-col gap-2"} titulo={"Acciones"}>
+                <Caja className={"flex flex-col gap-2"} titulo={t('partidoDetails.actions')}>
                     <div className="h-full gap-4 justify-center flex flex-col">
                         <MostrarBoton condicion={partido.estado.fase == 2}>
                             <Button disabled={loadingCuidar} onClick={cuidarPartido} className={"py-4 md:text-xl"} customBg={"#0F62FE"}>
                                 <Skeleton loading={loadingCuidar} fallback={<Loader />}>
-                                    Cuidar Partido
+                                    {t('partidoDetails.careMatch')}
                                 </Skeleton>
                             </Button>
                         </MostrarBoton>
                         <MostrarBoton condicion={partido.estado.fase == 4}>
-                            <Button onClick={() => modalAsistecia.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#7E7E7E"}>Tomar Asistencia</Button>
+                            <Button onClick={() => modalAsistecia.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#7E7E7E"}>{t('partidoDetails.takeAttendance')}</Button>
                         </MostrarBoton>
                         <MostrarBoton condicion={partido.estado.fase == 5}>
-                            <Button onClick={() => modalResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#cfb93d"}>Enviar Resultado</Button>
+                            <Button onClick={() => modalResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#cfb93d"}>{t('partidoDetails.sendResult')}</Button>
                         </MostrarBoton>
                     </div>
                 </Caja>
             </div>
 
-            <ModalAsistencia desktopTitle="Tomar Asistencia" {...modalAsistecia}>
+            <ModalAsistencia desktopTitle={t('partidoDetails.attendanceTitle')} {...modalAsistecia}>
                 <div className="p-4">
                     <div className="space-y-2">
-                        <p>Haz click para tomar la asistencia del equipo</p>
+                        <p>{t('partidoDetails.clickAttendance')}</p>
                         <Button disabled={asistenciaLoading} onClick={tomarAsistencia}>
                             <Skeleton loading={asistenciaLoading} fallback={<Loader />}>
-                                Tomar Asistencia
+                                {t('partidoDetails.takeAttendance')}
                             </Skeleton>
                         </Button>
                     </div>
 
                     <div className="mt-6 space-y-2">
-                        <p>Si no se presenta un equipo puedes cancelar el partido</p>
+                        <p>{t('partidoDetails.ifTeamNotPresent')}</p>
                         <Button disabled={cancelarLoading} onClick={cancelarPartidoClick} customBg={"#7E7E7E"}>
                             <Skeleton fallback={<Loader />} loading={cancelarLoading}>
-                                Cancelar Partido
+                                {t('partidoDetails.cancelMatch')}
                             </Skeleton>
                         </Button>
                     </div>
                 </div>
             </ModalAsistencia>
 
-            <ModalResultado desktopTitle="Resultados" {...modalResultado}>
+            <ModalResultado desktopTitle={t('partidoDetails.resultTitle')} {...modalResultado}>
                 <form onSubmit={handleSubmit(enviarResultadosSubmit)} className="p-4 space-y-2">
-                    <p>Envia aqui los resultados del partido !</p>
+                    <p>{t('partidoDetails.sendMatchResults')}</p>
                     <div className="space-y-2">
                         <EquipoCardResultado register={register("resultado_local", { required: true, valueAsNumber: true })} equipo={partido.equipo_local} />
                         <EquipoCardResultado register={register("resultado_visitante", { required: true, valueAsNumber: true })} equipo={partido.equipo_visitante} />
                     </div>
                     <Button disabled={isSubmitting}>
                         <Skeleton loading={isSubmitting} fallback={<Loader />}>
-                            Enviar Resultados
+                            {t('partidoDetails.sendMatchResults')}
                         </Skeleton>
                     </Button>
                 </form>
             </ModalResultado>
         </MaestroLayout>
-    )
+    );
 }
 
 

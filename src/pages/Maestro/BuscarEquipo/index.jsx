@@ -8,6 +8,7 @@ import MaestroLayout from "src/components/layout/MaestroLayout"
 import Caja from "src/components/ui/Cajas/Caja"
 import Loader from "src/components/ui/Loader"
 import Skeleton from "src/components/ui/Skeleton"
+import { useTranlate } from "src/hooks/useTranslation"
 import { useEquipo } from "src/store/useEquipo"
 
 
@@ -16,6 +17,7 @@ const BuscarEquipo = () => {
     const navigate = useNavigate();
     const [mensaje, setMensaje] = useState('');
     const { setEquipo } = useEquipo();
+    const {t} = useTranlate();
 
     const buscarEquipoForm = async (data) => {
         try {
@@ -30,25 +32,22 @@ const BuscarEquipo = () => {
 
     return (
         <MaestroLayout
-            titulo={"Buscar Equipo"}
+            titulo={t('buscarEquipo.pageTitle')}
         >
-            <Caja titulo="Buscar Equipo">
-                <p className="text-[#767676] my-4">¡Escribe el nombre del equipo y verifique si tienen un partido!</p>
-                {mensaje && <p className="text-red-500">{mensaje}</p>}
+            <Caja titulo={t('buscarEquipo.searchBoxTitle')}>
+                <p className="text-[#767676] my-4">{t('buscarEquipo.searchBoxDescription')}</p>
+                {mensaje && <p className="text-red-500">{t('buscarEquipo.errorMessage')}</p>}
                 <form onSubmit={handleSubmit(buscarEquipoForm)} className="md:max-w-md space-y-4">
-
-                    <Input register={register("nombre")} placeholder={"Nombre Del Equipo"} />
-
+                    <Input register={register("nombre")} placeholder={t('buscarEquipo.inputPlaceholder')} />
                     <Button disabled={isSubmitting}>
                         <Skeleton loading={isSubmitting} fallback={<Loader />}>
-                            Buscar
+                            {t('buscarEquipo.searchButton')}
                         </Skeleton>
                     </Button>
-
                 </form>
-
             </Caja>
         </MaestroLayout>
+
     )
 }
 
