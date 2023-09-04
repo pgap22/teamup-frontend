@@ -272,7 +272,7 @@ export const obtenerEstadisticasEstudiante = obtenerRegistros("/usuario/estadist
 
 export const obtenerEstadoServidor = async() => { 
   try {
-  const {data: {data}} = await axios.get("/", {baseURL: import.meta.env.VITE_URL});
+  const {data: {data}} = await axios.get("/", {baseURL: import.meta.env.VITE_URL, timeout: 8000 });
   return data;     
   } catch (error) {
     throw {
