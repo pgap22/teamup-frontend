@@ -1,7 +1,7 @@
 const Avatar = ({ avatar_url, h = 68, w = 68 }) => {
   return (
     <img
-      src={import.meta.env.VITE_URL + avatar_url}
+      src={avatar_url}
       alt="avatar_equipo"
       className="object-cover"
       style={{

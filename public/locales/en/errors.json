@@ -61,5 +61,6 @@
   "zona_de_juego_required": "A game zone is required.",
 
   "resultado_local_required": "The local team result is required.",
-  "resultado_visitante_required": "The visitor team result is required."
+  "resultado_visitante_required": "The visitor team result is required.",
+  "cuenta_no_verificada": "This account is not verified"
 }

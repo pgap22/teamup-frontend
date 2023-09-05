@@ -13,7 +13,7 @@ const MenuMobile = () => {
     >
       <FondoSombra />
       <div className="absolute top-0 z-30 w-full p-2 md:hidden">
-        <div className="flex flex-col gap-8 p-4 bg-white rounded-md">
+        <div className="flex flex-col gap-8 p-4 pb-12 bg-white rounded-md">
           <LogoCancelButton />
           <MenuLinks />
         </div>

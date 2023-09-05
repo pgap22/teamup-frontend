@@ -1,0 +1,8 @@
+{
+  "titulo": "Email Verification",
+  "subtitulo": "You must verify your email to use Teamup",
+  "congrats": "Congratulations, you have successfully verified your account!",
+  "youcanlogin": "Now you can log in.",
+  "error": "Oops, an error has occurred.",
+  "error_token": "The token is invalid or an error has occurred."
+}

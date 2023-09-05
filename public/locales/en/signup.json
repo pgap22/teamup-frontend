@@ -14,5 +14,7 @@
   "contrasenaLabel": "Password",
   "contrasenaPlaceholder": "Enter your password",
   "registrar": "Register",
-  "yaTienesCuenta": "Already have an account?"
+  "yaTienesCuenta": "Already have an account?",
+  "correo_verificacion": "We already sent you an email to verify your account check your inbox",
+  "regresarLogin": ". Let's go to login"
 }

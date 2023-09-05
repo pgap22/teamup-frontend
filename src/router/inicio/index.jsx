@@ -5,6 +5,7 @@ import PaginaPrincipal from "../../pages/PaginaPrincipal/PaginaPrincipal";
 import SignUp from "../../pages/SignUp/SignUp";
 import Redirect from "../../redirect";
 import ResetPassword from "src/pages/ResetPassword";
+import VerificarCorreo from "src/pages/VerificarCorreo/VerificarCorreo";
 
 const router = {
   caseSensitive: true,
@@ -52,6 +53,14 @@ const router = {
       element: (
         <ProtectedRoute needLogged={false}>
           <ResetPassword />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "verificarEmail/:token",
+      element: (
+        <ProtectedRoute needLogged={false}>
+          <VerificarCorreo />
         </ProtectedRoute>
       ),
     },

@@ -17,6 +17,7 @@ import Skeleton from "src/components/ui/Skeleton";
 import { PageLoader } from "src/components/ui/PageLoader";
 import { useTranlate } from "src/hooks/useTranslation";
 import ButtonTranslate from "src/components/translate/ButtonTranslate";
+import { useEffect } from "react";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -31,17 +32,31 @@ const Form = () => {
     mensajeError,
     registroExitoso,
     isLoading: formLoading,
+    reset,
   } = useFormulario(crearCuentaEstudiante);
+
+  useEffect(() => {
+    if (registroExitoso) {
+      reset();
+    }
+  }, [registroExitoso]);
 
   if (isLoading) return <PageLoader />;
   if (error) return <p>{t("Hubo un error, recarga la página")}</p>;
-  if (registroExitoso) {
-    navigate("/login");
-  }
 
   return (
     <FormLayout titulo={t("titulo")} subtitulo={t("subtitulo")}>
-      <p className="font-bold text-red-500">{t("errors:" + mensajeError)}</p>
+      {!registroExitoso && mensajeError && (
+        <p className="font-bold text-red-500">{t("errors:" + mensajeError)}</p>
+      )}
+      {registroExitoso && (
+        <p className="text-green-500">
+          {t("correo_verificacion")}{" "}
+          <Link to={"/login"} className="text-blue-500">
+            {t("regresarLogin")}
+          </Link>
+        </p>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col w-full gap-6">
         <Input
           register={register("nombre")}

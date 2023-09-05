@@ -59,7 +59,8 @@ export const equiposRivalesUsuario = async () => {
     throwError(error);
   }
 };
-export const abandonarEquipo = (id) => eliminarUnRegistro("/equipo/abandonarEquipo", id)();
+export const abandonarEquipo = (id) =>
+  eliminarUnRegistro("/equipo/abandonarEquipo", id)();
 export const eliminarEquipo = (id) => eliminarUnRegistro("/equipo", id)();
 export const actualizarDatos = async (datos) => {
   try {
@@ -265,19 +266,38 @@ export const changePassword = async (datos) => {
   }
 };
 
-export const verificarTokenPassword = token => obtenerUnRegistro("/usuario/verificar-token",token)();
-
-export const obtenerEstadisticasCoordinacion = obtenerRegistros("/usuario/estadisticas-coordinacion")
-export const obtenerEstadisticasEstudiante = obtenerRegistros("/usuario/estadisticas-estudiante")
-
-export const obtenerEstadoServidor = async() => { 
+export const verificarCorreo = async (data) => {
   try {
-  const {data: {data}} = await axios.get("/", {baseURL: import.meta.env.VITE_URL, timeout: 8000 });
-  return data;     
+    await clienteAxios.patch("/usuario/verificarCorreo", data);
+    return true;
+  } catch (error) {
+    throwError(error);
+  }
+};
+
+export const verificarTokenPassword = (token) =>
+  obtenerUnRegistro("/usuario/verificar-token", token)();
+
+export const obtenerEstadisticasCoordinacion = obtenerRegistros(
+  "/usuario/estadisticas-coordinacion"
+);
+export const obtenerEstadisticasEstudiante = obtenerRegistros(
+  "/usuario/estadisticas-estudiante"
+);
+
+export const obtenerEstadoServidor = async () => {
+  try {
+    const {
+      data: { data },
+    } = await axios.get("/", {
+      baseURL: import.meta.env.VITE_URL,
+      timeout: 8000,
+    });
+    return data;
   } catch (error) {
     throw {
       server: 0,
       db: 0,
-    }
+    };
   }
-}
+};

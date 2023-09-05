@@ -1,0 +1,8 @@
+{
+  "titulo": "Verificacion de correo",
+  "subtitulo": "Debes de verificar el correo para usar teamup",
+  "congrats": "Felicidades has verificado tu cuenta con exito.",
+  "youcanlogin": "Ahora puedes iniciar sesion.",
+  "error": "Opps ocurrido un error",
+  "error_token": "El token es invalido o ha ocurrido un error"
+}

@@ -14,5 +14,7 @@
   "contrasenaLabel": "Contraseña",
   "contrasenaPlaceholder": "Ingrese su contraseña",
   "registrar": "Registrate",
-  "yaTienesCuenta": "¿ Ya tienes cuenta ?"
+  "yaTienesCuenta": "¿ Ya tienes cuenta ?",
+  "correo_verificacion": "Te hemos enviado un correo para verificar tu cuenta revisa tu inbox",
+  "regresarLogin": ". Vamos a iniciar sesion"
 }
