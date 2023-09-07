@@ -121,14 +121,14 @@
 
   "ready": "¡Listo!",
   "requestOnPending": "Ahora tu solicitud está en",
-  "rivalPending": "ESPERA DEL RIVAL",
+  "rivalPending": " ESPERA DEL RIVAL",
   "waitRivalAcceptance": "Espera a que el equipo rival acepte tu partido.",
   "checkStatusByClickingButton": "Puedes verificar el estado de tu solicitud haciendo clic en el botón.",
   "seeMyApplication": "Ver mi solicitud",
   "equipos": "Equipos",
   "partidos": "Partidos",
 
-  "noScheduledMatch": "No tienes ningún partido programado",
+  "noScheduledMatch": "No tienes ningún partido programado ",
   "makeRequestToCreateOne": "Puedes hacer la solicitud para crear uno haciendo",
   "clickingHere": "clic aquí",
 
@@ -177,6 +177,6 @@
 
   "aceptarInvitacion": "Aceptar invitacion",
 
-  "teacherPending": " PENDIENTE DEL MAESTRO",
-  "waitTeacherAcceptance": "espera a un profesor que se encargue del partido"
+  "teacherPending": " EL PARTIDO HA AVANZADO A LA SIGUIENTE ETAPA",
+  "waitTeacherAcceptance": "Revisa el estado de tu partido"
 }

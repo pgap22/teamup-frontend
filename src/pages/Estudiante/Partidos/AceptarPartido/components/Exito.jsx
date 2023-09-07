@@ -24,7 +24,6 @@ const Exito = ({ idPartido }) => {
       <div className="flex flex-col items-center w-full gap-10 p-10 text-center">
         <h1 className="text-[#565656] text-3xl font-bold">{t("ready")}</h1>
         <p className="text-[#565656] text-xl font-normal">
-          {t("requestOnPending")}
           <span className="font-bold text-orange-500">
             {t("teacherPending")}
           </span>

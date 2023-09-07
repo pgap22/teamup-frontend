@@ -132,7 +132,7 @@
   "seeMyApplication": "See my application",
   "equipos": "Teams",
   "partidos": "Matches",
-  "noScheduledMatch": "You don't have any scheduled match",
+  "noScheduledMatch": "You don't have any scheduled match ",
   "makeRequestToCreateOne": "You can make the request to create one by",
   "clickingHere": "clicking here",
 
@@ -180,6 +180,6 @@
   "rechazar": "Decline",
   "aceptarInvitacion": "Accept invitation",
 
-  "teacherPending": "TEACHER PENDING",
-  "waitTeacherAcceptance": "wait for a teacher who cares of the match"
+  "teacherPending": " THE MATCH HAS ADVANCED TO THE NEXT STAGE",
+  "waitTeacherAcceptance": "Check status of the match"
 }

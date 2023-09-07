@@ -137,11 +137,30 @@ const PartidoInformacion = () => {
 
   if (!partido.id) return <PageLoader />;
 
-  const partidoAceptarResultado = (partido.estado.fase == 5 && partido.resultado && partido.resultado.id_usuario_resultadoAceptar == usuario.id && partido.resultado.enviadoListo)
-  const partidoCancelar = partido.equipo_visitante.id_lider !== usuario.id && partido.estado.fase === 1 && partido.equipo_local.id_lider == usuario.id
-  const partidoEnviarResultado = partido.estado.fase == 5 && !partido.id_usuarioMaestro && (!partido.resultado || (!partido.resultado.enviadoListo && partido.resultado.id_usuario_resultadoPublicar == usuario.id))
-  const partidoAceptarRechazar = partido.equipo_visitante.id_lider == usuario.id && partido.estado.fase === 1
-  const partidoAsistencia = !partido.maestro_intermediario && partido.id_estado == 4 && partido.equipo_local.id_lider == usuario.id && !partido.usuarioMaestro
+  const partidoAceptarResultado =
+    partido.estado.fase == 5 &&
+    partido.resultado &&
+    partido.resultado.id_usuario_resultadoAceptar == usuario.id &&
+    partido.resultado.enviadoListo;
+  const partidoCancelar =
+    partido.equipo_visitante.id_lider !== usuario.id &&
+    partido.estado.fase === 1 &&
+    partido.equipo_local.id_lider == usuario.id;
+  const partidoEnviarResultado =
+    partido.estado.fase == 5 &&
+    !partido.id_usuarioMaestro &&
+    (partido.resultado
+      ? !partido.resultado.enviadoListo &&
+        partido.resultado.id_usuario_resultadoPublicar == usuario.id
+      : partido.equipo_local.id_lider === usuario.id);
+  const partidoAceptarRechazar =
+    partido.equipo_visitante.id_lider == usuario.id &&
+    partido.estado.fase === 1;
+  const partidoAsistencia =
+    !partido.maestro_intermediario &&
+    partido.id_estado == 4 &&
+    partido.equipo_local.id_lider == usuario.id &&
+    !partido.usuarioMaestro;
 
   return (
     <EstudianteLayaout
@@ -194,9 +213,7 @@ const PartidoInformacion = () => {
             />
           </div>
 
-
           <div className="mt-4 space-y-4 ">
-
             <MostrarBoton condicion={partidoAceptarRechazar}>
               <Button
                 onClick={() => {
@@ -205,10 +222,9 @@ const PartidoInformacion = () => {
                 className={"py-3 md:text-xl"}
                 color={"verde"}
               >
-                 {t("aceptarPartido")}
+                {t("aceptarPartido")}
               </Button>
             </MostrarBoton>
-
 
             <MostrarBoton condicion={partidoAceptarRechazar}>
               <Button
@@ -218,10 +234,9 @@ const PartidoInformacion = () => {
                 className={"py-3 md:text-xl"}
                 color={"rojo"}
               >
-                  {t("rechazarInvitacion")}
+                {t("rechazarInvitacion")}
               </Button>
             </MostrarBoton>
-
 
             <MostrarBoton condicion={partidoCancelar}>
               <Button
@@ -231,28 +246,48 @@ const PartidoInformacion = () => {
                 className={"py-3 md:text-xl"}
                 color={"rojo"}
               >
-                 {t("cancelarPartido")}
+                {t("cancelarPartido")}
               </Button>
             </MostrarBoton>
 
             <MostrarBoton condicion={partidoEnviarResultado}>
-              <Button onClick={() => modalResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#cfb93d"}>{t("enviarResultado")}</Button>
+              <Button
+                onClick={() => modalResultado.toggleModal(true)}
+                className={"py-4 md:text-xl"}
+                customBg={"#cfb93d"}
+              >
+                {t("enviarResultado")}
+              </Button>
             </MostrarBoton>
 
             <MostrarBoton condicion={partidoAsistencia}>
-              <Button onClick={() => modalAsistecia.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"#7E7E7E"}> {t("tomarAsistencia")}</Button>
+              <Button
+                onClick={() => modalAsistecia.toggleModal(true)}
+                className={"py-4 md:text-xl"}
+                customBg={"#7E7E7E"}
+              >
+                {" "}
+                {t("tomarAsistencia")}
+              </Button>
             </MostrarBoton>
 
             <MostrarBoton condicion={partidoAceptarResultado}>
-              <Button onClick={() => modalAceptarResultado.toggleModal(true)} className={"py-4 md:text-xl"} customBg={"rgb(234, 88, 12)"}>{t("aceptarResultado")}</Button>
+              <Button
+                onClick={() => modalAceptarResultado.toggleModal(true)}
+                className={"py-4 md:text-xl"}
+                customBg={"rgb(234, 88, 12)"}
+              >
+                {t("aceptarResultado")}
+              </Button>
             </MostrarBoton>
           </div>
-
         </section>
 
-
         <ModalResultado desktopTitle="Resultados" {...modalResultado}>
-          <form onSubmit={handleSubmit(enviarResultadosSubmit)} className="p-4 space-y-2">
+          <form
+            onSubmit={handleSubmit(enviarResultadosSubmit)}
+            className="p-4 space-y-2"
+          >
             <p>Envia aqui los resultados del partido !</p>
             <div className="space-y-2">
               <EquipoCardResultado
@@ -331,7 +366,5 @@ const PartidoInformacion = () => {
     </EstudianteLayaout>
   );
 };
-
-
 
 export default PartidoInformacion;
