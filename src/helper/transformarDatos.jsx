@@ -90,7 +90,7 @@ export const solicitudesTabla = ({data}, t = ()=> '') => {
     if (solicitud.ZonaDejuego) {
       nombre = solicitud.ZonaDejuego.nombre;
     }
-    alert(JSON.stringify(solicitud)) 
+    alert(JSON.stringify(new Date(solicitud.fecha))) 
     return {
       [t('solicitud.ID')]: solicitud.id,
       [t('solicitud.Requester')]: solicitud.equipo_local.lider.nombre,
