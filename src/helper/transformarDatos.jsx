@@ -84,13 +84,13 @@ export const miembrosEquipo = ({ data }) => {
 
 };
 
-export const solicitudesTabla = ({ data}, t = ()=> '') => {
+export const solicitudesTabla = ({data}, t = ()=> '') => {
   return data.map((solicitud) => {
     let nombre = t('solicitud.Pending');
     if (solicitud.ZonaDejuego) {
       nombre = solicitud.ZonaDejuego.nombre;
     }
-
+    alert(JSON.stringify(solicitud)) 
     return {
       [t('solicitud.ID')]: solicitud.id,
       [t('solicitud.Requester')]: solicitud.equipo_local.lider.nombre,
