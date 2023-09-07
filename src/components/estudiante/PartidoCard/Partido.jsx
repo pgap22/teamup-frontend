@@ -11,7 +11,7 @@ export default function Partido({ url = "1", partido = {} }) {
   const hayZonaJuego = partido.id && !!partido.ZonaDejuego;
   const imagenZonaJuego = hayZonaJuego
     ? new URL(
-        import.meta.env.VITE_URL + partido.ZonaDejuego.imagenes[0].imagen_url
+        partido.ZonaDejuego.imagenes[0].imagen_url
       ).toString()
     : "";
 
