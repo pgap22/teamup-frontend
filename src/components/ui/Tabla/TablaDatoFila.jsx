@@ -7,7 +7,7 @@ const TablaDatoFila = ({ datos, filas }) => {
         <td
           title={fila}
           className="px-4 py-5 text-lg truncate"
-          style={{ maxWidth: `${filas[i].length + 5}ch` }}
+          style={{ maxWidth: `${i!=filas.length-1?filas[i].length + 5 : 'auto' }ch` }}
           key={i + "-dato"}
         >
           {fila}
