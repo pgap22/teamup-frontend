@@ -44,7 +44,7 @@ const Dashboard = () => {
           acciones={false}
           accionesCustomLabel={" "}
           AccionesCustomElement={({ dato }) => (
-            <Link to={`${t('maestro.solicitud')}/${dato.ID}`}>
+            <Link to={`solicitud/${dato.ID}`}>
               <Button>{t('maestro.masInformacion')}</Button>
             </Link>
           )}
