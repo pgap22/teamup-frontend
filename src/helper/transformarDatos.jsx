@@ -90,13 +90,15 @@ export const solicitudesTabla = ({data}, t = ()=> '') => {
     if (solicitud.ZonaDejuego) {
       nombre = solicitud.ZonaDejuego.nombre;
     }
-    alert(JSON.stringify(new Date(solicitud.fecha))) 
+    
+    const fechaFormateada = new Date(solicitud.fecha)
+    
     return {
       [t('solicitud.ID')]: solicitud.id,
       [t('solicitud.Requester')]: solicitud.equipo_local.lider.nombre,
       [t('solicitud.Playground')]: nombre,
       [t('solicitud.Sport')]: solicitud.deporte.nombre,
-      [t('solicitud.Date')]: new Date(solicitud.fecha).toLocaleDateString(localStorage.getItem("teamup-languaje"),{weekday: 'long', hour: '2-digit', hour12: true, month: 'long'}),
+      [t('solicitud.Date')]: fechaFormateada.toLocaleDateString(localStorage.getItem("teamup-languaje"),{weekday: 'long', hour: '2-digit', hour12: true, month: 'long'}),
     };
   });
 };
