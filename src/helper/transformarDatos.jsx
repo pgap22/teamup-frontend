@@ -98,7 +98,6 @@ export const solicitudesTabla = ({data}, t = ()=> '') => {
       [t('solicitud.Requester')]: solicitud.equipo_local.lider.nombre,
       [t('solicitud.Playground')]: nombre,
       [t('solicitud.Sport')]: solicitud.deporte.nombre,
-      [t('solicitud.Date')]: fechaFormateada,
     };
   });
 };
