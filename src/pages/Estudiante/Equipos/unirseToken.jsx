@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { unirsePorToken } from "src/api/equipos";
 import { useTranslation } from "react-i18next"; // Importa el hook de traducción
+import { PageLoader } from "src/components/ui/PageLoader";
 
 const UnirseToken = () => {
   const { t } = useTranslation(); // Inicializa el hook de traducción
@@ -21,7 +22,7 @@ const UnirseToken = () => {
             state: {
               url: "/estudiante/equipos",
               titulo: "nuevoEquipo",
-              subtitulo: "teAcabasDeUnirA" + data.nombre,
+              subtitulo: "teAcabasDeUnirA",
               descripcion: "nuevoMiembroDelEquipo",
               linkText: "volver",
             },
@@ -42,7 +43,7 @@ const UnirseToken = () => {
     }
   }, [first]);
 
-  return <>{t("uniendote")}</>;
+  return <>{<PageLoader />}</>;
 };
 
 export default UnirseToken;

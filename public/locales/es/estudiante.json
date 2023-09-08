@@ -16,7 +16,7 @@
 
   "uniendote": "Uniéndote...",
   "nuevoEquipo": "¡Nuevo Equipo!",
-  "teAcabasDeUnirA": "Te uniste a ",
+  "teAcabasDeUnirA": "Te acabas de unir a nuevo equipo",
   "nuevoMiembroDelEquipo": "¡Nuevo miembro!",
   "tokenInvalido": "Token Inválido",
   "invitacionNoValida": "Invitación no válida",
@@ -178,5 +178,8 @@
   "aceptarInvitacion": "Aceptar invitacion",
 
   "teacherPending": " EL PARTIDO HA AVANZADO A LA SIGUIENTE ETAPA",
-  "waitTeacherAcceptance": "Revisa el estado de tu partido"
+  "waitTeacherAcceptance": "Revisa el estado de tu partido",
+
+  "enviarPartidoResultados": "Envia aqui los resultados del partido !",
+  "Resultado": "Resultados"
 }

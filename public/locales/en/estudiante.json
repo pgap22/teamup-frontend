@@ -16,7 +16,7 @@
 
   "uniendote": "Joining...",
   "nuevoEquipo": "New Team!",
-  "teAcabasDeUnirA": "You joined ",
+  "teAcabasDeUnirA": "You have joined a new team",
   "nuevoMiembroDelEquipo": "New team member!",
   "tokenInvalido": "Invalid Token",
   "invitacionNoValida": "Invalid Invitation",
@@ -126,7 +126,7 @@
   "error": "An error has occurred",
   "ready": "Ready!",
   "requestOnPending": "Now your request is on",
-  "rivalPending": "RIVAL PENDING",
+  "rivalPending": " RIVAL PENDING",
   "waitRivalAcceptance": "wait for the rival team to accept your match!",
   "checkStatusByClickingButton": "You can check the status of your request by clicking on the button",
   "seeMyApplication": "See my application",
@@ -134,7 +134,7 @@
   "partidos": "Matches",
   "noScheduledMatch": "You don't have any scheduled match ",
   "makeRequestToCreateOne": "You can make the request to create one by",
-  "clickingHere": "clicking here",
+  "clickingHere": " clicking here",
 
   "sport": "Sport",
   "date": "Date",
@@ -181,5 +181,8 @@
   "aceptarInvitacion": "Accept invitation",
 
   "teacherPending": " THE MATCH HAS ADVANCED TO THE NEXT STAGE",
-  "waitTeacherAcceptance": "Check status of the match"
+  "waitTeacherAcceptance": "Check status of the match",
+
+  "enviarPartidoResultados": "Send here the results of the match !",
+  "Resultado": "Results"
 }

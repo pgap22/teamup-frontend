@@ -29,6 +29,8 @@ import { fechaNormal } from "src/helper";
 import { PageLoader } from "src/components/ui/PageLoader";
 import { MostrarBoton } from "src/components/ui/MostrarBoton";
 import { useTranlate } from "src/hooks/useTranslation";
+import Loader from "src/components/ui/Loader";
+import Skeleton from "src/components/ui/Skeleton";
 // import PartidosRealizados from "src/pages/Coordinacion/Dashboard/components/PartidosRealizados";
 
 const Titulo = ({ id, estado }) => {
@@ -48,6 +50,10 @@ const PartidoInformacion = () => {
   const [ModalResultado, modalResultado] = useModalPro();
   const [ModalAsistencia, modalAsistecia] = useModalPro();
   const [ModalAceptarResultado, modalAceptarResultado] = useModalPro();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [isLoading1, setIsLoading1] = useState(false);
+  const [isLoading2, setIsLoading2] = useState(false);
 
   const { id } = useParams();
   const { usuario } = useSession();
@@ -66,16 +72,20 @@ const PartidoInformacion = () => {
   };
 
   const enviarResultadosSubmit = async (datos) => {
+    setIsLoading(true);
     try {
       await enviarResultadosPartido(id, datos);
       modalResultado.toggleModal(false);
       obtenerPartidosEstado();
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const tomarAsistencia = async () => {
+    setIsLoading1(true);
     try {
       await colocarAsistencia(id);
 
@@ -84,10 +94,14 @@ const PartidoInformacion = () => {
       modalAsistecia.toggleModal(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading1(false);
     }
   };
 
   const cancelarPartidoClick = async () => {
+    setIsLoading2(true);
+
     try {
       await cancelarPartido(id);
 
@@ -104,10 +118,14 @@ const PartidoInformacion = () => {
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading2(false);
     }
   };
 
   const cancelarResultadoClick = async () => {
+    setIsLoading2(true);
+
     try {
       await cancelarResultados(id);
 
@@ -116,10 +134,13 @@ const PartidoInformacion = () => {
       modalAceptarResultado.toggleModal(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading2(false);
     }
   };
 
   const aceptarResultadoClick = async () => {
+    setIsLoading1(true);
     try {
       await aceptarResultados(id);
 
@@ -128,6 +149,8 @@ const PartidoInformacion = () => {
       modalAceptarResultado.toggleModal(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading1(false);
     }
   };
 
@@ -288,12 +311,13 @@ const PartidoInformacion = () => {
             onSubmit={handleSubmit(enviarResultadosSubmit)}
             className="p-4 space-y-2"
           >
-            <p>Envia aqui los resultados del partido !</p>
+            <p>{t("enviarPartidoResultados")}</p>
             <div className="space-y-2">
               <EquipoCardResultado
                 register={register("resultado_local", {
                   required: true,
                   valueAsNumber: true,
+                  min: 0,
                 })}
                 equipo={partido.equipo_local}
               />
@@ -301,11 +325,16 @@ const PartidoInformacion = () => {
                 register={register("resultado_visitante", {
                   required: true,
                   valueAsNumber: true,
+                  min: 0,
                 })}
                 equipo={partido.equipo_visitante}
               />
             </div>
-            <Button>{t("enviarResultado")} !</Button>
+            <Button disabled={isLoading}>
+              <Skeleton loading={isLoading} fallback={<Loader />}>
+                {t("enviarResultado")} !
+              </Skeleton>
+            </Button>
           </form>
         </ModalResultado>
 
@@ -316,13 +345,23 @@ const PartidoInformacion = () => {
           <div className="p-4">
             <div className="space-y-2">
               <p>{t("tomarAsistenciaInstruccion")}</p>
-              <Button onClick={tomarAsistencia}>{t("tomarAsistencia")}</Button>
+              <Button disabled={isLoading1} onClick={tomarAsistencia}>
+                <Skeleton loading={isLoading1} fallback={<Loader />}>
+                  {t("tomarAsistencia")}
+                </Skeleton>
+              </Button>
             </div>
 
             <div className="mt-6 space-y-2">
               <p>{t("cancelarPartidoInstruccion")}</p>
-              <Button onClick={cancelarPartidoClick} customBg={"#7E7E7E"}>
-                {t("cancelarPartido")}
+              <Button
+                disabled={isLoading2}
+                onClick={cancelarPartidoClick}
+                customBg={"#7E7E7E"}
+              >
+                <Skeleton loading={isLoading2} fallback={<Loader />}>
+                  {t("cancelarPartido")}
+                </Skeleton>
               </Button>
             </div>
           </div>
@@ -350,11 +389,23 @@ const PartidoInformacion = () => {
             </div>
 
             <div className="flex flex-col gap-4 mt-4">
-              <Button onClick={aceptarResultadoClick} color={"verde"}>
-                {t("aceptarResultado")}
+              <Button
+                disabled={isLoading1}
+                onClick={aceptarResultadoClick}
+                color={"verde"}
+              >
+                <Skeleton loading={isLoading1} fallback={<Loader />}>
+                  {t("aceptarResultado")}
+                </Skeleton>
               </Button>
-              <Button onClick={cancelarResultadoClick} customBg={"#7E7E7E"}>
-                {t("cancelarResultado")}
+              <Button
+                disabled={isLoading2}
+                onClick={cancelarResultadoClick}
+                customBg={"#7E7E7E"}
+              >
+                <Skeleton loading={isLoading2} fallback={<Loader />}>
+                  {t("cancelarResultado")}
+                </Skeleton>
               </Button>
             </div>
           </div>

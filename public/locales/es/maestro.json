@@ -1,75 +1,76 @@
 {
+  "sport": "Deporte",
+  "date": "Fecha",
+  "localTeam": "Equipo Local",
+  "visitorTeam": "Equipo Visitante",
+  "viewMoreInfo": "Ver más información",
+  "links": {
+    "inicio": "Inicio",
+    "buscarEquipo": "Buscar Equipo"
+  },
+  "cerrar": "Cerrar Sesion",
+  "maestro": {
+    "inicio": "Inicio",
+    "partidosCuidar": "Partidos para Cuidar",
+    "solicitudesPendientes": "Solicitudes Pendientes",
+    "solicitudes": "Solicitudes",
+    "masInformacion": "Más Información",
+    "cargandoPartidos": "Cargando Partidos"
+  },
+  "no_item": "No hay ningun item...",
+  "solicitud": {
+    "ID": "ID",
+    "Requester": "Solicitante",
+    "Playground": "Zona de juego",
+    "Sport": "Deporte",
+    "Date": "Fecha",
+    "Pending": "Pendiente"
+  },
+  "buscarEquipo": {
+    "pageTitle": "Buscar Equipo",
+    "searchBoxTitle": "Busca un Equipo",
+    "searchBoxDescription": "¡Ingresa el nombre del equipo y verifica si tienen un partido!",
+    "errorMessage": "Mensaje de error en español",
+    "inputPlaceholder": "Nombre Del Equipo",
+    "searchButton": "Buscar"
+  },
+  "equipoDetails": {
+    "partidosTitle": "Partidos",
+    "estudiantesTitle": "Estudiantes"
+  },
+  "partidoDetails": {
+    "pending": "Pendiente",
+    "volverInicio": "Volver al inicio",
+    "pageTitle": "Detalles del Partido",
+    "generalDataTitle": "Información General",
+    "zone": "Zona de Juego",
     "sport": "Deporte",
-    "date": "Fecha",
-    "localTeam": "Equipo Local",
-    "visitorTeam": "Equipo Visitante",
-    "viewMoreInfo": "Ver más información",
-    "links": {
-        "inicio": "Inicio",
-        "buscarEquipo": "Buscar Equipo"
+    "teacher": "Maestro Encargado",
+    "teams": "Equipos",
+    "actions": "Acciones",
+    "careMatch": "Cuidar Partido",
+    "takeAttendance": "Tomar Asistencia",
+    "sendResult": "Enviar Resultado",
+    "attendanceTitle": "Tomar Asistencia",
+    "clickAttendance": "Haz clic para tomar la asistencia del equipo",
+    "ifTeamNotPresent": "Si un equipo no se presenta, puedes cancelar el partido",
+    "cancelMatch": "Cancelar Partido",
+    "resultTitle": "Resultados",
+    "sendMatchResults": "¡Ingresa los resultados del partido aquí!",
+    "cuidarSolicitud": {
+      "titulo": "Solicitud para Cuidar el Partido",
+      "subtitulo": "Solicitud Aceptada",
+      "descripcion": "Ahora eres responsable de cuidar este partido."
     },
-    "cerrar": "Cerrar Sesion",
-    "maestro": {
-        "inicio": "Inicio",
-        "partidosCuidar": "Partidos para Cuidar",
-        "solicitudesPendientes": "Solicitudes Pendientes",
-        "solicitudes": "Solicitudes",
-        "masInformacion": "Más Información",
-        "cargandoPartidos": "Cargando Partidos"
+    "cancelarSolicitud": {
+      "titulo": "Solicitud Cancelada",
+      "subtitulo": "Solicitud Cancelada",
+      "descripcion": "Has cancelado esta solicitud."
     },
-    "no_item": "No hay ningun item...",
-    "solicitud": {
-        "ID": "ID",
-        "Requester": "Solicitante",
-        "Playground": "Zona de juego",
-        "Sport": "Deporte",
-        "Date": "Fecha",
-        "Pending": "Pendiente"
-
-    },
-    "buscarEquipo": {
-        "pageTitle": "Buscar Equipo",
-        "searchBoxTitle": "Busca un Equipo",
-        "searchBoxDescription": "¡Ingresa el nombre del equipo y verifica si tienen un partido!",
-        "errorMessage": "Mensaje de error en español",
-        "inputPlaceholder": "Nombre Del Equipo",
-        "searchButton": "Buscar"
-    },
-    "equipoDetails": {
-        "partidosTitle": "Partidos",
-        "estudiantesTitle": "Estudiantes"
-    },
-    "partidoDetails": {
-        "pageTitle": "Detalles del Partido",
-        "generalDataTitle": "Información General",
-        "zone": "Zona de Juego",
-        "sport": "Deporte",
-        "teacher": "Maestro Encargado",
-        "teams": "Equipos",
-        "actions": "Acciones",
-        "careMatch": "Cuidar Partido",
-        "takeAttendance": "Tomar Asistencia",
-        "sendResult": "Enviar Resultado",
-        "attendanceTitle": "Tomar Asistencia",
-        "clickAttendance": "Haz clic para tomar la asistencia del equipo",
-        "ifTeamNotPresent": "Si un equipo no se presenta, puedes cancelar el partido",
-        "cancelMatch": "Cancelar Partido",
-        "resultTitle": "Resultados",
-        "sendMatchResults": "¡Ingresa los resultados del partido aquí!",
-        "cuidarSolicitud": {
-            "titulo": "Solicitud para Cuidar el Partido",
-            "subtitulo": "Solicitud Aceptada",
-            "descripcion": "Ahora eres responsable de cuidar este partido."
-          },
-          "cancelarSolicitud": {
-            "titulo": "Solicitud Cancelada",
-            "subtitulo": "Solicitud Cancelada",
-            "descripcion": "Has cancelado esta solicitud."
-          },
-          "enviarResultados": {
-            "titulo": "Resultados del Partido Enviados",
-            "subtitulo": "Resultados del Partido Enviados",
-            "descripcion": "¡El partido ha finalizado y los resultados se han guardado!"
-          }
-      }
+    "enviarResultados": {
+      "titulo": "Resultados del Partido Enviados",
+      "subtitulo": "Resultados del Partido Enviados",
+      "descripcion": "¡El partido ha finalizado y los resultados se han guardado!"
+    }
+  }
 }

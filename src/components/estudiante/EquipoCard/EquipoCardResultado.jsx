@@ -1,6 +1,8 @@
 import Input from "src/components/form/Input";
+import { useTranlate } from "src/hooks/useTranslation";
 
 const EquipoCardResultado = ({ equipo, register }) => {
+  const { t } = useTranlate();
   return (
     <div
       className={
@@ -15,7 +17,7 @@ const EquipoCardResultado = ({ equipo, register }) => {
         />
         <p className="font-bold">{equipo.nombre}</p>
       </div>
-      <Input register={register} type="number" label={"Resultado"} />
+      <Input register={register} type="number" label={t("Resultado")} />
     </div>
   );
 };
