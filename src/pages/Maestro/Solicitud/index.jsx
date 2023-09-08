@@ -29,7 +29,7 @@ const Solicitud = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-
+  const {usuario} = useSession() 
   const [ModalAsistencia, modalAsistecia] = useModal();
   const [ModalResultado, modalResultado] = useModal();
 
@@ -161,7 +161,7 @@ const Solicitud = () => {
           titulo={t("partidoDetails.actions")}
         >
           <div className="flex flex-col justify-center h-full gap-4">
-            <MostrarBoton condicion={partido.estado.fase == 2}>
+            <MostrarBoton condicion={partido.estado.fase == 2 && partido.maestro_intermediario }>
               <Button
                 disabled={loadingCuidar}
                 onClick={cuidarPartido}
@@ -173,7 +173,7 @@ const Solicitud = () => {
                 </Skeleton>
               </Button>
             </MostrarBoton>
-            <MostrarBoton condicion={partido.estado.fase == 4}>
+            <MostrarBoton condicion={partido.estado.fase == 4 && partido.id_usuarioMaestro == usuario.id}>
               <Button
                 onClick={() => modalAsistecia.toggleModal(true)}
                 className={"py-4 md:text-xl"}
@@ -182,7 +182,7 @@ const Solicitud = () => {
                 {t("partidoDetails.takeAttendance")}
               </Button>
             </MostrarBoton>
-            <MostrarBoton condicion={partido.estado.fase == 5}>
+            <MostrarBoton condicion={partido.estado.fase == 5 && partido.id_usuarioMaestro == usuario.id }>
               <Button
                 onClick={() => modalResultado.toggleModal(true)}
                 className={"py-4 md:text-xl"}
