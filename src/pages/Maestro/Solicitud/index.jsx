@@ -21,7 +21,7 @@ import Skeleton from "src/components/ui/Skeleton";
 import { useFetchClick } from "src/hooks/useFetchClick";
 import { useModal } from "src/hooks/useModal";
 import { useTranlate } from "src/hooks/useTranslation";
-
+import { useSession } from "src/hooks/useSession";
 const Solicitud = () => {
   const { t } = useTranlate();
   const [partido, setPartido] = useState({});
